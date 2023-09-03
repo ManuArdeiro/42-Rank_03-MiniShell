@@ -1,22 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/01 18:55:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/09/03 20:44:00 by jolopez-         ###   ########.fr       */
+/*   Created: 2022/03/26 16:25:30 by jolopez-          #+#    #+#             */
+/*   Updated: 2022/03/30 20:07:48 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_minishell.h"
-
-int	main(int ac, char **av, char **env)
+void	ft_striteri(char *s, void (*f)(unsigned int, char *))
 {
-	
-	printf("\nThis is the MiniShell from yzaytoun and jolopez- for 42 project.");
-	printf("\nYou are very lucky if you are using it, enjoy it!!");
-	
-	return (0);
+	unsigned int	i;
+
+	if (!s || !f)
+		return ;
+	i = 0;
+	while (s[i])
+	{
+		(*f)(i, &s[i]);
+		i++;
+	}
 }

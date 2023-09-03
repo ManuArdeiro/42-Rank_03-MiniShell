@@ -1,22 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/01 18:55:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/09/03 20:44:00 by jolopez-         ###   ########.fr       */
+/*   Created: 2022/03/25 19:51:32 by jolopez-          #+#    #+#             */
+/*   Updated: 2022/03/31 20:08:13 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_minishell.h"
+#include "libft.h"
 
-int	main(int ac, char **av, char **env)
+void	*ft_memchr(const void *s, int c, size_t n)
 {
-	
-	printf("\nThis is the MiniShell from yzaytoun and jolopez- for 42 project.");
-	printf("\nYou are very lucky if you are using it, enjoy it!!");
-	
-	return (0);
+	size_t	i;
+
+	i = 0;
+	while (i < n)
+	{
+		if (*(unsigned char *)(s + i) == (unsigned char)c)
+			return ((void *)(s + i));
+		i++;
+	}
+	return (NULL);
 }

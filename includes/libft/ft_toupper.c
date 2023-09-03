@@ -1,22 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/01 18:55:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/09/03 20:44:00 by jolopez-         ###   ########.fr       */
+/*   Created: 2022/03/25 18:24:30 by jolopez-          #+#    #+#             */
+/*   Updated: 2022/03/25 18:25:02 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_minishell.h"
+#include "libft.h"
 
-int	main(int ac, char **av, char **env)
+int	ft_toupper(int c)
 {
-	
-	printf("\nThis is the MiniShell from yzaytoun and jolopez- for 42 project.");
-	printf("\nYou are very lucky if you are using it, enjoy it!!");
-	
-	return (0);
+	if (c >= 'a' && c <= 'z')
+		c = c - 32;
+	return (c);
 }

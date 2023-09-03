@@ -6,7 +6,7 @@
 #    By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/01 18:51:45 by jolopez-          #+#    #+#              #
-#    Updated: 2023/09/01 18:55:02 by jolopez-         ###   ########.fr        #
+#    Updated: 2023/09/03 20:44:30 by jolopez-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,17 +28,14 @@ all: $(NAME)
 
 $(NAME): 		$(OBJS)
 				@echo "$(LIGHT_RED) Creating libft files... $(WHITE)"
-				cd ./includes/42_libft && make 
+				cd ./includes/libft && make bonus && make clean 
 				@echo "$(YELLOW) Creating minishell... $(WHITE)"
 				$(CC) $(FLAGS) $(OBJS) $(LIBS) -o $(NAME)	
 
 clean:		
-				@echo "$(LIGHT_RED) Cleaning libft objects... $(WHITE)"
-				make clean -C includes/42_libft
 				/bin/rm -rf $(OBJS)
 
 fclean: 		clean
-				cd ./includes/42_libft && make fclean 
 				@echo "$(LIGHT_RED) Cleaning all... $(WHITE)"
 				/bin/rm -rf $(NAME)
 

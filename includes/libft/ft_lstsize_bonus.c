@@ -1,22 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/01 18:55:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/09/03 20:44:00 by jolopez-         ###   ########.fr       */
+/*   Created: 2022/04/03 14:57:25 by jolopez-          #+#    #+#             */
+/*   Updated: 2022/04/03 18:17:29 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_minishell.h"
+#include "libft.h"
 
-int	main(int ac, char **av, char **env)
+int	ft_lstsize(t_list *lst)
 {
-	
-	printf("\nThis is the MiniShell from yzaytoun and jolopez- for 42 project.");
-	printf("\nYou are very lucky if you are using it, enjoy it!!");
-	
-	return (0);
+	int	i;
+
+	if (!lst)
+		return (0);
+	i = 1;
+	while (lst->next)
+	{
+		lst = lst->next;
+		i++;
+	}
+	return (i);
 }

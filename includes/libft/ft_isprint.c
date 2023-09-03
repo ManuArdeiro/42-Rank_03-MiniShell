@@ -1,22 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/01 18:55:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/09/03 20:44:00 by jolopez-         ###   ########.fr       */
+/*   Created: 2022/03/25 14:43:03 by jolopez-          #+#    #+#             */
+/*   Updated: 2022/03/25 14:46:26 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_minishell.h"
+#include "libft.h"
 
-int	main(int ac, char **av, char **env)
+int	ft_isprint(int c)
 {
-	
-	printf("\nThis is the MiniShell from yzaytoun and jolopez- for 42 project.");
-	printf("\nYou are very lucky if you are using it, enjoy it!!");
-	
-	return (0);
+	return (c >= 32 && c <= 126);
 }

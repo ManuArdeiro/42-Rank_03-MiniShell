@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_minishell.h                                     :+:      :+:    :+:   */
+/*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:47:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/09/01 18:51:33 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/09/04 19:59:23 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_MINISHELL_H
-# define FT_MINISHELL_H
+#ifndef MINISHELL_H
+# define MINISHELL_H
 
 # define VARIABLE 		0
 
@@ -20,14 +20,15 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <limits.h>
+# include <errno.h>
+# include "../include/libft/libft.h"
 
-typedef struct s_test
+typedef struct s_global
 {
-	int	x;
-	int	y;
-}	t_test;
+	int	status;
+}	t_global;
 
 //	File mem.c
-int			main(int argc, char **argv);
+int			main(int ac, char **av, char **env);
 
 #endif

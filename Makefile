@@ -6,37 +6,52 @@
 #    By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/01 18:51:45 by jolopez-          #+#    #+#              #
-#    Updated: 2023/09/03 20:44:30 by jolopez-         ###   ########.fr        #
+#    Updated: 2023/09/04 20:00:32 by jolopez-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME 			=	minishell
 
-SRCS 			= 	srcs/main.c
+vpath %.h	include
+vpath %.c	src
+vpath %.o	obj
 
-OBJS			=	$(SRCS:%.c=%.o)
+INCLUDE 		=  include minishell.h
 
-INC 			=	-I./includes/so_long.h 
+SRC 			= 	main.c
 
-LIBS			=	
+OBJS			=	$(SRC:%.c=$(OBJ_DIR)/%.o)
 
 CC 				= 	gcc
 
-FLAGS 			= 	-Wall -Werror -Wextra $(INC) -g3 -fsanitize=address
+FLAGS 			= 	-Wall -Werror -Wextra -I$(INCLUDE)#-g3 -fsanitize=address
+
+LIBFT			= 	include/libft/libft.a
+
+OBJ_DIR			= obj
+
+$(OBJ_DIR)/%.o : %.c
+	@mkdir -p $(@D)
+	$(COMPILE.c) $< -o $@
 
 all: $(NAME)
 
-$(NAME): 		$(OBJS)
-				@echo "$(LIGHT_RED) Creating libft files... $(WHITE)"
-				cd ./includes/libft && make bonus && make clean 
+$(NAME): 		$(LIBFT) $(OBJS)
 				@echo "$(YELLOW) Creating minishell... $(WHITE)"
-				$(CC) $(FLAGS) $(OBJS) $(LIBS) -o $(NAME)	
+				$(CC) $(OBJS) $(LIBFT) -o $(NAME)	
 
+$(LIBFT):
+				@echo "$(LIGHT_RED) Creating libft files... $(WHITE)"
+				cd include/libft && make bonus
+	
 clean:		
+				@echo "$(LIGHT_RED) Creating libft files... $(WHITE)"
+				cd include/libft && make clean 
 				/bin/rm -rf $(OBJS)
 
 fclean: 		clean
-				@echo "$(LIGHT_RED) Cleaning all... $(WHITE)"
+				@echo "$(LIGHT_RED) Creating libft files... $(WHITE)"
+				cd include/libft && make fclean 
 				/bin/rm -rf $(NAME)
 
 re: 			fclean all

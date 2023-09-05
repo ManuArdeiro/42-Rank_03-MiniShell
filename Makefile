@@ -6,19 +6,21 @@
 #    By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/01 18:51:45 by jolopez-          #+#    #+#              #
-#    Updated: 2023/09/05 18:18:42 by jolopez-         ###   ########.fr        #
+#    Updated: 2023/09/05 20:58:53 by jolopez-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME 			=	minishell
 
 vpath 			%.h	include
-vpath 			%.c	src lexer
+vpath 			%.c	src
 vpath 			%.o	obj
 
 INCLUDE 		=	includes/minishell.h
 
-SRC 			= 	main.c
+SRC 			= 	main.c\
+					utils/print_msg.c
+					
 
 OBJS			=	$(SRC:%.c=$(OBJ_DIR)/%.o)
 

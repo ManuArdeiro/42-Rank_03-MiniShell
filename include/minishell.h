@@ -6,14 +6,14 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:47:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/09/04 19:59:23 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/09/05 20:11:37 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# define VARIABLE 		0
+# define prompt 	"MiniShell > "
 
 # include <stdarg.h>
 # include <unistd.h>
@@ -21,14 +21,20 @@
 # include <stdlib.h>
 # include <limits.h>
 # include <errno.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 # include "../include/libft/libft.h"
 
 typedef struct s_global
 {
-	int	status;
+	int		status;
+	char	*line;
 }	t_global;
 
-//	File mem.c
+//	File main.c
 int			main(int ac, char **av, char **env);
+//	File utils/print_msg.c
+void		ft_printhelp(void);
+void		ft_printwellcome(void);
 
 #endif

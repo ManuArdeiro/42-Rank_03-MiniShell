@@ -6,17 +6,17 @@
 #    By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/01 18:51:45 by jolopez-          #+#    #+#              #
-#    Updated: 2023/09/04 20:00:32 by jolopez-         ###   ########.fr        #
+#    Updated: 2023/09/05 18:18:42 by jolopez-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME 			=	minishell
 
-vpath %.h	include
-vpath %.c	src
-vpath %.o	obj
+vpath 			%.h	include
+vpath 			%.c	src lexer
+vpath 			%.o	obj
 
-INCLUDE 		=  include minishell.h
+INCLUDE 		=	includes/minishell.h
 
 SRC 			= 	main.c
 
@@ -28,7 +28,7 @@ FLAGS 			= 	-Wall -Werror -Wextra -I$(INCLUDE)#-g3 -fsanitize=address
 
 LIBFT			= 	include/libft/libft.a
 
-OBJ_DIR			= obj
+OBJ_DIR			=	obj
 
 $(OBJ_DIR)/%.o : %.c
 	@mkdir -p $(@D)

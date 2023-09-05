@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:55:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/09/05 20:18:52 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/09/05 21:06:58 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	ft_loop(t_global *global)
 	{
 		printf("%s", prompt);
 		global->line = readline(prompt);
-		if (ft_strncmp(line, "exit", 5) == 0)
+		if (ft_strncmp(line, "exit", 4) == 0)
 			global->status = 1;
 		free(global->line);
 	}

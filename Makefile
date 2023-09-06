@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+         #
+#    By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/01 18:51:45 by jolopez-          #+#    #+#              #
-#    Updated: 2023/09/05 21:10:53 by jolopez-         ###   ########.fr        #
+#    Updated: 2023/09/05 20:02:58 by yzaytoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,45 +16,64 @@ vpath 			%.h	include
 vpath 			%.c	src
 vpath 			%.o	obj
 
-INCLUDE 		=	includes/minishell.h
+WHITE_BAN        := $(shell tput -Txterm setaf 7)                                     
 
-SRC 			= 	main.c\
-					utils/print_msg.c
-					
+BANNER = 	$(info $(WHITE_BAN))\
+			$(info @@@@@@@@@@   @@@  @@@  @@@  @@@      @@@@@@   @@@  @@@  @@@@@@@@  @@@       @@@		  )\
+			$(info	@@@@@@@@@@@  @@@  @@@@ @@@  @@@     @@@@@@@   @@@  @@@  @@@@@@@@  @@@       @@@       )\
+			$(info	@@! @@! @@!  @@!  @@!@!@@@  @@!     !@@       @@!  @@@  @@!       @@!       @@!       )\
+			$(info	!@! !@! !@!  !@!  !@!!@!@!  !@!     !@!       !@!  @!@  !@!       !@!       !@!       )\
+			$(info	@!! !!@ @!@  !!@  @!@ !!@!  !!@     !!@@!!    @!@!@!@!  @!!!:!    @!!       @!!       )\
+			$(info	!@!   ! !@!  !!!  !@!  !!!  !!!      !!@!!!   !!!@!!!!  !!!!!:    !!!       !!!       )\
+			$(info	!!:     !!:  !!:  !!:  !!!  !!:          !:!  !!:  !!!  !!:       !!:       !!:       )\
+			$(info	:!:     :!:  :!:  :!:  !:!  :!:         !:!   :!:  !:!  :!:        :!:       :!:      )\
+			$(info	:::     ::    ::   ::   ::   ::     :::: ::   ::   :::   :: ::::   :: ::::   :: ::::  )\
+			$(info	 :      :    :    ::    :   :       :: : :     :   : :  : :: ::   : :: : :  : :: : :  )\
+			$(info	                                                                                      )\
+			$(info **************************************************************************************)
+
+INCLUDE 		=	include/
+INC_LIB 		=	include/libft
+
+SRC 			= 	main.c
 
 OBJS			=	$(SRC:%.c=$(OBJ_DIR)/%.o)
 
 CC 				= 	gcc
 
-FLAGS 			= 	-Wall -Werror -Wextra -I$(INCLUDE)#-g3 -fsanitize=address
+CFLAGS 			= 	-Wall -Werror -Wextra -I$(INCLUDE) -I$(INC_LIB)#-g3 -fsanitize=address
 
 LIBFT			= 	include/libft/libft.a
 
 OBJ_DIR			=	obj
 
+RM 				= /bin/rm -rf 
+
 $(OBJ_DIR)/%.o : %.c
 	@mkdir -p $(@D)
+	@echo "$(YELLOW) Creating Object files... $(WHITE)"	
 	$(COMPILE.c) $< -o $@
 
 all: $(NAME)
 
-$(NAME): 		$(LIBFT) $(OBJS)
+$(NAME): 		$(BANNER) $(LIBFT) $(OBJS)
 				@echo "$(YELLOW) Creating minishell... $(WHITE)"
-				$(CC) $(OBJS) $(LIBFT) -o $(NAME)	
-
+				$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)	
+.SILENT:
 $(LIBFT):
-				@echo "$(LIGHT_RED) Creating libft files... $(WHITE)"
+				echo "$(LIGHT_RED) Creating libft files... $(WHITE)"
 				cd include/libft && make bonus
 	
-clean:		
-				@echo "$(LIGHT_RED) Creating libft files... $(WHITE)"
+clean:
+				@echo "\n"
+				@echo "$(LIGHT_RED) Cleaning libft files... $(WHITE)\n"
 				cd include/libft && make clean 
 				/bin/rm -rf $(OBJS)
 
 fclean: 		clean
-				@echo "$(LIGHT_RED) Creating libft files... $(WHITE)"
-				cd include/libft && make fclean 
-				/bin/rm -rf $(NAME)
+				$(RM) $(NAME) $(OBJ_DIR)
+				@echo "$(GREEN) *** **** DONE **** *** $(WHITE)\n"
+				
 
 re: 			fclean all
 

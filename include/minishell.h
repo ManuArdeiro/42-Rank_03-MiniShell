@@ -23,7 +23,7 @@
 # include <errno.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-# include "../include/libft/libft.h"
+# include "libft.h"
 
 typedef struct s_global
 {

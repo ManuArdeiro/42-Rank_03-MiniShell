@@ -31,8 +31,6 @@ typedef struct s_global
 	char	*line;
 }	t_global;
 
-//	File main.c
-int			main(int ac, char **av, char **env);
 //	File utils/print_msg.c
 void		ft_printhelp(void);
 void		ft_printwellcome(void);

@@ -14,6 +14,7 @@ NAME 			=	minishell
 
 vpath 			%.h	include
 vpath 			%.c	src
+vpath 			%.c	src/utils
 vpath 			%.o	obj
 
 WHITE_BAN        := $(shell tput -Txterm setaf 7)                                     
@@ -35,7 +36,7 @@ BANNER = 	$(info $(WHITE_BAN))\
 INCLUDE 		=	include/
 INC_LIB 		=	include/libft
 
-SRC 			= 	main.c
+SRC 			= 	main.c print_msg.c
 
 OBJS			=	$(SRC:%.c=$(OBJ_DIR)/%.o)
 

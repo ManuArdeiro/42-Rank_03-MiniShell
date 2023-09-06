@@ -39,8 +39,9 @@ static void	ft_init(t_global **global)
 	ft_bzero(global, sizeof(global));
 }
 
-int	main(int ac, char **av, char **env)
+int	main(int ac, char **av)
 {
+	(void)av;
 	t_global	*global;
 
 	if (ac >= 2)

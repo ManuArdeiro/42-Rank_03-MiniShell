@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_msg.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
+/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 18:53:59 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/09/05 20:09:58 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/09/08 20:57:26 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,12 @@ void	ft_printhelp(void)
 
 void	ft_printwellcome(void)
 {
-	printf("\n\nMiniShell from yzaytoun and jolopez- for 42 project.\n"
+	printf("---------------------------------------------\n"
+		"     ___      ___    __      _       		\n"
+		"|\\/|  |  |\\ |  |    (_  |_| |_ |  |  		\n"
+		"|  | _|_ | \\| _|_   __) | | |_ |_ |_ 		\n"
+		"                              				\n"
+		"---------------------------------------------\n"
+		"\n\nMiniShell from yzaytoun and jolopez- for 42 project.\n"
 		"You are very lucky if you are using it, enjoy it!!\n\n");
 }

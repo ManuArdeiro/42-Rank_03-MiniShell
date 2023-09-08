@@ -6,7 +6,7 @@
 #    By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/01 18:51:45 by jolopez-          #+#    #+#              #
-#    Updated: 2023/09/05 20:02:58 by yzaytoun         ###   ########.fr        #
+#    Updated: 2023/09/08 21:01:18 by yzaytoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,22 +33,29 @@ BANNER = 	$(info $(WHITE_BAN))\
 			$(info	                                                                                      )\
 			$(info **************************************************************************************)
 
-INCLUDE 		=	include/
-INC_LIB 		=	include/libft
+USER			= $(shell whoami)
+INCLUDE 		= -Iinclude/
+INC_LIB 		= -Iinclude/libft
+INC_READLINE	= -I/Users/$(USER)/.brew/opt/readline/include
+READLINE_LIB	= -L/Users/$(USER)/.brew/opt/readline/lib
 
-SRC 			= 	main.c print_msg.c
+READLINE_FLAGS	= -lreadline
+SRC 			= main.c print_msg.c
 
 OBJS			=	$(SRC:%.c=$(OBJ_DIR)/%.o)
 
 CC 				= 	gcc
 
-CFLAGS 			= 	-Wall -Werror -Wextra -I$(INCLUDE) -I$(INC_LIB)#-g3 -fsanitize=address
+CFLAGS 			= 	-Wall -Werror -Wextra $(INCLUDE) $(INC_LIB) $(READLINE_INC)#-g3 -fsanitize=address
 
 LIBFT			= 	include/libft/libft.a
 
 OBJ_DIR			=	obj
 
-RM 				= /bin/rm -rf 
+RM 				= /bin/rm -rf
+
+
+
 
 $(OBJ_DIR)/%.o : %.c
 	@mkdir -p $(@D)
@@ -59,7 +66,9 @@ all: $(NAME)
 
 $(NAME): 		$(BANNER) $(LIBFT) $(OBJS)
 				@echo "$(YELLOW) Creating minishell... $(WHITE)"
-				$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)	
+				$(CC) $(CFLAGS) $(OBJS) $(READLINE_LIB)\
+				 $(READLINE_FLAGS) $(LIBFT) -o $(NAME)
+				@echo "\n$(LIGHT_GRAY)---------- MiniShell Ready ------------\n"
 .SILENT:
 $(LIBFT):
 				echo "$(LIGHT_RED) Creating libft files... $(WHITE)"

@@ -6,14 +6,14 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:47:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/09/05 20:11:37 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/09/08 20:59:03 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# define prompt 	"MiniShell > "
+# define MINI_PROMPT	"\033[0;36mMiniShell $> "
 
 # include <stdarg.h>
 # include <unistd.h>
@@ -24,6 +24,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "libft.h"
+# include <signal.h>
 
 typedef struct s_global
 {

@@ -15,12 +15,13 @@ NAME 			=	minishell
 vpath 			%.h	include
 vpath 			%.c	src
 vpath 			%.c	src/utils
+vpath 			%.c	src/Commands
 vpath 			%.o	obj
 
 WHITE_BAN        := $(shell tput -Txterm setaf 7)                                     
 
 BANNER = 	$(info $(WHITE_BAN))\
-			$(info @@@@@@@@@@   @@@  @@@  @@@  @@@      @@@@@@   @@@  @@@  @@@@@@@@  @@@       @@@		  )\
+			$(info  @@@@@@@@@@   @@@  @@@  @@@  @@@      @@@@@@   @@@  @@@  @@@@@@@@  @@@       @@@		  )\
 			$(info	@@@@@@@@@@@  @@@  @@@@ @@@  @@@     @@@@@@@   @@@  @@@  @@@@@@@@  @@@       @@@       )\
 			$(info	@@! @@! @@!  @@!  @@!@!@@@  @@!     !@@       @@!  @@@  @@!       @@!       @@!       )\
 			$(info	!@! !@! !@!  !@!  !@!!@!@!  !@!     !@!       !@!  @!@  !@!       !@!       !@!       )\
@@ -50,12 +51,11 @@ CFLAGS 			= 	-Wall -Werror -Wextra $(INCLUDE) $(INC_LIB) $(READLINE_INC)#-g3 -fs
 
 LIBFT			= 	include/libft/libft.a
 
+BUILTINS		= 	src/Commands/Pipex/pipex
+
 OBJ_DIR			=	obj
 
 RM 				= /bin/rm -rf
-
-
-
 
 $(OBJ_DIR)/%.o : %.c
 	@mkdir -p $(@D)
@@ -64,30 +64,33 @@ $(OBJ_DIR)/%.o : %.c
 
 all: $(NAME)
 
-$(NAME): 		$(BANNER) $(LIBFT) $(OBJS)
-				@echo "$(YELLOW) Creating minishell... $(WHITE)"
-				$(CC) $(CFLAGS) $(OBJS) $(READLINE_LIB)\
-				 $(READLINE_FLAGS) $(LIBFT) -o $(NAME)
-				@echo "\n$(LIGHT_GRAY)---------- MiniShell Ready ------------\n"
+$(NAME): 	$(BANNER) $(LIBFT) $(BUILTINS) $(OBJS)
+			@echo "$(YELLOW) Creating minishell... $(WHITE)"
+			$(CC) $(CFLAGS) $(OBJS) $(READLINE_LIB)\
+			 $(READLINE_FLAGS) $(LIBFT) -o $(NAME)
+			@echo "\n$(LIGHT_GRAY)---------- MiniShell Ready ------------\n"
 .SILENT:
 $(LIBFT):
-				echo "$(LIGHT_RED) Creating libft files... $(WHITE)"
-				cd include/libft && make bonus
+			echo "$(LIGHT_RED) Creating libft files... $(WHITE)"
+			cd include/libft && make bonus
 	
+$(BUILTINS):
+			@$(MAKE) -C src/Commands/Pipex
 clean:
-				@echo "\n"
-				@echo "$(LIGHT_RED) Cleaning libft files... $(WHITE)\n"
-				cd include/libft && make clean 
-				/bin/rm -rf $(OBJS)
+		@echo "\n"
+		@echo "$(LIGHT_RED) Cleaning libft files... $(WHITE)\n"
+		cd include/libft && make clean
+		@$(MAKE) fclean -C src/Commands/Pipex 
+		/bin/rm -rf $(OBJS)
 
-fclean: 		clean
-				$(RM) $(NAME) $(OBJ_DIR)
-				@echo "$(GREEN) *** **** DONE **** *** $(WHITE)\n"
+fclean: clean
+		$(RM) $(NAME) $(OBJ_DIR)
+		@echo "$(GREEN) *** **** DONE **** *** $(WHITE)\n"
 				
 
-re: 			fclean all
+re: 	fclean all
 
-.PHONY: 		all clean fclean re  
+.PHONY: all clean fclean re  
 
 # COLORS
 RED				= \033[0;31m

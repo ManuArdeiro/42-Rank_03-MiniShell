@@ -22,7 +22,13 @@ static int	ft_loop(t_global *global)
 			break ;
 		if (ft_strncmp(global->line, "exit", 4) == 0)
 			global->status = 1;
-		free(global->line);
+		if (global->line && *global->line)
+			add_history(global->line);
+		if (global->line)
+		{
+			free(global->line);
+			global->line = NULL;
+		}
 	}
 	return (EXIT_SUCCESS);
 }

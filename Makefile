@@ -15,7 +15,6 @@ NAME 			=	minishell
 vpath 			%.h	include
 vpath 			%.c	src
 vpath 			%.c	src/utils
-vpath 			%.c	src/Commands
 vpath 			%.o	obj
 
 WHITE_BAN        := $(shell tput -Txterm setaf 7)                                     
@@ -37,8 +36,11 @@ BANNER = 	$(info $(WHITE_BAN))\
 USER			= $(shell whoami)
 INCLUDE 		= -Iinclude/
 INC_LIB 		= -Iinclude/libft
-INC_READLINE	= -I/Users/$(USER)/.brew/opt/readline/include
-READLINE_LIB	= -L/Users/$(USER)/.brew/opt/readline/lib
+#INC_READLINE	= -I/Users/$(USER)/.brew/opt/readline/include
+#READLINE_LIB	= -L/Users/$(USER)/.brew/opt/readline/lib
+INC_READLINE	="-L/usr/local/opt/readline/lib"
+READLINE_LIB	="-I/usr/local/opt/readline/include"
+
 
 READLINE_FLAGS	= -lreadline
 SRC 			= main.c print_msg.c
@@ -51,11 +53,13 @@ CFLAGS 			= 	-Wall -Werror -Wextra $(INCLUDE) $(INC_LIB) $(READLINE_INC)#-g3 -fs
 
 LIBFT			= 	include/libft/libft.a
 
-BUILTINS		= 	src/Commands/Pipex/pipex
+COMMANDS		= 	Pipex
+
+BUILTINS		= 	$(addprefix "src/commands/", $(COMMANDS))
 
 OBJ_DIR			=	obj
 
-RM 				= /bin/rm -rf
+RM 				=	/bin/rm -rf
 
 $(OBJ_DIR)/%.o : %.c
 	@mkdir -p $(@D)
@@ -75,12 +79,12 @@ $(LIBFT):
 			cd include/libft && make bonus
 	
 $(BUILTINS):
-			@$(MAKE) -C src/Commands/Pipex
+			@$(MAKE) -C $@
 clean:
 		@echo "\n"
 		@echo "$(LIGHT_RED) Cleaning libft files... $(WHITE)\n"
 		cd include/libft && make clean
-		@$(MAKE) fclean -C src/Commands/Pipex 
+		@$(MAKE) fclean -C $(BUILTINS) 
 		/bin/rm -rf $(OBJS)
 
 fclean: clean
@@ -90,7 +94,7 @@ fclean: clean
 
 re: 	fclean all
 
-.PHONY: all clean fclean re  
+.PHONY: all clean fclean re
 
 # COLORS
 RED				= \033[0;31m

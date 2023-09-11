@@ -6,14 +6,14 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:47:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/09/08 20:59:03 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/09/11 19:30:39 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# define MINI_PROMPT	"\033[0;36mMiniShell $> "
+# define MINI_PROMPT	"\x1b[31mMiniShell $> \x1b[0m"
 
 # include <stdarg.h>
 # include <unistd.h>
@@ -32,8 +32,11 @@ typedef struct s_global
 	char	*line;
 }	t_global;
 
-//	File utils/print_msg.c
+//ANCHOR - 	File utils/print_msg.c
 void		ft_printhelp(void);
 void		ft_printwellcome(void);
 
+//ANCHOR - ReadLine Functions
+void		rl_clear_history(void);
+void		rl_replace_line(const char *text, int clear_undo);
 #endif

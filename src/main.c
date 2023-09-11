@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:55:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/09/08 20:55:23 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/09/11 20:02:34 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,14 @@ static int	ft_loop(t_global *global)
 			global->status = 1;
 		if (global->line && *global->line)
 			add_history(global->line);
+		rl_redisplay_function();
 		if (global->line)
 		{
 			free(global->line);
 			global->line = NULL;
 		}
 	}
+	rl_clear_history();
 	return (EXIT_SUCCESS);
 }
 

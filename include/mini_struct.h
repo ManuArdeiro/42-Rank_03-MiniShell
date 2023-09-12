@@ -1,20 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   mini_struct.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/26 16:30:44 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/09/12 19:28:45 by yzaytoun         ###   ########.fr       */
+/*   Created: 2023/09/12 19:10:53 by yzaytoun          #+#    #+#             */
+/*   Updated: 2023/09/12 20:53:34 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef MINI_STRUCT_H
+# define MINI_STRUCT_H
 
-void	ft_putstr_fd(char *s, int fd)
+typedef struct s_history	t_history;
+
+typedef enum s_bool
 {
-	if (!s || fd < 0)
-		return ;
-	write(fd, s, ft_strlen(s));
-}
+	FALSE,
+	TRUE
+}			t_bool;
+
+
+struct s_history
+{
+	char		*command;
+	t_history	*next;
+};
+
+#endif

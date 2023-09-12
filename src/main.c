@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:55:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/09/11 20:02:34 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/09/12 20:56:20 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,22 @@
 
 static int	ft_loop(t_global *global)
 {
-	while (!global->status)
+	t_history	*history;
+	int			file;
+
+	file = ft_init_history(&history);
+	while (global->status != TRUE)
 	{
 		global->line = readline(MINI_PROMPT);
 		if (!global->line)
 			break ;
 		if (ft_strncmp(global->line, "exit", 4) == 0)
-			global->status = 1;
-		if (global->line && *global->line)
+			global->status = TRUE;
+		if (global->line && *global->line != 32)
+		{
+			ft_register_command(history, global->line);
 			add_history(global->line);
-		rl_redisplay_function();
+		}
 		if (global->line)
 		{
 			free(global->line);
@@ -32,6 +38,8 @@ static int	ft_loop(t_global *global)
 		}
 	}
 	rl_clear_history();
+	ft_write_command_history(history);
+	ft_close_history(&history);
 	return (EXIT_SUCCESS);
 }
 

@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 18:53:59 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/09/08 20:57:26 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/09/12 20:12:56 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,13 @@ void	ft_printwellcome(void)
 		"---------------------------------------------\n"
 		"\n\nMiniShell from yzaytoun and jolopez- for 42 project.\n"
 		"You are very lucky if you are using it, enjoy it!!\n\n");
+}
+
+void	ft_printerror(char *function, char *string)
+{
+	ft_putstr_fd("Function -> ", STDERR_FILENO);
+	ft_putstr_fd(function, STDERR_FILENO);
+	ft_putstr_fd("Exited from -> ", STDERR_FILENO);
+	ft_putstr_fd(string, STDERR_FILENO);
+	ft_putstr_fd("\n", STDERR_FILENO);
 }

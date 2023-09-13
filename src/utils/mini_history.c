@@ -23,7 +23,7 @@ void	ft_register_command(t_list **history, char *command)
 	t_list	*new;
 
 	new = ft_lstnew(command);
-	ft_lstadd_back(history, new);
+	ft_lstadd_back(*history, new);
 }
 
 void	ft_write_command_history(t_list **history)

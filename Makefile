@@ -6,7 +6,7 @@
 #    By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/01 18:51:45 by jolopez-          #+#    #+#              #
-#    Updated: 2023/09/11 19:28:03 by yzaytoun         ###   ########.fr        #
+#    Updated: 2023/09/13 18:52:54 by yzaytoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@ NAME 			=	minishell
 vpath 			%.h	include
 vpath 			%.c	src
 vpath 			%.c	src/utils
+vpath			%.c src/env
 vpath 			%.o	obj
 
 WHITE_BAN        := $(shell tput -Txterm setaf 7)                                     
@@ -43,7 +44,7 @@ READLINE_LIB	= -L/Users/$(USER)/.brew/opt/readline/lib
 
 
 READLINE_FLAGS	= -lreadline
-SRC 			= main.c print_msg.c
+SRC 			= main.c print_msg.c mini_history.c ft_getenv.c ft_setenv.c
 
 OBJS			=	$(SRC:%.c=$(OBJ_DIR)/%.o)
 
@@ -55,7 +56,7 @@ LIBFT			= 	include/libft/libft.a
 
 COMMANDS		= 	Pipex
 
-BUILTINS		= 	$(addprefix "src/commands/", $(COMMANDS))
+BUILTINS		= 	$(addprefix "src/cmd/", $(COMMANDS))
 
 OBJ_DIR			=	obj
 

@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:47:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/09/12 20:13:35 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/09/13 18:22:24 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <stdlib.h>
 # include <limits.h>
 # include <errno.h>
+# include <fcntl.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "libft.h"
@@ -43,5 +44,5 @@ void		rl_clear_history(void);
 void		rl_replace_line(const char *text, int clear_undo);
 
 //ANCHOR - History
-int			ft_is_validcommand(char **string);
+
 #endif

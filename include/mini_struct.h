@@ -19,4 +19,14 @@ typedef enum s_bool
 	TRUE
 }			t_bool;
 
+typedef struct s_dict	t_dict;
+
+struct s_dict
+{
+	char	*value;
+	char	*name;
+	t_dict	*next;
+};
+
+
 #endif

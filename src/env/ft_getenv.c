@@ -12,32 +12,46 @@
 
 #include "minishell.h"
 
-char	**ft_setenv(char **env_array, char +name, char +value, int overwrite)
+static int	ft_check_name(t_dict *envlist, const char *name)
 {
-	int	count;
+	t_dict	*node;
 
-	count = 0;
-	if (!name || !value)
-		return ;
-	if (ft_check_name(name) == FALSE)
+	node = envlist;
+	while (node != NULL)
 	{
-		while ((+env_array)[count] != NULL)
-		{
-			//do something
-			count++;
-		}
+		if (ft_strcmp(node->name, name) == 0)
+			return (TRUE);
+		node = node->next;
+	}
+	return (FALSE);
+}
+
+void	ft_setenv(t_dict **envlist, char *name, char *value, int overwrite)
+{
+	t_list	*newnode;
+	t_dict	newenv;
+
+	if (envlist == NULL || !name || !value)
+		return ;
+	if (ft_check_nam(envlist, name) == FALSE)
+	{
+		newenv.name = name;
+		newenv.value = value;
+		newnode = ft_lstnew((void *)newenv);
+		ft_lstadd_back(envlist, newnode);
 	}
 }
 
-char	*ft_getenv(char **env_array, const char *name)
+char	*ft_getenv(t_dict *envlist, const char *name)
 {
-	int	count;
+	t_dict	*node;
 
-	count = 0;
-	while (env_array[count])
+	node = envlist;
+	while (node != NULL)
 	{
-		if (ft_strcmp(env_array[count], name) == 0)
-			return (value);
-		count++;
+		if (ft_strcmp(node->name, name) == 0)
+			return (node->value);
+		node = node->next;
 	}
+	return (NULL);
 }

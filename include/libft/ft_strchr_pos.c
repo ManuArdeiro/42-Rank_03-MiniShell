@@ -1,31 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mini_struct.h                                      :+:      :+:    :+:   */
+/*   ft_strchr_pos.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/12 19:10:53 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/09/15 18:36:13 by yzaytoun         ###   ########.fr       */
+/*   Created: 2023/09/15 19:54:12 by yzaytoun          #+#    #+#             */
+/*   Updated: 2023/09/15 20:03:55 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINI_STRUCT_H
-# define MINI_STRUCT_H
+#include "libft.h"
 
-typedef enum s_bool
+char	*ft_strchr_pos(const char *s, int c, int pos)
 {
-	FALSE,
-	TRUE,
-	EXIT
-}			t_bool;
+	int	i;
+	int	charcount;
 
-typedef struct s_dict	t_dict;
-
-struct s_dict
-{
-	char	*value;
-	char	*name;
-};
-
-#endif
+	i = 0;
+	charcount = 0;
+	if (!s || pos < 0)
+		return (NULL);
+	while (s[i])
+	{
+		if (s[i] == (char)c)
+			charcount++;
+		if (s[i] == (char)c && pos == 0)
+			return ((char *)(s + i));
+		else if (s[i] == (char)c && pos == charcount)
+			return ((char *)(s + i));
+		i++;
+	}
+	return (NULL);
+}

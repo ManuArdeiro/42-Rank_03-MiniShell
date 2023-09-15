@@ -6,7 +6,7 @@
 #    By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/01 18:51:45 by jolopez-          #+#    #+#              #
-#    Updated: 2023/09/13 18:52:54 by yzaytoun         ###   ########.fr        #
+#    Updated: 2023/09/15 19:46:46 by yzaytoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,8 @@ READLINE_LIB	= -L/Users/$(USER)/.brew/opt/readline/lib
 
 
 READLINE_FLAGS	= -lreadline
-SRC 			= main.c print_msg.c mini_history.c ft_getenv.c ft_setenv.c
+SRC 			= main.c print_msg.c mini_history.c ft_getenv.c ft_setenv.c \
+					ft_initenv.c get_path.c
 
 OBJS			=	$(SRC:%.c=$(OBJ_DIR)/%.o)
 

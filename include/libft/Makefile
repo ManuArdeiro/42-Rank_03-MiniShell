@@ -6,7 +6,7 @@
 #    By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/26 17:03:15 by jolopez-          #+#    #+#              #
-#    Updated: 2023/09/13 18:10:10 by yzaytoun         ###   ########.fr        #
+#    Updated: 2023/09/15 19:55:53 by yzaytoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,8 @@ SRCS			= ft_isalnum.c ft_isprint.c ft_memcmp.c ft_putchar_fd.c \
 BONUS			= ft_lstadd_front_bonus.c ft_lstclear_bonus.c \
 				  ft_lstdelone_bonus.c ft_lstiter_bonus.c ft_lstlast_bonus.c \
 				  ft_lstmap_bonus.c ft_lstnew_bonus.c ft_lstsize_bonus.c \
-				  ft_lstadd_back_bonus.c
+				  ft_lstadd_back_bonus.c ft_strarraylen.c ft_clear_strarray.c \
+				  ft_strchr_pos.c
 
 OBJS			= $(SRCS:.c=.o)
 

@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:47:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/09/13 18:22:24 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/09/15 19:49:41 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,24 @@ typedef struct s_global
 {
 	t_bool	status;
 	char	*line;
+	t_list	*envlist;
 }	t_global;
 
-//ANCHOR - 	File utils/print_msg.c
+// File utils/print_msg.c
 void		ft_printhelp(void);
 void		ft_printwellcome(void);
 void		ft_printerror(char *function, char *string);
 
-//ANCHOR - ReadLine Functions
+// ReadLine Functions
 void		rl_clear_history(void);
 void		rl_replace_line(const char *text, int clear_undo);
 
-//ANCHOR - History
+// Environment
+int			ft_check_name_in_dict(t_list *envlist, const char *name);
+void		ft_cleardict(void *content);
+void		ft_setenv(t_list **envlist, char *name, char *value, int overwrite);
+
+// Util
+char		*ft_get_localpath(void);
 
 #endif

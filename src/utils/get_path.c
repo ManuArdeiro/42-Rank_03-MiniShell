@@ -1,31 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mini_struct.h                                      :+:      :+:    :+:   */
+/*   get_path.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/12 19:10:53 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/09/15 18:36:13 by yzaytoun         ###   ########.fr       */
+/*   Created: 2023/09/15 19:46:11 by yzaytoun          #+#    #+#             */
+/*   Updated: 2023/09/15 19:48:34 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINI_STRUCT_H
-# define MINI_STRUCT_H
+#include "minishell.h"
 
-typedef enum s_bool
+char	*ft_get_localpath(void)
 {
-	FALSE,
-	TRUE,
-	EXIT
-}			t_bool;
+	char	localdir[PATH_MAX];
 
-typedef struct s_dict	t_dict;
-
-struct s_dict
-{
-	char	*value;
-	char	*name;
-};
-
-#endif
+	if (getcwd(localdir, sizeof(localdir)) == NULL)
+		return (NULL);
+	return (localdir);
+}

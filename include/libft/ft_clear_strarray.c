@@ -1,31 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mini_struct.h                                      :+:      :+:    :+:   */
+/*   ft_clear_strarray.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/12 19:10:53 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/09/15 18:36:13 by yzaytoun         ###   ########.fr       */
+/*   Created: 2023/09/15 19:19:59 by yzaytoun          #+#    #+#             */
+/*   Updated: 2023/09/15 19:21:24 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINI_STRUCT_H
-# define MINI_STRUCT_H
+#include "libft.h"
 
-typedef enum s_bool
+void	ft_clear_strarray(char **strarray)
 {
-	FALSE,
-	TRUE,
-	EXIT
-}			t_bool;
-
-typedef struct s_dict	t_dict;
-
-struct s_dict
-{
-	char	*value;
-	char	*name;
-};
-
-#endif
+	if (*strarray == NULL || !strarray)
+		return ;
+	while (*strarray)
+	{
+		free(*strarray);
+		++strarray;
+	}
+	free(strarray);
+}

@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 18:53:59 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/09/12 20:12:56 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/09/16 18:46:54 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	ft_printwellcome(void)
 		"You are very lucky if you are using it, enjoy it!!\n\n");
 }
 
-void	ft_printerror(char *function, char *string)
+void	ft_printerror(const char *function, const char *string)
 {
 	ft_putstr_fd("Function -> ", STDERR_FILENO);
 	ft_putstr_fd(function, STDERR_FILENO);

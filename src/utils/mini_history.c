@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:22:29 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/09/15 18:27:43 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/09/16 18:47:22 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ft_register_command(t_list **history, char *command)
 	t_list	*new;
 
 	new = ft_lstnew(command);
-	ft_lstadd_back(*history, (void *)new);
+	ft_lstadd_back(history, (void *)new);
 }
 
 void	ft_write_command_history(t_list **history, t_global *global)
@@ -47,5 +47,5 @@ void	ft_write_command_history(t_list **history, t_global *global)
 		ft_write_command((char *)node->content, file);
 		node = node->next;
 	}
-	close(path);
+	close(file);
 }

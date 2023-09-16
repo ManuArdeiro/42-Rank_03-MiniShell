@@ -6,7 +6,7 @@
 #    By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/01 18:51:45 by jolopez-          #+#    #+#              #
-#    Updated: 2023/09/15 19:46:46 by yzaytoun         ###   ########.fr        #
+#    Updated: 2023/09/16 19:06:28 by yzaytoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,6 +54,7 @@ CC 				= 	gcc
 CFLAGS 			= 	-Wall -Werror -Wextra $(INCLUDE) $(INC_LIB) $(READLINE_INC)#-g3 -fsanitize=address
 
 LIBFT			= 	include/libft/libft.a
+LIBFTDIR		= 	include/libft
 
 COMMANDS		= 	Pipex
 
@@ -65,7 +66,6 @@ RM 				=	/bin/rm -rf
 
 $(OBJ_DIR)/%.o : %.c
 	@mkdir -p $(@D)
-	@echo "$(YELLOW) Creating Object files... $(WHITE)"	
 	$(COMPILE.c) $< -o $@
 
 all: $(NAME)
@@ -78,14 +78,15 @@ $(NAME): 	$(BANNER) $(LIBFT) $(BUILTINS) $(OBJS)
 .SILENT:
 $(LIBFT):
 			echo "$(LIGHT_RED) Creating libft files... $(WHITE)"
-			cd include/libft && make bonus
+			$(MAKE) bonus -C $(LIBFTDIR)
 	
 $(BUILTINS):
+			@echo "$(YELLOW) Creating Object files... $(WHITE)"	
 			@$(MAKE) -C $@
 clean:
 		@echo "\n"
 		@echo "$(LIGHT_RED) Cleaning libft files... $(WHITE)\n"
-		cd include/libft && make clean
+		@$(MAKE) fclean -C $(LIBFTDIR) 
 		@$(MAKE) fclean -C $(BUILTINS) 
 		/bin/rm -rf $(OBJS)
 

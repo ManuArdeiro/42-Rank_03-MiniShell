@@ -6,13 +6,13 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 16:30:44 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/09/12 19:28:45 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/09/16 18:43:57 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putstr_fd(char *s, int fd)
+void	ft_putstr_fd(const char *s, int fd)
 {
 	if (!s || fd < 0)
 		return ;

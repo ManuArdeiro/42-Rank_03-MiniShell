@@ -6,13 +6,13 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:55:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/09/15 19:03:03 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/09/16 19:07:41 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	ft_loop(t_global *global)
+/*static int	ft_loop(t_global *global)
 {
 	t_list	*history;
 
@@ -40,10 +40,10 @@ static int	ft_loop(t_global *global)
 	ft_lstclear(&history, free);
 	return (EXIT_SUCCESS);
 }
-
+*/
 static void	ft_free(t_global **global)
 {
-	ft_lstclear((*global)->envlist, ft_cleardict);
+	ft_lstclear(&(*global)->envlist, ft_cleardict);
 	free(*global);
 }
 
@@ -60,13 +60,12 @@ int	main(int ac, char **av, char **env)
 {
 	t_global	*global;
 
-	(void)av;
-	if (ac >= 2)
+	if (ac >= 2 || (av && ft_strncmp(av[1], "--help", 6) == 0))
 		ft_printhelp();
 	ft_printwellcome();
 	ft_init(&global, env);
-	if (ft_loop(global) != EXIT_SUCCESS)
-		perror("Error using minishell");
+	//if (ft_loop(global) != EXIT_SUCCESS)
+	//	perror("Error using minishell");
 	ft_free(&global);
 	return (EXIT_SUCCESS);
 }

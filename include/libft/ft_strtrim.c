@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
+/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 12:27:19 by jolopez-          #+#    #+#             */
-/*   Updated: 2022/04/03 15:21:58 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/09/16 18:02:23 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ static int	ft_char_in_set(char c, char const *set)
 char	*ft_strtrim(char const *s1, char const *set)
 {
 	char	*str;
-	size_t	i;
 	size_t	start;
 	size_t	end;
 
@@ -41,16 +40,9 @@ char	*ft_strtrim(char const *s1, char const *set)
 		start++;
 	while (end > start && ft_char_in_set(s1[end - 1], set))
 		end--;
-	str = (char *)malloc(sizeof(*s1) * (end - start + 1));
+	str = malloc(sizeof(char) * (end - start + 2));
 	if (!str)
 		return (NULL);
-	i = 0;
-	while (start < end)
-	{
-		str[i] = s1[start];
-		i++;
-		start++;
-	}
-	str[i] = 0;
+	ft_strlcpy(str, &s1[start], end - start + 1);
 	return (str);
 }

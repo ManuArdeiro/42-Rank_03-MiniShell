@@ -15,9 +15,9 @@
 
 typedef enum s_bool
 {
+	EXIT = -1,
 	FALSE,
 	TRUE,
-	EXIT
 }			t_bool;
 
 typedef struct s_dict	t_dict;

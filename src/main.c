@@ -50,7 +50,7 @@ static void	ft_free(t_global **global)
 static void	ft_init(t_global **global, char **env)
 {
 	*global = malloc(sizeof(t_global));
-	if (*global)
+	if (*global == NULL)
 		return ;
 	ft_bzero(*global, sizeof(*global));
 	(*global)->envlist = ft_initenv(env);
@@ -60,8 +60,11 @@ int	main(int ac, char **av, char **env)
 {
 	t_global	*global;
 
-	if (ac >= 2 || (av && ft_strncmp(av[1], "--help", 6) == 0))
-		ft_printhelp();
+	if (ac >= 2)
+	{
+		if (ft_strncmp(av[1], "--help", 6) == 0)
+			ft_printhelp();
+	}
 	ft_printwellcome();
 	ft_init(&global, env);
 	//if (ft_loop(global) != EXIT_SUCCESS)

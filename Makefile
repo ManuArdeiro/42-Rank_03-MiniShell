@@ -45,13 +45,13 @@ READLINE_LIB	= -L/Users/$(USER)/.brew/opt/readline/lib
 
 READLINE_FLAGS	= -lreadline
 SRC 			= main.c print_msg.c mini_history.c ft_getenv.c ft_setenv.c \
-					ft_initenv.c get_path.c
+					ft_initenv.c get_path.c mini_dictionary.c
 
 OBJS			=	$(SRC:%.c=$(OBJ_DIR)/%.o)
 
 CC 				= 	gcc
 
-CFLAGS 			= 	-Wall -Werror -Wextra $(INCLUDE) $(INC_LIB) $(READLINE_INC)#-g3 -fsanitize=address
+CFLAGS 			= 	-Wall -Werror -Wextra $(INCLUDE) $(INC_LIB) $(READLINE_INC) -g#-g3 -fsanitize=address
 
 LIBFT			= 	include/libft/libft.a
 LIBFTDIR		= 	include/libft

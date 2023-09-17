@@ -12,28 +12,33 @@
 
 #include "minishell.h"
 
-void	ft_setenv(t_list **envlist, char *name, char *value, int overwrite)
+static t_list	*ft_create_newdict(char *name, char *value)
+{
+	t_dict	newdict;
+
+	newdict.name = ft_strdup(name);
+	newdict.value = ft_strdup(value);
+}
+
+static void	ft_add_entry(t_list **envlist, char *name, char *value)
 {
 	t_list	*newnode;
-	t_dict	newenv;
+	newnode = ft_lstnew(&newenv);
+	if (!envlist || *envlist == NULL)
+		*envlist = newnode;
+	else
+		ft_lstadd_back(envlist, newnode);
+}
 
+void	ft_setenv(t_list **envlist, char *name, char *value, int overwrite)
+{
 	if (!name || !value || *name == ' ' || ft_strlen(name) == 0)
 		return ;
 	if (overwrite == FALSE)
 	{
 		if (ft_check_name_in_dict(*envlist, name) == FALSE)
-		{
-			newenv.name = ft_strdup(name);
-			newenv.value = ft_strdup(value);
-			newnode = ft_lstnew(&newenv);
-			ft_lstadd_back(envlist, newnode);
-		}
+			ft_add_entry(envlist, name, value);
 	}
 	else if (overwrite == TRUE)
-	{
-		newenv.name = ft_strdup(name);
-		newenv.value = ft_strdup(value);
-		newnode = ft_lstnew(&newenv);
-		ft_lstadd_back(envlist, newnode);
-	}
+		ft_add_entry(envlist, name, value);
 }

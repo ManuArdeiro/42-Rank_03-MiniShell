@@ -50,13 +50,35 @@ static t_list	*ft_default_envlist(void)
 	return (envlist);
 }
 
+static void	printdict(t_dict dict)
+{
+	printf("name = %s\n ", dict.name);
+	printf("value = %s\n ", dict.value);
+}
+
+static void	ft_printlist(t_list *list)
+{
+	t_list	*node;
+
+	if (list == NULL)
+		return ;
+	node = list;
+	while (node != NULL)
+	{
+		printdict(*((t_dict *)node->content));
+		node = node->next;
+	}
+}
+
 t_list	*ft_initenv(char **env)
 {
 	t_list	*envlist;
 
+	envlist = NULL;
 	if (*env == NULL)
 		envlist = ft_default_envlist();
 	else
 		envlist = ft_get_envlist(env);
+	ft_printlist(envlist);
 	return (envlist);
 }

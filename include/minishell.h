@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:47:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/09/16 18:47:08 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/09/18 20:36:33 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,8 @@ void		rl_clear_history(void);
 void		rl_replace_line(const char *text, int clear_undo);
 
 // Environment
-int			ft_check_name_in_dict(t_list *envlist, const char *name);
-void		ft_cleardict(void *content);
-void		ft_setenv(t_list **envlist, char *name, char *value, int overwrite);
-char		*ft_getenv(const char *name, t_list *envlist);
+void		ft_setenv(t_list **envlist, char *key, char *value, int overwrite);
+char		*ft_getenv(const char *key, t_list *envlist);
 t_list		*ft_initenv(char **env);
 
 // Util
@@ -59,4 +57,10 @@ char		*ft_get_rootpath(const char *path);
 void		ft_write_command_history(t_list **history, t_global *global);
 void		ft_register_command(t_list **history, char *command);
 
+//Dictionary
+void		ft_cleardict(void *content);
+int			ft_searchdict(t_list *list, const char *key);
+int			ft_modifydict(
+				t_list **envlist, const char *key, const char *newvalue);
+void		ft_add_to_dict(t_list **envlist, char *key, char *value);
 #endif

@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:10:53 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/09/15 18:36:13 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/09/18 20:28:05 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,16 @@ typedef enum s_bool
 	EXIT = -1,
 	FALSE,
 	TRUE,
+	OVERWRITE_VALUE,
+	ADD_VALUE
 }			t_bool;
 
 typedef struct s_dict	t_dict;
 
 struct s_dict
 {
+	char	*key;
 	char	*value;
-	char	*name;
 };
 
 #endif

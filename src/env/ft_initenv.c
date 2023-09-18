@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 18:37:26 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/09/16 18:54:06 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/09/18 20:42:53 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,11 @@ static t_list	*ft_get_envlist(char **env)
 	while (*env != NULL)
 	{
 		buffer = ft_split(*env, '=');
-		ft_setenv(&envlist, buffer[0], buffer[1], TRUE);
-		ft_clear_strarray(buffer);
+		if (buffer)
+		{
+			ft_setenv(&envlist, buffer[0], buffer[1], OVERWRITE_VALUE);
+			ft_clear_strarray(buffer);
+		}
 		buffer = NULL;
 		++env;
 	}
@@ -50,10 +53,12 @@ static t_list	*ft_default_envlist(void)
 	return (envlist);
 }
 
-static void	printdict(t_dict dict)
+static void	printdict(t_dict *dict)
 {
-	printf("name = %s\n ", dict.name);
-	printf("value = %s\n ", dict.value);
+	if (dict->key)
+		printf("name = %s\n ", (*dict).key);
+	if (dict->value)
+		printf("value = %s\n ", (*dict).value);
 }
 
 static void	ft_printlist(t_list *list)
@@ -65,7 +70,7 @@ static void	ft_printlist(t_list *list)
 	node = list;
 	while (node != NULL)
 	{
-		printdict(*((t_dict *)node->content));
+		printdict(((t_dict *)node->content));
 		node = node->next;
 	}
 }

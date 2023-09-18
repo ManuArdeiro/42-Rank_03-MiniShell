@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 19:19:59 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/09/15 19:21:24 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/09/18 20:33:25 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,15 @@
 
 void	ft_clear_strarray(char **strarray)
 {
+	int	count;
+
+	count = 0;
 	if (*strarray == NULL || !strarray)
 		return ;
-	while (*strarray)
+	while (strarray[count])
 	{
-		free(*strarray);
-		++strarray;
+		free(strarray[count]);
+		++count;
 	}
 	free(strarray);
 }

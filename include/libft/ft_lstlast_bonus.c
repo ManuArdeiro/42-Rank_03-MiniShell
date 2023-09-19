@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 15:01:41 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/09/13 18:13:43 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/09/19 19:47:02 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,12 @@
 
 t_list	*ft_lstlast(t_list *lst)
 {
-	while (lst)
-	{
-		if (!lst->next)
-			return (lst);
-		lst = lst->next;
-	}
-	return (lst);
+	t_list	*node;
+
+	if (!lst)
+		return (NULL);
+	node = lst;
+	while (node->next != NULL)
+		node = node->next;
+	return (node);
 }

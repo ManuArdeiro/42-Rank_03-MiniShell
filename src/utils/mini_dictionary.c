@@ -6,23 +6,17 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 19:48:16 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/09/18 20:38:58 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/09/19 21:10:26 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+/*Do nothing*/
 void	ft_cleardict(void *content)
 {
-	t_dict	*dict;
-
 	if (content == NULL)
 		return ;
-	dict = (t_dict *)content;
-	if (dict->key)
-		free(dict->key);
-	if (dict->value)
-		free(dict->value);
 }
 
 int	ft_modifydict(t_list **envlist, const char *key, const char *newvalue)
@@ -52,7 +46,7 @@ int	ft_searchdict(t_list *list, const char *key)
 	t_list	*node;
 	size_t	len;
 
-	if (!list || !key)
+	if (!list || !key || list->content == NULL)
 		return (EXIT);
 	node = list;
 	len = ft_strlen(key);
@@ -74,4 +68,11 @@ void	ft_add_to_dict(t_list **envlist, char *key, char *value)
 	newdict.value = ft_strdup(value);
 	newnode = ft_lstnew(&newdict);
 	ft_lstadd_back(envlist, newnode);
+}
+
+int	ft_emptydict(t_dict *dict)
+{
+	if (dict->key == NULL || dict->value == NULL)
+		return (TRUE);
+	return (FALSE);
 }

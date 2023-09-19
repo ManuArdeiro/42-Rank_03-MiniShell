@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:47:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/09/18 20:36:33 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/09/19 21:00:46 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void		ft_write_command_history(t_list **history, t_global *global);
 void		ft_register_command(t_list **history, char *command);
 
 //Dictionary
+int			ft_emptydict(t_dict *dict);
 void		ft_cleardict(void *content);
 int			ft_searchdict(t_list *list, const char *key);
 int			ft_modifydict(

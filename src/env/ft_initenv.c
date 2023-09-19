@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 18:37:26 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/09/18 20:42:53 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/09/19 21:09:55 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,28 +53,6 @@ static t_list	*ft_default_envlist(void)
 	return (envlist);
 }
 
-static void	printdict(t_dict *dict)
-{
-	if (dict->key)
-		printf("name = %s\n ", (*dict).key);
-	if (dict->value)
-		printf("value = %s\n ", (*dict).value);
-}
-
-static void	ft_printlist(t_list *list)
-{
-	t_list	*node;
-
-	if (list == NULL)
-		return ;
-	node = list;
-	while (node != NULL)
-	{
-		printdict(((t_dict *)node->content));
-		node = node->next;
-	}
-}
-
 t_list	*ft_initenv(char **env)
 {
 	t_list	*envlist;
@@ -84,6 +62,5 @@ t_list	*ft_initenv(char **env)
 		envlist = ft_default_envlist();
 	else
 		envlist = ft_get_envlist(env);
-	ft_printlist(envlist);
 	return (envlist);
 }

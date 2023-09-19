@@ -6,13 +6,13 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:55:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/09/18 18:08:58 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/09/19 21:09:11 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*static int	ft_loop(t_global *global)
+static int	ft_loop(t_global *global)
 {
 	t_list	*history;
 
@@ -40,7 +40,7 @@
 	ft_lstclear(&history, free);
 	return (EXIT_SUCCESS);
 }
-*/
+
 static void	ft_free(t_global **global)
 {
 	ft_lstclear(&(*global)->envlist, ft_cleardict);
@@ -56,10 +56,18 @@ static void	ft_init(t_global **global, char **env)
 	(*global)->envlist = ft_initenv(env);
 }
 
+//For Debugging
+/*static void	ft_panic(void)
+{
+	system("leaks minishell");
+}*/
+
+
 int	main(int ac, char **av, char **env)
 {
 	t_global	*global;
 
+	//atexit(ft_panic);
 	if (ac >= 2)
 	{
 		if (ft_strncmp(av[1], "--help", 6) == 0)
@@ -67,8 +75,8 @@ int	main(int ac, char **av, char **env)
 	}
 	ft_printwellcome();
 	ft_init(&global, env);
-	//if (ft_loop(global) != EXIT_SUCCESS)
-	//	perror("Error using minishell");
+	if (ft_loop(global) != EXIT_SUCCESS)
+		perror("Error using minishell");
 	ft_free(&global);
 	return (EXIT_SUCCESS);
 }

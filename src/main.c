@@ -6,38 +6,46 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:55:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/09/19 21:09:11 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/09/20 18:47:31 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	free_string(void *content)
+{
+	if (content == NULL)
+		return ;
+	free(content);
+}
 
 static int	ft_loop(t_global *global)
 {
 	t_list	*history;
 
 	history = NULL;
-	while (global->status != EXIT)
-	{
-		global->line = readline(MINI_PROMPT);
-		if (!global->line)
-			break ;
-		if (ft_strncmp(global->line, "exit", 4) == 0)
-			global->status = EXIT;
-		if (global->line && *global->line != 32)
-		{
-			ft_register_command(&history, global->line);
-			add_history(global->line);
-		}
-		if (global->line)
-		{
-			free(global->line);
-			global->line = NULL;
-		}
-	}
+	//while (global->status != EXIT)
+	//{
+	//	global->line = readline(MINI_PROMPT);
+	//	if (!global->line)
+	//		break ;
+	//	if (ft_strncmp(global->line, "exit", 4) == 0)
+	//		global->status = EXIT;
+	//	if (global->line && *global->line != 32)
+	//	{
+	//		ft_register_command(&history, global->line);
+	//		add_history(global->line);
+	//	}
+	//	if (global->line)
+	//	{
+	//		free(global->line);
+	//		global->line = NULL;
+	//	}
+	//}
+	ft_register_command(&history, "exit");
 	rl_clear_history();
 	ft_write_command_history(&history, global);
-	ft_lstclear(&history, free);
+	ft_lstclear(&history, free_string);
 	return (EXIT_SUCCESS);
 }
 

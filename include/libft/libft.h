@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 16:48:34 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/09/16 18:44:20 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/09/20 18:26:31 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <unistd.h>
+# include "get_next_line.h"
 
 typedef struct s_list
 {

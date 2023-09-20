@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:47:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/09/19 21:00:46 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/09/20 17:41:16 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void		rl_replace_line(const char *text, int clear_undo);
 void		ft_setenv(t_list **envlist, char *key, char *value, int overwrite);
 char		*ft_getenv(const char *key, t_list *envlist);
 t_list		*ft_initenv(char **env);
+int			ft_printenv(t_list *envlist);
 
 // Util
 char		*ft_get_localpath(void);

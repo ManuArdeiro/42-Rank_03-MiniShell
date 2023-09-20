@@ -6,7 +6,7 @@
 #    By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/01 18:51:45 by jolopez-          #+#    #+#              #
-#    Updated: 2023/09/19 21:05:25 by yzaytoun         ###   ########.fr        #
+#    Updated: 2023/09/20 17:37:11 by yzaytoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,7 @@ SANITIZER		= -g3 -fsanitize=address
 
 READLINE_FLAGS	= -lreadline
 SRC 			= main.c print_msg.c mini_history.c ft_getenv.c ft_setenv.c \
-					ft_initenv.c get_path.c mini_dictionary.c
+					ft_initenv.c ft_printenv.c get_path.c mini_dictionary.c 
 
 OBJS			=	$(SRC:%.c=$(OBJ_DIR)/%.o)
 

@@ -1,32 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear_bonus.c                                :+:      :+:    :+:   */
+/*   ft_lstcreate.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/03 15:23:16 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/09/21 20:39:21 by yzaytoun         ###   ########.fr       */
+/*   Created: 2023/09/21 18:58:21 by yzaytoun          #+#    #+#             */
+/*   Updated: 2023/09/21 19:04:11 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstclear(t_list **lst, void (*del)(void *))
+t_list	*ft_lstcreate(void)
 {
-	t_list	*point;
-	t_list	*next_p;
+	t_list	*newlst;
 
-	if (!lst || !del)
-		return ;
-	point = (*lst);
-	(*lst) = point->next;
-	while (point != NULL)
-	{
-		next_p = point->next;
-		(*del)(point->content);
-		free(point);
-		point = next_p;
-	}
-	(*lst) = NULL;
+	newlst = malloc(sizeof(t_list));
+	if (!newlst)
+		return (NULL);
+	newlst->content = NULL;
+	newlst->next = NULL;
+	return (newlst);
 }

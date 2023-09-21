@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:55:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/09/20 18:47:31 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/09/21 20:50:00 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,12 @@
 
 void	free_string(void *content)
 {
+	char	*string;
+
 	if (content == NULL)
 		return ;
-	free(content);
+	string = (char *)content;
+	free(string);
 }
 
 static int	ft_loop(t_global *global)
@@ -42,16 +45,16 @@ static int	ft_loop(t_global *global)
 	//		global->line = NULL;
 	//	}
 	//}
-	ft_register_command(&history, "exit");
+	ft_register_command(&history, ft_strdup("exit"));
 	rl_clear_history();
 	ft_write_command_history(&history, global);
-	ft_lstclear(&history, free_string);
+	ft_lstclear(&history, &free_string);
 	return (EXIT_SUCCESS);
 }
 
 static void	ft_free(t_global **global)
 {
-	ft_lstclear(&(*global)->envlist, ft_cleardict);
+ 	ft_lstclear(&((*global)->envlist), &ft_cleardict);
 	free(*global);
 }
 
@@ -62,14 +65,16 @@ static void	ft_init(t_global **global, char **env)
 		return ;
 	ft_bzero(*global, sizeof(*global));
 	(*global)->envlist = ft_initenv(env);
+	if ((*global)->envlist == NULL)
+		ft_printerror(__func__, "Init Env");
 }
 
 //For Debugging
 /*static void	ft_panic(void)
 {
 	system("leaks minishell");
-}*/
-
+}
+*/
 
 int	main(int ac, char **av, char **env)
 {

@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:22:29 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/09/20 18:42:34 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/09/21 19:17:20 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ void	ft_write_command_history(t_list **history, t_global *global)
 	if (*history == NULL || history == NULL)
 		return ;
 	path = ft_getenv("HOME", global->envlist);
-	path = ft_strjoin_get(path, "/.minishell_history");
+	if (path != NULL)
+		path = ft_strjoin_get(path, "/.minishell_history");
 	if (path != NULL)
 		ft_write_to_file(history, path);
 }

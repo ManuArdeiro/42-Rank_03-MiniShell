@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 19:48:16 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/09/20 17:43:18 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/09/21 20:47:38 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,19 @@
 /*Do nothing*/
 void	ft_cleardict(void *content)
 {
+	t_dict	*dict;
+
 	if (content == NULL)
 		return ;
-	free(((t_dict *)content)->key);
-	free(((t_dict *)content)->value);
+	dict = (t_dict *)content;
+	printf("%s ", dict->key);
+	printf("= %s\n", dict->value);
+	if (ft_emptydict(dict) == FALSE && dict != NULL)
+	{
+		free(dict->key);
+		free(dict->value);
+	}
+	free(dict);
 }
 
 int	ft_modifydict(t_list **envlist, const char *key, const char *newvalue)
@@ -71,7 +80,7 @@ void	ft_add_to_dict(t_list **envlist, char *key, char *value)
 		return ;
 	newdict->key = ft_strdup(key);
 	newdict->value = ft_strdup(value);
-	newnode = ft_lstnew((t_dict *)newdict);
+	newnode = ft_lstnew(newdict);
 	ft_lstadd_back(envlist, newnode);
 }
 

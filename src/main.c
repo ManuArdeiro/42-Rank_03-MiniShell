@@ -6,11 +6,25 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:55:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/09/22 17:52:08 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/09/22 18:27:43 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	ft_register_and_clean(t_list **history, t_global **global)
+{
+	if ((*global)->line && (*global)->line[0] != 32)
+	{
+		ft_register_command(history, (*global)->line);
+		add_history((*global)->line);
+	}
+	if ((*global)->line)
+	{
+		free((*global)->line);
+		(*global)->line = NULL;
+	}
+}
 
 static int	ft_loop(t_global *global)
 {
@@ -24,16 +38,9 @@ static int	ft_loop(t_global *global)
 			break ;
 		if (ft_strncmp(global->line, "exit", 4) == 0)
 			global->status = EXIT;
-		if (global->line && *global->line != 32)
-		{
-			ft_register_command(&history, global->line);
-			add_history(global->line);
-		}
-		if (global->line)
-		{
-			free(global->line);
-			global->line = NULL;
-		}
+		//tokenizer
+		//parser
+		ft_register_and_clean(&history, &global);
 	}
 	rl_clear_history();
 	ft_write_command_history(&history, global);
@@ -53,8 +60,6 @@ static void	ft_init(t_global **global, char **env)
 	if (*global == NULL)
 		return ;
 	(*global)->envlist = ft_initenv(env);
-	if ((*global)->envlist == NULL)
-		ft_printerror(__func__, "Init Env");
 }
 
 //For Debugging

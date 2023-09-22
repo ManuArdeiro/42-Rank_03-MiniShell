@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 19:48:16 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/09/22 17:45:59 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/09/22 18:35:18 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int	ft_modifydict(t_list **envlist, const char *key, const char *newvalue)
 		if (ft_strncmp(((t_dict *)node->content)->key, key, len) == 0)
 		{
 			free(((t_dict *)node->content)->value);
+			((t_dict *)node->content)->value = NULL;
 			((t_dict *)node->content)->value = ft_strdup(newvalue);
 			return (TRUE);
 		}

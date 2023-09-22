@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 17:51:52 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/09/21 21:32:08 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/09/22 20:10:33 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,50 +31,69 @@ typedef enum s_token
 	tk_word
 }	t_token;
 
-typedef struct s_part
+int	ft_is_space(char *line, int *i)
 {
-	int		index;
-	int		value;
-	t_part	*next;
-}	t_part;
-
-static int	ft_token(int *tokens, char *line, int *i)
-{
-	
+	return (line[*i] == ' ' || line[*i] == '\t' || line[*i] == '\v');
 }
 
-t_part	*ft_tokenizer(char *line)
+static int	ft_count_tokens(char *line)
+{
+	int	i;
+	int	flag;
+	int	tokens;
+	
+	i = 0;
+	flag = 0;
+	tokens = 0;
+	while (line[i])
+	{
+		if (ft_is_space(line, i))
+		{
+			i++;
+			flag = 1;
+		}
+		else if (!!ft_strchr("()\'\"*;<>|&", line[i]))
+		{
+			i++;
+			tokens++;
+			flag = 1;
+		}
+		else if (flag == 1)
+		{
+			tokens++;
+			flag = 0;
+		}
+		else if (flag == 0)
+			i++;
+	}
+	return (tokens);	
+}
+
+int	*ft_tokenizer(char *line)
 {
 	int	*tokens;
 	int	i;
 	int	j;
+	int	flag;
 
 	i = 0;
+	j = 0;
+	flag = 0;
+	tokens = malloc(sizeof(int) * ft_count_tokens(line));
 	while (line[i])
 	{
 		if (ft_is_space(line, i))
 			i++;
 		else if (!!ft_strchr("()\'\"*;<>|&", line[i]))
-			ft_token(tokens, line, &i);
-		else if ()
-			
-
-
-			
-		else if (ft_is_lprnths(line, i))
-			ft_add_tkn(tokens, tk_lprnths);
-		else if (ft_is_rprnths(line, i))
-			ft_add_tkn(tokens, tk_rprnths);
-		else if (ft_is_sglquot(line, i))
-			ft_add_tkn(tokens, tk_sglquot);
-		else if (ft_is_dblquot(line, i))
-			ft_add_tkn(tokens, tk_dblquot);
-		else if (ft_is_mul(line, i))
-			ft_add_tkn(tokens, tk_mul);
-		else if (ft_is_semi(line, i))
-			ft_add_tkn(tokens, tk_semi);
-		else
-			r;
+			ft_token(tokens, line, &i, &j);
+		else if (flag == 0)
+		{
+			tokens[j] = tk_word;
+			j++;
+			i++;
+		}
+		else if (flag == 1)
+			i++;
 	}
 	return (tokens);
 }

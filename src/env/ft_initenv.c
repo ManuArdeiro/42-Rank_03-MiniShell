@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 18:37:26 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/09/21 20:46:54 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/09/22 17:43:34 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,5 @@ t_list	*ft_initenv(char **env)
 		ft_default_envlist(&envlist);
 	else
 		ft_get_envlist(&envlist, env);
-	//ft_printenv(envlist);
 	return (envlist);
 }

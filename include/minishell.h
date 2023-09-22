@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:47:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/09/21 19:17:13 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/09/22 17:51:34 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,7 @@ int			ft_searchdict(t_list *list, const char *key);
 int			ft_modifydict(
 				t_list **envlist, const char *key, const char *newvalue);
 void		ft_add_to_dict(t_list **envlist, char *key, char *value);
+
+//AUX
+void		ft_free_string(void *content);
 #endif

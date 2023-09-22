@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:22:29 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/09/21 19:17:20 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/09/22 18:00:13 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,14 @@ static void	ft_write_command(const char *string, int file_descriptor)
 void	ft_register_command(t_list **history, char *command)
 {
 	t_list	*new;
+	char	*buffer;
 
-	new = ft_lstnew((char *)command);
-	ft_lstadd_back(history, new);
+	if (command != NULL)
+	{
+		buffer = ft_strdup(command);
+		new = ft_lstnew((char *)buffer);
+		ft_lstadd_back(history, new);
+	}
 }
 
 void	ft_write_to_file(t_list **list, char *path)

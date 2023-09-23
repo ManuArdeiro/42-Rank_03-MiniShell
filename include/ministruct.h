@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mini_struct.h                                      :+:      :+:    :+:   */
+/*   ministruct.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
+/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:10:53 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/09/19 20:30:27 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/09/23 20:23:43 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINI_STRUCT_H
-# define MINI_STRUCT_H
+#ifndef MINISTRUCT_H
+# define MINISTRUCT_H
 
 typedef enum s_bool
 {
@@ -30,4 +30,29 @@ struct s_dict
 	char	*value;
 };
 
+typedef enum e_token
+{
+	tk_lprnths = 1,
+	tk_rprnths,
+	tk_sglquot,
+	tk_dblquot,
+	tk_mul,
+	tk_semi,
+	tk_less,
+	tk_dblless,
+	tk_gtr,
+	tk_dblgtr,
+	tk_pipe,
+	tk_or,
+	tk_and,
+	tk_state,
+	tk_word
+}	t_token;
+
+typedef struct s_command
+{
+	char		*name;
+	char		**args;
+	char		*wildcards;
+}				t_command;
 #endif

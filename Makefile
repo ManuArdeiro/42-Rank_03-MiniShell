@@ -6,7 +6,7 @@
 #    By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/01 18:51:45 by jolopez-          #+#    #+#              #
-#    Updated: 2023/09/22 18:13:37 by yzaytoun         ###   ########.fr        #
+#    Updated: 2023/09/23 20:17:27 by yzaytoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,8 @@ vpath 			%.h	include
 vpath 			%.c	src
 vpath 			%.c	src/utils
 vpath			%.c src/env
+vpath			%.c src/parser
+vpath			%.c src/lexer
 vpath 			%.o	obj
 
 WHITE_BAN        := $(shell tput -Txterm setaf 7)                                     
@@ -47,10 +49,14 @@ READLINE_FLAGS	= -lreadline
 
 #-------------------------- C Files -------------------------------------
 ENV				= ft_getenv.c ft_setenv.c ft_initenv.c ft_printenv.c
+
 UTILS			= print_msg.c mini_history.c get_path.c free_string.c \
 					mini_dictionary.c
+#TOKENIZER		= #tokenizerfiles
+PARSER			= mini_parser.c mini_summary.c print_tokens.c \
+					get_unique_tokens.c get_token_summary.c
 
-SRC 			= $(ENV) $(UTILS) main.c 
+SRC 			= $(ENV) $(UTILS) $(PARSER) main.c 
 
 COMMANDS		= 	Pipex
 BUILTINS		= 	$(addprefix "src/cmd/", $(COMMANDS))

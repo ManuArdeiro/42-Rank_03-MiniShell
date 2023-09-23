@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:55:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/09/22 18:27:43 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/09/23 20:02:16 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ static int	ft_loop(t_global *global)
 		if (ft_strncmp(global->line, "exit", 4) == 0)
 			global->status = EXIT;
 		//tokenizer
-		//parser
+		t_token	tokens[5] = {tk_dblquot, tk_and, tk_less, tk_pipe, tk_and};
+		ft_parse_line(tokens, 5);
 		ft_register_and_clean(&history, &global);
 	}
 	rl_clear_history();

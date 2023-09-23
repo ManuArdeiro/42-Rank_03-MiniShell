@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 16:48:34 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/09/16 18:44:20 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/09/21 19:05:03 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <unistd.h>
+# include "get_next_line.h"
 
 typedef struct s_list
 {
@@ -74,5 +75,6 @@ t_list			*ft_lstmap(t_list *lst, void *(*f)(void *),
 size_t			ft_strarraylen(char **strarray);
 void			ft_clear_strarray(char **strarray);
 char			*ft_strchr_pos(const char *s, int c, int pos);
+t_list			*ft_lstcreate(void);
 
 #endif

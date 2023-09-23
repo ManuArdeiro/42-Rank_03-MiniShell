@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 16:30:44 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/09/16 18:43:57 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/09/20 18:30:45 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,3 +18,4 @@ void	ft_putstr_fd(const char *s, int fd)
 		return ;
 	write(fd, s, ft_strlen(s));
 }
+

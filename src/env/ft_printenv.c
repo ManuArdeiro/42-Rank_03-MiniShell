@@ -1,41 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_printenv.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/26 12:22:26 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/09/20 18:25:10 by yzaytoun         ###   ########.fr       */
+/*   Created: 2023/09/20 17:36:29 by yzaytoun          #+#    #+#             */
+/*   Updated: 2023/09/21 19:30:33 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+int	ft_printenv(t_list *envlist)
 {
-	char	*str;
-	size_t	i;
-	size_t	j;
+	t_list	*node;
+	int		count;
 
-	i = 0;
-	j = 0;
-	if (!s1 || !s2)
-		return (NULL);
-	str = (char *)malloc(sizeof(*s1) * (ft_strlen(s1) + ft_strlen(s2) + 1));
-	if (!str)
-		return (NULL);
-	while (s1[i])
+	if (!envlist)
+		return (0);
+	count = 0;
+	node = envlist;
+	while (node != NULL)
 	{
-		str[j++] = s1[i];
-		i++;
+		printf("%s ", ((t_dict *)node->content)->key);
+		printf("= %s\n", ((t_dict *)node->content)->value);
+		++count;
+		node = node->next;
 	}
-	i = 0;
-	while (s2[i])
-	{
-		str[j++] = s2[i];
-		i++;
-	}
-	str[j] = 0;
-	return (str);
+	return (count);
 }

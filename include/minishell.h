@@ -48,6 +48,7 @@ void		rl_replace_line(const char *text, int clear_undo);
 void		ft_setenv(t_list **envlist, char *key, char *value, int overwrite);
 char		*ft_getenv(const char *key, t_list *envlist);
 t_list		*ft_initenv(char **env);
+int			ft_printenv(t_list *envlist);
 
 // Util
 char		*ft_get_localpath(void);
@@ -58,9 +59,13 @@ void		ft_write_command_history(t_list **history, t_global *global);
 void		ft_register_command(t_list **history, char *command);
 
 //Dictionary
+int			ft_emptydict(t_dict *dict);
 void		ft_cleardict(void *content);
 int			ft_searchdict(t_list *list, const char *key);
 int			ft_modifydict(
 				t_list **envlist, const char *key, const char *newvalue);
 void		ft_add_to_dict(t_list **envlist, char *key, char *value);
+
+//AUX
+void		ft_free_string(void *content);
 #endif

@@ -6,7 +6,7 @@
 #    By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/01 18:51:45 by jolopez-          #+#    #+#              #
-#    Updated: 2023/09/16 19:06:28 by yzaytoun         ###   ########.fr        #
+#    Updated: 2023/09/22 18:13:37 by yzaytoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,28 +41,30 @@ INC_READLINE	= -I/Users/$(USER)/.brew/opt/readline/include
 READLINE_LIB	= -L/Users/$(USER)/.brew/opt/readline/lib
 #INC_READLINE	="-L/usr/local/opt/readline/lib"
 #READLINE_LIB	="-I/usr/local/opt/readline/include"
-
+SANITIZER		= -g3 -fsanitize=address
 
 READLINE_FLAGS	= -lreadline
-SRC 			= main.c print_msg.c mini_history.c ft_getenv.c ft_setenv.c \
-					ft_initenv.c get_path.c mini_dictionary.c
+
+#-------------------------- C Files -------------------------------------
+ENV				= ft_getenv.c ft_setenv.c ft_initenv.c ft_printenv.c
+UTILS			= print_msg.c mini_history.c get_path.c free_string.c \
+					mini_dictionary.c
+
+SRC 			= $(ENV) $(UTILS) main.c 
+
+COMMANDS		= 	Pipex
+BUILTINS		= 	$(addprefix "src/cmd/", $(COMMANDS))
+#------------------------------------------------------------------------
 
 OBJS			=	$(SRC:%.c=$(OBJ_DIR)/%.o)
 
+RM 				=	/bin/rm -rf
 CC 				= 	gcc
-
-CFLAGS 			= 	-Wall -Werror -Wextra $(INCLUDE) $(INC_LIB) $(READLINE_INC) -g#-g3 -fsanitize=address
+CFLAGS 			= 	-Wall -Werror -Wextra $(INCLUDE) $(INC_LIB) $(READLINE_INC) $(SANITIZER)
 
 LIBFT			= 	include/libft/libft.a
 LIBFTDIR		= 	include/libft
-
-COMMANDS		= 	Pipex
-
-BUILTINS		= 	$(addprefix "src/cmd/", $(COMMANDS))
-
 OBJ_DIR			=	obj
-
-RM 				=	/bin/rm -rf
 
 $(OBJ_DIR)/%.o : %.c
 	@mkdir -p $(@D)

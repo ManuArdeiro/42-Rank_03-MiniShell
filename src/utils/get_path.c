@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 19:46:11 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/09/16 19:01:02 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/09/22 18:34:05 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,11 @@ char	*ft_get_rootpath(const char *path)
 	if (path == NULL)
 		return (NULL);
 	pathsuffix = ft_strchr_pos(path, '/', 3);
-	suffix_len = ft_strlen(pathsuffix) + 1;
-	path_len = ft_strlen(path) + 1;
-	rootpath = malloc(suffix_len + path_len);
-	printf("len = %lu", suffix_len + path_len);
+	suffix_len = ft_strlen(pathsuffix);
+	path_len = ft_strlen(path);
+	rootpath = malloc(suffix_len + path_len + 1);
 	if (!rootpath)
 		return (NULL);
-	ft_strlcpy(rootpath, path, path_len - suffix_len);
-	printf("root = %s", rootpath);
+	ft_strlcpy(rootpath, path, path_len - suffix_len + 2);
 	return (rootpath);
 }

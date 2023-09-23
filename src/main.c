@@ -30,6 +30,8 @@ static int	ft_loop(t_global *global)
 {
 	t_list	*history;
 
+	t_token	tokens[5] = {tk_dblquot, tk_and, tk_less, tk_pipe, tk_and};
+	ft_parse_line(tokens, 5);
 	history = NULL;
 	while (global->status != EXIT)
 	{
@@ -39,11 +41,9 @@ static int	ft_loop(t_global *global)
 		if (ft_strncmp(global->line, "exit", 4) == 0)
 			global->status = EXIT;
 		//tokenizer
-		t_token	tokens[5] = {tk_dblquot, tk_and, tk_less, tk_pipe, tk_and};
-		ft_parse_line(tokens, 5);
 		ft_register_and_clean(&history, &global);
 	}
-	rl_clear_history();
+	//rl_clear_history();
 	ft_write_command_history(&history, global);
 	ft_lstclear(&history, ft_free_string);
 	return (EXIT_SUCCESS);

@@ -16,16 +16,7 @@ t_list	*ft_summarize(t_token *tokens_list, int token_count)
 {
 	t_list	*command_summary;
 	t_list	*unique_token_list;
-	int		count;
 
-	if (!tokens_list || token_count <= 0)
-		return (NULL);
-	count = 0;
-	while (count < token_count)
-	{
-		ft_print_token(tokens_list[count]);
-		++count;
-	}
 	unique_token_list = ft_get_unique_tokens(tokens_list, token_count);
 	command_summary
 		= ft_get_token_summary(tokens_list, token_count, unique_token_list);

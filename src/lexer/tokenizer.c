@@ -6,30 +6,11 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 17:51:52 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/09/22 20:10:33 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/09/23 13:58:25 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-typedef enum s_token
-{
-	tk_lprnths = 1,
-	tk_rprnths,
-	tk_sglquot,
-	tk_dblquot,
-	tk_mul,
-	tk_semi,
-	tk_less,
-	tk_dblless,
-	tk_gtr,
-	tk_dblgtr,
-	tk_pipe,
-	tk_or,
-	tk_and,
-	tk_state,
-	tk_word
-}	t_token;
 
 int	ft_is_space(char *line, int *i)
 {
@@ -41,9 +22,9 @@ static int	ft_count_tokens(char *line)
 	int	i;
 	int	flag;
 	int	tokens;
-	
+
 	i = 0;
-	flag = 0;
+	flag = 1;
 	tokens = 0;
 	while (line[i])
 	{
@@ -52,7 +33,7 @@ static int	ft_count_tokens(char *line)
 			i++;
 			flag = 1;
 		}
-		else if (!!ft_strchr("()\'\"*;<>|&", line[i]))
+		else if (ft_strchr("()\'\"*;<>|&", line[i]))
 		{
 			i++;
 			tokens++;
@@ -66,15 +47,15 @@ static int	ft_count_tokens(char *line)
 		else if (flag == 0)
 			i++;
 	}
-	return (tokens);	
+	return (tokens);
 }
 
-int	*ft_tokenizer(char *line)
+t_token	*ft_tokenizer(char *line)
 {
-	int	*tokens;
-	int	i;
-	int	j;
-	int	flag;
+	int		i;
+	int		j;
+	int		flag;
+	t_token	*tokens;
 
 	i = 0;
 	j = 0;
@@ -85,7 +66,10 @@ int	*ft_tokenizer(char *line)
 		if (ft_is_space(line, i))
 			i++;
 		else if (!!ft_strchr("()\'\"*;<>|&", line[i]))
+		{
 			ft_token(tokens, line, &i, &j);
+			flag = 1;
+		}
 		else if (flag == 0)
 		{
 			tokens[j] = tk_word;

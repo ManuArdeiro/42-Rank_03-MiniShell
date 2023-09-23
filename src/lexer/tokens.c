@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 18:12:50 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/09/22 20:37:26 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/09/23 13:55:52 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ static void	ft_token_4(int *tokens, char *line, int *i, int *j)
 		*i = *i + 2;
 	}
 	else if (line[*i] == '&' && line[*i + 1] != '&' && line[*i + 1] != '!')
+		tokens[*j] = tk_ampersand;
+		*j++;
 		*i++;
 }
-	
-	

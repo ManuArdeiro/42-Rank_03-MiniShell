@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:47:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/09/23 13:59:44 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/09/23 20:17:37 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # include <readline/history.h>
 # include "libft.h"
 # include <signal.h>
-# include "mini_struct.h"
+# include "ministruct.h"
 
 typedef struct s_global
 {

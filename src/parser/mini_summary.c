@@ -18,6 +18,12 @@ t_list	*ft_summarize(t_token *tokens_list, int token_count)
 	t_list	*unique_token_list;
 
 	unique_token_list = ft_get_unique_tokens(tokens_list, token_count);
+	t_list *node = unique_token_list;
+	while (node != NULL)
+	{
+		printf("token in main = %d\n", *(t_token *)node->content);
+		node = node->next;
+	}
 	command_summary
 		= ft_get_token_summary(tokens_list, token_count, unique_token_list);
 	ft_lstclear_nodes(&unique_token_list);

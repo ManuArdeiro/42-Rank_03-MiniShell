@@ -57,10 +57,12 @@ t_list	*ft_get_token_summary(
 	summary = NULL;
 	while (node != NULL)
 	{
+		ft_print_token(*((t_token *)(node)->content));
+		printf("token = %d\n", *(t_token *)(node)->content);
 		ft_add_to_summary(
 			&summary,
 			ft_get_token_count(
-				token_list, *(t_token *)node->content, token_count)
+				token_list, *((t_token *)node->content), token_count)
 			);
 		node = node->next;
 	}

@@ -19,7 +19,7 @@ static void	ft_add_token_to_list(t_list **list, t_token token)
 	if (token <= 0)
 		return ;
 	new = ft_lstnew(&token);
-	ft_lstadd_back(list, new);
+	ft_lstadd_front(list, new);
 }
 
 static t_bool	ft_token_in_list(t_list *list, t_token token)
@@ -50,6 +50,12 @@ t_list	*ft_get_unique_tokens(t_token *tokens_list, int token_count)
 		if (ft_token_in_list(list, tokens_list[count]) == FALSE)
 			ft_add_token_to_list(&list, tokens_list[count]);
 		++count;
+	}
+	t_list *node = list;
+	while (node != NULL)
+	{
+		printf("token in main = %d\n", *(t_token *)node->content);
+		node = node->next;
 	}
 	return (list);
 }

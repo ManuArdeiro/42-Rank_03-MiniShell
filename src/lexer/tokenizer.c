@@ -6,78 +6,44 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 17:51:52 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/09/23 13:58:25 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/09/25 19:23:57 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_is_space(char *line, int *i)
+static void	ft_cmd_vs_arg(t_token *tokens, int *tk_count)
 {
-	return (line[*i] == ' ' || line[*i] == '\t' || line[*i] == '\v');
-}
-
-static int	ft_count_tokens(char *line)
-{
-	int	i;
 	int	flag;
-	int	tokens;
+	int	i;
 
 	i = 0;
-	flag = 1;
-	tokens = 0;
-	while (line[i])
+	flag = 0;
+	while (i < *tk_count)
 	{
-		if (ft_is_space(line, i))
-		{
-			i++;
-			flag = 1;
-		}
-		else if (ft_strchr("()\'\"*;<>|&", line[i]))
-		{
-			i++;
-			tokens++;
-			flag = 1;
-		}
-		else if (flag == 1)
-		{
-			tokens++;
+		if (tokens[i] == tk_semi || tokens[i] == tk_pipe)
 			flag = 0;
-		}
-		else if (flag == 0)
-			i++;
+		else if (tokens[i] == tk_cmd && flag == 0)
+			flag = 1;
+		else if (tokens[i] == tk_cmd && flag == 1)
+			tokens[i] = tk_arg;
+		i++;
 	}
-	return (tokens);
 }
 
-t_token	*ft_tokenizer(char *line)
+t_token	*ft_tokenizer(char *line, int *tk_count)
 {
 	int		i;
 	int		j;
-	int		flag;
 	t_token	*tokens;
 
 	i = 0;
 	j = 0;
-	flag = 0;
-	tokens = malloc(sizeof(int) * ft_count_tokens(line));
-	while (line[i])
-	{
-		if (ft_is_space(line, i))
-			i++;
-		else if (!!ft_strchr("()\'\"*;<>|&", line[i]))
-		{
-			ft_token(tokens, line, &i, &j);
-			flag = 1;
-		}
-		else if (flag == 0)
-		{
-			tokens[j] = tk_word;
-			j++;
-			i++;
-		}
-		else if (flag == 1)
-			i++;
-	}
+	*tk_count = ft_count_tokens(line);
+	tokens = malloc(sizeof(int) * *tk_count);
+	if (!tokens)
+		exit(1);
+	ft_get_tokens(line, tokens, &i, &j);
+	ft_cmd_vs_arg(tokens, tk_count);
 	return (tokens);
 }

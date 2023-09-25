@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:55:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/09/22 18:27:43 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/09/25 18:47:38 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ static void	ft_register_and_clean(t_list **history, t_global **global)
 static int	ft_loop(t_global *global)
 {
 	t_list	*history;
+	t_token	*tokens;
 
 	history = NULL;
 	while (global->status != EXIT)
@@ -38,7 +39,9 @@ static int	ft_loop(t_global *global)
 			break ;
 		if (ft_strncmp(global->line, "exit", 4) == 0)
 			global->status = EXIT;
-		//tokenizer
+		tokens = ft_tokenizer(global->line, &global->tk_count);
+			for (int i = 0; i < global->tk_count; i++)
+				printf("token %d = %d\n", i, tokens[i]);
 		//parser
 		ft_register_and_clean(&history, &global);
 	}

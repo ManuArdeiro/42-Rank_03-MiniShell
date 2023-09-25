@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:47:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/09/23 20:17:37 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/09/25 19:19:45 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 
 typedef struct s_global
 {
+	int		tk_count;
 	t_bool	status;
 	char	*line;
 	t_list	*envlist;
@@ -39,6 +40,17 @@ typedef struct s_global
 void		ft_printhelp(void);
 void		ft_printwellcome(void);
 void		ft_printerror(const char *function, const char *string);
+
+// File utils/tools.c
+int			ft_is_space(char *line, int *i);
+
+// Tokenizer
+
+t_token		*ft_tokenizer(char *line, int *tk_number);
+void		ft_token(t_token *tokens, char *line, int *i, int *j);
+void		ft_get_tokens(char *line, t_token *tokens, int *i, int *j);
+int			ft_count_tokens(char *line);
+int			ft_is_space(char *line, int *i);
 
 // ReadLine Functions
 void		rl_clear_history(void);

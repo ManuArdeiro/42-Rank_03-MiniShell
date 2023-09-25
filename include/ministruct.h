@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:10:53 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/09/23 14:00:19 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/09/25 19:06:55 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ typedef enum s_token
 	tk_ampersand,
 	tk_and,
 	tk_state,
-	tk_word
+	tk_cmd,
+	tk_arg
 }	t_token;
 
 typedef enum s_bool

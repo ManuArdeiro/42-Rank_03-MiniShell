@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+         #
+#    By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/01 18:51:45 by jolopez-          #+#    #+#              #
-#    Updated: 2023/09/22 18:13:37 by yzaytoun         ###   ########.fr        #
+#    Updated: 2023/09/25 19:17:05 by jolopez-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@ vpath 			%.h	include
 vpath 			%.c	src
 vpath 			%.c	src/utils
 vpath			%.c src/env
+vpath			%.c src/lexer
 vpath 			%.o	obj
 
 WHITE_BAN        := $(shell tput -Txterm setaf 7)                                     
@@ -49,8 +50,9 @@ READLINE_FLAGS	= -lreadline
 ENV				= ft_getenv.c ft_setenv.c ft_initenv.c ft_printenv.c
 UTILS			= print_msg.c mini_history.c get_path.c free_string.c \
 					mini_dictionary.c
+LEXER			= tokenizer.c tokens.c token_tools.c
 
-SRC 			= $(ENV) $(UTILS) main.c 
+SRC 			= $(ENV) $(UTILS) $(LEXER) main.c 
 
 COMMANDS		= 	Pipex
 BUILTINS		= 	$(addprefix "src/cmd/", $(COMMANDS))

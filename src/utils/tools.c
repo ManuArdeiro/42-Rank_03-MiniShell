@@ -6,13 +6,8 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 16:32:16 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/09/23 16:32:30 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/09/25 19:16:31 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int	ft_is_space(char *line, int *i)
-{
-	return (line[*i] == ' ' || line[*i] == '\t' || line[*i] == '\v');
-}

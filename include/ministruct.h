@@ -6,12 +6,15 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:10:53 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/09/23 20:23:43 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/09/25 19:04:26 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISTRUCT_H
 # define MINISTRUCT_H
+
+typedef struct s_dict		t_dict;
+typedef struct s_command	t_command;
 
 typedef enum s_bool
 {
@@ -22,7 +25,6 @@ typedef enum s_bool
 	ADD_VALUE
 }			t_bool;
 
-typedef struct s_dict	t_dict;
 
 struct s_dict
 {
@@ -49,10 +51,11 @@ typedef enum e_token
 	tk_word
 }	t_token;
 
-typedef struct s_command
+
+struct s_command
 {
-	char		*name;
-	char		**args;
-	char		*wildcards;
-}				t_command;
+	int		infile;
+	int		outfile;
+	char	*command;
+};
 #endif

@@ -6,7 +6,7 @@
 #    By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/01 18:51:45 by jolopez-          #+#    #+#              #
-#    Updated: 2023/09/23 20:17:27 by yzaytoun         ###   ########.fr        #
+#    Updated: 2023/09/25 19:13:26 by yzaytoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ vpath 			%.c	src/utils
 vpath			%.c src/env
 vpath			%.c src/parser
 vpath			%.c src/lexer
+vpath			%.c src/minitree
 vpath 			%.o	obj
 
 WHITE_BAN        := $(shell tput -Txterm setaf 7)                                     
@@ -54,7 +55,9 @@ UTILS			= print_msg.c mini_history.c get_path.c free_string.c \
 					mini_dictionary.c
 #TOKENIZER		= #tokenizerfiles
 PARSER			= mini_parser.c mini_summary.c print_tokens.c \
-					get_unique_tokens.c get_token_summary.c
+					get_unique_tokens.c get_token_summary.c get_token_count.c
+
+TREE 			= minitree.c
 
 SRC 			= $(ENV) $(UTILS) $(PARSER) main.c 
 

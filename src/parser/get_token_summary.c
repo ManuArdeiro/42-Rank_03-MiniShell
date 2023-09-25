@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 20:16:23 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/09/23 20:17:35 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/09/25 18:05:02 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	ft_add_to_summary(t_list **summary, t_summarizer *summarizer)
 {
 	t_list			*new;
 
-	if (summarizer)
+	if (summarizer != NULL)
 	{
 		new = ft_lstnew((t_summarizer *)summarizer);
 		ft_lstadd_back(summary, new);
@@ -57,12 +57,10 @@ t_list	*ft_get_token_summary(
 	summary = NULL;
 	while (node != NULL)
 	{
-		ft_print_token(*((t_token *)(node)->content));
-		printf("token = %d\n", *(t_token *)(node)->content);
 		ft_add_to_summary(
 			&summary,
 			ft_get_token_count(
-				token_list, *((t_token *)node->content), token_count)
+				token_list, (t_token)node->content, token_count)
 			);
 		node = node->next;
 	}

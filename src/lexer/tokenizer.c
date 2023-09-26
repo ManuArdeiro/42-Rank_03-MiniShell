@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 17:51:52 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/09/25 19:23:57 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/09/26 20:13:19 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ static void	ft_cmd_vs_arg(t_token *tokens, int *tk_count)
 	flag = 0;
 	while (i < *tk_count)
 	{
-		if (tokens[i] == tk_semi || tokens[i] == tk_pipe)
+		if (tokens[i] == tk_semi || tokens[i] == tk_pipe
+			|| tokens[i] == tk_ampersand)
 			flag = 0;
 		else if (tokens[i] == tk_cmd && flag == 0)
 			flag = 1;

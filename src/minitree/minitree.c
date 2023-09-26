@@ -6,11 +6,11 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 18:57:40 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/09/25 20:41:40 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/09/26 18:44:52 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitree.h"
+#include "minishell.h"
 
 t_minitree	*ft_createnode(void *content)
 {

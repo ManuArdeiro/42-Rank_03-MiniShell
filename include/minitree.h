@@ -6,16 +6,12 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 18:59:13 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/09/25 20:07:03 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/09/26 18:43:36 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINITREE_H
 # define MINITREE_H
-
-# include <stdlib.h>
-# include <limits.h>
-# include <stdio.h>
 
 typedef struct s_minitree	t_minitree;
 
@@ -35,4 +31,5 @@ t_minitree	*ft_insertright(t_minitree *root, void *content);
 void		ft_postorder_traversal(t_minitree *root, void (*function)(void *));
 void		ft_preorder_traversal(t_minitree *root, void (*function)(void *));
 void		ft_inorder_traversal(t_minitree *root, void (*function)(void *));
+
 #endif

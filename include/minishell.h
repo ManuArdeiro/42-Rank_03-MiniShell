@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:47:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/09/23 20:01:03 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/09/26 18:46:09 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # include "libft.h"
 # include <signal.h>
 # include "ministruct.h"
+# include "minitree.h"
 
 typedef struct s_global
 {

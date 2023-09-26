@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:10:53 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/09/25 19:04:26 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/09/26 20:34:48 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ struct s_command
 {
 	int		infile;
 	int		outfile;
-	char	*command;
+	char	*name;
+	char	**args;
 };
 #endif

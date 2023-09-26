@@ -6,7 +6,7 @@
 #    By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/01 18:51:45 by jolopez-          #+#    #+#              #
-#    Updated: 2023/09/25 19:13:26 by yzaytoun         ###   ########.fr        #
+#    Updated: 2023/09/26 20:28:51 by yzaytoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,11 +55,12 @@ UTILS			= print_msg.c mini_history.c get_path.c free_string.c \
 					mini_dictionary.c
 #TOKENIZER		= #tokenizerfiles
 PARSER			= mini_parser.c mini_summary.c print_tokens.c \
-					get_unique_tokens.c get_token_summary.c get_token_count.c
+					get_unique_tokens.c get_token_summary.c get_token_count.c\
+					minicommand.c
 
-TREE 			= minitree.c
+TREE 			= minitree.c treetraversal.c
 
-SRC 			= $(ENV) $(UTILS) $(PARSER) main.c 
+SRC 			= $(ENV) $(UTILS) $(PARSER) $(TREE) main.c 
 
 COMMANDS		= 	Pipex
 BUILTINS		= 	$(addprefix "src/cmd/", $(COMMANDS))

@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:47:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/09/25 19:19:45 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/09/26 20:03:41 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,12 @@ int			ft_is_space(char *line, int *i);
 // Tokenizer
 
 t_token		*ft_tokenizer(char *line, int *tk_number);
-void		ft_token(t_token *tokens, char *line, int *i, int *j);
+void		ft_token_1(t_token *tokens, char *line, int *i, int *j);
+void		ft_token_2(t_token *tokens, char *line, int *i, int *j);
+void		ft_token_3(t_token *tokens, char *line, int *i, int *j);
+void		ft_token_4(t_token *tokens, char *line, int *i, int *j);
+void		ft_token_5(t_token *tokens, char *line, int *i, int *j);
+void		ft_token_6(t_token *tokens, char *line, int *i, int *j);
 void		ft_get_tokens(char *line, t_token *tokens, int *i, int *j);
 int			ft_count_tokens(char *line);
 int			ft_is_space(char *line, int *i);

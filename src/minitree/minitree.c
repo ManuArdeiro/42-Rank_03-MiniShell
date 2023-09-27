@@ -6,13 +6,13 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 18:57:40 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/09/26 18:44:52 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/09/27 18:34:16 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_minitree	*ft_createnode(void *content)
+t_minitree	*ft_create_treenode(void *content)
 {
 	t_minitree	*newnode;
 
@@ -27,13 +27,13 @@ t_minitree	*ft_createnode(void *content)
 
 t_minitree	*ft_insertleft(t_minitree *root, void *content)
 {
-	root->leftchild = ft_createnode(content);
+	root->leftchild = ft_create_treenode(content);
 	return (root->leftchild);
 }
 
 t_minitree	*ft_insertright(t_minitree *root, void *content)
 {
-	root->rightchild = ft_createnode(content);
+	root->rightchild = ft_create_treenode(content);
 	return (root->rightchild);
 }
 

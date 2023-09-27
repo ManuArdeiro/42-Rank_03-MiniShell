@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 18:59:13 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/09/26 18:43:36 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/09/27 18:34:16 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ struct s_minitree
 	t_minitree	*rightchild;
 };
 
-t_minitree	*ft_createnode(void *content);
+t_minitree	*ft_create_treenode(void *content);
 void		ft_destroytree(t_minitree *root);
 
 t_minitree	*ft_insertleft(t_minitree *root, void *content);

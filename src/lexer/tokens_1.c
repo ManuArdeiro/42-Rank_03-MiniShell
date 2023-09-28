@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 18:12:50 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/09/28 19:44:39 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/09/28 19:48:14 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,7 @@
 
 void	ft_token_4(t_part *tokens, char *line, int *i)
 {
-	if (line[*i] == '&' && line[*i + 1] == '!')
-	{
-		ft_add_tkn(tokens, tk_amper_exc, i, i + 2);
-		*i = *i + 2;
-	}
-	else if (line[*i] == '&' && line[*i + 1] == '&')
+	if (line[*i] == '&' && line[*i + 1] == '&')
 	{
 		ft_add_tkn(tokens, tk_and, i, i + 2);
 		*i = *i + 2;
@@ -36,7 +31,7 @@ void	ft_token_4(t_part *tokens, char *line, int *i)
 	}
 	else if (line[*i] == '$' && line[*i + 1] == '!' )
 	{
-		ft_add_tkn(tokens, d, i, i + 2);
+		ft_add_tkn(tokens, tk_doll_exc, i, i + 2);
 		*i = *i + 2;
 	}
 }

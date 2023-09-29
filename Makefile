@@ -6,7 +6,7 @@
 #    By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/01 18:51:45 by jolopez-          #+#    #+#              #
-#    Updated: 2023/09/28 19:21:48 by jolopez-         ###   ########.fr        #
+#    Updated: 2023/09/29 18:07:51 by jolopez-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,7 +50,7 @@ READLINE_FLAGS	= -lreadline
 ENV				= ft_getenv.c ft_setenv.c ft_initenv.c ft_printenv.c
 UTILS			= print_msg.c mini_history.c get_path.c free_string.c \
 					mini_dictionary.c
-LEXER			= tokenizer.c tokens_1.c tokens_2.c token_tools_1.c token_tools_2.c
+LEXER			= tokenizer.c tokens.c token_tools_1.c token_tools_2.c
 
 SRC 			= $(ENV) $(UTILS) $(LEXER) main.c 
 

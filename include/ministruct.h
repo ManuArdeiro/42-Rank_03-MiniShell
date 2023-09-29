@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:10:53 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/09/28 19:44:55 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/09/29 18:22:40 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,17 @@ typedef enum s_token
 	tk_and,
 	tk_doll_exc,
 	tk_dollar,
-	tk_output,
 	tk_cmd,
 	tk_arg
 }	t_token;
 
 typedef struct s_part
 {
-	int		index;
-	int		token;
-	int		start;
-	int		end;
-	t_part	*next;
+	int				index;
+	t_token			token;
+	int				start;
+	int				end;
+	struct s_part	*next;
 }	t_part;
 
 typedef enum s_bool

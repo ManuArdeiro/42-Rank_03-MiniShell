@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:47:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/09/28 19:42:55 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/09/29 18:59:04 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,23 +41,17 @@ void		ft_printhelp(void);
 void		ft_printwellcome(void);
 void		ft_printerror(const char *function, const char *string);
 
-// File utils/tools.c
-int			ft_is_space(char *line, int *i);
-
 // Tokenizer
 
 t_part		*ft_tokenizer(char *line, int *tk_count);
+int			ft_is_space(char *line, int i);
 t_part		*ft_create_tkn_list(void);
 int			ft_last_index(t_part *tokens);
 t_part		*ft_last_tkn(t_part *tokens);
+void		ft_add_tkn(t_part *tokens, int token, int start, int end);
 void		ft_get_tokens(char *line, t_part *tokens);
 int			ft_count_tokens(char *line);
-int			ft_add_tkn(t_part *tokens, int token, int start, int end);
 void		ft_token_1(t_part *tokens, char *line, int *i);
-void		ft_token_2(t_part *tokens, char *line, int *i);
-void		ft_token_3(t_part *tokens, char *line, int *i);
-void		ft_token_4(t_part *tokens, char *line, int *i);
-int			ft_is_space(char *line, int *i);
 
 // ReadLine Functions
 void		rl_clear_history(void);

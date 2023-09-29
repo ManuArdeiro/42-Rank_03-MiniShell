@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 18:30:15 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/09/28 20:24:09 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/09/29 19:13:26 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	ft_count_tokens(char *line)
 	tokens = 0;
 	while (line[i])
 	{
-		if (ft_is_space(line, &i))
+		if (ft_is_space(line, i))
 		{
 			i++;
 			flag = 1;
@@ -79,9 +79,30 @@ int	ft_count_tokens(char *line)
 	return (tokens);
 }
 
-static void	ft_distint_token(char *line, t_part *tokens, int *i, int *flag)
+static void	ft_get_tokens_2(char *line, t_part *tokens, int *i, int *start)
 {
-	
+	if (ft_strchr("()\'\"*;<>|&", line[*i + 1]) || ft_is_space(line, *i + 1))
+	{
+		ft_add_tkn(tokens, tk_cmd, *i, *i + 1);
+		*i = *i + 1;
+	}
+	else if (*start == -1)
+	{
+		start = i;
+		*i = *i + 1;
+	}
+	if (*start != -1 && (ft_strchr("()\'\"*;<>|&", line[*i])
+			|| ft_is_space(line, *i)))
+	{
+		ft_add_tkn(tokens, tk_cmd, *start, *i);
+		*i = *i + 1;
+	}
+	else if (*start != -1 && !ft_strchr("()\'\"*;<>|&", line[*i])
+		&& !ft_is_space(line, *i))
+	{
+		*i = *i + 1;
+	}
+	i++;
 }
 
 void	ft_get_tokens(char *line, t_part *tokens)
@@ -103,28 +124,6 @@ void	ft_get_tokens(char *line, t_part *tokens)
 			ft_token_1(tokens, line, &i);
 			start = -1;
 		}
-		else if (!ft_strchr("()\'\"*;<>|&", line[i])
-			&& (ft_strchr("()\'\"*;<>|&", line[i + 1])
-				|| ft_is_space(line, i + 1)))
-		{
-			ft_add_tkn(tokens, tk_cmd, i, i + 1);
-			i = i + 1;
-		}
-		else if (start == -1)
-		{
-			start = i;
-			i = i + 1;
-		}
-		else if (start != -1 && (ft_strchr("()\'\"*;<>|&", line[i])
-				|| ft_is_space(line, i)))
-		{
-			ft_add_tkn(tokens, tk_cmd, start, i);
-			i = i + 1;
-		}
-		else if (start != -1 && !ft_strchr("()\'\"*;<>|&", line[i])
-			&& !ft_is_space(line, i))
-		{
-			i = i + 1;
-		}
+		ft_get_tokens_2(line, tokens, &i, &start);
 	}
 }

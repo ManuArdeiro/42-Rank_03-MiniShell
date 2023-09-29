@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:10:53 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/09/29 18:22:40 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/09/29 20:06:13 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef enum s_token
 typedef struct s_part
 {
 	int				index;
+	t_bool			used;
 	t_token			token;
 	int				start;
 	int				end;

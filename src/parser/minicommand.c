@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 20:25:34 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/09/29 18:30:00 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/09/29 20:02:10 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,13 @@ t_command	*ft_createcommand(char *name, char *arg, int infile, int outfile)
 	return (command);
 }
 
-t_minitree	*ft_create_commandnode(char *line, t_part *token)
+t_minitree	*ft_create_commandnode(char *line, t_part *tokenlist)
 {
 	t_minitree	*minitree;
 
-	//Extract commands
+	if (!tokenlist || !line)
+		return (NULL);
+
 	ft_createcommand(
 		ft_substr(line, token->start, token->end)
 		ft_substr(line, token->start, token->end),

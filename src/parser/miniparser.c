@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 19:37:00 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/09/29 19:17:42 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/09/29 19:34:02 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 t_bool	ft_is_wildcard(t_token token)
 {
-	if (token == tk_pipe || token == tk_and || token == tk_mul)
+	if (token == tk_pipe || token == tk_and || token == tk_mul
+		|| token == tk_ampersand || token == tk_or)
 		return (TRUE);
 	return (FALSE);
 }

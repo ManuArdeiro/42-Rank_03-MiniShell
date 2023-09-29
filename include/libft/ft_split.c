@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
+/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 13:23:15 by jolopez-          #+#    #+#             */
-/*   Updated: 2022/04/06 18:59:06 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/09/29 18:27:14 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,20 +98,3 @@ char	**ft_split(const char *s, char c)
 		return (NULL);
 	return (split);
 }
-
-/*int  main()
-{
-	char **dest;
-	char P[] = "   hola papu que  tal   ";
-	char U = ' ';
-	int	i = 0;
-
-	printf("%s\n", P);
-	dest = ft_split(P, U);
-	while (dest[i])
-	{
-		printf("part = %d -> %s \n", i, dest[i]);
-		i++;
-	}
-	return (0);
-}*/

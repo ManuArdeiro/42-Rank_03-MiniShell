@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:55:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/09/25 19:04:49 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/09/29 18:36:35 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ static int	ft_loop(t_global *global)
 {
 	t_list	*history;
 
-	t_token	tokens[5] = {tk_dblquot, tk_and, tk_less, tk_pipe, tk_and};
-	ft_parse_line(tokens, 5);
 	history = NULL;
 	while (global->status != EXIT)
 	{

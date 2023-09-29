@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mini_summary.c                                     :+:      :+:    :+:   */
+/*   minisummary.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 20:05:07 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/09/25 18:29:28 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/09/29 19:02:49 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniparser.h"
+#include "minishell.h"
 
-t_list	*ft_summarize(t_token *tokens_list, int token_count)
+t_list	*ft_summarize(t_part *tokens_list)
 {
 	t_list	*command_summary;
 	t_list	*unique_token_list;
 
-	unique_token_list = ft_get_unique_tokens(tokens_list, token_count);
+	unique_token_list = ft_get_unique_tokens(tokens_list);
 	command_summary
-		= ft_get_token_summary(tokens_list, token_count, unique_token_list);
+		= ft_get_token_summary(tokens_list, unique_token_list);
 	ft_lstclear_nodes(&unique_token_list);
 	return (command_summary);
 }

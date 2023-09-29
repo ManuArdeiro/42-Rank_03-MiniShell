@@ -6,29 +6,28 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 20:16:23 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/09/25 18:05:02 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/09/29 19:14:14 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniparser.h"
 
-static t_summarizer	*ft_get_token_count(
-		t_token *token_list, t_token token, int token_count)
+static t_summarizer	*ft_count_token(t_part *tokenlist, t_token token)
 {
 	t_summarizer	*summarizer;
-	int				count;
+	t_part			*part;
 
-	if (token <= 0)
+	if (tokenlist == NULL || token <= 0)
 		return (NULL);
-	count = 0;
 	summarizer = ft_calloc(sizeof(t_summarizer), 1);
 	if (!summarizer)
 		return (NULL);
-	while (count < token_count)
+	part = tokenlist;
+	while (part != NULL)
 	{
-		if (token_list[count] == token)
+		if (part->token == token)
 			summarizer->count++;
-		count++;
+		part = part->next;
 	}
 	summarizer->token = token;
 	return (summarizer);
@@ -45,8 +44,7 @@ static void	ft_add_to_summary(t_list **summary, t_summarizer *summarizer)
 	}
 }
 
-t_list	*ft_get_token_summary(
-			t_token *token_list, int token_count, t_list *unique_token_list)
+t_list	*ft_get_token_summary(t_part *tokenlist, t_list *unique_token_list)
 {
 	t_list	*summary;
 	t_list	*node;
@@ -59,8 +57,7 @@ t_list	*ft_get_token_summary(
 	{
 		ft_add_to_summary(
 			&summary,
-			ft_get_token_count(
-				token_list, (t_token)node->content, token_count)
+			ft_count_token(tokenlist, (t_token)node->content)
 			);
 		node = node->next;
 	}

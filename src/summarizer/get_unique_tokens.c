@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 18:36:48 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/09/25 18:01:23 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/09/29 19:05:28 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,18 +38,20 @@ static t_bool	ft_token_in_list(t_list *list, t_token token)
 	return (FALSE);
 }
 
-t_list	*ft_get_unique_tokens(t_token *tokens_list, int token_count)
+t_list	*ft_get_unique_tokens(t_part *tokenlist)
 {
 	t_list	*list;
-	int		count;
+	t_part	*part;
 
-	count = 0;
 	list = NULL;
-	while (count < token_count)
+	if (tokenlist == NULL)
+		return (NULL);
+	part = tokenlist;
+	while (part != NULL)
 	{
-		if (ft_token_in_list(list, tokens_list[count]) == FALSE)
-			ft_add_token_to_list(&list, tokens_list[count]);
-		++count;
+		if (ft_token_in_list(list, part->token) == FALSE)
+			ft_add_token_to_list(&list, part->token);
+		part = part->next;
 	}
 	return (list);
 }

@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:47:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/09/26 18:46:09 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/09/29 18:47:26 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@
 # include <fcntl.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-# include "libft.h"
 # include <signal.h>
 # include "ministruct.h"
 # include "minitree.h"
+# include "miniparser.h"
 
 typedef struct s_global
 {

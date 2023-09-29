@@ -6,19 +6,16 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 20:25:34 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/09/27 18:35:46 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/09/29 18:30:00 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-//FIXME - Need to manage null not to avoid it
 t_command	*ft_createcommand(char *name, char *arg, int infile, int outfile)
 {
 	t_command	*command;
 
-	if (name == NULL || arg == NULL || infile < 0 || outfile < 0)
-		return (NULL);
 	command = malloc(sizeof(t_command));
 	if (!command)
 		return (NULL);
@@ -29,7 +26,7 @@ t_command	*ft_createcommand(char *name, char *arg, int infile, int outfile)
 	return (command);
 }
 
-t_minitree	*ft_create_commandnode(char *line, t_token wildcard)
+t_minitree	*ft_create_commandnode(char *line, t_part *token)
 {
 	t_minitree	*minitree;
 

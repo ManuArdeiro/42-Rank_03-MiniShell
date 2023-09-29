@@ -55,7 +55,7 @@ ENV				= ft_getenv.c ft_setenv.c ft_initenv.c ft_printenv.c
 UTILS			= print_msg.c mini_history.c get_path.c free_string.c \
 					mini_dictionary.c
 #TOKENIZER		= #tokenizerfiles
-PARSER			= miniparser.c minicommand.c
+PARSER			= miniparser.c minicommand.c get_token_value.c
 
 SUMMARIZER		= minisummary.c printtokens.c get_unique_tokens.c \
 					get_token_summary.c get_token_count.c

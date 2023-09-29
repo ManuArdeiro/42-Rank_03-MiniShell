@@ -12,3 +12,15 @@
 
 #include "minishell.h"
 
+t_part	*ft_get_tokennode(t_part *part, t_token token)
+{
+	t_part	*node;
+
+	node = part;
+	while (node != NULL)
+	{
+		if (node->token = token)
+			return (node);
+		node = node->next;
+	}
+}

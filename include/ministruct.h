@@ -59,8 +59,8 @@ typedef enum s_token
 
 struct s_command
 {
-	int		infile;
-	int		outfile;
+	int		*infile;
+	int		*outfile;
 	char	*name;
 	char	**args;
 };

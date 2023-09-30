@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_command_tree.c                              :+:      :+:    :+:   */
+/*   create_commandtree.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -24,18 +24,22 @@ t_command	*ft_createcommand(
 	command->args = ft_lst_to_strarr(arglist);
 	command->infile = ft_lst_to_strarr(infile);
 	command->outfile = ft_lst_to_strarr(outfile);
+	ft_lstclear(&arglist, free);
+	ft_lstclear(&infile, free);
+	ft_lstclear(&outfile, free);
 	return (command);
 }
 
 //FIXME -> Find a separator and separate command creation
-//NOTE Mark the wildcard node start
+//NOTE Mark the wildcard node and start again
+// Create command and add to tree
 
 t_minitree	*ft_create_command_tree(
 		char *commandline, t_part *tokenlist, t_summarizer *command_summary)
 {
 	t_part		*node;
-	t_part		*tracer;
 	t_minitree	*commandtree;
+	t_command	*command;
 	int			command_count;
 
 	if (tokenlist == NULL || commandline == NULL || command_summary == NULL)
@@ -43,14 +47,15 @@ t_minitree	*ft_create_command_tree(
 	command_count = ft_get_token_count(command_summary, tk_cmd);
 	while (command_count > 0)
 	{
+
 		node = ft_get_tokennode(tokenlist, tk_cmd);
-		tracer = ft_get_tokennode(tokenlist, /*flag*/);
-		ft_create_command(
+		command = ft_create_command(
 			ft_extract_tokenstring(commandline, node),
 			ft_extract_stringlist(commandline, tokenlist, tk_arg),
 			ft_extract_filelist(commandline, tokenlist, INFILE),
 			ft_extract_filelist(commandline, tokenlist, OUTFILE)
 			);
+		//add to tree
 		command_count--;
 	}
 	return (commandtree);

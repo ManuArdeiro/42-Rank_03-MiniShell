@@ -55,7 +55,7 @@ ENV				= ft_getenv.c ft_setenv.c ft_initenv.c ft_printenv.c
 UTILS			= print_msg.c mini_history.c get_path.c free_string.c \
 					mini_dictionary.c
 
-PARSER			= create_command_tree.c parser_aux.c convertlist.c\
+PARSER			= create_commandtree.c parser_aux.c convertlist.c\
 					get_arglist.c extract_tokenstring.c extract_filelist.c\
 					get_tokennode.c
 

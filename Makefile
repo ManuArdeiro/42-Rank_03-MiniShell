@@ -6,7 +6,7 @@
 #    By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/01 18:51:45 by jolopez-          #+#    #+#              #
-#    Updated: 2023/09/30 12:54:01 by jolopez-         ###   ########.fr        #
+#    Updated: 2023/09/30 19:21:48 by jolopez-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,7 @@ INC_READLINE	= -I/Users/$(USER)/.brew/opt/readline/include
 READLINE_LIB	= -L/Users/$(USER)/.brew/opt/readline/lib
 #INC_READLINE	="-L/usr/local/opt/readline/lib"
 #READLINE_LIB	="-I/usr/local/opt/readline/include"
-SANITIZER		= -g3 -fsanitize=address -g
+SANITIZER		= -g -g3 -fsanitize=address
 
 READLINE_FLAGS	= -lreadline
 

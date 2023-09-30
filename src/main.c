@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:55:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/09/29 19:31:06 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/09/30 19:01:00 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ static int	ft_loop(t_global *global)
 {
 	t_list	*history;
 	t_part	*tokens;
+	t_part	*print;
 
 	history = NULL;
 	while (global->status != EXIT)
@@ -40,13 +41,12 @@ static int	ft_loop(t_global *global)
 		if (ft_strncmp(global->line, "exit", 4) == 0)
 			global->status = EXIT;
 		tokens = ft_tokenizer(global->line, &global->tk_count);
-			while (tokens)
+		print = tokens;
+			while (print)
 			{
-				printf("\ntoken %d = %d\t", tokens->index, tokens->token);
-				ft_print_token(tokens->token);
-				tokens = tokens->next;
+				printf("token %d = %d\n", print->index, print->token);
+				print = print->next;
 			}
-			printf("\n");
 		//parser
 		ft_register_and_clean(&history, &global);
 	}

@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:47:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/09/29 18:59:04 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/09/30 12:15:01 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int			ft_is_space(char *line, int i);
 t_part		*ft_create_tkn_list(void);
 int			ft_last_index(t_part *tokens);
 t_part		*ft_last_tkn(t_part *tokens);
-void		ft_add_tkn(t_part *tokens, int token, int start, int end);
+void		ft_add_tkn(t_part *tokens, t_token token, int start, int end);
 void		ft_get_tokens(char *line, t_part *tokens);
 int			ft_count_tokens(char *line);
 void		ft_token_1(t_part *tokens, char *line, int *i);

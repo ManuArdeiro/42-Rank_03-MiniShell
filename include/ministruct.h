@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:10:53 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/09/29 20:06:13 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/09/30 12:05:14 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,15 @@ typedef enum s_token
 	tk_arg
 }	t_token;
 
+typedef enum s_bool
+{
+	EXIT = -1,
+	FALSE,
+	TRUE,
+	OVERWRITE_VALUE,
+	ADD_VALUE
+}			t_bool;
+
 typedef struct s_part
 {
 	int				index;
@@ -44,15 +53,6 @@ typedef struct s_part
 	int				end;
 	struct s_part	*next;
 }	t_part;
-
-typedef enum s_bool
-{
-	EXIT = -1,
-	FALSE,
-	TRUE,
-	OVERWRITE_VALUE,
-	ADD_VALUE
-}			t_bool;
 
 typedef struct s_dict	t_dict;
 

@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 19:15:42 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/09/29 19:23:02 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/09/30 19:05:50 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ t_part	*ft_create_tkn_list(void)
 	if (part)
 	{
 		part->index = 0;
+		part->used = FALSE;
 		part->token = 0;
 		part->start = 0;
 		part->end = 0;
@@ -35,28 +36,33 @@ t_part	*ft_create_tkn_list(void)
 }
 
 int	ft_last_index(t_part *tokens)
-{	
-	while (tokens)
+{
+	t_part	*last;
+
+	last = tokens;
+	while (last)
 	{
-		if (tokens->next)
-			return (tokens->index);
-		tokens = tokens->next;
+		if (!last->next)
+			return (last->index);
+		last = last->next;
 	}
 	return (EXIT_FAILURE);
 }
 
 t_part	*ft_last_tkn(t_part *tokens)
 {
+	t_part	*last;
+
 	while (tokens)
 	{
 		if (!tokens->next)
-			return (tokens);
-		tokens = tokens->next;
+			return (last);
+		last = tokens->next;
 	}
-	return (tokens);
+	return (last);
 }
 
-void	ft_add_tkn(t_part *tokens, int token, int start, int end)
+void	ft_add_tkn(t_part *tokens, t_token token, int start, int end)
 {
 	t_part	*new;
 	t_part	*last;
@@ -64,19 +70,20 @@ void	ft_add_tkn(t_part *tokens, int token, int start, int end)
 	new = malloc(sizeof(t_part) * 1);
 	if (!new)
 		exit(EXIT_FAILURE);
-	else
-	{
-		printf("tokens->index = %d \n", tokens->index);
-		printf("ft_last_index(tokens) = %d \n", ft_last_index(tokens));
-		if (ft_last_index(tokens) == 0)
-			tokens = new;
-		new->index = ft_last_index(tokens) + 1;
-		printf("new->index = %d \n", new->index);
-		new->token = token;
-		new->start = start;
-		new->end = end;
-		new->next = NULL;
-	}
+	printf("reserva new hecha\n");
 	last = ft_last_tkn(tokens);
+	printf("ft_last_index(tokens) = %d\n", ft_last_index(tokens));
 	last->next = new;
+	if (ft_last_index(tokens) == 0)
+	{
+		tokens = new;
+		tokens->index = 1;
+	}
+	else
+		new->index = ft_last_index(tokens) + 1;
+	new->token = token;
+	new->used = FALSE;
+	new->start = start;
+	new->end = end;
+	new->next = NULL;
 }

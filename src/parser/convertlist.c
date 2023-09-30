@@ -1,30 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstsize_bonus.c                                 :+:      :+:    :+:   */
+/*   convertlist.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/03 14:57:25 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/09/30 17:52:12 by yzaytoun         ###   ########.fr       */
+/*   Created: 2023/09/30 15:51:54 by yzaytoun          #+#    #+#             */
+/*   Updated: 2023/09/30 18:07:50 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-int	ft_lstsize(t_list *lst)
+char	**ft_lst_to_strarr(t_list *list)
 {
-	int		i;
+	char	**stringarray;
 	t_list	*node;
+	int		i;
 
-	if (!lst)
-		return (0);
-	node = lst;
-	i = 1;
-	while (node->next)
+	if (list == NULL)
+		return (NULL);
+	node = list;
+	stringarray = malloc(sizeof(char *) * (ft_lstsize(list) + 1));
+	if (!stringarray)
+		return (NULL);
+	i = 0;
+	while (node != NULL)
 	{
+		stringarray[i] = ft_strdup((char *)node->content);
 		node = node->next;
-		i++;
+		++i;
 	}
-	return (i);
+	stringarray[i] = NULL;
+	return (stringarray);
 }
+

@@ -1,30 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstsize_bonus.c                                 :+:      :+:    :+:   */
+/*   lstinsert.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/03 14:57:25 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/09/30 17:52:12 by yzaytoun         ###   ########.fr       */
+/*   Created: 2023/09/30 19:40:10 by yzaytoun          #+#    #+#             */
+/*   Updated: 2023/09/30 19:42:22 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_lstsize(t_list *lst)
+void	ft_lstinsert(t_list **list, void *content)
 {
-	int		i;
-	t_list	*node;
+	t_list	*newnode;
 
-	if (!lst)
-		return (0);
-	node = lst;
-	i = 1;
-	while (node->next)
+	newnode = NULL;
+	if (content)
 	{
-		node = node->next;
-		i++;
+		newnode = ft_lstnew(content);
+		ft_lstadd_back(list, newnode);
 	}
-	return (i);
 }

@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 16:48:34 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/09/23 20:21:21 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/09/30 19:43:28 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,6 @@ size_t			ft_strarraylen(char **strarray);
 void			ft_clear_strarray(char **strarray);
 char			*ft_strchr_pos(const char *s, int c, int pos);
 void			ft_lstclear_nodes(t_list **lst);
+void			ft_lstinsert(t_list **list, void *content);
 
 #endif

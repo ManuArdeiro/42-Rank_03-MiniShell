@@ -6,7 +6,7 @@
 #    By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/01 18:51:45 by jolopez-          #+#    #+#              #
-#    Updated: 2023/09/29 18:49:11 by yzaytoun         ###   ########.fr        #
+#    Updated: 2023/09/30 19:07:38 by yzaytoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,8 +54,10 @@ ENV				= ft_getenv.c ft_setenv.c ft_initenv.c ft_printenv.c
 
 UTILS			= print_msg.c mini_history.c get_path.c free_string.c \
 					mini_dictionary.c
-#TOKENIZER		= #tokenizerfiles
-PARSER			= miniparser.c minicommand.c get_token_value.c
+
+PARSER			= create_command_tree.c parser_aux.c convertlist.c\
+					get_arglist.c extract_tokenstring.c extract_filelist.c\
+					get_tokennode.c
 
 SUMMARIZER		= minisummary.c printtokens.c get_unique_tokens.c \
 					get_token_summary.c get_token_count.c

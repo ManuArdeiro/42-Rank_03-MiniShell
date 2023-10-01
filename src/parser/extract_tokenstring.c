@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 14:50:43 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/09/30 19:48:32 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/01 18:48:26 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ t_list	*ft_extract_stringlist(
 		if (node->token == token)
 		{
 			string = ft_extract_tokenstring(commandline, node);
-			ft_lstinsert(&stringlist, (char *)string);
+			ft_lstinsert(&stringlist, (char *)string, BACK);
 		}
 		node = node->next;
 	}

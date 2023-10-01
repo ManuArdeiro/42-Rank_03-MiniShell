@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:10:53 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/09/30 18:35:59 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/01 18:05:20 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ typedef struct s_file		t_file;
 
 typedef enum s_bool
 {
-	EXIT = -1,
+	EXITED = -1,
 	FALSE,
 	TRUE,
 	OVERWRITE_VALUE,
 	ADD_VALUE,
 	INFILE,
-	OUTFILE
+	OUTFILE,
 }			t_bool;
 
 

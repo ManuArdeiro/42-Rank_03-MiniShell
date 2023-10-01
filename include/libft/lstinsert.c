@@ -6,13 +6,13 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 19:40:10 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/09/30 19:42:22 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/01 18:45:02 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstinsert(t_list **list, void *content)
+void	ft_lstinsert(t_list **list, void *content, t_location location)
 {
 	t_list	*newnode;
 
@@ -20,6 +20,9 @@ void	ft_lstinsert(t_list **list, void *content)
 	if (content)
 	{
 		newnode = ft_lstnew(content);
-		ft_lstadd_back(list, newnode);
+		if (location == FRONT)
+			ft_lstadd_front(list, newnode);
+		else if (location == BACK)
+			ft_lstadd_back(list, newnode);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 16:48:34 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/09/30 19:43:28 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/01 18:45:22 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,12 @@
 # include <stdio.h>
 # include <unistd.h>
 # include "get_next_line.h"
+
+typedef enum e_location
+{
+	FRONT,
+	BACK
+}			t_location;
 
 typedef struct s_list
 {
@@ -76,6 +82,6 @@ size_t			ft_strarraylen(char **strarray);
 void			ft_clear_strarray(char **strarray);
 char			*ft_strchr_pos(const char *s, int c, int pos);
 void			ft_lstclear_nodes(t_list **lst);
-void			ft_lstinsert(t_list **list, void *content);
+void			ft_lstinsert(t_list **list, void *content, t_location location);
 
 #endif

@@ -6,7 +6,7 @@
 #    By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/01 18:51:45 by jolopez-          #+#    #+#              #
-#    Updated: 2023/09/30 19:07:38 by yzaytoun         ###   ########.fr        #
+#    Updated: 2023/10/01 18:58:23 by yzaytoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ vpath			%.c src/parser
 vpath			%.c src/lexer
 vpath			%.c src/minitree
 vpath			%.c src/summarizer
+vpath			%.c src/exec
 vpath 			%.o	obj
 
 WHITE_BAN        := $(shell tput -Txterm setaf 7)                                     
@@ -55,16 +56,18 @@ ENV				= ft_getenv.c ft_setenv.c ft_initenv.c ft_printenv.c
 UTILS			= print_msg.c mini_history.c get_path.c free_string.c \
 					mini_dictionary.c
 
-PARSER			= create_commandtree.c parser_aux.c convertlist.c\
+PARSER			= get_commandlist.c isseparator.c convertlist.c\
 					get_arglist.c extract_tokenstring.c extract_filelist.c\
-					get_tokennode.c
+					get_tokennode.c lstconvert.c printcommand.c
 
 SUMMARIZER		= minisummary.c printtokens.c get_unique_tokens.c \
 					get_token_summary.c get_token_count.c
 
 TREE 			= minitree.c treetraversal.c
 
-SRC 			= $(ENV) $(UTILS) $(PARSER) $(TREE) $(SUMMARIZER) main.c 
+EXEC			= executer.c openfile.c
+
+SRC 			= $(ENV) $(UTILS) $(PARSER) $(TREE) $(SUMMARIZER) $(EXEC) main.c 
 
 COMMANDS		= 	Pipex
 BUILTINS		= 	$(addprefix "src/cmd/", $(COMMANDS))

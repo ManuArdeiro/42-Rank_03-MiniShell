@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 18:30:15 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/10/01 10:50:59 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/10/01 15:35:54 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ void	ft_get_tokens(char *line, t_part *tokens)
 	int	i;
 	int	start;
 
-	start = 0;
+	start = -1;
 	i = 0;
 	while (line[i])
 	{

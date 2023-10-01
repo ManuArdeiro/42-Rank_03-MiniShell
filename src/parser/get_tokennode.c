@@ -1,33 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   get_tokennode.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/25 20:31:00 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/09/29 18:26:34 by yzaytoun         ###   ########.fr       */
+/*   Created: 2023/09/30 19:07:11 by yzaytoun          #+#    #+#             */
+/*   Updated: 2023/10/01 18:57:25 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-char	*ft_strdup(const char *s1)
+t_part	*ft_get_tokennode(t_part *tokenlist, t_token token)
 {
-	char	*str;
-	size_t	i;
+	t_part	*node;
 
-	if (s1 == NULL)
+	if (tokenlist == NULL)
 		return (NULL);
-	str = (char *)malloc(sizeof(*s1) * (ft_strlen(s1) + 1));
-	if (!str)
-		return (NULL);
-	i = 0;
-	while (s1[i])
+	node = tokenlist;
+	while (node != NULL)
 	{
-		str[i] = s1[i];
-		i++;
+		if (node->token && node->used == FALSE)
+			return (node);
+		node = node->next;
 	}
-	str[i] = 0;
-	return (str);
+	return (NULL);
 }

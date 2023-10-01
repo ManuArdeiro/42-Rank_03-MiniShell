@@ -1,33 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   lstinsert.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/25 20:31:00 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/09/29 18:26:34 by yzaytoun         ###   ########.fr       */
+/*   Created: 2023/09/30 19:40:10 by yzaytoun          #+#    #+#             */
+/*   Updated: 2023/10/01 18:45:02 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strdup(const char *s1)
+void	ft_lstinsert(t_list **list, void *content, t_location location)
 {
-	char	*str;
-	size_t	i;
+	t_list	*newnode;
 
-	if (s1 == NULL)
-		return (NULL);
-	str = (char *)malloc(sizeof(*s1) * (ft_strlen(s1) + 1));
-	if (!str)
-		return (NULL);
-	i = 0;
-	while (s1[i])
+	newnode = NULL;
+	if (content)
 	{
-		str[i] = s1[i];
-		i++;
+		newnode = ft_lstnew(content);
+		if (location == FRONT)
+			ft_lstadd_front(list, newnode);
+		else if (location == BACK)
+			ft_lstadd_back(list, newnode);
 	}
-	str[i] = 0;
-	return (str);
 }

@@ -1,33 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   get_token_count.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/25 20:31:00 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/09/29 18:26:34 by yzaytoun         ###   ########.fr       */
+/*   Created: 2023/09/25 18:37:04 by yzaytoun          #+#    #+#             */
+/*   Updated: 2023/09/29 19:13:32 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "miniparser.h"
 
-char	*ft_strdup(const char *s1)
+int	ft_get_token_count(t_list *summary, t_token token)
 {
-	char	*str;
-	size_t	i;
+	int		result;
+	t_list	*node;
 
-	if (s1 == NULL)
-		return (NULL);
-	str = (char *)malloc(sizeof(*s1) * (ft_strlen(s1) + 1));
-	if (!str)
-		return (NULL);
-	i = 0;
-	while (s1[i])
+	if (!summary || !token)
+		return (0);
+	node = summary;
+	result = 0;
+	while (node != NULL)
 	{
-		str[i] = s1[i];
-		i++;
+		if (((t_summarizer *)node->content)->token == token)
+			result = ((t_summarizer *)node->content)->count;
+		node = node->next;
 	}
-	str[i] = 0;
-	return (str);
+	return (result);
 }

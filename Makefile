@@ -16,7 +16,11 @@ vpath 			%.h	include
 vpath 			%.c	src
 vpath 			%.c	src/utils
 vpath			%.c src/env
+vpath			%.c src/parser
 vpath			%.c src/lexer
+vpath			%.c src/minitree
+vpath			%.c src/summarizer
+vpath			%.c src/exec
 vpath 			%.o	obj
 
 WHITE_BAN        := $(shell tput -Txterm setaf 7)                                     
@@ -38,21 +42,33 @@ BANNER = 	$(info $(WHITE_BAN))\
 USER			= $(shell whoami)
 INCLUDE 		= -Iinclude/
 INC_LIB 		= -Iinclude/libft
-INC_READLINE	= -I/Users/$(USER)/.brew/opt/readline/include
-READLINE_LIB	= -L/Users/$(USER)/.brew/opt/readline/lib
-#INC_READLINE	="-L/usr/local/opt/readline/lib"
-#READLINE_LIB	="-I/usr/local/opt/readline/include"
+#INC_READLINE	= -I/Users/$(USER)/.brew/opt/readline/include
+#READLINE_LIB	= -L/Users/$(USER)/.brew/opt/readline/lib
+INC_READLINE	="-L/usr/local/opt/readline/lib"
+READLINE_LIB	="-I/usr/local/opt/readline/include"
 SANITIZER		= -g -g3 -fsanitize=address
 
 READLINE_FLAGS	= -lreadline
 
 #-------------------------- C Files -------------------------------------
 ENV				= ft_getenv.c ft_setenv.c ft_initenv.c ft_printenv.c
+
 UTILS			= print_msg.c mini_history.c get_path.c free_string.c \
 					mini_dictionary.c
 LEXER			= tokenizer.c tokens.c token_tools_1.c token_tools_2.c
 
-SRC 			= $(ENV) $(UTILS) $(LEXER) main.c 
+PARSER			= get_commandlist.c isseparator.c convertlist.c\
+					get_arglist.c extract_tokenstring.c extract_filelist.c\
+					get_tokennode.c lstconvert.c printcommand.c
+
+SUMMARIZER		= minisummary.c printtokens.c get_unique_tokens.c \
+					get_token_summary.c get_token_count.c
+
+TREE 			= minitree.c treetraversal.c
+
+EXEC			= executor.c openfile.c
+
+SRC 			= $(ENV) $(UTILS) $(PARSER) $(TREE) $(SUMMARIZER) $(EXEC) main.c 
 
 COMMANDS		= 	Pipex
 BUILTINS		= 	$(addprefix "src/cmd/", $(COMMANDS))

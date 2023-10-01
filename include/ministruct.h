@@ -10,8 +10,32 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISTRUCT_H
+#ifndef MINISTRUCT_H	/*Mini struct header*/
 # define MINISTRUCT_H
+
+# include "libft.h"
+
+typedef struct s_dict		t_dict;
+typedef struct s_command	t_command;
+typedef struct s_file		t_file;
+
+typedef enum s_bool
+{
+	EXITED = -1,
+	FALSE,
+	TRUE,
+	OVERWRITE_VALUE,
+	ADD_VALUE,
+	INFILE,
+	OUTFILE,
+}			t_bool;
+
+
+struct s_dict
+{
+	char	*key;
+	char	*value;
+};
 
 typedef enum s_token
 {
@@ -35,31 +59,35 @@ typedef enum s_token
 	tk_arg
 }	t_token;
 
-typedef enum s_bool
+struct s_file	/*File desciptor and name*/
 {
-	EXIT = -1,
-	FALSE,
-	TRUE,
-	OVERWRITE_VALUE,
-	ADD_VALUE
-}			t_bool;
+	char	*name;
+	int		fd;
+};
+
+
+struct s_command
+{
+	t_file	*infile;
+	t_file	*outfile;
+	char	*name;
+	char	**args;
+};
 
 typedef struct s_part
 {
-	int				index;
-	t_bool			used;
-	t_token			token;
-	int				start;
-	int				end;
-	struct s_part	*next;
+	int		index;
+	int		token;
+	int		start;
+	int		end;
+	t_bool	used;
+	t_part	*next;
 }	t_part;
 
-typedef struct s_dict	t_dict;
-
-struct s_dict
+typedef struct s_summarizer
 {
-	char	*key;
-	char	*value;
-};
+	int		count;
+	t_token	token;
+}				t_summarizer;
 
-#endif
+#endif		/*Mini struct header*/

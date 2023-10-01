@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:55:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/09/30 19:01:00 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/10/01 00:27:08 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static int	ft_loop(t_global *global)
 		//parser
 		ft_register_and_clean(&history, &global);
 	}
-	rl_clear_history();
+	//rl_clear_history();
 	ft_write_command_history(&history, global);
 	ft_lstclear(&history, ft_free_string);
 	return (EXIT_SUCCESS);

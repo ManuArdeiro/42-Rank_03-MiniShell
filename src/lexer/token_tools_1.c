@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 19:15:42 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/09/30 19:05:50 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/10/01 03:33:09 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,50 +40,42 @@ int	ft_last_index(t_part *tokens)
 	t_part	*last;
 
 	last = tokens;
-	while (last)
-	{
-		if (!last->next)
-			return (last->index);
+	while (last->next != NULL)
 		last = last->next;
-	}
-	return (EXIT_FAILURE);
+	return (last->index);
 }
 
 t_part	*ft_last_tkn(t_part *tokens)
 {
 	t_part	*last;
 
-	while (tokens)
-	{
-		if (!tokens->next)
-			return (last);
+	last = tokens;
+	while (last->next != NULL)
 		last = tokens->next;
-	}
 	return (last);
 }
 
 void	ft_add_tkn(t_part *tokens, t_token token, int start, int end)
 {
 	t_part	*new;
-	t_part	*last;
+	t_part	*last_tk;
 
 	new = malloc(sizeof(t_part) * 1);
 	if (!new)
 		exit(EXIT_FAILURE);
-	printf("reserva new hecha\n");
-	last = ft_last_tkn(tokens);
-	printf("ft_last_index(tokens) = %d\n", ft_last_index(tokens));
-	last->next = new;
-	if (ft_last_index(tokens) == 0)
-	{
-		tokens = new;
-		tokens->index = 1;
-	}
-	else
-		new->index = ft_last_index(tokens) + 1;
 	new->token = token;
 	new->used = FALSE;
 	new->start = start;
 	new->end = end;
 	new->next = NULL;
+	last_tk = ft_last_tkn(tokens);
+	last_tk->next = new;
+	if (ft_last_index(tokens) == 0)
+	{
+		free(tokens);
+		tokens = new;
+		tokens->index = 1;
+	}
+	else
+		new->index = ft_last_index(tokens) + 1;
 }

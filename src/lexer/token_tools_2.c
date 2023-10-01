@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 18:30:15 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/09/30 18:46:55 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/10/01 03:20:06 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,19 +83,17 @@ static void	ft_get_tokens_2(char *line, t_part *tokens, int *i, int *start)
 {	
 	if (ft_strchr("()\'\"*;<>|&", line[*i + 1]) || ft_is_space(line, *i + 1))
 	{
-	printf("añadir token word 1 caracter start = %d i = %d \n", *start, *i);
-		ft_add_tkn(tokens, tk_cmd, *i, *i + 1);
+		ft_add_tkn(tokens, tk_cmd, *start, *i + 1);
 		*i = *i + 1;
 	}
 	else if (*start == -1)
 	{
-		start = i;
+		*start = *i;
 		*i = *i + 1;
 	}
 	else if (*start != -1 && (ft_strchr("()\'\"*;<>|&", line[*i])
 			|| ft_is_space(line, *i)))
 	{
-	printf("añadir token mas 1 caracter start = %d i = %d\n", *start, *i);
 		ft_add_tkn(tokens, tk_cmd, *start, *i);
 		*i = *i + 1;
 	}
@@ -111,7 +109,7 @@ void	ft_get_tokens(char *line, t_part *tokens)
 	int	i;
 	int	start;
 
-	start = -1;
+	start = 0;
 	i = 0;
 	while (line[i])
 	{

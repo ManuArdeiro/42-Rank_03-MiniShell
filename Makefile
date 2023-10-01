@@ -6,7 +6,7 @@
 #    By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/01 18:51:45 by jolopez-          #+#    #+#              #
-#    Updated: 2023/10/01 18:58:23 by yzaytoun         ###   ########.fr        #
+#    Updated: 2023/10/01 19:01:25 by yzaytoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,7 +65,7 @@ SUMMARIZER		= minisummary.c printtokens.c get_unique_tokens.c \
 
 TREE 			= minitree.c treetraversal.c
 
-EXEC			= executer.c openfile.c
+EXEC			= executor.c openfile.c
 
 SRC 			= $(ENV) $(UTILS) $(PARSER) $(TREE) $(SUMMARIZER) $(EXEC) main.c 
 

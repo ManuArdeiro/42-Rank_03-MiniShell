@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 19:15:42 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/09/30 19:05:50 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/10/01 11:06:47 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@ t_part	*ft_create_tkn_list(void)
 	t_part	*part;
 
 	part = malloc(sizeof(t_part));
-	if (part)
+	if (!part)
+		exit(EXIT_FAILURE);
+	else
 	{
 		part->index = 0;
 		part->used = FALSE;
@@ -37,29 +39,22 @@ t_part	*ft_create_tkn_list(void)
 
 int	ft_last_index(t_part *tokens)
 {
-	t_part	*last;
+	t_part	*last_idx;
 
-	last = tokens;
-	while (last)
-	{
-		if (!last->next)
-			return (last->index);
-		last = last->next;
-	}
-	return (EXIT_FAILURE);
+	last_idx = tokens;
+	while (last_idx->next != NULL)
+		last_idx = last_idx->next;
+	return (last_idx->index);
 }
 
 t_part	*ft_last_tkn(t_part *tokens)
 {
-	t_part	*last;
+	t_part	*last_tk;
 
-	while (tokens)
-	{
-		if (!tokens->next)
-			return (last);
-		last = tokens->next;
-	}
-	return (last);
+	last_tk = tokens;
+	while (last_tk->next != NULL)
+		last_tk = last_tk->next;
+	return (last_tk);
 }
 
 void	ft_add_tkn(t_part *tokens, t_token token, int start, int end)
@@ -70,20 +65,25 @@ void	ft_add_tkn(t_part *tokens, t_token token, int start, int end)
 	new = malloc(sizeof(t_part) * 1);
 	if (!new)
 		exit(EXIT_FAILURE);
-	printf("reserva new hecha\n");
 	last = ft_last_tkn(tokens);
-	printf("ft_last_index(tokens) = %d\n", ft_last_index(tokens));
-	last->next = new;
-	if (ft_last_index(tokens) == 0)
+	if (tokens->index == 0)
 	{
-		tokens = new;
 		tokens->index = 1;
+		tokens->token = token;
+		tokens->used = FALSE;
+		tokens->start = start;
+		tokens->end = end;
+		tokens->next = NULL;
+		free(new);
 	}
 	else
+	{
 		new->index = ft_last_index(tokens) + 1;
-	new->token = token;
-	new->used = FALSE;
-	new->start = start;
-	new->end = end;
-	new->next = NULL;
+		new->token = token;
+		new->used = FALSE;
+		new->start = start;
+		new->end = end;
+		new->next = NULL;
+		last->next = new;
+	}
 }

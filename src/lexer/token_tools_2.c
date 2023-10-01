@@ -110,7 +110,7 @@ void	ft_get_tokens(char *line, t_part *tokens)
 	int	i;
 	int	start;
 
-	start = -1;
+	start = 0;
 	i = 0;
 	while (line[i])
 	{

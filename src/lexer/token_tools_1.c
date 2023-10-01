@@ -54,13 +54,13 @@ t_part	*ft_last_tkn(t_part *tokens)
 	last_tk = tokens;
 	while (last_tk->next != NULL)
 		last_tk = last_tk->next;
-	return (last_tk);
+	return (last_tk)
 }
 
 void	ft_add_tkn(t_part *tokens, t_token token, int start, int end)
 {
 	t_part	*new;
-	t_part	*last;
+	t_part	*last_tk;
 
 	new = malloc(sizeof(t_part) * 1);
 	if (!new)
@@ -86,4 +86,3 @@ void	ft_add_tkn(t_part *tokens, t_token token, int start, int end)
 		new->next = NULL;
 		last->next = new;
 	}
-}

@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   print_msg.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 18:53:59 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/09/18 20:29:56 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/02 20:15:57 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+/*	This function prints help for users to use MiniShell.	*/
 
 void	ft_printhelp(void)
 {
@@ -19,6 +21,8 @@ void	ft_printhelp(void)
 		"2.- Once you get inside type \"exit\" to stop execution.\n\n");
 	exit(EXIT_SUCCESS);
 }
+
+/*	This function prints welcome message.	*/
 
 void	ft_printwellcome(void)
 {

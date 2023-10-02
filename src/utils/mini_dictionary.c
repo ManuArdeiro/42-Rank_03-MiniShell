@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   mini_dictionary.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 19:48:16 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/09/22 18:35:18 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/02 22:06:14 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+/*	*/
 
 void	ft_cleardict(void *content)
 {
@@ -50,6 +52,14 @@ int	ft_modifydict(t_list **envlist, const char *key, const char *newvalue)
 	return (FALSE);
 }
 
+/*	This function cheks is the received string key is included in the 
+	list (envList, the list of strings of environment). 
+	
+Por qué utilizas size_t, cual es su función en lugar de un int normal? Beneficio?
+A qué se expande EXIT y por qué? 
+Por qué los paréntesis en ((t_dict *)node->content)->key? 
+El nombre de la función no sería mejor ft_search_env? */
+
 int	ft_searchdict(t_list *list, const char *key)
 {
 	t_list	*node;
@@ -68,6 +78,9 @@ int	ft_searchdict(t_list *list, const char *key)
 	return (FALSE);
 }
 
+/*	This funtion creates a new t_dict item (key and value) and adds it to
+	the	environment t_dict list.	*/
+
 void	ft_add_to_dict(t_list **envlist, char *key, char *value)
 {
 	t_list	*newnode;
@@ -82,6 +95,10 @@ void	ft_add_to_dict(t_list **envlist, char *key, char *value)
 	ft_lstadd_back(envlist, newnode);
 }
 
+/*	This function checks if the t_dict item (key or value) is empty and
+	returns TRUE if so.	It returns FALSE if both key and value are not 
+	empty.	*/
+	
 int	ft_emptydict(t_dict *dict)
 {
 	if (dict->key == NULL || dict->value == NULL)

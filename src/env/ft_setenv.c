@@ -3,14 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   ft_setenv.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 18:49:32 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/09/22 17:44:28 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/02 21:37:22 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+/*	This function:
+	-	If "overwrite" = ADD_VALUE, it checks if a key (environment item name) 
+		is included in the environment list:
+			* If it is not, it uses ft_add_to_dict() to include it.
+			* If it is, it prints an error.
+	-	If "overwrite = OVERWRITE_VALUE, it checks if a key (environment item
+		name) is included in the environment list:
+			* If it is, the function overwrite the key (environment item name) 
+			  using the ft_modifydict() function.
+			* If it is not, the function uses ft_add_to_dict() to include it."
+	
+
+Por qué usas 32? No es mejor utilizar ' '. 
+Y que sentido tiene si el string es igual solo a 32?
+Estás pasando overwrite = TRUE que no está contemplado como opción!! */
 
 void	ft_setenv(t_list **envlist, char *key, char *value, int overwrite)
 {

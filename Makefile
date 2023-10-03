@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+         #
+#    By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/01 18:51:45 by jolopez-          #+#    #+#              #
-#    Updated: 2023/09/30 19:21:48 by jolopez-         ###   ########.fr        #
+#    Updated: 2023/10/03 15:19:56 by yzaytoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,7 @@ INC_LIB 		= -Iinclude/libft
 #READLINE_LIB	= -L/Users/$(USER)/.brew/opt/readline/lib
 INC_READLINE	="-L/usr/local/opt/readline/lib"
 READLINE_LIB	="-I/usr/local/opt/readline/include"
-SANITIZER		= -g -g3 -fsanitize=address
+SANITIZER		= -g3 -fsanitize=address -g
 
 READLINE_FLAGS	= -lreadline
 
@@ -59,7 +59,8 @@ LEXER			= tokenizer.c tokens.c token_tools_1.c token_tools_2.c
 
 PARSER			= get_commandlist.c isseparator.c convertlist.c\
 					get_arglist.c extract_tokenstring.c extract_filelist.c\
-					get_tokennode.c lstconvert.c printcommand.c
+					get_tokennode.c lstconvert.c printcommand.c \ 
+					generate_parsetree.c
 
 SUMMARIZER		= minisummary.c printtokens.c get_unique_tokens.c \
 					get_token_summary.c get_token_count.c

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ministruct.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
+/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:10:53 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/09/30 12:05:14 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/10/03 12:03:20 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,13 +65,12 @@ struct s_file	/*File desciptor and name*/
 	int		fd;
 };
 
-
 struct s_command
 {
-	t_file	*infile;
-	t_file	*outfile;
 	char	*name;
 	char	**args;
+	t_file	*infile;
+	t_file	*outfile;
 };
 
 typedef struct s_part

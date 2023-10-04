@@ -29,7 +29,11 @@ tk_assign &rarr; '='  <br>
 <p>&nbsp;</p>
 
 ## Parser
-### Minishell Grammar
+<details>
+
+<summary> Minishell Grammar </summary>
+<h3>MiniShell Grammar </h3>
+
 |**Syntax**  | **Expansion** |
 | :--------------- | :--------------------------- |
 **complete_command**| &rarr; list separator<br> &ensp; &#124; list <br> &ensp; ;
@@ -51,5 +55,11 @@ tk_assign &rarr; '='  <br>
 **Bang** | &rarr; ';' <br> &ensp; ;
 **command_name** | &rarr; WORD <br> &ensp; ;
 
+</details>
+
 <p>&nbsp;</p>
+
+![PARSER GRAPH](parsertree.png)
+
+
 ## Executer

@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 19:23:26 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/03 20:10:16 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/04 10:28:04 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ t_bool	ft_looknext(t_minitree *node)
 {
 	if ((t_token)node->content == /*token*/)
 	{
-
 	}
+	else
+		ft_printerror(NULL, "Parser error");
 	return (FALSE);
 }

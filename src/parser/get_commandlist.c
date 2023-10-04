@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 12:35:44 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/01 18:56:37 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/04 11:08:18 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ t_list	*ft_get_commandlist(
 	commandlist = NULL;
 	if (tokenlist == NULL || commandline == NULL || command_summary == NULL)
 		return (NULL);
-	command_count = ft_get_token_count(command_summary, tk_cmd);
+	command_count = ft_get_tokencount(command_summary, tk_cmd);
 	tracernode = tokenlist;
 	while (command_count > 0 || tracernode != NULL)
 	{

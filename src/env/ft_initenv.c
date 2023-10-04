@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_initenv.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
+/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 18:37:26 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/02 21:59:35 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/10/04 17:14:32 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /*	If an environemnt is passed as argument this function reads it and save 
 	every item to the environment list overwriten it if already exists.	*/
 
-static void	ft_get_envlist(t_list **envlist, char **env)
+static void	ft_copy_envlist(t_list **envlist, char **env)
 {
 	char	**buffer;
 
@@ -53,12 +53,12 @@ static void	ft_default_envlist(t_list **envlist)
 		rootdir = ft_get_rootpath(localdir);
 		if (rootdir != NULL)
 		{
-			ft_setenv(&(*envlist), "HOME", rootdir, TRUE);
-			ft_setenv(&(*envlist), "PWD", localdir, TRUE);
+			ft_setenv(&(*envlist), "HOME", rootdir, OVERWRITE_VALUE);
+			ft_setenv(&(*envlist), "PWD", localdir, OVERWRITE_VALUE);
 		}
 	}
-	ft_setenv(&(*envlist), "_", "/usr/bin/env", TRUE);
-	ft_setenv(&(*envlist), "SHLVL", "1", TRUE);
+	ft_setenv(&(*envlist), "_", "/usr/bin/env", OVERWRITE_VALUE);
+	ft_setenv(&(*envlist), "SHLVL", "1", OVERWRITE_VALUE);
 }
 
 /*	This function creates a list where to save the environment:
@@ -73,6 +73,6 @@ t_list	*ft_initenv(char **env)
 	if (*env == NULL)
 		ft_default_envlist(&envlist);
 	else
-		ft_get_envlist(&envlist, env);
+		ft_copy_envlist(&envlist, env);
 	return (envlist);
 }

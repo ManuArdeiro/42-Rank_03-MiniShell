@@ -57,10 +57,10 @@ UTILS			= print_msg.c mini_history.c get_path.c free_string.c \
 					mini_dictionary.c
 LEXER			= tokenizer.c tokens.c token_tools_1.c token_tools_2.c
 
-PARSER			= get_commandlist.c isseparator.c convertlist.c\
-					get_arglist.c extract_tokenstring.c extract_filelist.c\
-					get_tokennode.c lstconvert.c printcommand.c \
-					generate_parsetree.c
+PARSER			= get_commandlist.c isseparator.c convertlist.c \
+					get_arglist.c extract_tokenstring.c extract_filelist.c \
+					get_tokennode.c lstconvert.c printcommand.c  \
+					generate_parsetree.c grammar.c isvalid_commandtree.c
 
 SUMMARIZER		= minisummary.c printtokens.c get_unique_tokens.c \
 					get_token_summary.c get_token_count.c

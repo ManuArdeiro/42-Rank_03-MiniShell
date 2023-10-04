@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:10:53 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/03 12:03:20 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/04 10:48:45 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,9 @@ typedef enum s_token
 	tk_doll_exc,
 	tk_dollar,
 	tk_cmd,
-	tk_arg
+	tk_arg,
+	/*Add equal sign */
+	/*Add newline sign */
 }	t_token;
 
 struct s_file	/*File desciptor and name*/

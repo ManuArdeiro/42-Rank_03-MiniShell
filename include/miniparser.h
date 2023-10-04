@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 20:07:17 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/01 16:13:11 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/04 11:08:18 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void		ft_print_token(t_token token);
 t_list		*ft_get_unique_tokens(t_part *tokenlist);
 t_list		*ft_summarize(t_part *tokenlist);
 t_list		*ft_get_token_summary(t_part *tokenlist, t_list *unique_token_list);
-int			ft_get_token_count(t_list *summary, t_token token);
+int			ft_get_tokencount(t_list *summary, t_token token);
 
 
 void		ft_printsummary(t_list *command_summary);
@@ -34,8 +34,8 @@ t_minitree	*ft_create_commandtree(char *commandline, t_part *tokenlist,
 				t_summarizer *command_summary);
 void		ft_printcommand(t_command *command);
 
-//AUX FINCTIONS
 t_bool		ft_isseparator(t_token token);
+t_bool		ft_isvalid_command(t_list *commandsummary);
 
 //CONVERT FUNCTIONS
 char		**ft_lstconvert_strarr(t_list *list);

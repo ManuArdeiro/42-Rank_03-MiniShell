@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 15:19:00 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/04 17:12:02 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/04 17:41:29 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,28 +20,30 @@
 /*Get  by separator*/
 
 static t_minitree	*ft_create_parsetree(
-		t_list *commandlist, t_list *commandsummary)
+		t_part *tokenlist, t_list *commandsummary)
 {
-	t_list		*node;
+	t_part		*node;
 	t_minitree	*treenode;
+	
 
-	node = commandlist;
+	node = tokenlist;
 	while (node != NULL)
 	{
-		
-		ft_treeinsert(&treenode, /*right, center, left*/);
+		if (ft_is_logicalseparator(node->token) == TRUE)
+			ft_splittoken();
+		//ft_treeinsert(&treenode, /*right, center, left*/);
 		node = node->next;
 	}
 	return (treenode);
 }
 
-t_minitree	*ft_generate_parsetree(t_list *commandlist, t_list *commandsummary)
+t_minitree	*ft_generate_parsetree(t_part *tokenlist, t_list *commandsummary)
 {
 	t_minitree	*parsetree;
 
-	if (commandlist == NULL || commandsummary == NULL)
+	if (tokenlist == NULL || commandsummary == NULL)
 		return (NULL);
-	parsetree = ft_create_parsetree(commandlist, commandsummary);
+	parsetree = ft_create_parsetree(tokenlist, commandsummary);
 	if (ft_isvalid_commmandtree(parsetree) == FALSE)
 		ft_printerror(NULL, "Parser error");
 	return (parsetree);

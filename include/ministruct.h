@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:10:53 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/04 10:48:45 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/04 17:56:22 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,14 @@
 
 # include "libft.h"
 
-typedef struct s_dict		t_dict;
-typedef struct s_command	t_command;
-typedef struct s_file		t_file;
+typedef struct s_dict			t_dict;
+typedef struct s_command		t_command;
+typedef struct s_file			t_file;
+typedef enum e_token			t_token;
+typedef enum e_nodetype			t_nodetype;
+typedef struct s_summarizer		t_summarizer;
+typedef struct s_part			t_part;
+typedef struct s_mininode		t_mininode;
 
 typedef enum s_bool
 {
@@ -30,14 +35,13 @@ typedef enum s_bool
 	OUTFILE,
 }			t_bool;
 
-
 struct s_dict
 {
 	char	*key;
 	char	*value;
 };
 
-typedef enum s_token
+enum e_token
 {
 	tk_lprnths = 1,
 	tk_rprnths,
@@ -57,9 +61,9 @@ typedef enum s_token
 	tk_dollar,
 	tk_cmd,
 	tk_arg,
-	/*Add equal sign */
-	/*Add newline sign */
-}	t_token;
+	tk_equal,
+	tk_newline
+};
 
 struct s_file	/*File desciptor and name*/
 {
@@ -75,7 +79,7 @@ struct s_command
 	t_file	*outfile;
 };
 
-typedef struct s_part
+struct s_part
 {
 	int		index;
 	int		token;
@@ -83,12 +87,39 @@ typedef struct s_part
 	int		end;
 	t_bool	used;
 	t_part	*next;
-}	t_part;
+};
 
-typedef struct s_summarizer
+struct s_summarizer
 {
 	int		count;
 	t_token	token;
-}				t_summarizer;
+};
+
+enum e_nodetype
+{
+	command_list = 10,
+	separator,
+	and_if,
+	or_if,
+	pipeline,
+	pipe_sequence,
+	command,
+	simple_command,
+	compound_command,
+	subshell,
+	compound_list,
+	newline_list,
+	io_redirect,
+	io_file,
+	io_here,
+	separator_op,
+	linebreak
+};
+
+struct s_mininode
+{
+	t_nodetype	type;
+	void		*content;
+};
 
 #endif		/*Mini struct header*/

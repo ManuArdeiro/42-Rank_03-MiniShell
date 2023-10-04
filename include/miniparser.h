@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 20:07:17 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/04 11:08:18 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/04 17:35:56 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_minitree	*ft_create_commandtree(char *commandline, t_part *tokenlist,
 void		ft_printcommand(t_command *command);
 
 t_bool		ft_isseparator(t_token token);
-t_bool		ft_isvalid_command(t_list *commandsummary);
+t_bool		ft_is_logicalseparator(t_token token);
 
 //CONVERT FUNCTIONS
 char		**ft_lstconvert_strarr(t_list *list);

@@ -6,7 +6,7 @@
 #    By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/01 18:51:45 by jolopez-          #+#    #+#              #
-#    Updated: 2023/10/04 17:18:26 by yzaytoun         ###   ########.fr        #
+#    Updated: 2023/10/04 17:29:42 by yzaytoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,7 +59,7 @@ LEXER			= tokenizer.c tokens.c token_tools_1.c token_tools_2.c
 
 PARSER			= get_commandlist.c isseparator.c convertlist.c \
 					get_arglist.c extract_tokenstring.c extract_filelist.c \
-					get_tokennode.c lstconvert.c printcommand.c  \
+					get_tokennode.c lstconvert.c printcommand.c \
 					generate_parsetree.c grammar.c isvalid_commandtree.c
 
 SUMMARIZER		= minisummary.c printtokens.c get_unique_tokens.c \

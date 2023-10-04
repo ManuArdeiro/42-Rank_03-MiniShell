@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 15:19:00 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/04 13:18:26 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/04 17:12:02 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,17 @@
 static t_minitree	*ft_create_parsetree(
 		t_list *commandlist, t_list *commandsummary)
 {
-	int	sep_count;
+	t_list		*node;
+	t_minitree	*treenode;
 
-	sep_count = ft_get_tokencount(commandsummary, tk_and);
-	sep_count = ft_get_tokencount(commandsummary, tk_or);
-	/*if separator == TRUE
-	get separator and the two commands
-	*/
-	while (sep_count > 0)
+	node = commandlist;
+	while (node != NULL)
 	{
-		ft_treeinsert(/*right, center, left*/);
-		sep_count--;
+		
+		ft_treeinsert(&treenode, /*right, center, left*/);
+		node = node->next;
 	}
+	return (treenode);
 }
 
 t_minitree	*ft_generate_parsetree(t_list *commandlist, t_list *commandsummary)

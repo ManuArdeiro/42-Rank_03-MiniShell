@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 18:58:37 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/01 18:58:40 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/04 17:12:53 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,4 +18,9 @@ t_bool	ft_isseparator(t_token token)
 		|| token == tk_ampersand || token == tk_or)
 		return (TRUE);
 	return (FALSE);
+}
+
+t_bool	ft_is_logicalseparator(t_token token)
+{
+	
 }

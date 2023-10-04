@@ -6,7 +6,7 @@
 #    By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/01 18:51:45 by jolopez-          #+#    #+#              #
-#    Updated: 2023/10/04 11:22:35 by yzaytoun         ###   ########.fr        #
+#    Updated: 2023/10/04 17:18:26 by yzaytoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,7 +69,7 @@ TREE 			= minitree.c treetraversal.c
 
 EXEC			= executor.c openfile.c
 
-SRC 			= $(ENV) $(UTILS) $(PARSER) $(TREE) $(SUMMARIZER) $(EXEC) main.c 
+SRC 			= $(ENV) $(UTILS) $(PARSER) $(TREE) $(SUMMARIZER) $(EXEC) $(LEXER) main.c
 
 COMMANDS		= 	Pipex
 BUILTINS		= 	$(addprefix "src/cmd/", $(COMMANDS))

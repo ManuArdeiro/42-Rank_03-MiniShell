@@ -24,13 +24,13 @@ static t_minitree	*ft_create_parsetree(
 {
 	t_part		*node;
 	t_minitree	*treenode;
+	t_part		**tokenarray;
 	
-
 	node = tokenlist;
 	while (node != NULL)
 	{
 		if (ft_is_logicalseparator(node->token) == TRUE)
-			ft_splittoken();
+			tokenarray = ft_tokensplit(tokenlist, ft_is_logicalseparator);
 		//ft_treeinsert(&treenode, /*right, center, left*/);
 		node = node->next;
 	}

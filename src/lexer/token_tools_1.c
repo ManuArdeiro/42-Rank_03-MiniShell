@@ -17,6 +17,8 @@ int	ft_is_space(char *line, int i)
 	return (line[i] == ' ' || line[i] == '\t' || line[i] == '\v');
 }
 
+/*Revisar la salida de error*/
+
 t_part	*ft_create_tkn_list(void)
 {
 	t_part	*part;

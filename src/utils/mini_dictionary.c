@@ -6,13 +6,13 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 19:48:16 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/02 22:06:14 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/10/05 11:14:03 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*	*/
+/*	This function frees the content memory.	*/
 
 void	ft_cleardict(void *content)
 {
@@ -28,6 +28,11 @@ void	ft_cleardict(void *content)
 		free(dict);
 	}
 }
+
+/*	This function looks for a passed key in the current environment list 
+	and modify it with the passed newvalue.	
+	
+	Por qué liberas el valor del contenido? No haría falta reservar de nuevo?*/
 
 int	ft_modifydict(t_list **envlist, const char *key, const char *newvalue)
 {

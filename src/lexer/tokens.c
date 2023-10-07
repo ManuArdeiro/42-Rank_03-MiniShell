@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 18:12:50 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/10/01 15:37:29 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/10/05 11:47:24 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,11 @@ static void	ft_token_2(t_part *tokens, char *line, int *i)
 	else
 		ft_token_3(tokens, line, i);
 }
+
+/*	This function looks the special characters in the string line
+	passed as argument and adds the corresponding token in the list of 
+	tokens every time one is found.
+	It uses the ft_token_2, ft_token_3 and ft_token_4 functions.	*/
 
 void	ft_token_1(t_part *tokens, char *line, int *i)
 {

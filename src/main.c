@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:55:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/10/02 22:19:11 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/10/05 11:04:49 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,10 @@ void ft_print_token(t_token print)
 		printf("valor = %s\n", "tk_arg");
 }
 
+/*	This function register the lines wrote in the command line in a
+	file called ./minishell_history in the HOME directory and clean the
+	line in the global structure.	*/
+	
 static void	ft_register_and_clean(t_list **history, t_global **global)
 {
 	if ((*global)->line && (*global)->line[0] != 32)
@@ -69,14 +73,10 @@ static void	ft_register_and_clean(t_list **history, t_global **global)
 /*	The loop will be running continuously as long as "exit" is not written on 
 	the command line: 
 	-	It will read every phrase typed on the command line (using readline()
-	function and will pass it to the tokenizer to recognize the diffetent tokens.
+		function and will pass it to the tokenizer to recognize the diffetent
+		tokens.
 	-	Then will call the parser.
 	-	
-	
-
-Por qué if (!global->line)
-			break ;?
-
 	*/
 
 static int	ft_loop(t_global *global)
@@ -90,7 +90,7 @@ static int	ft_loop(t_global *global)
 	{
 		global->line = readline(MINI_PROMPT);
 		if (!global->line)
-			break ;
+			ft_printerror(__func__, "Error reading line (readline function).") ;
 		if (ft_strncmp(global->line, "exit", 4) == 0)
 			global->status = EXIT;
 		tokens = ft_tokenizer(global->line, &global->tk_count);

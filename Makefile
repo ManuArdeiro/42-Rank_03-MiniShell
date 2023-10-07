@@ -6,7 +6,7 @@
 #    By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/01 18:51:45 by jolopez-          #+#    #+#              #
-#    Updated: 2023/09/30 19:21:48 by jolopez-         ###   ########.fr        #
+#    Updated: 2023/10/07 13:47:56 by jolopez-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,6 +57,8 @@ UTILS			= print_msg.c mini_history.c get_path.c free_string.c \
 					mini_dictionary.c
 LEXER			= tokenizer.c tokens.c token_tools_1.c token_tools_2.c
 
+CMD				= mini_cd.c mini_echo.c
+
 PARSER			= get_commandlist.c isseparator.c convertlist.c\
 					get_arglist.c extract_tokenstring.c extract_filelist.c\
 					get_tokennode.c lstconvert.c printcommand.c
@@ -70,7 +72,7 @@ EXEC			= executor.c openfile.c
 
 SRC 			= $(ENV) $(UTILS) $(PARSER) $(TREE) $(SUMMARIZER) $(EXEC) main.c 
 
-COMMANDS		= 	Pipex
+COMMANDS		= 	Pipex cd echo
 BUILTINS		= 	$(addprefix "src/cmd/", $(COMMANDS))
 #------------------------------------------------------------------------
 

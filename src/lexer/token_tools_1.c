@@ -6,11 +6,13 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 19:15:42 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/10/01 15:35:29 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/10/05 11:23:31 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+/*	This function returs 1 if the character is space (or tabs), 0 if not.	*/
 
 int	ft_is_space(char *line, int i)
 {
@@ -37,6 +39,9 @@ t_part	*ft_create_tkn_list(void)
 	return (NULL);
 }
 
+/*	This function returns the index of the last t_part node of the
+	list (of t_part) passed as argument.	*/
+
 int	ft_last_index(t_part *tokens)
 {
 	t_part	*last_idx;
@@ -47,6 +52,9 @@ int	ft_last_index(t_part *tokens)
 	return (last_idx->index);
 }
 
+/*	This function returns the last t_part node of the list (of t_part)
+	passed as argument.	*/
+
 t_part	*ft_last_tkn(t_part *tokens)
 {
 	t_part	*last_tk;
@@ -56,6 +64,9 @@ t_part	*ft_last_tkn(t_part *tokens)
 		last_tk = last_tk->next;
 	return (last_tk);
 }
+
+/*	This function adds a new node to the list of t_part passed as 
+	argument.	*/
 
 void	ft_add_tkn(t_part *tokens, t_token token, int start, int end)
 {

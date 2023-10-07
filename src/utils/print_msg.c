@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 18:53:59 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/10/02 20:15:57 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/10/07 00:15:58 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,9 @@ void	ft_printwellcome(void)
 		"\n\nMiniShell from yzaytoun and jolopez- for 42 project.\n"
 		"You are very lucky if you are using it, enjoy it!!\n\n");
 }
+
+/*	This function prints an error message noticing the function where
+	the error happened and a text message to the error output.	*/
 
 void	ft_printerror(const char *function, const char *string)
 {

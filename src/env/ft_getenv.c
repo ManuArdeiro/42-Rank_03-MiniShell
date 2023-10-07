@@ -3,16 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   ft_getenv.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 18:49:35 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/09/22 17:42:58 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/03 16:49:01 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+/*	This function looks for the passed key in the environment list and if it
+	is found, then returns the string of the assciated value (path).
 
+Por qué lo escribes así?	*/
 char	*ft_getenv(const char *key, t_list *envlist)
 {
 	t_list	*node;

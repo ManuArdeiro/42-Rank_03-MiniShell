@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 18:30:15 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/10/01 15:35:54 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/10/05 11:35:08 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,11 @@ static void	ft_check_dbltoken(char *line, int *i, int *flag, int *tokens)
 	free(str);
 }
 
+/*	This function returs the number of tokens in a string passed as 
+	argument, looking for the special characters which are tokens or 
+	separate the tokens.
+	It continues in ft_check_dbltoken and ft_check_sgltoken	functions.	*/
+
 int	ft_count_tokens(char *line)
 {
 	int		i;
@@ -78,6 +83,8 @@ int	ft_count_tokens(char *line)
 	}
 	return (tokens);
 }
+
+/*	This function is the continuation of ft_get_tokens function.	*/
 
 static void	ft_get_tokens_2(char *line, t_part *tokens, int *i, int *start)
 {	
@@ -104,6 +111,14 @@ static void	ft_get_tokens_2(char *line, t_part *tokens, int *i, int *start)
 		*i = *i + 1;
 	}
 }
+
+/*	This function looks for the different tokens in the string passed as 
+	argument. 
+	-	When a special character is found the ft_token_1 function is used
+		to recognize it.
+	-	When a "word" is found it uses the ft_add_tkn to add it as a 
+		command.	
+	-	This function continues in ft_get_tokens_2 function.	*/
 
 void	ft_get_tokens(char *line, t_part *tokens)
 {

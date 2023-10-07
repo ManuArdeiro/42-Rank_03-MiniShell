@@ -97,23 +97,23 @@ struct s_summarizer
 
 enum e_nodetype
 {
-	command_list = 10,
-	separator,
-	and_if,
-	or_if,
-	pipeline,
-	pipe_sequence,
-	command,
-	simple_command,
-	compound_command,
-	subshell,
-	compound_list,
-	newline_list,
-	io_redirect,
-	io_file,
-	io_here,
-	separator_op,
-	linebreak
+	n_command_list = 10,
+	n_separator,
+	n_and_if,
+	n_or_if,
+	n_pipeline,
+	n_pipe_sequence,
+	n_command,
+	n_simple_command,
+	n_compound_command,
+	n_subshell,
+	n_compound_list,
+	n_newline_list,
+	n_io_redirect,
+	n_io_file,
+	n_io_here,
+	n_separator_op,
+	n_linebreak
 };
 
 struct s_mininode

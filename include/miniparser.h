@@ -26,7 +26,9 @@ int			ft_get_tokencount(t_list *summary, t_token token);
 void		ft_printsummary(t_list *command_summary);
 
 //Command Tree
-t_part		**ft_tokensplit(t_part *tokenlist, void (*splitfunction)(t_token));
+t_part		**ft_tokensplit(
+				t_part *tokenlist, void (*splitfunction)(t_token),
+				t_nodetype nodetype);
 char		*ft_extract_tokenstring(char *line, t_part *node);
 t_command	*ft_createcommand(
 				char *name, t_list *arglist, t_list *infile, t_list *outfile);
@@ -37,6 +39,8 @@ void		ft_printcommand(t_command *command);
 
 t_bool		ft_isseparator(t_token token);
 t_bool		ft_is_logicalseparator(t_token token);
+t_bool		ft_is_pipeseparator(t_token token);
+t_bool		ft_is_subshellseparator(t_token token);
 
 //CONVERT FUNCTIONS
 char		**ft_lstconvert_strarr(t_list *list);

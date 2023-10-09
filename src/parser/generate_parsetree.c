@@ -12,21 +12,10 @@
 
 #include "minishell.h"
 
-static t_mininode	*ft_get_separartornode(t_token separatortoken)
-{
-	t_mininode	*separatornode;
-
-	if (!separatortoken)
-		return (NULL);
-	separatornode = ft_create_mininode(NULL, separatortoken);
-	return (separatornode);
-}
-
 static t_minitree	*ft_create_parsetree(
 		t_part *tokenlist, t_list *commandsummary)
 {
 	t_minitree	*parsetree;
-	t_minitree	*treenode;
 
 	ft_tokensplit(&parsetree, tokenlist, ft_is_subshellseparator, n_subshell);
 	//ft_tokensplit(tokenlist, ft_is_logicalseparator, n_and_if);

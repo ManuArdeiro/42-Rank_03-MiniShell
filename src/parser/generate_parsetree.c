@@ -6,19 +6,13 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 15:19:00 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/04 17:41:29 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/09 19:13:57 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*typees
-- Command list
-- subshell
-- */
-/*Get commnandlist by separator*/
-/*Get  by separator*/
-t_mininode	*ft_get_separartornode(t_token separatortoken)
+static t_mininode	*ft_get_separartornode(t_token separatortoken)
 {
 	t_mininode	*separatornode;
 
@@ -28,41 +22,15 @@ t_mininode	*ft_get_separartornode(t_token separatortoken)
 	return (separatornode);
 }
 
-void	ft_parsetree_add(t_minitree *parsetree, t_list *tokenarray)
-{
-	t_list		*node;
-	t_mininode	*separator;
-
-	if (tokenarray == NULL)
-		return ;
-	separator = ft_get_separatornode(((t_mininode *)node->content)->type);
-	if (separator == NULL)
-		ft_printerror(__func__, "No separator token");
-	while (node != NULL)
-	{
-		ft_treeinsert(
-			(t_mininode *)node->content,
-			separator,
-			(t_mininode *)node->next->content
-			);
-		node = node->next;
-	}
-	node = tokenarray;
-}
-
-// Create function to add list to tree
 static t_minitree	*ft_create_parsetree(
 		t_part *tokenlist, t_list *commandsummary)
 {
 	t_minitree	*parsetree;
-	t_list		*tokenarray;
+	t_minitree	*treenode;
 
-	tokenarray = ft_tokensplit(tokenlist, ft_is_subshellseparator, n_subshell);
-	ft_parsetree_add(&parsetree, tokenarray);
-	ft_tokensplit(&parsetree, tokenlist, ft_is_subshellseparator, n_and_if);
-	ft_tokensplit(&parsetree, tokenlist, ft_is_subshellseparator, n_or_if);
-	ft_tokensplit(&parsetree, tokenlist, ft_is_subshellseparator, n_pipe_sequence);
-	ft_tokensplit(&parsetree, tokenlist, ft_is_subshellseparator, n_pipeline);
+	ft_tokensplit(&parsetree, tokenlist, ft_is_subshellseparator, n_subshell);
+	//ft_tokensplit(tokenlist, ft_is_logicalseparator, n_and_if);
+	//ft_tokensplit(tokenlist, ft_is_pipeseparator, n_pipeline);
 	return (treenode);
 }
 

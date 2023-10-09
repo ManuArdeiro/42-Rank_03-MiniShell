@@ -1,46 +1,41 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tokensplit.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/09 11:52:43 by yzaytoun          #+#    #+#             */
+/*   Updated: 2023/10/09 19:17:34 by yzaytoun         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-t_mininode	*ft_create_mininode(void *content, t_nodetype type)
-{
-	t_mininode	*newnode;
-	
-	newnode = NULL;
-	if (content)
-	{
-		newnode = malloc(sizeof(t_mininode));
-		if (!newnode)
-			return (NULL);
-		newnode->content = content;
-		newnode->type = type;
-	}
-	return (newnode);
-}
-
-t_list	*ft_tokensplit(
-	t_part *tokenlist, void (*splitfunction)(t_token), t_nodetype nodetype)
+void	ft_tokensplit(
+	t_minitree *parsetree,
+	t_part *tokenlist, t_bool (*splitfunction)(t_token), t_nodetype nodetype)
 {
 	t_part	*node;
-	t_part	*newlist;
-	t_list	*listsarray;
+	t_part	*leftlist;
+	t_part	*rightlist;
 
 	if (tokenlist == NULL)
 		return (NULL);
-	listsarray = malloc(sizeof(t_part *));
-	if (!listsarray)
-		return (NULL);
 	node = tokenlist;
-	newlist = NULL;
-	listsarray = NULL;
+	leftlist = NULL;
+	rightlist = NULL;
 	while (node != NULL)
 	{
 		if ((*splitfunction)(node->token) == TRUE && node->used == FALSE)
 		{
 			node->used = TRUE;
-			ft_copy_tokenlist(&newlist, tokenlist, node);
-			mininode = ft_create_mininode((t_list *) newlist, nodetype); 
-			ft_lstinsert(&listsarray, (t_mininode *)mininode, BACK);
+			ft_copy_tokenlist(&leftlist, tokenlist, node, LEFT);
+			mininode = ft_create_mininode((t_list *) leftlist, nodetype);
+			ft_copy_tokenlist(&rightlist, tokenlist, node, RIGHT);
+			mininode = ft_create_mininode((t_list *) rightlist, nodetype);
+			//ft_treeinsert(parsetree, leftnode, middlenode, rightnode);
 		}
 		node = node->next;
 	}
-	return (listsarray);
 }

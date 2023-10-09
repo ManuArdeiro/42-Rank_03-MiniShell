@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:10:53 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/04 17:56:22 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/09 19:10:20 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ typedef enum s_bool
 	ADD_VALUE,
 	INFILE,
 	OUTFILE,
+	LEFT,
+	RIGHT
 }			t_bool;
 
 struct s_dict

@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 20:07:17 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/04 17:35:56 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/09 19:16:04 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,15 @@ int			ft_get_tokencount(t_list *summary, t_token token);
 
 void		ft_printsummary(t_list *command_summary);
 
+void		ft_copy_tokenlist(
+				t_part **newlist, t_part *tokenlist,
+				t_part *limitnode, t_bool direction);
+
 //Command Tree
-t_part		**ft_tokensplit(
-				t_part *tokenlist, void (*splitfunction)(t_token),
-				t_nodetype nodetype);
+t_mininode	*ft_create_mininode(void *content, t_nodetype type);
+void		ft_tokensplit(
+				t_minitree *parsetree, t_part *tokenlist,
+				t_bool (*splitfunction)(t_token), t_nodetype nodetype);
 char		*ft_extract_tokenstring(char *line, t_part *node);
 t_command	*ft_createcommand(
 				char *name, t_list *arglist, t_list *infile, t_list *outfile);

@@ -1,19 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lookahead.c                                        :+:      :+:    :+:   */
+/*   create_mininode.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/04 17:36:49 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/09 15:53:12 by yzaytoun         ###   ########.fr       */
+/*   Created: 2023/10/09 16:14:34 by yzaytoun          #+#    #+#             */
+/*   Updated: 2023/10/09 16:14:53 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_bool	ft_lookahead(t_minitree *root, t_nodetype n_type)
+t_mininode	*ft_create_mininode(void *content, t_nodetype type)
 {
-	if (((t_)root->content))
-	return (FALSE);
+	t_mininode	*newnode;
+
+	newnode = NULL;
+	if (content)
+	{
+		newnode = malloc(sizeof(t_mininode));
+		if (!newnode)
+			return (NULL);
+		newnode->content = content;
+		newnode->type = type;
+	}
+	return (newnode);
 }

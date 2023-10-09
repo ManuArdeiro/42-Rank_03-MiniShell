@@ -6,7 +6,7 @@
 #    By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/01 18:51:45 by jolopez-          #+#    #+#              #
-#    Updated: 2023/10/04 17:29:42 by yzaytoun         ###   ########.fr        #
+#    Updated: 2023/10/09 18:56:01 by yzaytoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,12 +55,13 @@ ENV				= ft_getenv.c ft_setenv.c ft_initenv.c ft_printenv.c
 
 UTILS			= print_msg.c mini_history.c get_path.c free_string.c \
 					mini_dictionary.c
-LEXER			= tokenizer.c tokens.c token_tools_1.c token_tools_2.c ft_copy_tokenlist.c ft_tokenarray_add.c
-PARSER			= get_commandlist.c isseparator.c convertlist.c \
+LEXER			= tokenizer.c tokens.c token_tools_1.c token_tools_2.c \
+					ft_copy_tokenlist.c ft_tokenlist_add.c
+PARSER			= get_commandlist.c separators.c convertlist.c \
 					get_arglist.c extract_tokenstring.c extract_filelist.c \
 					get_tokennode.c lstconvert.c printcommand.c \
 					generate_parsetree.c grammar.c isvalid_commandtree.c \
-					tokensplit.c
+					tokensplit.c lookahead.c create_mininode.c
 
 SUMMARIZER		= minisummary.c printtokens.c get_unique_tokens.c \
 					get_token_summary.c get_token_count.c

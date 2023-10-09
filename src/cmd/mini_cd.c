@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:05:20 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/07 22:09:56 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/10/09 16:48:23 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static int	ft_new_folder(t_list *envlist, char *dir)
 int	ft_mini_cd(char **arg, t_list *envList)
 {
 	char	*dir;
-	
+
 	if (ft_arg_nbr(arg) > 1)
 	{
 		ft_print_screen("cd: Too many arguments.");
@@ -61,11 +61,11 @@ int	ft_mini_cd(char **arg, t_list *envList)
 	}
 	else if (ft_arg_nbr(arg) == 0)
 	{
-		dir = ft_getenv("HOME", envList);	
+		dir = ft_getenv("HOME", envList);
 		if (dir == NULL)
 		{
 			ft_print_screen("cd: HOME directory not valid.");
-			return (EXIT_SUCCESS);		
+			return (EXIT_SUCCESS);
 		}
 		return (ft_new_folder(envList, dir));
 	}

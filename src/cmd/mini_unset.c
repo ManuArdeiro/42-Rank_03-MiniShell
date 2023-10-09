@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 15:23:35 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/10/08 15:25:49 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/10/09 18:39:53 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,28 @@
 
 int	ft_mini_unset(t_list *envList, char **args)
 {
-	int	i;
-	int	nbr;
+	int		i;
+	char	*env_value;
 
 	i = 0;
+	if (ft_arg_nbr(args) < 1)
+	{
+		ft_putendl_fd("unset: at least one argument is needed.", STDOUT_FILENO);
+		ft_putendl_fd("unset: at least one argument is needed.", STDERR_FILENO);
+		return (EXIT_FAILURE);
+	}
 	while (args[i] != NULL)
 	{
-		nb = get_env_var_nb(tcsh->env.env, cmd->cmd[i]);
-		if (nb != -1)
-			tcsh->env.env = ft_arrdelline(tcsh->env.env, (size_t)nb);
+		env_value = ft_getenv(envList, args[i]);
+		if (env_value != NULL)
+		{
+			if (ft_delenv(envList, args[i]))
+			{
+				printf("unset: error  unsetting %s variable.", args[i]);
+				return (EXIT_FAILURE);
+			}
+		}
 		i++;
 	}
-	if (i < 2)
-	{
-		ft_putendl_fd("unsetenv: Too few arguments.", 2);
-		return (1);
-	}
-	return (0);
+	return (EXIT_SUCCESS);
 }

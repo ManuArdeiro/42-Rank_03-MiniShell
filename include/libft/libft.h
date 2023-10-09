@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 16:48:34 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/10/01 18:45:22 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/07 16:53:53 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
+#ifndef	LIBFT_H
 # define LIBFT_H
 
 # include <stdlib.h>

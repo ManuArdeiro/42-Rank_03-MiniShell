@@ -1,33 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmd_tools.c                                        :+:      :+:    :+:   */
+/*   mini_pwd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/05 17:16:54 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/10/07 22:10:45 by jolopez-         ###   ########.fr       */
+/*   Created: 2023/10/07 17:03:19 by jolopez-          #+#    #+#             */
+/*   Updated: 2023/10/07 21:26:07 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-/*	This function prints to screen.	*/
+/*	This function gets the current directory via getcwd() function from the
+	unistd library, then print it to the standard output. */
 
-void	ft_print_screen(char *str)
+int		ft_mini_pwd(void)
 {
-	printf("%s\n", str);
-}
+	char	*cwd[PATH_MAX];
 
-/*	This function counts the number of strings inside the array char ** passed
-	as argument and returns that number.	*/
-
-int	ft_arg_nbr(char **args)
-{
-	int	size;
-
-	size = 0;
-	while (args[size])
-		size++;
-	return (size);
+	if (getcwd(cwd, PATH_MAX))
+	{
+		ft_putendl_fd(cwd, STDOUT_FILENO);
+		return (EXIT_SUCCESS);
+	}
+	else
+		return (EXIT_FAILURE);
 }

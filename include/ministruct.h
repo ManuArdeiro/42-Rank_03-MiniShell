@@ -6,14 +6,14 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:10:53 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/09/30 12:05:14 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/10/07 16:58:29 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISTRUCT_H	/*Mini struct header*/
 # define MINISTRUCT_H
 
-# include "libft.h"
+# include "libft/libft.h"
 
 typedef struct s_dict		t_dict;
 typedef struct s_command	t_command;
@@ -76,12 +76,12 @@ struct s_command
 
 typedef struct s_part
 {
-	int		index;
-	int		token;
-	int		start;
-	int		end;
-	t_bool	used;
-	t_part	*next;
+	int				index;
+	int				token;
+	int				start;
+	int				end;
+	t_bool			used;
+	struct s_part	*next;
 }	t_part;
 
 typedef struct s_summarizer

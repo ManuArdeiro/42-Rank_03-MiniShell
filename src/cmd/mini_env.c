@@ -1,33 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmd_tools.c                                        :+:      :+:    :+:   */
+/*   mini_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/05 17:16:54 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/10/07 22:10:45 by jolopez-         ###   ########.fr       */
+/*   Created: 2023/10/07 18:38:09 by jolopez-          #+#    #+#             */
+/*   Updated: 2023/10/08 14:55:22 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-/*	This function prints to screen.	*/
+/*	This function prints all the key/values stored in the envList list.	*/
 
-void	ft_print_screen(char *str)
+int		ft_mini_env(t_list *envList)
 {
-	printf("%s\n", str);
-}
+	t_list	*node;
 
-/*	This function counts the number of strings inside the array char ** passed
-	as argument and returns that number.	*/
-
-int	ft_arg_nbr(char **args)
-{
-	int	size;
-
-	size = 0;
-	while (args[size])
-		size++;
-	return (size);
+	if (!envList)
+		return (0);
+	node = envList;
+	while (node)
+	{
+		ft_putstr_fd(((t_dict *)node->content)->key, STDOUT_FILENO);
+		ft_putstr_fd("=", STDOUT_FILENO);
+		ft_putendl_fd(((t_dict *)node->content)->value,STDOUT_FILENO);
+		node = node->next;
+	}
+	return (EXIT_SUCCESS);
 }

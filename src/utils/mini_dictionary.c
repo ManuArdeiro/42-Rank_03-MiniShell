@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 19:48:16 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/05 11:14:03 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/10/07 17:00:44 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	ft_modifydict(t_list **envlist, const char *key, const char *newvalue)
 	size_t	len;
 
 	if (!envlist || *envlist == NULL || !newvalue)
-		return (EXIT);
+		return (EXIT_SUCCESS);
 	node = *envlist;
 	len = ft_strlen(key);
 	while (node != NULL)
@@ -71,7 +71,7 @@ int	ft_searchdict(t_list *list, const char *key)
 	size_t	len;
 
 	if (!list || !key || list->content == NULL)
-		return (EXIT);
+		return (EXIT_SUCCESS);
 	node = list;
 	len = ft_strlen(key);
 	while (node != NULL)

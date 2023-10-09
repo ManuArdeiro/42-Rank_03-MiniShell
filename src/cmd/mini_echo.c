@@ -6,46 +6,44 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 13:36:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/10/07 13:43:00 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/10/07 21:39:01 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../include/minishell.h"
 
-int		nb_args(char **args)
-{
-	int		size;
+/*	This function check the first argument:
+	-	If it is "-n" then all the arguments will be written (separated by
+		spaces) to the standard	output but "\n" won't be written at the end 
+		of the arguments.
+	-	If it is not "-n", then all the arguments will be written (separated 
+		by spaces) to the standard output and after them a "\n" will be 
+		written.	*/
 
-	size = 0;
-	while (args[size])
-		size++;
-	return (size);
-}
-
-int				ft_echo(char **args)
+int	ft_mini_echo(char **args)
 {
 	int		i;
-	int		n_option;
+	t_bool	n_option;
 
-	i = 1;
-	n_option = 0;
-	if (nb_args(args) > 1)
+	i = 0;
+	n_option = FALSE;
+	while (args[i])
 	{
-		while (args[i] && ft_strcmp(args[i], "-n") == 0)
+		if (ft_strncmp(args[i], "-n", 3) == 0)
 		{
-			n_option = 1;
+			n_option = TRUE;
 			i++;
 		}
 		while (args[i])
 		{
-			ft_putstr_fd(args[i], 1);
+			ft_putstr_fd(args[i], STDOUT_FILENO);
 			if (args[i + 1] && args[i][0] != '\0')
 				write(1, " ", 1);
 			i++;
 		}
 	}
-	if (n_option == 0)
+	if (n_option == FALSE)
 		write(1, "\n", 1);
-	return (SUCCESS);
+	return (EXIT_SUCCESS);
 }
 

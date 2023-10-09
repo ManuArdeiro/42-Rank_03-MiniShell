@@ -1,33 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmd_tools.c                                        :+:      :+:    :+:   */
+/*   mini_unset.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/05 17:16:54 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/10/07 22:10:45 by jolopez-         ###   ########.fr       */
+/*   Created: 2023/10/08 15:23:35 by jolopez-          #+#    #+#             */
+/*   Updated: 2023/10/08 15:25:49 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-/*	This function prints to screen.	*/
-
-void	ft_print_screen(char *str)
+int	ft_mini_unset(t_list *envList, char **args)
 {
-	printf("%s\n", str);
-}
+	int	i;
+	int	nbr;
 
-/*	This function counts the number of strings inside the array char ** passed
-	as argument and returns that number.	*/
-
-int	ft_arg_nbr(char **args)
-{
-	int	size;
-
-	size = 0;
-	while (args[size])
-		size++;
-	return (size);
+	i = 0;
+	while (args[i] != NULL)
+	{
+		nb = get_env_var_nb(tcsh->env.env, cmd->cmd[i]);
+		if (nb != -1)
+			tcsh->env.env = ft_arrdelline(tcsh->env.env, (size_t)nb);
+		i++;
+	}
+	if (i < 2)
+	{
+		ft_putendl_fd("unsetenv: Too few arguments.", 2);
+		return (1);
+	}
+	return (0);
 }

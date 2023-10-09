@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:55:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/10/05 11:04:49 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/10/08 02:00:13 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,13 +86,13 @@ static int	ft_loop(t_global *global)
 	t_part	*print;
 
 	history = NULL;
-	while (global->status != EXIT)
+	while (global->status != EXITED)
 	{
 		global->line = readline(MINI_PROMPT);
 		if (!global->line)
 			ft_printerror(__func__, "Error reading line (readline function).") ;
 		if (ft_strncmp(global->line, "exit", 4) == 0)
-			global->status = EXIT;
+			global->status = EXITED;
 		tokens = ft_tokenizer(global->line, &global->tk_count);
 		print = tokens;
 			while (print)

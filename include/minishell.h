@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:47:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/10/07 13:43:44 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/10/07 21:58:10 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # include "ministruct.h"
 # include "minitree.h"
 # include "miniparser.h"
-# include "mininexecuter.h"
+# include "miniexecuter.h"
 
 typedef struct s_global
 {
@@ -58,8 +58,11 @@ void		ft_token_1(t_part *tokens, char *line, int *i);
 // Built-ins
 
 void		ft_print_screen(char *str);
+int			ft_arg_nbr(char **args);
 int			ft_mini_cd(char **arg, t_list *envlist);
-
+int			ft_mini_echo(char **args);
+int			ft_mini_pwd(void);
+int			ft_mini_env(t_list *envList);
 
 // ReadLine Functions
 void		rl_clear_history(void);

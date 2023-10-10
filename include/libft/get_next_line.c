@@ -3,14 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzaytoun <yzaytoun@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:55:32 by yzaytoun          #+#    #+#             */
-/*   Updated: 2022/11/11 20:29:01 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/03 18:31:16 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"get_next_line.h"
+
+/*	This function copies n characters from src to dest and returns a pointer 
+	to dest.	*/
 
 void	*ft_memmove_get(char *dest, const char *src, size_t n)
 {

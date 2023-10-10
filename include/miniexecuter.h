@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   miniexecuter.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 18:11:58 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/01 18:35:27 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/07 16:57:47 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIEXECUTER_H
 # define MINIEXECUTER_H
 
+# include "libft/libft.h"
 # include "ministruct.h"
 
 int		ft_openfile(char *filename, int mode);

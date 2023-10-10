@@ -6,7 +6,11 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:47:53 by jolopez-          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/10/03 11:19:05 by yzaytoun         ###   ########.fr       */
+=======
+/*   Updated: 2023/10/09 21:30:08 by jolopez-         ###   ########.fr       */
+>>>>>>> comments
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +59,15 @@ void		ft_get_tokens(char *line, t_part *tokens);
 int			ft_count_tokens(char *line);
 void		ft_token_1(t_part *tokens, char *line, int *i);
 
+// Built-ins
+
+void		ft_print_screen(char *str);
+int			ft_arg_nbr(char **args);
+int			ft_mini_cd(char **arg, t_list *envlist);
+int			ft_mini_echo(char **args);
+int			ft_mini_pwd(void);
+int			ft_mini_env(t_list *envList);
+
 // ReadLine Functions
 void		rl_clear_history(void);
 void		rl_replace_line(const char *text, int clear_undo);
@@ -64,6 +77,7 @@ void		ft_setenv(t_list **envlist, char *key, char *value, int overwrite);
 char		*ft_getenv(const char *key, t_list *envlist);
 t_list		*ft_initenv(char **env);
 int			ft_printenv(t_list *envlist);
+int			ft_delenv(t_list *envList, char *key);
 
 // Util
 char		*ft_get_localpath(void);

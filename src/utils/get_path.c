@@ -3,14 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   get_path.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 19:46:11 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/09/22 18:34:05 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/05 11:17:36 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+/*	This function returns the local path using the unistd.h library 
+	function.	*/
 
 char	*ft_get_localpath(void)
 {
@@ -23,6 +26,9 @@ char	*ft_get_localpath(void)
 		return (NULL);
 	return (localdir);
 }
+
+/*	This function returns the root directory (for 42 computers) of the
+	path passed as argument.	*/
 
 char	*ft_get_rootpath(const char *path)
 {

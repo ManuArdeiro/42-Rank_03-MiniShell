@@ -1,25 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_string.c                                      :+:      :+:    :+:   */
+/*   cmd_tools.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/22 17:50:43 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/05 11:06:02 by jolopez-         ###   ########.fr       */
+/*   Created: 2023/10/05 17:16:54 by jolopez-          #+#    #+#             */
+/*   Updated: 2023/10/07 22:10:45 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../include/minishell.h"
 
-/*	This function frees the (void *)content passed as argument.	*/
+/*	This function prints to screen.	*/
 
-void	ft_free_string(void *content)
+void	ft_print_screen(char *str)
 {
-	char	*string;
+	printf("%s\n", str);
+}
 
-	if (content == NULL)
-		return ;
-	string = (char *)content;
-	free(string);
+/*	This function counts the number of strings inside the array char ** passed
+	as argument and returns that number.	*/
+
+int	ft_arg_nbr(char **args)
+{
+	int	size;
+
+	size = 0;
+	while (args[size])
+		size++;
+	return (size);
 }

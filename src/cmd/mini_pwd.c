@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_string.c                                      :+:      :+:    :+:   */
+/*   mini_pwd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/22 17:50:43 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/05 11:06:02 by jolopez-         ###   ########.fr       */
+/*   Created: 2023/10/07 17:03:19 by jolopez-          #+#    #+#             */
+/*   Updated: 2023/10/07 21:26:07 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../include/minishell.h"
 
-/*	This function frees the (void *)content passed as argument.	*/
+/*	This function gets the current directory via getcwd() function from the
+	unistd library, then print it to the standard output. */
 
-void	ft_free_string(void *content)
+int		ft_mini_pwd(void)
 {
-	char	*string;
+	char	*cwd[PATH_MAX];
 
-	if (content == NULL)
-		return ;
-	string = (char *)content;
-	free(string);
+	if (getcwd(cwd, PATH_MAX))
+	{
+		ft_putendl_fd(cwd, STDOUT_FILENO);
+		return (EXIT_SUCCESS);
+	}
+	else
+		return (EXIT_FAILURE);
 }

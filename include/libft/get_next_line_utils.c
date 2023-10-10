@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzaytoun <yzaytoun@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 15:55:39 by yzaytoun          #+#    #+#             */
-/*   Updated: 2022/11/15 21:12:16 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/03 18:33:05 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,9 @@ void	*ft_calloc_get(size_t count, size_t size)
 	}
 	return (obj);
 }
+
+/*	This function joins the strings s1 and s2 and returns a poniter to
+	the memory address where the joined string is allocated.	*/
 
 char	*ft_strjoin_get(char *s1, char *s2)
 {

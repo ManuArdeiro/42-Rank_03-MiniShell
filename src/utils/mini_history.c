@@ -3,20 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   mini_history.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:22:29 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/09/22 18:00:13 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/03 18:35:10 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+/*	Function to write a string (command) in the passed file descriptor and
+	add a new line.	*/
+	
 static void	ft_write_command(const char *string, int file_descriptor)
 {
 	ft_putstr_fd(string, file_descriptor);
 	ft_putstr_fd("\n", file_descriptor);
 }
+
+/*	This function cretes a new list item (wich contains the command) and
+	adds it to the commands history.	*/
 
 void	ft_register_command(t_list **history, char *command)
 {
@@ -30,6 +36,11 @@ void	ft_register_command(t_list **history, char *command)
 		ft_lstadd_back(history, new);
 	}
 }
+
+/*	This function open a file in path to write all the nodes in
+	the list passed. If the open can't be openned it prints an error.
+
+No entiendo la forma recursiva __func__	*/
 
 void	ft_write_to_file(t_list **list, char *path)
 {
@@ -50,6 +61,10 @@ void	ft_write_to_file(t_list **list, char *path)
 	}
 	close(file);
 }
+
+/*	This function gets the path of HOME in the environment list and save
+	(using ft_write_to_file()) the command history to a file called
+	.minishell_history in the HOME directory.	*/
 
 void	ft_write_command_history(t_list **history, t_global *global)
 {

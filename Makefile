@@ -3,7 +3,7 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+         #
+#    By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/01 18:51:45 by jolopez-          #+#    #+#              #
 #    Updated: 2023/10/09 21:28:54 by jolopez-         ###   ########.fr        #
@@ -42,11 +42,11 @@ BANNER = 	$(info $(WHITE_BAN))\
 USER			= $(shell whoami)
 INCLUDE 		= -Iinclude/
 INC_LIB 		= -Iinclude/libft
-#INC_READLINE	= -I/Users/$(USER)/.brew/opt/readline/include
-#READLINE_LIB	= -L/Users/$(USER)/.brew/opt/readline/lib
-INC_READLINE	="-L/usr/local/opt/readline/lib"
-READLINE_LIB	="-I/usr/local/opt/readline/include"
-SANITIZER		= -g -g3 -fsanitize=address
+INC_READLINE	= -I/Users/$(USER)/.brew/opt/readline/include
+READLINE_LIB	= -L/Users/$(USER)/.brew/opt/readline/lib
+#INC_READLINE	="-L/usr/local/opt/readline/lib"
+#READLINE_LIB	="-I/usr/local/opt/readline/include"
+SANITIZER		= -g3 -fsanitize=address -g
 
 READLINE_FLAGS	= -lreadline
 
@@ -57,9 +57,10 @@ UTILS			= print_msg.c mini_history.c get_path.c free_string.c \
 					mini_dictionary.c
 LEXER			= tokenizer.c tokens.c token_tools_1.c token_tools_2.c
 
-PARSER			= get_commandlist.c isseparator.c convertlist.c\
-					get_arglist.c extract_tokenstring.c extract_filelist.c\
-					get_tokennode.c lstconvert.c printcommand.c
+PARSER			= get_commandlist.c isseparator.c convertlist.c \
+					get_arglist.c extract_tokenstring.c extract_filelist.c \
+					get_tokennode.c lstconvert.c printcommand.c  \
+					generate_parsetree.c grammar.c isvalid_commandtree.c
 
 SUMMARIZER		= minisummary.c printtokens.c get_unique_tokens.c \
 					get_token_summary.c get_token_count.c
@@ -70,7 +71,7 @@ TREE 			= minitree.c treetraversal.c
 
 EXEC			= executor.c openfile.c
 
-SRC 			= $(ENV) $(UTILS) $(PARSER) $(TREE) $(SUMMARIZER) $(EXEC) $(CMD) main.c 
+SRC 			= $(ENV) $(UTILS) $(PARSER) $(TREE) $(SUMMARIZER) $(EXEC) $(LEXER) $(CMD) main.c 
 
 COMMANDS		= 	Pipex
 BUILTINS		= 	$(addprefix "src/cmd/", $(COMMANDS))

@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   ministruct.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
+/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:10:53 by yzaytoun          #+#    #+#             */
 /*   Updated: 2023/10/07 16:58:29 by jolopez-         ###   ########.fr       */
@@ -56,7 +56,9 @@ typedef enum s_token
 	tk_doll_exc,
 	tk_dollar,
 	tk_cmd,
-	tk_arg
+	tk_arg,
+	/*Add equal sign */
+	/*Add newline sign */
 }	t_token;
 
 struct s_file	/*File desciptor and name*/
@@ -65,13 +67,12 @@ struct s_file	/*File desciptor and name*/
 	int		fd;
 };
 
-
 struct s_command
 {
-	t_file	*infile;
-	t_file	*outfile;
 	char	*name;
 	char	**args;
+	t_file	*infile;
+	t_file	*outfile;
 };
 
 typedef struct s_part

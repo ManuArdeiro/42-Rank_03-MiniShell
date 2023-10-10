@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:10:53 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/09 19:10:20 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/10 11:00:07 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,7 @@ enum e_nodetype
 {
 	n_command_list = 10,
 	n_separator,
-	n_and_if,
-	n_or_if,
+	n_and_or,
 	n_pipeline,
 	n_pipe_sequence,
 	n_command,

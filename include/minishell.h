@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:47:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/10/09 19:13:05 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/10 11:20:36 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # include "minitree.h"
 # include "miniparser.h"
 # include "miniexecuter.h"
+# include "tokenizer.h"
 
 typedef struct s_global
 {

@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 19:07:11 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/01 18:57:25 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/10 11:13:39 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_part	*ft_get_tokennode(t_part *tokenlist, t_token token)
 	node = tokenlist;
 	while (node != NULL)
 	{
-		if (node->token && node->used == FALSE)
+		if (node->token == token && node->used == FALSE)
 			return (node);
 		node = node->next;
 	}

@@ -6,7 +6,7 @@
 #    By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/01 18:51:45 by jolopez-          #+#    #+#              #
-#    Updated: 2023/10/07 17:05:30 by jolopez-         ###   ########.fr        #
+#    Updated: 2023/10/09 21:28:54 by jolopez-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,7 +51,7 @@ SANITIZER		= -g -g3 -fsanitize=address
 READLINE_FLAGS	= -lreadline
 
 #-------------------------- C Files -------------------------------------
-ENV				= ft_getenv.c ft_setenv.c ft_initenv.c ft_printenv.c
+ENV				= ft_getenv.c ft_setenv.c ft_initenv.c ft_printenv.c ft_delenv.c
 
 UTILS			= print_msg.c mini_history.c get_path.c free_string.c \
 					mini_dictionary.c

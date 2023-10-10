@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 01:42:21 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/10/08 15:20:09 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/10/09 21:35:41 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ int	ft_mini_exit(t_global *global, char **args)
 	ft_putendl_fd("exit", STDOUT_FILENO);
 	if (ft_arg_nbr(args) > 1)
 	{
-		ft_putendl_fd("exit: too many arguments.", STDOUT_FILENO);
 		ft_putendl_fd("exit: too many arguments.", STDERR_FILENO);
 		return (EXIT_FAILURE);
 	}
@@ -56,7 +55,6 @@ int	ft_mini_exit(t_global *global, char **args)
 	{
 		if (!ft_is_number(args[0]))
 		{
-			ft_putendl_fd("exit: numeric argument required.", STDOUT_FILENO);
 			ft_putendl_fd("exit: numeric argument required.", STDERR_FILENO);
 			return (1);
 		}

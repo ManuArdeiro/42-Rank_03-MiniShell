@@ -12,18 +12,18 @@
 
 #include "minishell.h"
 
-t_mininode	*ft_create_mininode(void *content, t_nodetype type)
+t_mininode	*ft_create_mininode(void *content, t_nodetype nodetype)
 {
 	t_mininode	*newnode;
 
 	newnode = NULL;
-	if (content)
+	if (nodetype != 0)
 	{
 		newnode = malloc(sizeof(t_mininode));
 		if (!newnode)
 			return (NULL);
 		newnode->content = content;
-		newnode->type = type;
+		newnode->type = nodetype;
 	}
 	return (newnode);
 }

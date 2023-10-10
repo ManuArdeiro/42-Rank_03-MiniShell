@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-static void	ft_get_infillist(
+static void	ft_get_infilelist(
 	t_list **filelist, char *commandline, t_part *tokenlist)
 {
 	t_part	*node;
@@ -29,7 +29,7 @@ static void	ft_get_infillist(
 	}
 }
 
-static void	ft_get_outfillist(
+static void	ft_get_outfilelist(
 	t_list **filelist, char *commandline, t_part *tokenlist)
 {
 	t_part	*node;

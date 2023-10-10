@@ -45,7 +45,7 @@ t_command	*ft_get_minicommand(char *commandline, t_part *tokenlist)
 	arglist = ft_extract_stringlist(commandline, tokenlist, tk_arg);
 	commandname = ft_extract_tokenstring(commandline, commandnode);
 	ft_lstinsert(&arglist, commandname, FRONT);
-	command = ft_create_command(
+	command = ft_createcommand(
 			commandname,
 			arglist,
 			ft_extract_filelist(commandline, tokenlist, INFILE),

@@ -53,6 +53,6 @@ void	ft_treeinsert(
 	t_minitree **root, void *leftcontent, void *rootcontent, void *rightcontent)
 {
 	(*root) = ft_create_treenode(rootcontent);
-	(*root)->leftchild = ft_insertleft(root, leftcontent);
-	(*root)->rightchild = ft_insertright(root, rightcontent);
+	(*root)->leftchild = ft_insertleft(*root, leftcontent);
+	(*root)->rightchild = ft_insertright(*root, rightcontent);
 }

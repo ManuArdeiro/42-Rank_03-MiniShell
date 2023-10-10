@@ -35,7 +35,7 @@ int	ft_modifydict(t_list **envlist, const char *key, const char *newvalue)
 	size_t	len;
 
 	if (!envlist || *envlist == NULL || !newvalue)
-		return (EXIT);
+		return (EXITED);
 	node = *envlist;
 	len = ft_strlen(key);
 	while (node != NULL)
@@ -66,7 +66,7 @@ int	ft_searchdict(t_list *list, const char *key)
 	size_t	len;
 
 	if (!list || !key || list->content == NULL)
-		return (EXIT);
+		return (EXITED);
 	node = list;
 	len = ft_strlen(key);
 	while (node != NULL)

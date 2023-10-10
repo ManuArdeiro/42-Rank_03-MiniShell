@@ -12,18 +12,19 @@
 
 #include "minishell.h"
 
-static t_bool	ft_evaluate_token(t_list *token_summary, (*validate)(token))
+static t_bool	ft_evaluate_token(
+		t_list *token_summary, t_bool (*validate)(t_token))
 {
 	t_bool	result;
 
 	result = FALSE;
-	if (list == NULL || (*validate) == NULL)
+	if (token_summary == NULL || (*validate) == NULL)
 		return (FALSE);
 	result = (*validate)(((t_summarizer *)token_summary->content)->token);
 	return (result);
 }
 
-static t_nodetype	ft_get_listtype(t_list *token_summary)
+static t_nodetype	ft_define_listtype(t_list *token_summary)
 {
 	t_list	*node;
 
@@ -34,12 +35,12 @@ static t_nodetype	ft_get_listtype(t_list *token_summary)
 	{
 		if (ft_evaluate_token(node, ft_is_logicalseparator) == TRUE)
 			return (n_and_or);
-		if (ft_evaluate_token(node, ft_is_subshellseparator) == TRUE)
+		else if (ft_evaluate_token(node, ft_is_subshellseparator) == TRUE)
 			return (n_subshell);
-		if (ft_evaluate_token(node, ft_is_pipeseparator) == TRUE)
+		else if (ft_evaluate_token(node, ft_is_pipeseparator) == TRUE)
 			return (n_pipeline);
-		if (ft_evaluate_token(node, ft_is_newline) == TRUE)
-			return (n_pipeline);
+		else if (ft_evaluate_token(node, ft_is_newline) == TRUE)
+			return (n_newline_list);
 		node = node->next;
 	}
 	return (0);
@@ -47,14 +48,11 @@ static t_nodetype	ft_get_listtype(t_list *token_summary)
 
 t_nodetype	ft_get_nodetype(t_part *tokenlist)
 {
-	t_part		*node;
 	t_list		*token_summary;
 	t_nodetype	nodetype;
 
 	token_summary = ft_summarize(tokenlist);
-	nodetype = ft_get_listtype(token_summary);
-	if (!nodetype)
-		ft_printerror(NULL, "No nodetype was found");
-	ft_lstclear(token_summary, free);
+	nodetype = ft_define_listtype(token_summary);
+	ft_lstclear(&token_summary, free);
 	return (nodetype);
 }

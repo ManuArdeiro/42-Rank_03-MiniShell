@@ -26,7 +26,6 @@
 # include <readline/history.h>
 # include <signal.h>
 # include "ministruct.h"
-# include "minitree.h"
 # include "miniparser.h"
 # include "miniexecuter.h"
 # include "tokenizer.h"

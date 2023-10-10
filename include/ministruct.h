@@ -14,6 +14,7 @@
 # define MINISTRUCT_H
 
 # include "libft.h"
+# include "minitree.h"
 
 typedef struct s_dict			t_dict;
 typedef struct s_command		t_command;
@@ -84,7 +85,7 @@ struct s_command
 struct s_part
 {
 	int		index;
-	int		token;
+	t_token	token;
 	int		start;
 	int		end;
 	t_bool	used;
@@ -99,22 +100,11 @@ struct s_summarizer
 
 enum e_nodetype
 {
-	n_command_list = 10,
-	n_separator,
-	n_and_or,
+	n_and_or = 10,
 	n_pipeline,
-	n_pipe_sequence,
 	n_command,
-	n_simple_command,
-	n_compound_command,
 	n_subshell,
-	n_compound_list,
 	n_newline_list,
-	n_io_redirect,
-	n_io_file,
-	n_io_here,
-	n_separator_op,
-	n_linebreak
 };
 
 struct s_mininode

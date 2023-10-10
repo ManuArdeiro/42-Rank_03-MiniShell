@@ -26,11 +26,15 @@ void		ft_printsummary(t_list *command_summary);
 //Command list
 t_part		*ft_get_commandlist(t_part *tokenlist, t_part *delimiter);
 
-//Command Tree
+//Parse Tree
 t_mininode	*ft_create_mininode(void *content, t_nodetype type);
-void		ft_tokensplit(t_minitree **parsetree,
-				t_part *tokenlist, t_token token);
+t_minitree	*ft_tokensplit(t_part *tokenlist, t_token token);
+
 char		*ft_extract_tokenstring(char *line, t_part *node);
+t_list		*ft_extract_stringlist(
+				char *commandline, t_part *tokenlist, t_token token);
+t_list		*ft_extract_filelist(
+				char *commandline, t_part *tokenlist, t_bool filedirection);
 t_command	*ft_createcommand(
 				char *name, t_list *arglist, t_list *infile, t_list *outfile);
 t_part		*ft_get_tokennode(t_part *tokenlist, t_token token);

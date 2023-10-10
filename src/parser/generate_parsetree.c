@@ -12,29 +12,36 @@
 
 #include "minishell.h"
 
-static void	ft_add_split_tokens(t_minitree **root, t_part *tokenlist)
+static void	ft_tokensplit_all(t_minitree **root, t_part *tokenlist)
 {
-	ft_tokensplit(root, tokenlist, tk_newline);
-	ft_tokensplit(root, tokenlist, tk_and);
-	ft_tokensplit(root, tokenlist, tk_or);
-	ft_tokensplit(root, tokenlist, tk_lprnths);
-	ft_tokensplit(root, tokenlist, tk_pipe);
+	*root = ft_tokensplit(tokenlist, tk_newline);
+	if (*root == NULL)
+		*root = ft_tokensplit(tokenlist, tk_and);
+	if (*root == NULL)
+		*root = ft_tokensplit(tokenlist, tk_or);
+	if (*root == NULL)
+		*root = ft_tokensplit(tokenlist, tk_lprnths);
+	if (*root == NULL)
+		*root = ft_tokensplit(tokenlist, tk_pipe);
+
 }
 
 static void	ft_parse_tokenlist(t_minitree **root, t_part *tokenlist)
 {
 	if (tokenlist == NULL)
-		return (NULL);
-	
-	/*if null fill*/
-	/*else checkchild and split tokenlist inside the child and free list*/
-	if (root == NULL)
-		ft_add_split_tokens(root, tokenlist);
+		return ;
+	if (*root == NULL)
+		ft_tokensplit_all(root, tokenlist);
 	else
 	{
-		ft_parse_tokenlist(r);
+		free(*root);
+		ft_tokensplit_all(root, tokenlist);
 	}
-	return (root);
+	if (*root)
+	{
+		ft_parse_tokenlist(&(*root)->leftchild, (t_part *)(*root)->leftchild->content);
+		ft_parse_tokenlist(&(*root)->rightchild, (t_part *)(*root)->rightchild->content);
+	}
 }
 
 t_minitree	*ft_generate_parsetree(t_part *tokenlist, t_list *commandsummary)
@@ -44,7 +51,7 @@ t_minitree	*ft_generate_parsetree(t_part *tokenlist, t_list *commandsummary)
 	if (tokenlist == NULL || commandsummary == NULL)
 		return (NULL);
 	ft_parse_tokenlist(&parsetree, tokenlist);
-	if (ft_isvalid_commmandtree(parsetree) == FALSE)
-		ft_printerror(NULL, "Parser error");
+	//if (ft_isvalid_commmandtree(parsetree) == FALSE)
+	//	ft_printerror(NULL, "Parser error");
 	return (parsetree);
 }

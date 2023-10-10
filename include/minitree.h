@@ -13,6 +13,8 @@
 #ifndef MINITREE_H
 # define MINITREE_H
 
+#include "libft.h"
+
 typedef struct s_minitree	t_minitree;
 
 struct s_minitree

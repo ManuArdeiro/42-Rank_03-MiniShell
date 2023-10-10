@@ -48,4 +48,5 @@ t_list	*ft_extract_stringlist(
 		}
 		node = node->next;
 	}
+	return (stringlist);
 }

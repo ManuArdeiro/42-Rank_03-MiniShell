@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
+/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 17:51:52 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/10/01 15:36:15 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/10/11 12:29:14 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ static void	ft_cmd_vs_arg(t_part *tokens)
 t_part	*ft_tokenizer(char *line, int *tk_count)
 {
 	t_part	*tokens;
+
 	tokens = ft_create_tkn_list();
 	if (!tokens)
 		return (tokens);

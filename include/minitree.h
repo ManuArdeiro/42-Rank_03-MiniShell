@@ -6,14 +6,14 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 18:59:13 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/04 12:13:21 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/11 12:50:51 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINITREE_H
 # define MINITREE_H
 
-#include "libft.h"
+# include "libft.h"
 
 typedef struct s_minitree	t_minitree;
 
@@ -25,7 +25,7 @@ struct s_minitree
 };
 
 t_minitree	*ft_create_treenode(void *content);
-void		ft_destroytree(t_minitree *root);
+void		ft_destroytree(t_minitree **root);
 
 t_minitree	*ft_insertleft(t_minitree *root, void *content);
 t_minitree	*ft_insertright(t_minitree *root, void *content);

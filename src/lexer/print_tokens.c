@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tokenizer.h                                        :+:      :+:    :+:   */
+/*   print_tokens.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/10 11:18:23 by yzaytoun          #+#    #+#             */
+/*   Created: 2023/10/11 12:11:26 by yzaytoun          #+#    #+#             */
 /*   Updated: 2023/10/11 12:27:42 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TOKENIZER_H
-# define TOKENIZER_H
+#include "minishell.h"
 
-# include "ministruct.h"
+void	ft_print_tokenlist(t_part *tokenlist)
+{
+	t_part	*print;
 
-t_part	*ft_copytoken(t_part *tokennode);
-void	ft_tokenlist_add(t_part **tokenlist, t_part *newtoken);
-void	ft_print_tokenlist(t_part *tokenlist);
-
-
-#endif
+	if (tokenlist == NULL)
+		return ;
+	print = tokenlist;
+	while (print)
+	{
+		printf("token %d = %d\t", print->index, print->token);
+		ft_print_token(print->token);
+		print = print->next;
+	}
+}

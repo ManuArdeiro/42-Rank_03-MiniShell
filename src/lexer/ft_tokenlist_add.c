@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 16:27:56 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/09 16:28:10 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/11 12:08:31 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_tokenlist_add(t_part **tokenlist, t_part *newtoken)
 	t_part	*last;
 
 	if (*tokenlist == NULL)
-		tokenlist = newtoken;
+		*tokenlist = newtoken;
 	else
 	{
 		last = (*tokenlist);

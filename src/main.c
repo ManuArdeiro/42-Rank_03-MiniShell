@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:55:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/10/04 17:18:56 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/11 13:05:20 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,35 +39,27 @@ Por qué if (!global->line)
 
 	*/
 
-static int	ft_loop(t_global *global)
+static void	ft_loop(t_global *global)
 {
-	t_list	*history;
-	t_part	*tokens;
-	t_part	*print;
+	t_list		*history;
+	t_minitree	*parsetree;
 
 	history = NULL;
-	while (global->status != EXIT)
+	while (global->status != EXITED)
 	{
 		global->line = readline(MINI_PROMPT);
 		if (!global->line)
 			break ;
 		if (ft_strncmp(global->line, "exit", 4) == 0)
-			global->status = EXIT;
-		tokens = ft_tokenizer(global->line, &global->tk_count);
-		print = tokens;
-			while (print)
-			{
-				printf("token %d = %d\t", print->index, print->token);
-				ft_print_token(print->token);
-				print = print->next;
-			}
-		//parser
+			global->status = EXITED;
+		parsetree = ft_parse_commandline(global->line);
+		//ft_execute_commandline(parsetree);
+		ft_destroytree(&parsetree);
 		ft_register_and_clean(&history, &global);
 	}
 	rl_clear_history();
 	ft_write_command_history(&history, global);
 	ft_lstclear(&history, ft_free_string);
-	return (EXIT_SUCCESS);
 }
 
 /*	This function first frees the list of environment strings then frees the
@@ -83,7 +75,7 @@ static void	ft_free(t_global **global)
 	with calloc. Then it creates the environment items list depending on
 	the environment passed as argument (or not) calling to ft_initenv()
 	function.	*/
-	
+
 static void	ft_init(t_global **global, char **env)
 {
 	*global = ft_calloc(sizeof(t_global), 1);
@@ -118,8 +110,7 @@ int	main(int ac, char **av, char **env)
 	}
 	ft_printwellcome();
 	ft_init(&global, env);
-	if (ft_loop(global) != EXIT_SUCCESS)
-		perror("Error using minishell");
+	ft_loop(global);
 	ft_free(&global);
 	return (EXIT_SUCCESS);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   generate_parsetree.c                               :+:      :+:    :+:   */
+/*   parse_commandline.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/03 15:19:00 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/10 17:56:49 by yzaytoun         ###   ########.fr       */
+/*   Created: 2023/10/11 12:24:07 by yzaytoun          #+#    #+#             */
+/*   Updated: 2023/10/11 13:07:02 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,19 +39,40 @@ static void	ft_parse_tokenlist(t_minitree **root, t_part *tokenlist)
 	}
 	if (*root)
 	{
-		ft_parse_tokenlist(&(*root)->leftchild, (t_part *)(*root)->leftchild->content);
-		ft_parse_tokenlist(&(*root)->rightchild, (t_part *)(*root)->rightchild->content);
+		ft_parse_tokenlist(
+			&(*root)->leftchild, (t_part *)(*root)->leftchild->content);
+		ft_parse_tokenlist(
+			&(*root)->rightchild, (t_part *)(*root)->rightchild->content);
 	}
 }
 
-t_minitree	*ft_generate_parsetree(t_part *tokenlist, t_list *commandsummary)
+static t_minitree	*ft_generate_parsetree(t_part *tokenlist)
 {
 	t_minitree	*parsetree;
 
-	if (tokenlist == NULL || commandsummary == NULL)
+	if (tokenlist == NULL)
 		return (NULL);
 	ft_parse_tokenlist(&parsetree, tokenlist);
+	ft_printtree(parsetree);
 	//if (ft_isvalid_commmandtree(parsetree) == FALSE)
 	//	ft_printerror(NULL, "Parser error");
+	return (parsetree);
+}
+
+//FIXME - How to validate command sequence
+
+t_minitree	*ft_parse_commandline(const char *commandline)
+{
+	t_part		*tokenlist;
+	t_minitree	*parsetree;
+	int			token_count;
+
+	token_count = 0;
+	if (commandline == NULL)
+		return ;
+	tokenlist = ft_tokenizer(commandline, &token_count);
+	ft_print_tokenlist(tokenlist);
+	parsetree = ft_generate_parsetree(tokenlist);
+	ft_printtree(parsetree);
 	return (parsetree);
 }

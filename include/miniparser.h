@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 20:07:17 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/10 15:59:40 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/11 12:48:26 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ t_part		*ft_get_commandlist(t_part *tokenlist, t_part *delimiter);
 //Parse Tree
 t_mininode	*ft_create_mininode(void *content, t_nodetype type);
 t_minitree	*ft_tokensplit(t_part *tokenlist, t_token token);
+t_minitree	*ft_generate_parsetree(t_part *tokenlist);
+void		ft_printtree(t_minitree *root);
 
 char		*ft_extract_tokenstring(char *line, t_part *node);
 t_list		*ft_extract_stringlist(

@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tokenizer.h                                        :+:      :+:    :+:   */
+/*   execute_commandline.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/10 11:18:23 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/11 12:27:42 by yzaytoun         ###   ########.fr       */
+/*   Created: 2023/10/11 12:40:08 by yzaytoun          #+#    #+#             */
+/*   Updated: 2023/10/11 13:03:50 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TOKENIZER_H
-# define TOKENIZER_H
+#include "minishell.h"
 
-# include "ministruct.h"
+static void	*ft_navigate_and_execute(t_minitree *root)
+{
+	ft_navigate_and_execute(root->leftchild);
+	//ft_executecommand(root);
+	ft_navigate_and_execute(root->rightchild);
+}
 
-t_part	*ft_copytoken(t_part *tokennode);
-void	ft_tokenlist_add(t_part **tokenlist, t_part *newtoken);
-void	ft_print_tokenlist(t_part *tokenlist);
-
-
-#endif
+void	ft_execute_commandline(t_minitree *root)
+{
+	if (root == NULL)
+		return ;
+	ft_navigate_and_execute(root);
+}

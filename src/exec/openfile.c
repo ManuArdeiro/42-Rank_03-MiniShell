@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 18:03:52 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/01 18:33:06 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/11 11:55:50 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	ft_openfile(char *filename, int mode)
 	return (file_descriptor);
 }
 
-void	ft_closefiles(int *file_descriptor)
+void	ft_closefile(int *file_descriptor)
 {
 	if (close(*file_descriptor) < 0)
 		ft_printerror(__func__, "close");

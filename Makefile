@@ -42,10 +42,10 @@ BANNER = 	$(info $(WHITE_BAN))\
 USER			= $(shell whoami)
 INCLUDE 		= -Iinclude/
 INC_LIB 		= -Iinclude/libft
-INC_READLINE	= -I/Users/$(USER)/.brew/opt/readline/include
-READLINE_LIB	= -L/Users/$(USER)/.brew/opt/readline/lib
-#INC_READLINE	="-L/usr/local/opt/readline/lib"
-#READLINE_LIB	="-I/usr/local/opt/readline/include"
+#INC_READLINE	= -I/Users/$(USER)/.brew/opt/readline/include
+#READLINE_LIB	= -L/Users/$(USER)/.brew/opt/readline/lib
+INC_READLINE	="-L/usr/local/opt/readline/lib"
+READLINE_LIB	="-I/usr/local/opt/readline/include"
 SANITIZER		= -g3 -fsanitize=address -g
 
 READLINE_FLAGS	= -lreadline
@@ -55,18 +55,21 @@ ENV				= ft_getenv.c ft_setenv.c ft_initenv.c ft_printenv.c
 
 UTILS			= print_msg.c mini_history.c get_path.c free_string.c \
 					mini_dictionary.c
+
 LEXER			= tokenizer.c tokens.c token_tools_1.c token_tools_2.c \
 					ft_copy_tokenlist.c ft_tokenlist_add.c print_tokens.c
+
 PARSER			= get_commandlist.c separators.c extract_tokenstring.c \
 					extract_filelist.c get_tokennode.c lstconvert.c printcommand.c \
 					tokensplit.c create_mininode.c \
 					create_command.c get_nodetype.c parse_commandline.c print_tree.c
+
 SUMMARIZER		= minisummary.c printtokens.c get_unique_tokens.c \
 					get_token_summary.c get_token_count.c
 
 TREE 			= minitree.c treetraversal.c
 
-EXEC			= execute_commandline.c executecommand.c openfile.c
+EXEC			= executecommand.c openfile.c
 
 SRC 			= $(ENV) $(UTILS) $(PARSER) $(TREE) $(SUMMARIZER) $(EXEC) $(LEXER) main.c
 

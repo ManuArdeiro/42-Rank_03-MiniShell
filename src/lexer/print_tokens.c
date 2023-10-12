@@ -21,8 +21,9 @@ void	ft_print_tokenlist(t_part *tokenlist)
 	print = tokenlist;
 	while (print)
 	{
-		printf("token %d = %d\t", print->index, print->token);
+		//printf("token %d = %d\n", print->index, print->token);
 		ft_print_token(print->token);
+		printf("\n");
 		print = print->next;
 	}
 }

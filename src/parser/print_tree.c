@@ -31,6 +31,6 @@ void	ft_printtree(t_minitree *root)
 	if (root == NULL)
 		return ;
 	ft_printtree(root->leftchild);
-	printnode((t_mininode *)root->content);
+	ft_printnode((t_mininode *)root->content);
 	ft_printtree(root->rightchild);
 }

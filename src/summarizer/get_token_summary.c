@@ -57,7 +57,7 @@ t_list	*ft_get_token_summary(t_part *tokenlist, t_list *unique_token_list)
 	{
 		ft_add_to_summary(
 			&summary,
-			ft_count_token(tokenlist, (t_token)node->content)
+			ft_count_token(tokenlist, (uintptr_t)(void *)node->content)
 			);
 		node = node->next;
 	}

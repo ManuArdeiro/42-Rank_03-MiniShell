@@ -57,7 +57,7 @@ static void	ft_loop(t_global *global)
 		ft_destroytree(&parsetree);
 		ft_register_and_clean(&history, &global);
 	}
-	rl_clear_history();
+	//rl_clear_history();
 	ft_write_command_history(&history, global);
 	ft_lstclear(&history, ft_free_string);
 }

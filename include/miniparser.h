@@ -27,9 +27,9 @@ void		ft_printsummary(t_list *command_summary);
 t_part		*ft_get_commandlist(t_part *tokenlist, t_part *delimiter);
 
 //Parse Tree
+t_minitree	*ft_parse_commandline(const char *commandline);
 t_mininode	*ft_create_mininode(void *content, t_nodetype type);
 t_minitree	*ft_tokensplit(t_part *tokenlist, t_token token);
-t_minitree	*ft_generate_parsetree(t_part *tokenlist);
 void		ft_printtree(t_minitree *root);
 
 char		*ft_extract_tokenstring(char *line, t_part *node);

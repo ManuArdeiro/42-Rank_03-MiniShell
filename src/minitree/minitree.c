@@ -44,8 +44,8 @@ void	ft_destroytree(t_minitree **root)
 	if (*root == NULL)
 		return ;
 	node = *root;
-	ft_destroytree((*root)->leftchild);
-	ft_destroytree((*root)->rightchild);
+	ft_destroytree(&(*root)->leftchild);
+	ft_destroytree(&(*root)->rightchild);
 	free(node);
 }
 

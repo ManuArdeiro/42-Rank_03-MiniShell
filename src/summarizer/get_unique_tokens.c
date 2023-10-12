@@ -31,7 +31,7 @@ static t_bool	ft_token_in_list(t_list *list, t_token token)
 	node = list;
 	while (node != NULL)
 	{
-		if ((t_token)node->content == token)
+		if ((uintptr_t)(void *)node->content == token)
 			return (TRUE);
 		node = node->next;
 	}

@@ -49,10 +49,10 @@ t_list	*ft_get_token_summary(t_part *tokenlist, t_list *unique_token_list)
 	t_list	*summary;
 	t_list	*node;
 
+	summary = NULL;
 	if (!unique_token_list)
 		return (NULL);
 	node = unique_token_list;
-	summary = NULL;
 	while (node != NULL)
 	{
 		ft_add_to_summary(

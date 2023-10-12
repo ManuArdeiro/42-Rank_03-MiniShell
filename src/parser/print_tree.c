@@ -14,6 +14,8 @@
 
 static void	ft_printnode(t_mininode *mininode)
 {
+	if (mininode == NULL)
+		return ;
 	if (mininode->type == n_and_or)
 		printf("n_and_or\n");
 	else if (mininode->type == n_subshell)

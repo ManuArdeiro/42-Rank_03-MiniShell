@@ -19,7 +19,9 @@ static void	ft_cmd_vs_arg(t_part *tokens)
 	flag = 0;
 	while (tokens)
 	{
-		if (tokens->token == tk_semi || tokens->token == tk_pipe)
+		if (tokens->token == tk_semi || tokens->token == tk_pipe
+			|| tokens->token == tk_or || tokens->token == tk_ampersand
+			|| tokens->token == tk_lprnths || tokens->token == tk_and)
 			flag = 0;
 		else if (tokens->token == tk_cmd && flag == 0)
 			flag = 1;

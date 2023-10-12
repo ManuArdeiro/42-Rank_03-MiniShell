@@ -39,11 +39,9 @@ static t_nodetype	ft_define_listtype(t_list *token_summary)
 			return (n_subshell);
 		else if (ft_evaluate_token(node, ft_is_pipeseparator) == TRUE)
 			return (n_pipeline);
-		else if (ft_evaluate_token(node, ft_is_newline) == TRUE)
-			return (n_newline_list);
 		node = node->next;
 	}
-	return (0);
+	return (n_command);
 }
 
 t_nodetype	ft_get_nodetype(t_part *tokenlist)
@@ -51,8 +49,9 @@ t_nodetype	ft_get_nodetype(t_part *tokenlist)
 	t_list		*token_summary;
 	t_nodetype	nodetype;
 
+	token_summary = NULL;
 	token_summary = ft_summarize(tokenlist);
 	nodetype = ft_define_listtype(token_summary);
-	ft_lstclear(&token_summary, free);
+	ft_lstclear_nodes(&token_summary);
 	return (nodetype);
 }

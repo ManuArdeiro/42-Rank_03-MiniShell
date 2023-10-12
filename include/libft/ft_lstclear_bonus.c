@@ -17,10 +17,10 @@ void	ft_lstclear(t_list **lst, void (*del)(void *))
 	t_list	*point;
 	t_list	*next_p;
 
-	if (!lst || !del)
+	if (!lst || !del || (*lst) == NULL)
 		return ;
 	point = (*lst);
-	(*lst) = point->next;
+	next_p = point->next;
 	while (point != NULL)
 	{
 		next_p = point->next;

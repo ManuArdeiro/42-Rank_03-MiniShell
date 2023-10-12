@@ -17,6 +17,8 @@ t_list	*ft_summarize(t_part *tokens_list)
 	t_list	*token_summary;
 	t_list	*unique_token_list;
 
+	token_summary = NULL;
+	unique_token_list = NULL;
 	unique_token_list = ft_get_unique_tokens(tokens_list);
 	token_summary
 		= ft_get_token_summary(tokens_list, unique_token_list);

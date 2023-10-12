@@ -12,26 +12,23 @@
 
 #include "minishell.h"
 
-/*static void	ft_tokensplit_all(t_minitree **root, t_part *tokenlist)
+//FIXME - Find combinations of tokens/command list/ Add a default action after split
+static void	ft_tokensplit_all(t_minitree **root, t_part *tokenlist)
 {
-	*root = ft_tokensplit(tokenlist, tk_newline);
-	if (*root == NULL)
-		*root = ft_tokensplit(tokenlist, tk_and);
+	*root = ft_tokensplit(tokenlist, tk_and);
 	if (*root == NULL)
 		*root = ft_tokensplit(tokenlist, tk_or);
 	if (*root == NULL)
 		*root = ft_tokensplit(tokenlist, tk_lprnths);
 	if (*root == NULL)
 		*root = ft_tokensplit(tokenlist, tk_pipe);
-
 }
 
 static void	ft_parse_tokenlist(t_minitree **root, t_part *tokenlist)
 {
 	if (tokenlist == NULL)
 		return ;
-	if (*root == NULL)
-		ft_tokensplit_all(root, tokenlist);
+	ft_tokensplit_all(root, tokenlist);
 	//if (*root)
 	//{
 	//	ft_parse_tokenlist(
@@ -52,7 +49,7 @@ static t_minitree	*ft_generate_parsetree(t_part *tokenlist)
 	//if (ft_isvalid_commmandtree(parsetree) == FALSE)
 	//	ft_printerror(NULL, "Parser error");
 	return (parsetree);
-}*/
+}
 
 //FIXME - How to validate command sequence
 t_minitree	*ft_parse_commandline(const char *commandline)
@@ -66,7 +63,7 @@ t_minitree	*ft_parse_commandline(const char *commandline)
 		return (NULL);
 	tokenlist = ft_tokenizer((char *)commandline, &token_count);
 	ft_print_tokenlist(tokenlist);
-	//parsetree = ft_generate_parsetree(tokenlist);
+	parsetree = ft_generate_parsetree(tokenlist);
 	//ft_printtree(parsetree);
 	return (parsetree);
 }

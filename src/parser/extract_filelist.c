@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 18:36:15 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/01 18:49:03 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/13 15:52:39 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	ft_get_infilelist(
 	while (node != NULL && ft_isseparator(node->token) == FALSE)
 	{
 		if (node->token == tk_less || node->token == tk_dblless)
-			ft_get_tokennode(tokenlist, node->token);
+			ft_get_tokennode(tokenlist, node->token, CURRENT_NODE);
 		string = ft_extract_tokenstring(commandline, node->next);
 		ft_lstinsert(filelist, (char *)string, BACK);
 		node = node->next;
@@ -39,7 +39,7 @@ static void	ft_get_outfilelist(
 	while (node != NULL && ft_isseparator(node->token) == FALSE)
 	{
 		if (node->token == tk_grt || node->token == tk_dblgrt)
-			ft_get_tokennode(tokenlist, node->token);
+			ft_get_tokennode(tokenlist, node->token, CURRENT_NODE);
 		string = ft_extract_tokenstring(commandline, node->next);
 		ft_lstinsert(filelist, (char *)string, BACK);
 		node = node->next;

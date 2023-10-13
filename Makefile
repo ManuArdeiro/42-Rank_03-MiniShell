@@ -6,7 +6,7 @@
 #    By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/01 18:51:45 by jolopez-          #+#    #+#              #
-#    Updated: 2023/10/11 13:06:17 by yzaytoun         ###   ########.fr        #
+#    Updated: 2023/10/13 10:06:06 by yzaytoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,10 +42,10 @@ BANNER = 	$(info $(WHITE_BAN))\
 USER			= $(shell whoami)
 INCLUDE 		= -Iinclude/
 INC_LIB 		= -Iinclude/libft
-#INC_READLINE	= -I/Users/$(USER)/.brew/opt/readline/include
-#READLINE_LIB	= -L/Users/$(USER)/.brew/opt/readline/lib
-INC_READLINE	="-L/usr/local/opt/readline/lib"
-READLINE_LIB	="-I/usr/local/opt/readline/include"
+INC_READLINE	= -I/Users/$(USER)/.brew/opt/readline/include
+READLINE_LIB	= -L/Users/$(USER)/.brew/opt/readline/lib
+#INC_READLINE	="-L/usr/local/opt/readline/lib"
+#READLINE_LIB	="-I/usr/local/opt/readline/include"
 SANITIZER		= -g3 -fsanitize=address -g
 
 READLINE_FLAGS	= -lreadline

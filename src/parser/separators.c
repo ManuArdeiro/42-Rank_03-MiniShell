@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 18:58:37 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/10 16:05:24 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/13 12:41:40 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ t_bool	ft_is_subshellseparator(t_token token)
 	return (FALSE);
 }
 
-t_bool	ft_is_newline(t_token token)
+t_bool	ft_is_semicolon(t_token token)
 {
-	if (token == tk_newline)
+	if (token == tk_semi)
 		return (TRUE);
 	return (FALSE);
 }

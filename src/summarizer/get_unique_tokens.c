@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 18:36:48 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/09/29 19:05:28 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/13 14:35:02 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	ft_add_token_to_list(t_list **list, t_token token)
 
 	if (token <= 0)
 		return ;
-	new = ft_lstnew((void *)(uintptr_t)token);
+	new = ft_lstnew((void *)token);
 	ft_lstadd_front(list, new);
 }
 

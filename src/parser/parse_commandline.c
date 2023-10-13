@@ -6,13 +6,14 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 12:24:07 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/11 13:07:02 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/13 14:51:09 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 //FIXME - Find combinations of tokens/command list/ Add a default action after split
+//FIXME - How to validate command sequence
 static void	ft_tokensplit_all(t_minitree **root, t_part *tokenlist)
 {
 	*root = ft_tokensplit(tokenlist, tk_and);
@@ -51,14 +52,14 @@ static t_minitree	*ft_generate_parsetree(t_part *tokenlist)
 	return (parsetree);
 }
 
-//FIXME - How to validate command sequence
 t_minitree	*ft_parse_commandline(const char *commandline)
 {
 	t_part		*tokenlist;
-	t_minitree	*parsetree = NULL;
+	t_minitree	*parsetree;
 	int			token_count;
 
 	token_count = 0;
+	parsetree = NULL;
 	if (commandline == NULL)
 		return (NULL);
 	tokenlist = ft_tokenizer((char *)commandline, &token_count);

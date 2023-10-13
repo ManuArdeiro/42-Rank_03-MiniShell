@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 11:05:21 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/10 11:06:27 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/13 15:52:57 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ t_command	*ft_get_minicommand(char *commandline, t_part *tokenlist)
 	command = NULL;
 	if (tokenlist == NULL)
 		return (NULL);
-	commandnode = ft_get_tokennode(tokenlist, tk_cmd);
+	commandnode = ft_get_tokennode(tokenlist, tk_cmd, CURRENT_NODE);
 	arglist = ft_extract_stringlist(commandline, tokenlist, tk_arg);
 	commandname = ft_extract_tokenstring(commandline, commandnode);
 	ft_lstinsert(&arglist, commandname, FRONT);

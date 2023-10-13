@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 20:07:17 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/11 12:48:26 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/13 15:46:41 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ t_list		*ft_extract_filelist(
 				char *commandline, t_part *tokenlist, t_bool filedirection);
 t_command	*ft_createcommand(
 				char *name, t_list *arglist, t_list *infile, t_list *outfile);
-t_part		*ft_get_tokennode(t_part *tokenlist, t_token token);
+t_part		*ft_get_tokennode(
+				t_part *tokenlist, t_token token, t_bool position);
 t_nodetype	ft_get_nodetype(t_part *tokenlist);
 
 void		ft_printcommand(t_command *command);
@@ -48,8 +49,7 @@ t_bool		ft_isseparator(t_token token);
 t_bool		ft_is_logicalseparator(t_token token);
 t_bool		ft_is_pipeseparator(t_token token);
 t_bool		ft_is_subshellseparator(t_token token);
-t_bool		ft_is_newline(t_token token);
-
+t_bool		ft_is_semicolon(t_token token);
 
 //CONVERT FUNCTIONS
 char		**ft_lstconvert_strarr(t_list *list);

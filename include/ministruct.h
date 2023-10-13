@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:10:53 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/10 11:00:07 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/13 15:49:50 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,9 @@ typedef enum s_bool
 	INFILE,
 	OUTFILE,
 	LEFT,
-	RIGHT
+	RIGHT,
+	NEXT_NODE,
+	CURRENT_NODE
 }			t_bool;
 
 struct s_dict
@@ -103,8 +105,8 @@ enum e_nodetype
 	n_and_or = 10,
 	n_pipeline,
 	n_command,
-	n_subshell,
-	n_newline_list,
+	n_commandlist,
+	n_subshell
 };
 
 struct s_mininode

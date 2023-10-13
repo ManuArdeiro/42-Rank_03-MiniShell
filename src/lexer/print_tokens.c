@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 12:11:26 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/13 15:40:50 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/13 20:26:17 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,12 @@ void	ft_print_tokenlist(t_part *tokenlist)
 		return ;
 	print = tokenlist;
 	printf("**** Token list **** \n\n");
+	printf("index | token\n");
+	printf("-------------\n");
 	while (print)
 	{
 		//printf("token %d = %d\n", print->index, print->token);
-		printf("%d  ", count);
+		printf("%d    |  ", count);
 		ft_print_token(print->token);
 		printf("\n");
 		print = print->next;

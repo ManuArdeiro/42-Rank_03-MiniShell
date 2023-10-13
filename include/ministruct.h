@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:10:53 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/13 15:49:50 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/13 17:36:40 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,26 +48,27 @@ struct s_dict
 
 enum e_token
 {
-	tk_lprnths = 1,
+	tk_and = 1,
+	tk_or,
+	tk_lprnths,
 	tk_rprnths,
 	tk_sglquot,
 	tk_dblquot,
+	tk_pipe,
 	tk_mul,
 	tk_semi,
 	tk_less,
 	tk_dblless,
 	tk_grt,
 	tk_dblgrt,
-	tk_pipe,
-	tk_or,
 	tk_ampersand,
-	tk_and,
 	tk_doll_exc,
 	tk_dollar,
 	tk_cmd,
 	tk_arg,
 	tk_equal,
-	tk_newline
+	tk_newline,
+	max_token
 };
 
 struct s_file	/*File desciptor and name*/

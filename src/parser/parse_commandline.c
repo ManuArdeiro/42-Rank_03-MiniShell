@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 12:24:07 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/13 14:51:09 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/13 17:47:05 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,19 @@
 //FIXME - How to validate command sequence
 static void	ft_tokensplit_all(t_minitree **root, t_part *tokenlist)
 {
-	*root = ft_tokensplit(tokenlist, tk_and);
-	if (*root == NULL)
-		*root = ft_tokensplit(tokenlist, tk_or);
-	if (*root == NULL)
-		*root = ft_tokensplit(tokenlist, tk_lprnths);
-	if (*root == NULL)
-		*root = ft_tokensplit(tokenlist, tk_pipe);
+	t_token	token;
+
+	token = 0;
+	while (token < max_token)
+	{
+		if (ft_isseparator(token) == TRUE)
+		{
+			*root = ft_tokensplit(tokenlist, token);
+			if (*root != NULL)
+				break ;
+		}
+		++token;
+	}
 }
 
 static void	ft_parse_tokenlist(t_minitree **root, t_part *tokenlist)

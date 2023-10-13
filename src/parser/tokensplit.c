@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 11:52:43 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/13 16:31:15 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/13 16:58:31 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ t_minitree	*ft_tokensplit(t_part *tokenlist, t_token token)
 		return (NULL);
 	delimiter = ft_get_tokennode(tokenlist, token, CURRENT_NODE);
 	nextdelimiter = ft_get_tokennode(delimiter, token, CURRENT_NODE);
-	nextnode = ft_get_tokennode(tokenlist, token, NEXT_NODE);
+	nextnode = ft_get_tokennode(delimiter, token, NEXT_NODE);
 	if (delimiter != NULL)
 	{
 		ft_fill_treenode(

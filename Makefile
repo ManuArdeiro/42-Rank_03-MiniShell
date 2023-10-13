@@ -6,7 +6,7 @@
 #    By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/01 18:51:45 by jolopez-          #+#    #+#              #
-#    Updated: 2023/10/13 10:06:06 by yzaytoun         ###   ########.fr        #
+#    Updated: 2023/10/13 17:22:13 by yzaytoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,7 +57,7 @@ UTILS			= print_msg.c mini_history.c get_path.c free_string.c \
 					mini_dictionary.c
 
 LEXER			= tokenizer.c tokens.c token_tools_1.c token_tools_2.c \
-					ft_copy_tokenlist.c ft_tokenlist_add.c print_tokens.c
+					ft_copy_tokenlist.c ft_tokenlist_add.c print_tokens.c \
 
 PARSER			= get_commandlist.c separators.c extract_tokenstring.c \
 					extract_filelist.c get_tokennode.c lstconvert.c printcommand.c \

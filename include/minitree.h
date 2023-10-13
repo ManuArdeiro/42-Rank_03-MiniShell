@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 18:59:13 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/11 12:50:51 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/13 20:48:58 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,8 @@ void		ft_treeinsert(t_minitree **root,
 void		ft_postorder_traversal(t_minitree *root, void (*function)(void *));
 void		ft_preorder_traversal(t_minitree *root, void (*function)(void *));
 void		ft_inorder_traversal(t_minitree *root, void (*function)(void *));
+
+t_bool		ft_is_emptynode(t_minitree *root);
+void		ft_printtree(t_minitree *root);
 
 #endif

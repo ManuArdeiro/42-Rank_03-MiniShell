@@ -6,7 +6,7 @@
 #    By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/01 18:51:45 by jolopez-          #+#    #+#              #
-#    Updated: 2023/10/13 17:22:13 by yzaytoun         ###   ########.fr        #
+#    Updated: 2023/10/13 20:16:11 by yzaytoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,18 +57,19 @@ UTILS			= print_msg.c mini_history.c get_path.c free_string.c \
 					mini_dictionary.c
 
 LEXER			= tokenizer.c tokens.c token_tools_1.c token_tools_2.c \
-					ft_copy_tokenlist.c ft_tokenlist_add.c print_tokens.c \
+					ft_copy_tokenlist.c ft_tokenlist_add.c print_tokens.c
 
 PARSER			= get_commandlist.c separators.c extract_tokenstring.c \
 					extract_filelist.c get_tokennode.c lstconvert.c printcommand.c \
-					tokensplit.c create_mininode.c \
-					create_command.c get_nodetype.c parse_commandline.c print_tree.c
+					tokensplit.c get_minicommand.c get_nodetype.c \
+					parse_commandline.c
 
 SUMMARIZER		= minisummary.c printtokens.c get_unique_tokens.c \
 					get_token_summary.c get_token_count.c
-
-TREE 			= minitree.c treetraversal.c
-
+					
+TREE 			= minitree.c treetraversal.c is_emptynode.c create_mininode.c \
+				print_tree.c
+					
 EXEC			= executecommand.c openfile.c
 
 SRC 			= $(ENV) $(UTILS) $(PARSER) $(TREE) $(SUMMARIZER) $(EXEC) $(LEXER) main.c

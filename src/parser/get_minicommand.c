@@ -6,13 +6,13 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 11:05:21 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/13 15:52:57 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/13 19:57:45 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_command	*ft_createcommand(
+static t_command	*ft_createcommand(
 	char *name, t_list *arglist, t_list *infile, t_list *outfile)
 {
 	t_command	*command;
@@ -31,25 +31,40 @@ t_command	*ft_createcommand(
 	return (command);
 }
 
-t_command	*ft_get_minicommand(char *commandline, t_part *tokenlist)
+static t_command	*ft_newcommand(const char *commandline, t_part *tokenlist)
 {
+	t_command	*newcommand;
 	t_part		*commandnode;
-	t_command	*command;
 	t_list		*arglist;
 	char		*commandname;
 
-	command = NULL;
-	if (tokenlist == NULL)
-		return (NULL);
+	newcommand = NULL;
 	commandnode = ft_get_tokennode(tokenlist, tk_cmd, CURRENT_NODE);
-	arglist = ft_extract_stringlist(commandline, tokenlist, tk_arg);
 	commandname = ft_extract_tokenstring(commandline, commandnode);
+	arglist = ft_extract_stringlist(commandline, tokenlist, tk_arg);
 	ft_lstinsert(&arglist, commandname, FRONT);
-	command = ft_createcommand(
+	newcommand
+		= ft_createcommand(
 			commandname,
 			arglist,
 			ft_extract_filelist(commandline, tokenlist, INFILE),
 			ft_extract_filelist(commandline, tokenlist, OUTFILE)
 			);
-	return (command);
+	return (newcommand);
+}
+
+t_minitree	*ft_get_minicommand(const char *commandline, t_part *tokenlist)
+{
+	t_minitree	*minitree;
+	t_command	*command;
+	t_mininode	*minicommand;
+
+	minitree = NULL;
+	minicommand = NULL;
+	if (tokenlist == NULL)
+		return (NULL);
+	command = ft_newcommand(commandline, tokenlist);
+	minicommand = ft_create_mininode(command, n_command);
+	ft_treeinsert(&minitree, NULL, minicommand, NULL);
+	return (minitree);
 }

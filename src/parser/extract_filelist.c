@@ -6,14 +6,14 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 18:36:15 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/13 15:52:39 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/13 20:05:10 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 static void	ft_get_infilelist(
-	t_list **filelist, char *commandline, t_part *tokenlist)
+	t_list **filelist, const char *commandline, t_part *tokenlist)
 {
 	t_part	*node;
 	char	*string;
@@ -30,7 +30,7 @@ static void	ft_get_infilelist(
 }
 
 static void	ft_get_outfilelist(
-	t_list **filelist, char *commandline, t_part *tokenlist)
+	t_list **filelist, const char *commandline, t_part *tokenlist)
 {
 	t_part	*node;
 	char	*string;
@@ -47,7 +47,7 @@ static void	ft_get_outfilelist(
 }
 
 t_list	*ft_extract_filelist(
-	char *commandline, t_part *tokenlist, t_bool filedirection)
+	const char *commandline, t_part *tokenlist, t_bool filedirection)
 {
 	t_list	*filelist;
 

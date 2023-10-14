@@ -6,11 +6,11 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 13:36:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/10/07 21:39:01 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/10/14 19:56:29 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../../../include/minishell.h"
 
 /*	This function check the first argument:
 	-	If it is "-n" then all the arguments will be written (separated by

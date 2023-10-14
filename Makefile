@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+         #
+#    By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/01 18:51:45 by jolopez-          #+#    #+#              #
-#    Updated: 2023/10/14 19:25:45 by jolopez-         ###   ########.fr        #
+#    Updated: 2023/10/14 20:49:47 by yzaytoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,21 +56,22 @@ ENV				= ft_getenv.c ft_setenv.c ft_initenv.c ft_printenv.c ft_delenv.c
 
 UTILS			= print_msg.c mini_history.c get_path.c free_string.c \
 					mini_dictionary.c
-LEXER			= tokenizer.c tokens.c token_tools_1.c token_tools_2.c
 
-PARSER			= get_commandlist.c isseparator.c convertlist.c \
-					get_arglist.c extract_tokenstring.c extract_filelist.c \
-					get_tokennode.c lstconvert.c printcommand.c  \
-					generate_parsetree.c grammar.c isvalid_commandtree.c
+LEXER			= tokenizer.c tokens.c token_tools_1.c token_tools_2.c \
+					ft_copy_tokenlist.c ft_tokenlist_add.c print_tokens.c
+
+PARSER			= get_commandlist.c separators.c extract_tokenstring.c \
+					extract_filelist.c get_tokennode.c lstconvert.c printcommand.c \
+					tokensplit.c get_minicommand.c get_nodetype.c \
+					parse_commandline.c free_mininode.c filelist_size.c
 
 SUMMARIZER		= minisummary.c printtokens.c get_unique_tokens.c \
 					get_token_summary.c get_token_count.c
-
-cmd				= cmd_tools.c mini_cd.c mini_echo.c mini_pwd.c
-
-TREE 			= minitree.c treetraversal.c
-
-EXEC			= executor.c openfile.c
+					
+TREE 			= minitree.c treetraversal.c is_emptynode.c create_mininode.c \
+				print_tree.c
+					
+EXEC			= executecommand.c openfile.c execute_commandline.c
 
 SRC 			= $(ENV) $(UTILS) $(SUMMARIZER) $(LEXER) $(CMD) main.c
 

@@ -24,7 +24,7 @@ BONUS			= ft_lstadd_front_bonus.c ft_lstclear_bonus.c \
 				  ft_lstdelone_bonus.c ft_lstiter_bonus.c ft_lstlast_bonus.c \
 				  ft_lstmap_bonus.c ft_lstnew_bonus.c ft_lstsize_bonus.c \
 				  ft_lstadd_back_bonus.c ft_strarraylen.c ft_clear_strarray.c \
-				  ft_strchr_pos.c ft_lstclear_nodes.c ft_lstinsert.c
+				  ft_strchr_pos.c ft_lstclear_nodes.c ft_lstinsert.c ft_lstcopy.c
 
 OBJS			= $(SRCS:.c=.o)
 

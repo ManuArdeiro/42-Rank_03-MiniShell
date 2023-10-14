@@ -1,24 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   isvalid_commandtree.c                              :+:      :+:    :+:   */
+/*   ft_tokenlist_add.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/03 19:40:35 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/04 11:06:10 by yzaytoun         ###   ########.fr       */
+/*   Created: 2023/10/09 16:27:56 by yzaytoun          #+#    #+#             */
+/*   Updated: 2023/10/11 12:08:31 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_bool	ft_validate_commandtree(t_minitree *commandtree)
+void	ft_tokenlist_add(t_part **tokenlist, t_part *newtoken)
 {
-	return (FALSE);
-}
+	t_part	*last;
 
-t_bool	ft_validate_commandsequence(t_minitree *commandsequence)
-{
-	return (FALSE);
+	if (*tokenlist == NULL)
+		*tokenlist = newtoken;
+	else
+	{
+		last = (*tokenlist);
+		while (last->next != NULL)
+			last = last->next;
+		last->next = newtoken;
+	}
 }
-

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
+/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:47:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/10/14 19:20:59 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/10/14 20:47:17 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,11 @@
 # include <signal.h>
 # include "ministruct.h"
 # include "miniparser.h"
+# include "miniexecuter.h"
+# include "tokenizer.h"
 
 typedef struct s_global
 {
-	int		tk_count;
 	t_bool	status;
 	char	*line;
 	t_list	*envlist;
@@ -40,27 +41,6 @@ typedef struct s_global
 void		ft_printhelp(void);
 void		ft_printwellcome(void);
 void		ft_printerror(const char *function, const char *string);
-
-// Tokenizer
-
-t_part		*ft_tokenizer(char *line, int *tk_count);
-int			ft_is_space(char *line, int i);
-t_part		*ft_create_tkn_list(void);
-int			ft_last_index(t_part *tokens);
-t_part		*ft_last_tkn(t_part *tokens);
-void		ft_add_tkn(t_part *tokens, t_token token, int start, int end);
-void		ft_get_tokens(char *line, t_part *tokens);
-int			ft_count_tokens(char *line);
-void		ft_token_1(t_part *tokens, char *line, int *i);
-
-// Built-ins
-
-void		ft_print_screen(char *str);
-int			ft_arg_nbr(char **args);
-int			ft_mini_cd(char **arg, t_list *envlist);
-int			ft_mini_echo(char **args);
-int			ft_mini_pwd(void);
-int			ft_mini_env(t_list *envList);
 
 // ReadLine Functions
 void		rl_clear_history(void);

@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 18:57:40 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/04 12:12:06 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/14 14:30:50 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,15 +37,15 @@ t_minitree	*ft_insertright(t_minitree *root, void *content)
 	return (root->rightchild);
 }
 
-void	ft_destroytree(t_minitree *root)
+void	ft_destroytree(t_minitree **root)
 {
 	t_minitree	*node;
 
-	if (root == NULL)
+	if (*root == NULL)
 		return ;
-	node = root;
-	ft_destroytree(root->leftchild);
-	ft_destroytree(root->rightchild);
+	node = *root;
+	ft_destroytree(&(*root)->leftchild);
+	ft_destroytree(&(*root)->rightchild);
 	free(node);
 }
 
@@ -53,6 +53,6 @@ void	ft_treeinsert(
 	t_minitree **root, void *leftcontent, void *rootcontent, void *rightcontent)
 {
 	(*root) = ft_create_treenode(rootcontent);
-	(*root)->leftchild = ft_insertleft(root, leftcontent);
-	(*root)->rightchild = ft_insertright(root, rightcontent);
+	(*root)->leftchild = ft_insertleft(*root, leftcontent);
+	(*root)->rightchild = ft_insertright(*root, rightcontent);
 }

@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 15:51:54 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/01 16:17:01 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/14 20:29:43 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,27 +35,45 @@ char	**ft_lstconvert_strarr(t_list *list)
 	return (stringarray);
 }
 
-t_file	*ft_lstconvert_filearr(t_list *list)
+static t_file	*ft_create_filearray(size_t size, int std_stream)
+{
+	t_file	*filearray;
+
+	filearray = NULL;
+	filearray = malloc(sizeof(t_file) * (size + 1));
+	if (!filearray)
+		return (NULL);
+	else if (filearray)
+	{
+		filearray[size].name = NULL;
+		filearray[size].fd = std_stream;
+	}
+	return (filearray);
+}
+
+t_file	*ft_lstconvert_filearr(t_list *list, int std_stream)
 {
 	t_file	*filearray;
 	t_list	*node;
 	int		i;
 
 	if (list == NULL)
-		return (NULL);
-	node = list;
-	filearray = malloc(sizeof(t_file) * (ft_lstsize(list) + 1));
-	if (!filearray)
-		return (NULL);
-	i = 0;
-	while (node != NULL)
 	{
-		filearray[i].name = ft_strdup((char *)node->content);
-		filearray[i].fd = 0;
-		node = node->next;
-		++i;
+		filearray = ft_create_filearray(0, std_stream);
+		return (filearray);
 	}
-	filearray[i].name = NULL;
+	node = list;
+	filearray = ft_create_filearray(ft_lstsize(list), std_stream);
+	if (filearray)
+	{
+		i = 0;
+		while (node != NULL)
+		{
+			filearray[i].name = ft_strdup((char *)node->content);
+			filearray[i].fd = std_stream;
+			node = node->next;
+			++i;
+		}
+	}
 	return (filearray);
 }
-

@@ -1,30 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   grammar.c                                          :+:      :+:    :+:   */
+/*   create_mininode.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/03 19:23:26 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/04 10:28:04 by yzaytoun         ###   ########.fr       */
+/*   Created: 2023/10/09 16:14:34 by yzaytoun          #+#    #+#             */
+/*   Updated: 2023/10/09 16:14:53 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*
--> search for separator 
--> search for or / and
--> search for pipline
--> search for command
--> if (token == TRUE) lookahead ->
-*/
-t_bool	ft_looknext(t_minitree *node)
+t_mininode	*ft_create_mininode(void *content, t_nodetype nodetype)
 {
-	if ((t_token)node->content == /*token*/)
+	t_mininode	*newnode;
+
+	newnode = NULL;
+	if (nodetype != 0)
 	{
+		newnode = malloc(sizeof(t_mininode));
+		if (!newnode)
+			return (NULL);
+		newnode->content = content;
+		newnode->type = nodetype;
 	}
-	else
-		ft_printerror(NULL, "Parser error");
-	return (FALSE);
+	return (newnode);
 }

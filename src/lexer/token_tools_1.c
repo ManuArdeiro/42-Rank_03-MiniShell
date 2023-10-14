@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_tools_1.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
+/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 19:15:42 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/10/05 11:23:31 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/10/14 20:47:40 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int	ft_is_space(char *line, int i)
 {
 	return (line[i] == ' ' || line[i] == '\t' || line[i] == '\v');
 }
+
+/*Revisar la salida de error*/
 
 t_part	*ft_create_tkn_list(void)
 {

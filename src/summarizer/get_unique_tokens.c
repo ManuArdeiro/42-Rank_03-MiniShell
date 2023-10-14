@@ -6,21 +6,11 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 18:36:48 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/09/29 19:05:28 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/13 17:09:38 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniparser.h"
-
-static void	ft_add_token_to_list(t_list **list, t_token token)
-{
-	t_list	*new;
-
-	if (token <= 0)
-		return ;
-	new = ft_lstnew((void *)(uintptr_t)token);
-	ft_lstadd_front(list, new);
-}
 
 static t_bool	ft_token_in_list(t_list *list, t_token token)
 {
@@ -31,7 +21,7 @@ static t_bool	ft_token_in_list(t_list *list, t_token token)
 	node = list;
 	while (node != NULL)
 	{
-		if ((t_token)node->content == token)
+		if ((uintptr_t)(void *)node->content == token)
 			return (TRUE);
 		node = node->next;
 	}
@@ -50,7 +40,10 @@ t_list	*ft_get_unique_tokens(t_part *tokenlist)
 	while (part != NULL)
 	{
 		if (ft_token_in_list(list, part->token) == FALSE)
-			ft_add_token_to_list(&list, part->token);
+		{
+			if (part->token != 0)
+				ft_lstinsert(&list, (void *)part->token, BACK);
+		}
 		part = part->next;
 	}
 	return (list);

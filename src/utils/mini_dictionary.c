@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_dictionary.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
+/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 19:48:16 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/07 17:00:44 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/10/14 20:48:36 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	ft_modifydict(t_list **envlist, const char *key, const char *newvalue)
 	size_t	len;
 
 	if (!envlist || *envlist == NULL || !newvalue)
-		return (EXIT_SUCCESS);
+		return (EXITED);
 	node = *envlist;
 	len = ft_strlen(key);
 	while (node != NULL)
@@ -71,7 +71,7 @@ int	ft_searchdict(t_list *list, const char *key)
 	size_t	len;
 
 	if (!list || !key || list->content == NULL)
-		return (EXIT_SUCCESS);
+		return (EXITED);
 	node = list;
 	len = ft_strlen(key);
 	while (node != NULL)

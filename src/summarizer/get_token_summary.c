@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 20:16:23 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/09/29 19:14:14 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/13 13:19:50 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,15 +49,15 @@ t_list	*ft_get_token_summary(t_part *tokenlist, t_list *unique_token_list)
 	t_list	*summary;
 	t_list	*node;
 
+	summary = NULL;
 	if (!unique_token_list)
 		return (NULL);
 	node = unique_token_list;
-	summary = NULL;
 	while (node != NULL)
 	{
 		ft_add_to_summary(
 			&summary,
-			ft_count_token(tokenlist, (t_token)node->content)
+			ft_count_token(tokenlist, (uintptr_t)(void *)node->content)
 			);
 		node = node->next;
 	}

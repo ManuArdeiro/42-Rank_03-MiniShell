@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 16:44:36 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/14 19:14:26 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/14 20:39:31 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ static void	ft_initiate_childprocess(
 	int	count;
 
 	count = 0;
+	if (filecount == 0)
+		filecount = 1;
 	*pid = malloc(sizeof(pid_t) * filecount);
 	if (!*pid)
 		return ;
@@ -72,6 +74,8 @@ static void	ft_waitprocess(pid_t *pid, int pidcount)
 	int	status;
 
 	status = EXIT_SUCCESS;
+	if (pidcount == 0)
+		pidcount = 1;
 	count = 0;
 	while (count < pidcount)
 	{

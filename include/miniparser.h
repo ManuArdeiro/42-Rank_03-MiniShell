@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 20:07:17 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/13 20:48:56 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/14 19:01:58 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,10 @@ void		ft_printcommand(t_command *command);
 
 
 //Parse Tree
+int			ft_filelist_size(t_file *filelist);
+void		ft_printnode(t_mininode *mininode);
+void		ft_free_mininode(void *content);
+t_bool		ft_is_emptynode(t_minitree *root);
 t_minitree	*ft_parse_commandline(const char *commandline);
 t_mininode	*ft_create_mininode(void *content, t_nodetype type);
 t_minitree	*ft_tokensplit(t_part *tokenlist, t_token token);
@@ -52,5 +56,5 @@ t_bool		ft_is_semicolon(t_token token);
 
 //CONVERT FUNCTIONS
 char		**ft_lstconvert_strarr(t_list *list);
-t_file		*ft_lstconvert_filearr(t_list *list);
+t_file		*ft_lstconvert_filearr(t_list *list, int std_stream);
 #endif		/*Mini Parser*/

@@ -6,13 +6,13 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 12:41:11 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/13 17:49:42 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/14 14:40:08 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	ft_printnode(t_mininode *mininode)
+void	ft_printnode(t_mininode *mininode)
 {
 	if (mininode == NULL)
 		return ;

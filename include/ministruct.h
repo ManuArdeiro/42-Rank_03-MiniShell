@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:10:53 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/13 17:36:40 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/14 15:17:22 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,23 @@
 typedef struct s_dict			t_dict;
 typedef struct s_command		t_command;
 typedef struct s_file			t_file;
+typedef enum e_bool				t_bool;
 typedef enum e_token			t_token;
 typedef enum e_nodetype			t_nodetype;
 typedef struct s_summarizer		t_summarizer;
 typedef struct s_part			t_part;
 typedef struct s_mininode		t_mininode;
+typedef enum e_casttype			t_casttype;
 
-typedef enum s_bool
+enum e_casttype
+{
+	TYPE_STRING,
+	TYPE_FILE,
+	TYPE_COMMAND,
+	TYPE_LIST
+};
+
+enum e_bool
 {
 	EXITED = -1,
 	FALSE,
@@ -38,7 +48,7 @@ typedef enum s_bool
 	RIGHT,
 	NEXT_NODE,
 	CURRENT_NODE
-}			t_bool;
+};
 
 struct s_dict
 {

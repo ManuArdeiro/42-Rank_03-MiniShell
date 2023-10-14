@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 18:03:52 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/11 11:55:50 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/14 17:05:02 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int	ft_openfile(char *filename, int mode)
 	int	file_descriptor;
 
 	file_descriptor = -1;
+	if (filename == NULL)
+		return (file_descriptor);
 	if (mode == O_RDONLY)
 		file_descriptor = open(filename, mode);
 	else if (mode == O_RDWR)
@@ -28,12 +30,16 @@ int	ft_openfile(char *filename, int mode)
 
 void	ft_closefile(int *file_descriptor)
 {
+	if (file_descriptor < 0)
+		return ;
 	if (close(*file_descriptor) < 0)
 		ft_printerror(__func__, "close");
 }
 
 void	ft_duplicate_descriptors(int *input, int *output)
 {
+	if (*input < 0 || *output < 0)
+		return ;
 	if (*input != STDIN_FILENO)
 		if (dup2(*input, STDIN_FILENO) < 0)
 			ft_printerror(NULL, "Dup IN failed");

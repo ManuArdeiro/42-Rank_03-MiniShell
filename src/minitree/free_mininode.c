@@ -1,24 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   miniexecuter.h                                     :+:      :+:    :+:   */
+/*   free_mininode.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/01 18:11:58 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/14 17:08:22 by yzaytoun         ###   ########.fr       */
+/*   Created: 2023/10/14 14:34:11 by yzaytoun          #+#    #+#             */
+/*   Updated: 2023/10/14 14:36:40 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIEXECUTER_H
-# define MINIEXECUTER_H
+#include "minishell.h"
 
-# include "ministruct.h"
+void	ft_free_mininode(void *content)
+{
+	t_mininode	*mininode;
 
-int		ft_openfile(char *filename, int mode);
-void	ft_executecommand(t_command *command, char **envp);
-void	ft_duplicate_descriptors(int *input, int *output);
-void	ft_closefile(int *file_descriptor);
-void	ft_execute_commandline(t_minitree *root, t_list *envlist);
-
-#endif
+	if (content == NULL)
+		return ;
+	mininode = (void *)content;
+	if (mininode->content != NULL)
+		free(mininode->content);
+	free(mininode);
+}

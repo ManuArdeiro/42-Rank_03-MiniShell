@@ -6,25 +6,40 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 12:40:08 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/13 20:34:41 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/14 18:29:13 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*static void	ft_navigate_and_execute(t_minitree *root, t_list *envlist)
+static void	ft_checkexecute(t_mininode *mininode, char **envp)
 {
-	ft_navigate_and_execute(root->leftchild);
-	ft_executecommand(root);
-	ft_navigate_and_execute(root->rightchild);
+	if (mininode == NULL)
+		return ;
+	ft_printnode(mininode);
+	if (mininode->type == n_command)
+		ft_executecommand((t_command *)mininode->content, envp);
 }
-
-t_bool	ft_execute_commandline(t_minitree *root, t_list *envlist)
+/*
+static void	ft_navigate_and_execute(t_minitree *root, char **envp)
 {
-	if (is_valid_parsetree(root) == FALSE)
-		return (EXISTED);
 	if (root == NULL)
 		return ;
-	ft_navigate_and_execute(root);
+	if (ft_is_emptynode(root->leftchild) == FALSE)
+		ft_navigate_and_execute(root->leftchild, envp);
+	ft_checkexecute(root, envp);
+	if (ft_is_emptynode(root->rightchild) == FALSE)
+		ft_navigate_and_execute(root->rightchild, envp);
 }
 */
+
+void	ft_execute_commandline(t_minitree *root, t_list *envlist)
+{
+	char	**envp;
+
+	if (root == NULL)
+		return ;
+	envp = ft_lstconvert_strarr(envlist);
+	ft_checkexecute((t_mininode *)root->content, envp);
+	//ft_navigate_and_execute(root, envp);
+}

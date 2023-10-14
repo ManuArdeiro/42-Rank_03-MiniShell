@@ -1,24 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   miniexecuter.h                                     :+:      :+:    :+:   */
+/*   filelist_size.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/01 18:11:58 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/14 17:08:22 by yzaytoun         ###   ########.fr       */
+/*   Created: 2023/10/14 18:58:09 by yzaytoun          #+#    #+#             */
+/*   Updated: 2023/10/14 19:01:25 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIEXECUTER_H
-# define MINIEXECUTER_H
+#include "minishell.h"
 
-# include "ministruct.h"
+int	ft_filelist_size(t_file *filelist)
+{
+	int	len;
 
-int		ft_openfile(char *filename, int mode);
-void	ft_executecommand(t_command *command, char **envp);
-void	ft_duplicate_descriptors(int *input, int *output);
-void	ft_closefile(int *file_descriptor);
-void	ft_execute_commandline(t_minitree *root, t_list *envlist);
-
-#endif
+	len = 0;
+	if (filelist == NULL)
+		return (len);
+	while (filelist[len].name != NULL)
+		++len;
+	return (len);
+}

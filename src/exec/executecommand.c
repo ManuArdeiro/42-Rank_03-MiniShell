@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 16:44:36 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/13 20:32:14 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/14 19:14:26 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,38 +21,75 @@ int	ft_eval_processstatus(int status)
 	{
 		exitstatus = WEXITSTATUS(status);
 		if (exitstatus != EXIT_SUCCESS)
-			return (exitstatus);
+		{
+			printf("Process Exited with status -> %d \n", exitstatus);
+		}
 	}
 	return (EXIT_SUCCESS);
 }
 
-static void	ft_childprocess(t_command *command, char **envp)
+static void	ft_execute(
+	t_command *command, t_file infile, t_file outfile, char **envp)
 {
-	command->infile[0].fd = ft_openfile(command->infile[0].name, O_RDONLY);
-	command->outfile[0].fd = ft_openfile(command->outfile[0].name, O_RDWR);
-	ft_duplicate_descriptors(&command->infile[0].fd, &command->outfile[0].fd);
-	ft_closefile(&command->infile[0].fd);
-	ft_closefile(&command->outfile[0].fd);
+	if (infile.name != NULL)
+		infile.fd = ft_openfile(infile.name, O_RDONLY);
+	if (outfile.name != NULL)
+		outfile.fd = ft_openfile(outfile.name, O_RDWR);
+	ft_duplicate_descriptors(&infile.fd, &outfile.fd);
+	ft_closefile(&infile.fd);
+	ft_closefile(&outfile.fd);
 	if (execve(command->name, command->args, envp) < 0)
 	{
 		ft_printerror(NULL, "No such file or directory");
 		exit(127);
+	}	
+}
+
+static void	ft_initiate_childprocess(
+		t_command *command, char **envp, int filecount, pid_t **pid)
+{
+	int	count;
+
+	count = 0;
+	*pid = malloc(sizeof(pid_t) * filecount);
+	if (!*pid)
+		return ;
+	while (count < filecount)
+	{
+		(*pid)[count] = fork();
+		if ((*pid)[count] == 0)
+			ft_execute(
+				command, command->infile[0], command->outfile[count], envp);
+		else if ((*pid)[count] < 0)
+			ft_printerror(NULL, "Fork");
+		++count;
 	}
 }
 
-int	ft_executecommand(t_command *command, char **envp)
+static void	ft_waitprocess(pid_t *pid, int pidcount)
 {
-	pid_t	pid;
-	int		status;
+	int	count;
+	int	status;
+
+	status = EXIT_SUCCESS;
+	count = 0;
+	while (count < pidcount)
+	{
+		if (waitpid(pid[count], &status, EXIT_SUCCESS) < 0)
+			ft_eval_processstatus(status);
+		++count;
+	}
+}
+
+void	ft_executecommand(t_command *command, char **envp)
+{
+	pid_t	*pidarray;
+	int		filecount;
 
 	if (command == NULL)
-		return (0);
-	pid = fork();
-	if (pid == 0)
-		ft_childprocess(command, envp);
-	else if (pid < 0)
-		ft_printerror(__func__, "Fork");
-	if (waitpid(pid, &status, EXIT_SUCCESS) < 0)
-		ft_printerror(__func__, "wait");
-	return (ft_eval_processstatus(status));
+		return ;
+	ft_printcommand(command);
+	filecount = ft_filelist_size(command->outfile);
+	ft_initiate_childprocess(command, envp, filecount, &pidarray);
+	ft_waitprocess(pidarray, filecount);
 }

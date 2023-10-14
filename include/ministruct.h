@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ministruct.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:10:53 by yzaytoun          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/10/04 10:48:45 by yzaytoun         ###   ########.fr       */
-=======
-/*   Updated: 2023/10/07 16:58:29 by jolopez-         ###   ########.fr       */
->>>>>>> comments
+/*   Updated: 2023/10/14 19:22:30 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +78,7 @@ struct s_command
 typedef struct s_part
 {
 	int				index;
-	int				token;
+	t_token			token;
 	int				start;
 	int				end;
 	t_bool			used;

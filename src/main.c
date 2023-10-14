@@ -3,22 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:55:53 by jolopez-          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/10/04 17:18:56 by yzaytoun         ###   ########.fr       */
-=======
-/*   Updated: 2023/10/08 02:00:13 by jolopez-         ###   ########.fr       */
->>>>>>> comments
+/*   Updated: 2023/10/14 19:24:47 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-<<<<<<< HEAD
-=======
-void ft_print_token(t_token print)
+void ft_print_tokens(t_token print)
 {
 	if (print == tk_lprnths)
 		printf("valor = %s\n", "tk_lprnths");
@@ -62,7 +56,6 @@ void ft_print_token(t_token print)
 	file called ./minishell_history in the HOME directory and clean the
 	line in the global structure.	*/
 	
->>>>>>> comments
 static void	ft_register_and_clean(t_list **history, t_global **global)
 {
 	if ((*global)->line && (*global)->line[0] != 32)
@@ -105,13 +98,13 @@ static int	ft_loop(t_global *global)
 			while (print)
 			{
 				printf("token %d = %d\t", print->index, print->token);
-				ft_print_token(print->token);
+				ft_print_tokens(print->token);
 				print = print->next;
 			}
 		//parser
 		ft_register_and_clean(&history, &global);
 	}
-	rl_clear_history();
+	//rl_clear_history();
 	ft_write_command_history(&history, global);
 	ft_lstclear(&history, ft_free_string);
 	return (EXIT_SUCCESS);

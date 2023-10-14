@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniparser.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 20:07:17 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/04 11:08:18 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/14 19:21:26 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ char		*ft_extract_tokenstring(char *line, t_part *node);
 t_command	*ft_createcommand(
 				char *name, t_list *arglist, t_list *infile, t_list *outfile);
 t_part		*ft_get_tokennode(t_part *tokenlist, t_token token);
-t_minitree	*ft_create_commandtree(char *commandline, t_part *tokenlist,
-				t_summarizer *command_summary);
+//t_minitree	*ft_create_commandtree(char *commandline, t_part *tokenlist,
+//				t_summarizer *command_summary);
 void		ft_printcommand(t_command *command);
 
 t_bool		ft_isseparator(t_token token);

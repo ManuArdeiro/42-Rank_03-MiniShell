@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:47:53 by jolopez-          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/10/03 11:19:05 by yzaytoun         ###   ########.fr       */
-=======
-/*   Updated: 2023/10/09 21:30:08 by jolopez-         ###   ########.fr       */
->>>>>>> comments
+/*   Updated: 2023/10/14 19:20:59 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +26,7 @@
 # include <readline/history.h>
 # include <signal.h>
 # include "ministruct.h"
-# include "minitree.h"
 # include "miniparser.h"
-# include "miniexecuter.h"
 
 typedef struct s_global
 {

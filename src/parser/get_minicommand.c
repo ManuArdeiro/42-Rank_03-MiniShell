@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 11:05:21 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/14 12:56:52 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/14 21:14:30 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ static t_command	*ft_createcommand(
 	command->args = ft_lstconvert_strarr(arglist);
 	command->infile = ft_lstconvert_filearr(infile, STDIN_FILENO);
 	command->outfile = ft_lstconvert_filearr(outfile, STDOUT_FILENO);
-	free(name);
 	ft_lstclear(&arglist, free);
 	ft_lstclear(&infile, free);
 	ft_lstclear(&outfile, free);

@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 14:50:43 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/13 20:04:10 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/14 21:03:02 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,7 @@ char	*ft_extract_tokenstring(const char *commandline, t_part *node)
 	if (node == NULL || commandline == NULL)
 		return (NULL);
 	value = NULL;
-	if (node->used != TRUE)
-	{
-		node->used = TRUE;
-		value = ft_substr(commandline, node->start, node->end);
-		return (value);
-	}
+	value = ft_substr(commandline, node->start, node->end);
 	return (value);
 }
 

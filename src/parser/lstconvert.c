@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 15:51:54 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/14 20:29:43 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/14 21:11:13 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,12 @@ char	**ft_lstconvert_strarr(t_list *list)
 	int		i;
 
 	if (list == NULL)
-		return (NULL);
+	{
+		stringarray = malloc(sizeof(char *) * 2);
+		stringarray[0] = "";
+		stringarray[1] = NULL;
+		return (stringarray);
+	}
 	node = list;
 	stringarray = malloc(sizeof(char *) * (ft_lstsize(list) + 1));
 	if (!stringarray)

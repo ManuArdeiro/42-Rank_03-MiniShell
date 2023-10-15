@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 12:24:07 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/13 20:31:08 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/15 18:00:14 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ static void	ft_parse_tokenlist(
 			commandline);
 	}
 }
-
 
 static t_minitree	*ft_generate_parsetree(
 		const char *commandline, t_part *tokenlist)

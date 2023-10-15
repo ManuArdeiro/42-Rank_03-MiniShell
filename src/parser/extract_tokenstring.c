@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 14:50:43 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/14 21:03:02 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/15 17:40:39 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ char	*ft_extract_tokenstring(const char *commandline, t_part *node)
 	return (value);
 }
 
-t_list	*ft_extract_stringlist(
-		const char *commandline, t_part *tokenlist, t_token token)
+t_list	*ft_extract_argumentlist(const char *commandline, t_part *tokenlist)
 {
 	t_part	*node;
+	t_part	*prev_node;
 	t_list	*stringlist;
 	char	*string;
 
@@ -34,13 +34,16 @@ t_list	*ft_extract_stringlist(
 	if (!commandline || !tokenlist)
 		return (NULL);
 	node = tokenlist;
+	prev_node = NULL;
 	while (node != NULL && ft_isseparator(node->token) == FALSE)
 	{
-		if (node->token == token)
+		if (node->token == tk_arg
+			&& ft_is_redirection(prev_node->token) == FALSE)
 		{
 			string = ft_extract_tokenstring(commandline, node);
 			ft_lstinsert(&stringlist, (char *)string, BACK);
 		}
+		prev_node = node;
 		node = node->next;
 	}
 	return (stringlist);

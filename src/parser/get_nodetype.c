@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 15:23:19 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/13 14:50:56 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/15 18:19:35 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ t_nodetype	ft_get_nodetype(t_part *tokenlist)
 
 	token_summary = NULL;
 	token_summary = ft_summarize(tokenlist);
-	ft_printsummary(token_summary);
+	//ft_printsummary(token_summary);
 	nodetype = ft_find_listtype(token_summary);
 	ft_lstclear_nodes(&token_summary);
 	return (nodetype);

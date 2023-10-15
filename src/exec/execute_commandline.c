@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 12:40:08 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/14 18:29:13 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/15 17:59:02 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ static void	ft_checkexecute(t_mininode *mininode, char **envp)
 {
 	if (mininode == NULL)
 		return ;
-	ft_printnode(mininode);
 	if (mininode->type == n_command)
 		ft_executecommand((t_command *)mininode->content, envp);
 }

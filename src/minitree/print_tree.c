@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 12:41:11 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/14 14:40:08 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/15 18:20:04 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,18 @@ void	ft_printnode(t_mininode *mininode)
 	printf("\n");
 }
 
-void	ft_printtree(t_minitree *root)
+static void	ft_printtree_recursive(t_minitree *root)
 {
 	if (root == NULL)
 		return ;
-	ft_printtree(root->leftchild);
+	ft_printtree_recursive(root->leftchild);
 	ft_printnode((t_mininode *)root->content);
-	ft_printtree(root->rightchild);
+	ft_printtree_recursive(root->rightchild);
+}
+
+void	ft_printtree(t_minitree *root)
+{
+	printf("********** ParseTree ************\n\n");
+	ft_printtree_recursive(root);
+	printf("--------------------------------\n");
 }

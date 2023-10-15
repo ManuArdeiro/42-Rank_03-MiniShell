@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 20:07:17 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/14 20:46:59 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/15 17:39:06 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void		ft_printcommand(t_command *command);
 
 
 //Parse Tree
+t_bool		ft_is_redirection(t_token token);
 int			ft_filelist_size(t_file *filelist);
 void		ft_printnode(t_mininode *mininode);
 void		ft_free_mininode(void *content);
@@ -38,8 +39,8 @@ t_mininode	*ft_create_mininode(void *content, t_nodetype type);
 t_minitree	*ft_tokensplit(t_part *tokenlist, t_token token);
 
 char		*ft_extract_tokenstring(const char *commandline, t_part *node);
-t_list		*ft_extract_stringlist(
-				const char *commandline, t_part *tokenlist, t_token token);
+t_list		*ft_extract_argumentlist(
+				const char *commandline, t_part *tokenlist);
 t_list		*ft_extract_filelist(
 				const char *commandline,
 				t_part *tokenlist, t_bool filedirection);

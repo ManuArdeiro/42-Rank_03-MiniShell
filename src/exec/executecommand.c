@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 16:44:36 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/14 20:39:31 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/15 16:44:12 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	ft_eval_processstatus(int status)
 	}
 	return (EXIT_SUCCESS);
 }
-
+/*
 static void	ft_execute(
 	t_command *command, t_file infile, t_file outfile, char **envp)
 {
@@ -84,16 +84,18 @@ static void	ft_waitprocess(pid_t *pid, int pidcount)
 		++count;
 	}
 }
-
+*/
 void	ft_executecommand(t_command *command, char **envp)
 {
-	pid_t	*pidarray;
-	int		filecount;
+	//pid_t	*pidarray;
+	//int		filecount;
 
+	(void)envp;
+	//pidarray = NULL;
 	if (command == NULL)
 		return ;
 	ft_printcommand(command);
-	filecount = ft_filelist_size(command->outfile);
-	ft_initiate_childprocess(command, envp, filecount, &pidarray);
-	ft_waitprocess(pidarray, filecount);
+	//filecount = ft_filelist_size(command->outfile);
+	//ft_initiate_childprocess(command, envp, filecount, &pidarray);
+	//ft_waitprocess(pidarray, filecount);
 }

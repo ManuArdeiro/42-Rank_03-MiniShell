@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 16:02:47 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/14 15:56:05 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/15 18:09:19 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,14 @@ void	ft_printcommand(t_command *command)
 	count = 0;
 	if (command == NULL)
 		return ;
-	printf("name = %s\n", command->name);
+	printf("****** Command ********\n\n"
+		"name = %s\n", command->name);
 	ft_printarray(command->args, TYPE_STRING);
+	printf("-----------------------------\n"
+		"****** Input files ********\n\n");
 	ft_printarray(command->infile, TYPE_FILE);
+	printf("-----------------------------\n"
+		"****** output files ********\n\n");
 	ft_printarray(command->outfile, TYPE_FILE);
+	printf("-----------------------------\n");
 }

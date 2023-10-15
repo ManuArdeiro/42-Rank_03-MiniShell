@@ -71,8 +71,4 @@ void		ft_add_to_dict(t_list **envlist, char *key, char *value);
 
 //AUX
 void		ft_free_string(void *content);
-
-//PARSER
-t_command	*ft_parse_line(t_token *tokens_array, int token_count);
-
 #endif

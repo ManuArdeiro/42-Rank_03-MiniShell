@@ -12,19 +12,36 @@
 
 #include "minishell.h"
 
+//FIXME - Don´t split pipeline
 static void	ft_evaluate_relation(t_minitree *root, char **envp)
 {
-	int	status;
-
+	int			status;
+	t_nodetype	nodetype;
+	
 	status = EXIT_SUCCESS;
-	if (ft_is_compoundcommand(((t_mininode *)root->content)->type) == TRUE)
+	nodetype = ((t_mininode *)root->content)->type;
+	if (nodetype == n_and_or)
 	{
-		if (status == EXIT_FAILURE)
-			//execute next
-		//evalute
+		if (/*OR*/)
+		{
+			status = ft_executecommand(
+				(t_command *)((t_mininode *)root->leftchild->content)->content, envp);
+			if (status == EXIT_FAILURE)
+				status = ft_executecommand(
+					(t_command *)((t_mininode *)root->rightchild->content)->content, envp);
+		}
+		else
+		{
+			status = ft_executecommand(
+				(t_command *)((t_mininode *)root->leftchild->content)->content, envp);
+			status = ft_executecommand(
+				(t_command *)((t_mininode *)root->rightchild->content)->content, envp);
+		}
 	}
-	else if (((t_mininode *)root->content)->type) == n_command)
-		status = ft_executecommand(
+	else if (nodetype == n_pipeline)
+		/*Pipeline function*/
+	else if (nodetype == n_command)
+		ft_executecommand(
 			(t_command *)((t_mininode *)root->content)->content, envp);
 }
 

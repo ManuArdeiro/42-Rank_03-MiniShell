@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   miniexecuter.h                                     :+:      :+:    :+:   */
+/*   is_compoundcommand.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/01 18:11:58 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/15 18:59:09 by yzaytoun         ###   ########.fr       */
+/*   Created: 2023/10/15 18:34:00 by yzaytoun          #+#    #+#             */
+/*   Updated: 2023/10/15 18:36:37 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIEXECUTER_H
-# define MINIEXECUTER_H
+#include "minishell.h"
 
-# include "libft/libft.h"
-# include "ministruct.h"
-
-int		ft_openfile(char *filename, int mode);
-t_bool	ft_executecommand(t_command *command, char **envp);
-void	ft_duplicate_descriptors(int *input, int *output);
-void	ft_closefile(int *file_descriptor);
-void	ft_execute_commandline(t_minitree *root, t_list *envlist);
-
-#endif
+t_bool	ft_is_compoundcommand(t_nodetype nodetype)
+{
+	if (nodetype != n_command)
+		return (TRUE);
+	return (FALSE);
+}

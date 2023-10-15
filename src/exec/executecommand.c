@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 16:44:36 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/15 16:44:12 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/15 19:05:07 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,12 @@ int	ft_eval_processstatus(int status)
 		if (exitstatus != EXIT_SUCCESS)
 		{
 			printf("Process Exited with status -> %d \n", exitstatus);
+			return (EXIT_FAILURE);
 		}
 	}
 	return (EXIT_SUCCESS);
 }
-/*
+
 static void	ft_execute(
 	t_command *command, t_file infile, t_file outfile, char **envp)
 {
@@ -68,34 +69,39 @@ static void	ft_initiate_childprocess(
 	}
 }
 
-static void	ft_waitprocess(pid_t *pid, int pidcount)
+static int	ft_waitprocess(pid_t *pid, int pidcount)
 {
 	int	count;
 	int	status;
-
+	int	laststatus;
+	
 	status = EXIT_SUCCESS;
+	laststatus = EXIT_SUCCESS;
 	if (pidcount == 0)
 		pidcount = 1;
 	count = 0;
 	while (count < pidcount)
 	{
 		if (waitpid(pid[count], &status, EXIT_SUCCESS) < 0)
-			ft_eval_processstatus(status);
+			laststatus = ft_eval_processstatus(status);
 		++count;
 	}
+	return (laststatus);
 }
-*/
-void	ft_executecommand(t_command *command, char **envp)
-{
-	//pid_t	*pidarray;
-	//int		filecount;
 
-	(void)envp;
-	//pidarray = NULL;
+t_bool	ft_executecommand(t_command *command, char **envp)
+{
+	pid_t	*pidarray;
+	int		filecount;
+	int		laststatus;
+
+	laststatus = EXIT_SUCCESS;
+	pidarray = NULL;
 	if (command == NULL)
 		return ;
 	ft_printcommand(command);
-	//filecount = ft_filelist_size(command->outfile);
-	//ft_initiate_childprocess(command, envp, filecount, &pidarray);
-	//ft_waitprocess(pidarray, filecount);
+	filecount = ft_filelist_size(command->outfile);
+	ft_initiate_childprocess(command, envp, filecount, &pidarray);
+	laststatus = ft_waitprocess(pidarray, filecount);
+	return (laststatus);
 }

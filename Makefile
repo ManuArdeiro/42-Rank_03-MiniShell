@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+         #
+#    By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/01 18:51:45 by jolopez-          #+#    #+#              #
-#    Updated: 2023/10/15 17:36:42 by yzaytoun         ###   ########.fr        #
+#    Updated: 2023/10/16 18:10:07 by jolopez-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,10 +43,10 @@ BANNER = 	$(info $(WHITE_BAN))\
 USER			= $(shell whoami)
 INCLUDE 		= -Iinclude/
 INC_LIB 		= -Iinclude/libft
-INC_READLINE	= -I/Users/$(USER)/.brew/opt/readline/include
-READLINE_LIB	= -L/Users/$(USER)/.brew/opt/readline/lib
-#INC_READLINE	="-L/usr/local/opt/readline/lib"
-#READLINE_LIB	="-I/usr/local/opt/readline/include"
+#INC_READLINE	= -I/Users/$(USER)/.brew/opt/readline/include
+#READLINE_LIB	= -L/Users/$(USER)/.brew/opt/readline/lib
+INC_READLINE	="-L/usr/local/opt/readline/lib"
+READLINE_LIB	="-I/usr/local/opt/readline/include"
 SANITIZER		= -g3 -fsanitize=address -g
 
 READLINE_FLAGS	= -lreadline

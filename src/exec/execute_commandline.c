@@ -6,40 +6,32 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 12:40:08 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/15 19:13:39 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/16 19:50:23 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-//FIXME - Don´t split pipeline
 static void	ft_evaluate_relation(t_minitree *root, char **envp)
 {
 	int			status;
 	t_nodetype	nodetype;
-	
+
 	status = EXIT_SUCCESS;
 	nodetype = ((t_mininode *)root->content)->type;
-	if (nodetype == n_and_or)
+	if (nodetype == n_and)
 	{
-		if (/*OR*/)
-		{
-			status = ft_executecommand(
-				(t_command *)((t_mininode *)root->leftchild->content)->content, envp);
-			if (status == EXIT_FAILURE)
-				status = ft_executecommand(
-					(t_command *)((t_mininode *)root->rightchild->content)->content, envp);
-		}
-		else
-		{
-			status = ft_executecommand(
-				(t_command *)((t_mininode *)root->leftchild->content)->content, envp);
-			status = ft_executecommand(
-				(t_command *)((t_mininode *)root->rightchild->content)->content, envp);
-		}
+		ft_goto_childnode(root, envp, LEFT);
+		ft_goto_childnode(root, envp, RIGHT);
+	}
+	else if (nodetype == n_or)
+	{
+		status = ft_goto_childnode(root, envp, LEFT);
+		if (status == EXIT_FAILURE)
+			status = ft_goto_childnode(root, envp, RIGHT);
 	}
 	else if (nodetype == n_pipeline)
-		/*Pipeline function*/
+		ft_execute_pipline((t_mininode *)root->content, envp);
 	else if (nodetype == n_command)
 		ft_executecommand(
 			(t_command *)((t_mininode *)root->content)->content, envp);

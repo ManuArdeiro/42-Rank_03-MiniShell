@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 16:44:36 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/15 19:05:07 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/16 19:19:30 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ static int	ft_waitprocess(pid_t *pid, int pidcount)
 	int	count;
 	int	status;
 	int	laststatus;
-	
+
 	status = EXIT_SUCCESS;
 	laststatus = EXIT_SUCCESS;
 	if (pidcount == 0)
@@ -100,6 +100,8 @@ t_bool	ft_executecommand(t_command *command, char **envp)
 	if (command == NULL)
 		return ;
 	ft_printcommand(command);
+	if (/*is builtin command*/)
+		/*builtin function*/
 	filecount = ft_filelist_size(command->outfile);
 	ft_initiate_childprocess(command, envp, filecount, &pidarray);
 	laststatus = ft_waitprocess(pidarray, filecount);

@@ -6,7 +6,7 @@
 #    By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/01 18:51:45 by jolopez-          #+#    #+#              #
-#    Updated: 2023/10/15 18:34:37 by yzaytoun         ###   ########.fr        #
+#    Updated: 2023/10/16 19:47:28 by yzaytoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,10 +43,10 @@ BANNER = 	$(info $(WHITE_BAN))\
 USER			= $(shell whoami)
 INCLUDE 		= -Iinclude/
 INC_LIB 		= -Iinclude/libft
-#INC_READLINE	= -I/Users/$(USER)/.brew/opt/readline/include
-#READLINE_LIB	= -L/Users/$(USER)/.brew/opt/readline/lib
-INC_READLINE	="-L/usr/local/opt/readline/lib"
-READLINE_LIB	="-I/usr/local/opt/readline/include"
+INC_READLINE	= -I/Users/$(USER)/.brew/opt/readline/include
+READLINE_LIB	= -L/Users/$(USER)/.brew/opt/readline/lib
+#INC_READLINE	="-L/usr/local/opt/readline/lib"
+#READLINE_LIB	="-I/usr/local/opt/readline/include"
 SANITIZER		= -g3 -fsanitize=address -g
 
 READLINE_FLAGS	= -lreadline
@@ -72,7 +72,8 @@ SUMMARIZER		= minisummary.c printtokens.c get_unique_tokens.c \
 TREE 			= minitree.c treetraversal.c is_emptynode.c create_mininode.c \
 				print_tree.c
 					
-EXEC			= executecommand.c openfile.c execute_commandline.c
+EXEC			= executecommand.c openfile.c execute_commandline.c \
+				goto_childnode.c execute_pipeline.c
 
 SRC 			= $(ENV) $(UTILS) $(SUMMARIZER) $(LEXER) \
 					$(CMD) $(PARSER) $(TREE) $(EXEC) main.c

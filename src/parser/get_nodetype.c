@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 15:23:19 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/15 18:24:42 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/16 19:27:11 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,10 @@ static t_nodetype	ft_find_listtype(t_list *token_summary)
 	node = token_summary;
 	while (node != NULL)
 	{
-		if (ft_evaluate_token(node, ft_is_logicalseparator) == TRUE)
-			return (n_and_or);
+		if (((t_summarizer *)node->content)->token == tk_and)
+			return (n_and);
+		else if (((t_summarizer *)node->content)->token == tk_or)
+			return (n_or);
 		else if (ft_evaluate_token(node, ft_is_subshellseparator) == TRUE)
 			return (n_subshell);
 		else if (ft_evaluate_token(node, ft_is_pipeseparator) == TRUE)

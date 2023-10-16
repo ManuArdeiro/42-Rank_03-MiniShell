@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:10:53 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/14 20:47:27 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/16 19:27:17 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,8 @@ struct s_summarizer
 
 enum e_nodetype
 {
-	n_and_or = 10,
+	n_and = 10,
+	n_or,
 	n_pipeline,
 	n_command,
 	n_commandlist,

@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 12:41:11 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/15 18:20:04 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/16 19:24:49 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,10 @@ void	ft_printnode(t_mininode *mininode)
 		printf("separator = ");
 	else
 		printf("nodetype = ");
-	if (mininode->type == n_and_or)
-		printf("n_and_or");
+	if (mininode->type == n_and)
+		printf("n_and");
+	else if (mininode->type == n_or)
+		printf("n_or");
 	else if (mininode->type == n_subshell)
 		printf("n_subshell");
 	else if (mininode->type == n_pipeline)

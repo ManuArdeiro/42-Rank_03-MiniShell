@@ -89,7 +89,7 @@ static int	ft_waitprocess(pid_t *pid, int pidcount)
 	return (laststatus);
 }
 
-t_bool	ft_executecommand(t_command *command, char **envp)
+t_bool	ft_executecommand(t_command *command, char **envp, t_list *envlist)
 {
 	pid_t	*pidarray;
 	int		filecount;
@@ -102,6 +102,8 @@ t_bool	ft_executecommand(t_command *command, char **envp)
 	ft_printcommand(command);
 	if (/*is builtin command*/)
 		/*builtin function*/
+	else
+		command->name = ft_add_pathprefix(command->name, envlist);
 	filecount = ft_filelist_size(command->outfile);
 	ft_initiate_childprocess(command, envp, filecount, &pidarray);
 	laststatus = ft_waitprocess(pidarray, filecount);

@@ -25,5 +25,6 @@ void	ft_execute_commandline(t_minitree *root, t_list *envlist);
 
 int		ft_goto_childnode(t_minitree *root, char **envp, t_bool childnode);
 int		ft_execute_pipeline(t_mininode *mininode, char **envp);
+char	*ft_add_pathprefix(char *commandname, t_list *envlist);
 
 #endif

@@ -1,32 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear_bonus.c                                :+:      :+:    :+:   */
+/*   free_mininode.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/03 15:23:16 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/10/14 21:06:51 by yzaytoun         ###   ########.fr       */
+/*   Created: 2023/10/14 14:34:11 by yzaytoun          #+#    #+#             */
+/*   Updated: 2023/10/14 14:36:40 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-void	ft_lstclear(t_list **lst, void (*del)(void *))
+void	ft_free_mininode(void *content)
 {
-	t_list	*point;
-	t_list	*next_p;
+	t_mininode	*mininode;
 
-	if (!lst || !del || (*lst) == NULL)
+	if (content == NULL)
 		return ;
-	point = (*lst);
-	next_p = point->next;
-	while (point != NULL)
-	{
-		next_p = point->next;
-		(*del)(point->content);
-		free(point);
-		point = next_p;
-	}
-	(*lst) = NULL;
+	mininode = (void *)content;
+	if (mininode->content != NULL)
+		free(mininode->content);
+	free(mininode);
 }

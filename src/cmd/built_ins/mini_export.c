@@ -6,11 +6,11 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 18:43:48 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/10/10 18:18:36 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/10/16 18:53:15 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "minishell.h"
 
 /*	This function manages the case where the arg is like "name=??"; the actions
 	are different depending on the ?? is some character or just '\0'.	*/
@@ -20,9 +20,9 @@ static void	ft_name_equal(t_list *envList, char **args, int *i)
 	int		j;
 	char	*name;
 	char	*value;
-	
+
 	j = 0;
-	while (args[*i][j] =! "=")
+	while (args[*i][j] != "=")
 	{
 		name = ft_strjoin(name, args[*i][j]);
 		j++;
@@ -50,7 +50,7 @@ static int	ft_print_not_found(char **args, int i)
 {
 	ft_putstr_fd("export: ", STDERR_FILENO);
 	ft_putstr_fd(args[i] + 1, STDERR_FILENO);
-	ft_putendl_fd(" not found.", STDERR_FILENO); 
+	ft_putendl_fd(" not found.", STDERR_FILENO);
 	return (EXIT_SUCCESS);
 }
 
@@ -77,11 +77,11 @@ int	ft_export(t_list *envList, char **args)
 	i = 0;
 	if (!args)
 		ft_printenv(envList);
-	while (args{i})
+	while (args[i])
 	{
 		if (ft_strncmp(args[i], "=", 2))
 		{
-			ft_putendl_fd("export: bad assigment.", STDERR_FILENO); 
+			ft_putendl_fd("export: bad assigment.", STDERR_FILENO);
 			return (EXIT_SUCCESS);
 		}
 		else if (ft_strchr(args[i], "=") != NULL && args[i][0] != "=")

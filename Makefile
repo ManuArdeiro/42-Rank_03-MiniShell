@@ -3,12 +3,13 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+         #
+#    By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/01 18:51:45 by jolopez-          #+#    #+#              #
-#    Updated: 2023/10/09 21:28:54 by jolopez-         ###   ########.fr        #
+#    Updated: 2023/10/16 18:58:14 by jolopez-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
 
 NAME 			=	minishell
 
@@ -21,6 +22,7 @@ vpath			%.c src/lexer
 vpath			%.c src/minitree
 vpath			%.c src/summarizer
 vpath			%.c src/exec
+vpath			%.c src/cmd/built_ins
 vpath 			%.o	obj
 
 WHITE_BAN        := $(shell tput -Txterm setaf 7)                                     
@@ -42,10 +44,10 @@ BANNER = 	$(info $(WHITE_BAN))\
 USER			= $(shell whoami)
 INCLUDE 		= -Iinclude/
 INC_LIB 		= -Iinclude/libft
-INC_READLINE	= -I/Users/$(USER)/.brew/opt/readline/include
-READLINE_LIB	= -L/Users/$(USER)/.brew/opt/readline/lib
-#INC_READLINE	="-L/usr/local/opt/readline/lib"
-#READLINE_LIB	="-I/usr/local/opt/readline/include"
+#INC_READLINE	= -I/Users/$(USER)/.brew/opt/readline/include
+#READLINE_LIB	= -L/Users/$(USER)/.brew/opt/readline/lib
+INC_READLINE	="-L/usr/local/opt/readline/lib"
+READLINE_LIB	="-I/usr/local/opt/readline/include"
 SANITIZER		= -g3 -fsanitize=address -g
 
 READLINE_FLAGS	= -lreadline
@@ -55,23 +57,29 @@ ENV				= ft_getenv.c ft_setenv.c ft_initenv.c ft_printenv.c ft_delenv.c
 
 UTILS			= print_msg.c mini_history.c get_path.c free_string.c \
 					mini_dictionary.c
-LEXER			= tokenizer.c tokens.c token_tools_1.c token_tools_2.c
 
-PARSER			= get_commandlist.c isseparator.c convertlist.c \
-					get_arglist.c extract_tokenstring.c extract_filelist.c \
-					get_tokennode.c lstconvert.c printcommand.c  \
-					generate_parsetree.c grammar.c isvalid_commandtree.c
+LEXER			= tokenizer.c tokens.c token_tools_1.c token_tools_2.c \
+					ft_copy_tokenlist.c ft_tokenlist_add.c print_tokens.c
+
+PARSER			= get_commandlist.c separators.c extract_tokenstring.c \
+					extract_filelist.c get_tokennode.c lstconvert.c printcommand.c \
+					tokensplit.c get_minicommand.c get_nodetype.c \
+					parse_commandline.c free_mininode.c filelist_size.c \
+					is_redirection.c
 
 SUMMARIZER		= minisummary.c printtokens.c get_unique_tokens.c \
 					get_token_summary.c get_token_count.c
 
-cmd				= cmd_tools.c mini_cd.c mini_echo.c mini_pwd.c
+CMD				= mini_cd.c mini_echo.c mini_env.c mini_exit.c mini_export.c mini_pwd.c \
+					mini_unset.c
+					
+TREE 			= minitree.c treetraversal.c is_emptynode.c create_mininode.c \
+				print_tree.c
+					
+EXEC			= executecommand.c openfile.c execute_commandline.c
 
-TREE 			= minitree.c treetraversal.c
-
-EXEC			= executor.c openfile.c
-
-SRC 			= $(ENV) $(UTILS) $(PARSER) $(TREE) $(SUMMARIZER) $(EXEC) $(LEXER) $(CMD) main.c 
+SRC 			= $(ENV) $(UTILS) $(SUMMARIZER) $(LEXER) \
+					$(CMD) $(PARSER) $(TREE) $(EXEC) main.c
 
 COMMANDS		= 	Pipex
 BUILTINS		= 	$(addprefix "src/cmd/", $(COMMANDS))

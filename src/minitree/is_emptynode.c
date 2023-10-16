@@ -1,32 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear_bonus.c                                :+:      :+:    :+:   */
+/*   is_emptynode.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/03 15:23:16 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/10/14 21:06:51 by yzaytoun         ###   ########.fr       */
+/*   Created: 2023/10/13 20:07:19 by yzaytoun          #+#    #+#             */
+/*   Updated: 2023/10/13 20:09:55 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-void	ft_lstclear(t_list **lst, void (*del)(void *))
+t_bool	ft_is_emptynode(t_minitree *root)
 {
-	t_list	*point;
-	t_list	*next_p;
-
-	if (!lst || !del || (*lst) == NULL)
-		return ;
-	point = (*lst);
-	next_p = point->next;
-	while (point != NULL)
-	{
-		next_p = point->next;
-		(*del)(point->content);
-		free(point);
-		point = next_p;
-	}
-	(*lst) = NULL;
+	if (root == NULL || (t_mininode *)root->content == NULL)
+		return (TRUE);
+	return (FALSE);
 }

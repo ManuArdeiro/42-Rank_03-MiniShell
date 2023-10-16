@@ -6,11 +6,11 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:05:20 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/09 16:48:23 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/10/14 19:56:12 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../../../include/minishell.h"
 
 /*	This function tries to change the cwd to the path dir passed as argument.
 	-	If it is not possible, an error message is sent to the standard error

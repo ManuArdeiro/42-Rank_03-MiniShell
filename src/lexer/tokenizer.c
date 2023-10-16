@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
+/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 17:51:52 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/10/05 11:43:45 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/10/14 20:48:01 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,22 @@
 
 static void	ft_cmd_vs_arg(t_part *tokens)
 {
-	int	flag;
+	int		flag;
+	t_part	*node;
 
 	flag = 0;
-	while (tokens)
+	node = tokens;
+	while (node)
 	{
-		if (tokens->token == tk_semi || tokens->token == tk_pipe)
+		if (node->token == tk_semi || node->token == tk_pipe
+			|| node->token == tk_or || node->token == tk_ampersand
+			|| node->token == tk_lprnths || node->token == tk_and)
 			flag = 0;
-		else if (tokens->token == tk_cmd && flag == 0)
+		else if (node->token == tk_cmd && flag == 0)
 			flag = 1;
-		else if (tokens->token == tk_cmd && flag == 1)
-			tokens->token = tk_arg;
-		tokens = tokens->next;
+		else if (node->token == tk_cmd && flag == 1)
+			node->token = tk_arg;
+		node = node->next;
 	}
 }
 
@@ -45,6 +49,7 @@ static void	ft_cmd_vs_arg(t_part *tokens)
 t_part	*ft_tokenizer(char *line, int *tk_count)
 {
 	t_part	*tokens;
+
 	tokens = ft_create_tkn_list();
 	if (!tokens)
 		return (tokens);

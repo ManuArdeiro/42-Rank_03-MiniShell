@@ -1,32 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_commandlist.c                                  :+:      :+:    :+:   */
+/*   print_tokens.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/30 12:35:44 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/10 11:27:02 by yzaytoun         ###   ########.fr       */
+/*   Created: 2023/10/11 12:11:26 by yzaytoun          #+#    #+#             */
+/*   Updated: 2023/10/13 20:26:17 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_part	*ft_get_commandlist(t_part *tokenlist, t_part *delimiter)
+void	ft_print_tokenlist(t_part *tokenlist)
 {
-	t_part		*node;
-	t_part		*commandlist;
-	t_part		*tokencopy;
+	t_part	*print;
+	int		count;
 
-	commandlist = NULL;
+	count = 1;
 	if (tokenlist == NULL)
-		return (NULL);
-	node = tokenlist;
-	while (node != delimiter)
+		return ;
+	print = tokenlist;
+	printf("**** Token list **** \n\n");
+	printf("index | token\n");
+	printf("-------------\n");
+	while (print)
 	{
-		tokencopy = ft_copytoken(node);
-		ft_tokenlist_add(&commandlist, tokencopy);
-		node = node->next;
+		//printf("token %d = %d\n", print->index, print->token);
+		printf("%d    |  ", count);
+		ft_print_token(print->token);
+		printf("\n");
+		print = print->next;
+		count++;
 	}
-	return (commandlist);
+	printf("------------------------\n");
 }

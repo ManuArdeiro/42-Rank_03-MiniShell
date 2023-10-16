@@ -1,32 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear_bonus.c                                :+:      :+:    :+:   */
+/*   is_redirection.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/03 15:23:16 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/10/14 21:06:51 by yzaytoun         ###   ########.fr       */
+/*   Created: 2023/10/15 17:36:17 by yzaytoun          #+#    #+#             */
+/*   Updated: 2023/10/15 17:38:36 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-void	ft_lstclear(t_list **lst, void (*del)(void *))
+t_bool	ft_is_redirection(t_token token)
 {
-	t_list	*point;
-	t_list	*next_p;
-
-	if (!lst || !del || (*lst) == NULL)
-		return ;
-	point = (*lst);
-	next_p = point->next;
-	while (point != NULL)
-	{
-		next_p = point->next;
-		(*del)(point->content);
-		free(point);
-		point = next_p;
-	}
-	(*lst) = NULL;
+	if (token == tk_less || token == tk_dblless || token == tk_grt
+		|| token == tk_dblgrt)
+		return (TRUE);
+	return (FALSE);
 }

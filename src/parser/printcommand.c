@@ -6,11 +6,49 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 16:02:47 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/01 16:08:13 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/15 18:09:19 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	ft_print_filearray(t_file *filearray)
+{
+	int	count;
+
+	count = 0;
+	if (filearray == NULL)
+		return ;
+	while (filearray[count].name != NULL)
+	{
+		printf("File[%d] -> %s\n", count, filearray[count].name);
+		count++;
+	}
+}
+
+static void	ft_printarray(void *array, t_casttype type)
+{
+	char	**strarray;
+	int		count;
+
+	if (array == NULL)
+	{
+		printf("%s\n", NULL);
+		return ;
+	}
+	count = 0;
+	if (type == TYPE_STRING)
+	{
+		strarray = (char **)array;
+		while (strarray[count] != NULL)
+		{
+			printf("argument[%d] -> %s\n", count, strarray[count]);
+			count++;
+		}
+	}
+	else if (type == TYPE_FILE)
+		ft_print_filearray((t_file *)array);
+}
 
 void	ft_printcommand(t_command *command)
 {
@@ -19,11 +57,14 @@ void	ft_printcommand(t_command *command)
 	count = 0;
 	if (command == NULL)
 		return ;
-	printf("name = %s\n", command->name);
-	while (command->args[count] != NULL)
-		printf("args %i = %s\n", count, command->args[count]);
-	while (command->infile[count].name != NULL)
-		printf("infile %i = %s\n", count, command->infile[count].name);
-	while (command->outfile[count].name != NULL)
-		printf("outfile %i = %s\n", count, command->outfile[count].name);
+	printf("****** Command ********\n\n"
+		"name = %s\n", command->name);
+	ft_printarray(command->args, TYPE_STRING);
+	printf("-----------------------------\n"
+		"****** Input files ********\n\n");
+	ft_printarray(command->infile, TYPE_FILE);
+	printf("-----------------------------\n"
+		"****** output files ********\n\n");
+	ft_printarray(command->outfile, TYPE_FILE);
+	printf("-----------------------------\n");
 }

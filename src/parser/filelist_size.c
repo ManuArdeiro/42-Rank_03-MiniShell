@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   isseparator.c                                      :+:      :+:    :+:   */
+/*   filelist_size.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/01 18:58:37 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/04 17:12:53 by yzaytoun         ###   ########.fr       */
+/*   Created: 2023/10/14 18:58:09 by yzaytoun          #+#    #+#             */
+/*   Updated: 2023/10/14 19:01:25 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_bool	ft_isseparator(t_token token)
+int	ft_filelist_size(t_file *filelist)
 {
-	if (token == tk_pipe || token == tk_and || token == tk_mul
-		|| token == tk_ampersand || token == tk_or)
-		return (TRUE);
-	return (FALSE);
-}
+	int	len;
 
-t_bool	ft_is_logicalseparator(t_token token)
-{
-	
+	len = 0;
+	if (filelist == NULL)
+		return (len);
+	while (filelist[len].name != NULL)
+		++len;
+	return (len);
 }

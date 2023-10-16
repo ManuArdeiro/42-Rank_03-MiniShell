@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_msg.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
+/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 18:53:59 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/10/07 00:15:58 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/10/14 20:48:45 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ void	ft_printerror(const char *function, const char *string)
 {
 	if (function != NULL)
 	{
-		ft_putstr_fd("Function -> ", STDERR_FILENO);
+		ft_putstr_fd("Function: ", STDERR_FILENO);
 		ft_putstr_fd(function, STDERR_FILENO);
-		ft_putstr_fd("Exited from -> ", STDERR_FILENO);
+		ft_putstr_fd("\n Exited from -> ", STDERR_FILENO);
 	}
 	ft_putstr_fd(string, STDERR_FILENO);
 	ft_putstr_fd("\n", STDERR_FILENO);

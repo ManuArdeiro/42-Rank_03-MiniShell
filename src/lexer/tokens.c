@@ -12,6 +12,20 @@
 
 #include "minishell.h"
 
+static void	ft_token_5(t_part *tokens, char *line, int *i)
+{
+	if (line[*i] == '\n')
+	{
+		ft_add_tkn(tokens, tk_newline, *i, *i + 1);
+		*i = *i + 1;
+	}
+	else if (line[*i] == '=')
+	{
+		ft_add_tkn(tokens, tk_equal, *i, *i + 1);
+		*i = *i + 1;
+	}
+}
+
 static void	ft_token_4(t_part *tokens, char *line, int *i)
 {
 	if (line[*i] == '&' && line[*i + 1] == '&')
@@ -34,6 +48,8 @@ static void	ft_token_4(t_part *tokens, char *line, int *i)
 		ft_add_tkn(tokens, tk_doll_exc, *i, *i + 2);
 		*i = *i + 2;
 	}
+	else
+		ft_token_5(tokens, line, i);
 }
 
 static void	ft_token_3(t_part *tokens, char *line, int *i)

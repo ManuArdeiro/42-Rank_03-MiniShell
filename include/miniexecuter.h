@@ -31,5 +31,6 @@ char	*ft_add_pathprefix(char *commandname, char *pathvariables);
 
 //Builtins
 t_bool	ft_isbuiltin(char *commandname);
+int		ft_execute_pipeline(t_mininode *mininode, char **envp);
 
 #endif

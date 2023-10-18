@@ -14,7 +14,20 @@
 
 int	ft_execute_pipeline(t_mininode *mininode, char **envp)
 {
+	int	fd[2];
+	int	count;
+
+	count = 0;
 	if (mininode == NULL)
 		return (EXITED);
-	
+	if (pipe(fd) < 0)
+		return (EXITED);
+	//ft_get_tokencount
+	while (count < pipcount)
+	{
+		pid = fork();
+		if (pid == 0)
+			//ft_execute....
+		count++;
+	}
 }

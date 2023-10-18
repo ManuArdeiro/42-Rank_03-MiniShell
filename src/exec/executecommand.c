@@ -46,6 +46,7 @@ static void	ft_execute(
 	}	
 }
 
+///NOTE - HAndles one infile
 static void	ft_initiate_childprocess(
 		t_command *command, char **envp, int filecount, pid_t **pid)
 {
@@ -102,14 +103,14 @@ t_bool	ft_executecommand(t_command *command, char **envp, t_global *global)
 		return ;
 	pathvariables = ft_getenv("PATH", global->envlist);
 	ft_printcommand(command);
-	if (ft_isbuiltin(command->name) == TRUE)
-		laststatus = ft_builtins(command->args, global->envlist, global);
-	else
-	{
+//	if (ft_isbuiltin(command->name) == TRUE)
+//		laststatus = ft_builtins(command->args, global->envlist, global);
+//	else
+//	{
 		command->name = ft_add_pathprefix(command->name, pathvariables);
 		filecount = ft_filelist_size(command->outfile);
 		ft_initiate_childprocess(command, envp, filecount, &pidarray);
 		laststatus = ft_waitprocess(pidarray, filecount);
-	}
-	return (laststatus);
+//	}
+//	return (laststatus);
 }

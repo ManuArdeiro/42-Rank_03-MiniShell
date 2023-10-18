@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 13:36:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/10/14 19:56:29 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/10/16 19:29:09 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	ft_mini_echo(char **args)
 	int		i;
 	t_bool	n_option;
 
-	i = 0;
+	i = 1;
 	n_option = FALSE;
 	while (args[i])
 	{

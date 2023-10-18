@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_tools_2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 18:30:15 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/10/14 20:47:53 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/18 16:25:53 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	ft_check_sgltoken(char *line, int *i, int *flag, int *tokens)
 		*tokens = *tokens + 1;
 		*flag = 1;
 	}
-	else if (*flag == 1)
+	else if (*flag != 0)
 	{
 		*tokens = *tokens + 1;
 		*flag = 0;
@@ -81,6 +81,7 @@ int	ft_count_tokens(char *line)
 		else
 			ft_check_dbltoken(line, &i, &flag, &tokens);
 	}
+	printf("número de tokens = %d\n", tokens);
 	return (tokens);
 }
 

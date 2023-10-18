@@ -6,7 +6,7 @@
 #    By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/01 18:51:45 by jolopez-          #+#    #+#              #
-#    Updated: 2023/10/16 18:58:14 by jolopez-         ###   ########.fr        #
+#    Updated: 2023/10/16 19:07:42 by jolopez-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ vpath			%.c src/minitree
 vpath			%.c src/summarizer
 vpath			%.c src/exec
 vpath			%.c src/cmd/built_ins
+vpath			%.c src/cmd/
 vpath 			%.o	obj
 
 WHITE_BAN        := $(shell tput -Txterm setaf 7)                                     
@@ -71,7 +72,7 @@ SUMMARIZER		= minisummary.c printtokens.c get_unique_tokens.c \
 					get_token_summary.c get_token_count.c
 
 CMD				= mini_cd.c mini_echo.c mini_env.c mini_exit.c mini_export.c mini_pwd.c \
-					mini_unset.c
+					mini_unset.c mini_builtins.c
 					
 TREE 			= minitree.c treetraversal.c is_emptynode.c create_mininode.c \
 				print_tree.c

@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 17:03:19 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/10/14 19:59:26 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/10/16 19:44:14 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 int	ft_mini_pwd(void)
 {
-	char	*cwd[PATH_MAX];
+	char	cwd[PATH_MAX];
 
 	if (getcwd(cwd, PATH_MAX))
 	{

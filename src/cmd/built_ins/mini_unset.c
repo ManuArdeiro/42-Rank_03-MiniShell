@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 15:23:35 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/10/14 20:02:32 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/10/16 19:44:40 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int	ft_unset_var(t_list *envList, char **args)
 	int		i;
 	char	*env_value;
 
-	i = 0;
+	i = 1;
 	while (args[i] != NULL)
 	{
 		env_value = ft_getenv(args[i], envList);
@@ -39,10 +39,9 @@ static int	ft_unset_var(t_list *envList, char **args)
 int	ft_mini_unset(t_list *envList, char **args)
 {
 	int		i;
-	char	*env_value;
 
 	i = 0;
-	if (ft_arg_nbr(args) < 1)
+	if (ft_arg_nbr(args) < 2)
 	{
 		ft_putendl_fd("unset: at least one argument is needed.", STDERR_FILENO);
 		return (EXIT_FAILURE);

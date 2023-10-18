@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:47:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/10/16 18:52:11 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/10/16 19:40:33 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,19 @@ char		*ft_getenv(const char *key, t_list *envlist);
 t_list		*ft_initenv(char **env);
 int			ft_printenv(t_list *envlist);
 int			ft_delenv(t_list *envList, char *key);
+
+// Built-ins
+
+int			ft_builtins(char **args, t_list *envList, t_global *global);
+void		ft_print_screen(char *str);
+int			ft_arg_nbr(char **args);
+int			ft_mini_cd(char **arg, t_list *envList);
+int			ft_mini_echo(char **args);
+int			ft_mini_env(t_list *envList);
+int			ft_mini_exit(t_global *global, char **args);
+int			ft_mini_export(t_list *envList, char **args);
+int			ft_mini_pwd(void);
+int			ft_mini_unset(t_list *envList, char **args);
 
 // Util
 char		*ft_get_localpath(void);

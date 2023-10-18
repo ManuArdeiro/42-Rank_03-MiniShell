@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 18:43:48 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/10/16 18:53:15 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/10/16 19:42:48 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 /*	This function manages the case where the arg is like "name=??"; the actions
 	are different depending on the ?? is some character or just '\0'.	*/
 
+/*
 static void	ft_name_equal(t_list *envList, char **args, int *i)
 {
 	int		j;
@@ -22,9 +23,9 @@ static void	ft_name_equal(t_list *envList, char **args, int *i)
 	char	*value;
 
 	j = 0;
-	while (args[*i][j] != "=")
+	while ((char)args[*i][j] != '=')
 	{
-		name = ft_strjoin(name, args[*i][j]);
+		name = ft_strnjoin(name, args[*i][j]);
 		j++;
 	}
 	j++;
@@ -43,9 +44,11 @@ static void	ft_name_equal(t_list *envList, char **args, int *i)
 			ft_setenv(envList, args[*i], '\0', ADD_VALUE);
 	}
 }
+*/
 
 /*	This function just prints the "not found" error message.	*/
 
+/*
 static int	ft_print_not_found(char **args, int i)
 {
 	ft_putstr_fd("export: ", STDERR_FILENO);
@@ -53,6 +56,7 @@ static int	ft_print_not_found(char **args, int i)
 	ft_putendl_fd(" not found.", STDERR_FILENO);
 	return (EXIT_SUCCESS);
 }
+*/
 
 /*	This function depends on the arguments:
 	-	No arguments: - it prints all environment variables (including 
@@ -70,13 +74,14 @@ static int	ft_print_not_found(char **args, int i)
 	-	If after the name there is an equalsign then other word, that is the
 		value for key = name.	*/
 
-int	ft_export(t_list *envList, char **args)
+int	ft_mini_export(t_list *envList, char **args)
 {
 	int	i;
 
 	i = 0;
 	if (!args)
 		ft_printenv(envList);
+		/*
 	while (args[i])
 	{
 		if (ft_strncmp(args[i], "=", 2))
@@ -96,5 +101,6 @@ int	ft_export(t_list *envList, char **args)
 				ft_setenv(envList, args[i], '\0', ADD_VALUE);
 		}
 	}
+	*/
 	return (EXIT_SUCCESS);
 }

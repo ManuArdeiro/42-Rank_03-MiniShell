@@ -6,7 +6,7 @@
 #    By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/01 18:51:45 by jolopez-          #+#    #+#              #
-#    Updated: 2023/10/17 20:37:35 by yzaytoun         ###   ########.fr        #
+#    Updated: 2023/10/18 17:52:53 by yzaytoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ vpath 			%.c	src
 vpath 			%.c	src/utils
 vpath			%.c src/env
 vpath			%.c src/parser
+vpath			%.c src/cmd
 vpath			%.c src/lexer
 vpath			%.c src/minitree
 vpath			%.c src/summarizer
@@ -75,11 +76,11 @@ TREE 			= minitree.c treetraversal.c is_emptynode.c create_mininode.c \
 EXEC			= executecommand.c openfile.c execute_commandline.c \
 				goto_childnode.c execute_pipeline.c add_pathprefix.c
 
+BUILTINS		= is_builtin.c
+
 SRC 			= $(ENV) $(UTILS) $(SUMMARIZER) $(LEXER) \
 					$(CMD) $(PARSER) $(TREE) $(EXEC) main.c
 
-COMMANDS		= 	Pipex
-BUILTINS		= 	$(addprefix "src/cmd/", $(COMMANDS))
 #------------------------------------------------------------------------
 
 OBJS			=	$(SRC:%.c=$(OBJ_DIR)/%.o)
@@ -98,7 +99,7 @@ $(OBJ_DIR)/%.o : %.c
 
 all: $(NAME)
 
-$(NAME): 	$(BANNER) $(LIBFT) $(BUILTINS) $(OBJS)
+$(NAME): 	$(BANNER) $(LIBFT) $(OBJS)
 			@echo "$(YELLOW) Creating minishell... $(WHITE)"
 			$(CC) $(CFLAGS) $(OBJS) $(READLINE_LIB)\
 			 $(READLINE_FLAGS) $(LIBFT) -o $(NAME)
@@ -108,9 +109,6 @@ $(LIBFT):
 			echo "$(LIGHT_RED) Creating libft files... $(WHITE)"
 			$(MAKE) bonus -C $(LIBFTDIR)
 	
-$(BUILTINS):
-			@echo "$(YELLOW) Creating Object files... $(WHITE)"	
-			@$(MAKE) -C $@
 clean:
 		@echo "\n"
 		@echo "$(LIGHT_RED) Cleaning libft files... $(WHITE)\n"

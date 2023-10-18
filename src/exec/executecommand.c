@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 16:44:36 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/16 19:19:30 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/18 18:13:31 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,9 +89,10 @@ static int	ft_waitprocess(pid_t *pid, int pidcount)
 	return (laststatus);
 }
 
-t_bool	ft_executecommand(t_command *command, char **envp, t_list *envlist)
+t_bool	ft_executecommand(t_command *command, char **envp, t_global *global)
 {
 	pid_t	*pidarray;
+	char	*pathvariables;
 	int		filecount;
 	int		laststatus;
 
@@ -99,13 +100,16 @@ t_bool	ft_executecommand(t_command *command, char **envp, t_list *envlist)
 	pidarray = NULL;
 	if (command == NULL)
 		return ;
+	pathvariables = ft_getenv("PATH", global->envlist);
 	ft_printcommand(command);
-	if (/*is builtin command*/)
-		/*builtin function*/
+	if (ft_isbuiltin(command->name) == TRUE)
+		laststatus = ft_builtins(command->args, global->envlist, global);
 	else
-		command->name = ft_add_pathprefix(command->name, envlist);
-	filecount = ft_filelist_size(command->outfile);
-	ft_initiate_childprocess(command, envp, filecount, &pidarray);
-	laststatus = ft_waitprocess(pidarray, filecount);
+	{
+		command->name = ft_add_pathprefix(command->name, pathvariables);
+		filecount = ft_filelist_size(command->outfile);
+		ft_initiate_childprocess(command, envp, filecount, &pidarray);
+		laststatus = ft_waitprocess(pidarray, filecount);
+	}
 	return (laststatus);
 }

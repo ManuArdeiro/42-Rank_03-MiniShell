@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:47:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/10/14 20:47:17 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/18 17:42:44 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,6 @@ void		ft_add_to_dict(t_list **envlist, char *key, char *value);
 
 //AUX
 void		ft_free_string(void *content);
+//FIXME - DELETE BEFORE MERGE
+int			ft_builtins(char **args, t_list *envList, t_global *global);
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   extract_tokenstring.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 14:50:43 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/15 17:40:39 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/19 20:23:25 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*ft_extract_tokenstring(const char *commandline, t_part *node)
 	if (node == NULL || commandline == NULL)
 		return (NULL);
 	value = NULL;
-	value = ft_substr(commandline, node->start, node->end);
+	value = ft_substr(commandline, node->start, (node->end - node->start) + 1);
 	return (value);
 }
 

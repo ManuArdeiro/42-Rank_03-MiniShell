@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:47:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/10/18 17:42:44 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/20 18:23:06 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <limits.h>
 # include <errno.h>
 # include <fcntl.h>
+# include <dirent.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <signal.h>
@@ -56,12 +57,14 @@ int			ft_delenv(t_list *envList, char *key);
 // Util
 char		*ft_get_localpath(void);
 char		*ft_get_rootpath(const char *path);
+void		ft_free_string(void *content);
+void		ft_get_commandhistory(t_list *envlist);
 
 //History
 void		ft_write_command_history(t_list **history, t_global *global);
 void		ft_register_command(t_list **history, char *command);
 
-//Dictionary
+//Mini Dictionary
 int			ft_emptydict(t_dict *dict);
 void		ft_cleardict(void *content);
 int			ft_searchdict(t_list *list, const char *key);
@@ -69,8 +72,6 @@ int			ft_modifydict(
 				t_list **envlist, const char *key, const char *newvalue);
 void		ft_add_to_dict(t_list **envlist, char *key, char *value);
 
-//AUX
-void		ft_free_string(void *content);
 //FIXME - DELETE BEFORE MERGE
 int			ft_builtins(char **args, t_list *envList, t_global *global);
 #endif

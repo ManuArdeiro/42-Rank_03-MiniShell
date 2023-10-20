@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:55:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/10/19 20:52:05 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/20 17:00:18 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void	ft_loop(t_global *global)
 	{
 		global->line = readline(MINI_PROMPT);
 		if (!global->line)
-			ft_printerror(__func__, "Error reading line (readline function).") ;
+			ft_printerror(__func__, "Error reading line (readline function).");
 		if (ft_strncmp(global->line, "exit", 4) == 0)
 			global->status = EXITED;
 		parsetree = ft_parse_commandline(global->line);

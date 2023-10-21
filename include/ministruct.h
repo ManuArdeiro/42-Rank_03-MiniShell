@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:10:53 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/19 20:45:51 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/21 18:12:08 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ struct s_file	/*File desciptor and name*/
 {
 	char	*name;
 	int		fd;
+	int		mode;
 };
 
 struct s_command

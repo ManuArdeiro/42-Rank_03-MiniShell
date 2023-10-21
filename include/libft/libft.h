@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
+/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 16:48:34 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/10/07 16:53:53 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/10/21 15:44:52 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	LIBFT_H
+#ifndef LIBFT_H
 # define LIBFT_H
 
 # include <stdlib.h>
@@ -84,4 +84,6 @@ char			*ft_strchr_pos(const char *s, int c, int pos);
 void			ft_lstclear_nodes(t_list **lst);
 void			ft_lstinsert(t_list **list, void *content, t_location location);
 t_list			*ft_lstcopy(t_list *list, t_list *limit);
+int				ft_countchr(const char *string, int c);
+int				ft_strequal(const char *str1, const char *str2);
 #endif

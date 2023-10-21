@@ -1,35 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expand_star.c                                      :+:      :+:    :+:   */
+/*   expand_startoken.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 18:05:17 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/21 12:32:55 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/21 12:47:29 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static int	ft_countchar(const char *string, int c)
-{
-	int	count;
-	int	i;
-
-	count = 0;
-	i = 0;
-	if (string)
-	{
-		while (string[i] != 0)
-		{
-			if (string[i] == (char)c)
-				count++;
-			i++;
-		}
-	}
-	return (count);
-}
 
 t_list	*ft_expand_startoken(char *fullpath)
 {
@@ -42,7 +23,7 @@ t_list	*ft_expand_startoken(char *fullpath)
 	files_list = NULL;
 	if (path == NULL)
 		return (NULL);
-	lastpos = ft_countchar(fullpath, '/');
+	lastpos = ft_countchr(fullpath, '/');
 	path = ft_strchr_pos(fullpath, '/', lastpos);
 	if (path == NULL)
 		path = ".";

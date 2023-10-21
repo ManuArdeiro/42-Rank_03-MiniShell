@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 15:51:54 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/14 21:11:13 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/21 18:18:36 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,12 @@ static t_file	*ft_create_filearray(size_t size, int std_stream)
 	{
 		filearray[size].name = NULL;
 		filearray[size].fd = std_stream;
+		filearray[size].mode = 0;
 	}
 	return (filearray);
 }
 
-t_file	*ft_lstconvert_filearr(t_list *list, int std_stream)
+t_file	*ft_lstconvert_filearr(t_list *list, int std_stream, int mode)
 {
 	t_file	*filearray;
 	t_list	*node;
@@ -76,6 +77,7 @@ t_file	*ft_lstconvert_filearr(t_list *list, int std_stream)
 		{
 			filearray[i].name = ft_strdup((char *)node->content);
 			filearray[i].fd = std_stream;
+			filearray[i].mode = mode;
 			node = node->next;
 			++i;
 		}

@@ -6,7 +6,7 @@
 #    By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/01 18:51:45 by jolopez-          #+#    #+#              #
-#    Updated: 2023/10/20 18:06:26 by yzaytoun         ###   ########.fr        #
+#    Updated: 2023/10/21 12:37:38 by yzaytoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,7 +65,8 @@ PARSER			= get_commandlist.c separators.c extract_tokenstring.c \
 					extract_filelist.c get_tokennode.c lstconvert.c printcommand.c \
 					tokensplit.c get_minicommand.c get_nodetype.c \
 					parse_commandline.c free_mininode.c filelist_size.c \
-					is_redirection.c is_compoundcommand.c expand_star.c
+					is_redirection.c is_compoundcommand.c expand_startoken.c \
+					expand_dollartoken.c
 
 SUMMARIZER		= minisummary.c printtokens.c get_unique_tokens.c \
 					get_token_summary.c get_token_count.c

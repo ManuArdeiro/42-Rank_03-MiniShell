@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 16:44:36 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/19 19:11:28 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/21 18:12:26 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ static void	ft_execute(
 	t_command *command, t_file infile, t_file outfile, char **envp)
 {
 	if (infile.name != NULL)
-		infile.fd = ft_openfile(infile.name, O_RDONLY);
+		infile.fd = ft_openfile(infile.name, infile.mode);
 	if (outfile.name != NULL)
-		outfile.fd = ft_openfile(outfile.name, O_RDWR);
+		outfile.fd = ft_openfile(outfile.name, outfile.mode);
 	ft_duplicate_descriptors(&infile.fd, &outfile.fd);
 	ft_closefile(&infile.fd);
 	ft_closefile(&outfile.fd);

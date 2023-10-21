@@ -48,6 +48,8 @@ t_list		*ft_extract_filelist(
 t_part		*ft_get_tokennode(
 				t_part *tokenlist, t_token token, t_bool position);
 t_nodetype	ft_get_nodetype(t_part *tokenlist);
+t_file		*ft_create_file(const char *name, int std_stream, int mode);
+int			ft_get_filemode(t_token token);
 
 //Separators
 t_bool		ft_isseparator(t_token token);

@@ -66,7 +66,7 @@ PARSER			= get_commandlist.c separators.c extract_tokenstring.c \
 					tokensplit.c get_minicommand.c get_nodetype.c \
 					parse_commandline.c free_mininode.c filelist_size.c \
 					is_redirection.c is_compoundcommand.c expand_startoken.c \
-					expand_dollartoken.c
+					expand_dollartoken.c create_file.c get_filemode.c
 
 SUMMARIZER		= minisummary.c printtokens.c get_unique_tokens.c \
 					get_token_summary.c get_token_count.c

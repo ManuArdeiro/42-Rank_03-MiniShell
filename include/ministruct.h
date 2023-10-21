@@ -47,7 +47,8 @@ enum e_bool
 	LEFT,
 	RIGHT,
 	NEXT_NODE,
-	CURRENT_NODE
+	CURRENT_NODE,
+	O_HEREDOC
 };
 
 struct s_dict
@@ -92,8 +93,8 @@ struct s_command
 {
 	char	*name;
 	char	**args;
-	t_file	*infile;
-	t_file	*outfile;
+	t_list	*infile;
+	t_list	*outfile;
 };
 
 struct s_part

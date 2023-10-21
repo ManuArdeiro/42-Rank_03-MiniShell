@@ -18,7 +18,7 @@ static void	ft_addpipe(t_command *command, int *pipe, t_bool std_stream)
 
 	if (command == NULL || pipe == 0)
 		return ;
-	pipestream = /*create file stream*/
+	pipestream = ft_create_file(ft_strdup("in_pipe"),);
 	//pipename
 	//descriptor
 	if (std_stream == INFILE)

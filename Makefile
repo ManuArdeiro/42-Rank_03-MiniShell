@@ -6,7 +6,7 @@
 #    By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/01 18:51:45 by jolopez-          #+#    #+#              #
-#    Updated: 2023/10/21 12:37:38 by yzaytoun         ###   ########.fr        #
+#    Updated: 2023/10/21 20:54:48 by yzaytoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -72,10 +72,10 @@ SUMMARIZER		= minisummary.c printtokens.c get_unique_tokens.c \
 					get_token_summary.c get_token_count.c
 					
 TREE 			= minitree.c treetraversal.c is_emptynode.c create_mininode.c \
-				print_tree.c
+				print_tree.c get_lasttreenode.c
 					
 EXEC			= executecommand.c openfile.c execute_commandline.c \
-				goto_childnode.c execute_pipeline.c add_pathprefix.c
+				goto_childnode.c add_pathprefix.c add_pipeline.c
 
 BUILTINS		= is_builtin.c
 

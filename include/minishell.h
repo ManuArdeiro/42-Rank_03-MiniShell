@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:47:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/10/20 18:23:06 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/21 18:38:10 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_global
 	t_bool	status;
 	char	*line;
 	t_list	*envlist;
+	int		laststatus;
 }	t_global;
 
 // File utils/print_msg.c

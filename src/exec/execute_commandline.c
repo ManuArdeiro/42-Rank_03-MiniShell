@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 12:40:08 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/19 19:53:18 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/21 20:52:17 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ static void	ft_evaluate_relation(
 		if (status == EXIT_FAILURE)
 			status = ft_goto_childnode(root, envp, RIGHT, global);
 	}
+	else if (nodetype == n_pipeline)
+		ft_add_pipeline(root);
 	else if (nodetype == n_command)
 		status = ft_executecommand(
 				(t_command *)((t_mininode *)root->content)->content,

@@ -18,13 +18,16 @@ static void	ft_addpipe(t_command *command, int *pipe, t_bool std_stream)
 
 	if (command == NULL || pipe == 0)
 		return ;
-	pipestream = ft_create_file(ft_strdup("in_pipe"),);
-	//pipename
-	//descriptor
 	if (std_stream == INFILE)
-		ft_lstinsert(&command->infile, pipe, BACK);
+	{
+		pipestream = ft_create_file(ft_strdup("in_pipe"), pipe[0], std_stream);
+		ft_lstinsert(&command->infile, pipestream, FRONT);
+	}
 	else if (std_stream == OUTFILE)
-		ft_lstinsert(&command->outfile, pipe, FRONT);
+	{
+		pipestream = ft_create_file(ft_strdup("out_pipe"), pipe[1], std_stream);
+		ft_lstinsert(&command->outfile, pipestream, BACK);
+	}
 }
 
 int	ft_add_pipeline(t_minitree *root)
@@ -45,12 +48,12 @@ int	ft_add_pipeline(t_minitree *root)
 			(t_command *)
 			((t_mininode *)last_leftnode->content)->content,
 			(int *)root->content,
-			INFILE);
+			OUTFILE);
 		ft_addpipe(
 			(t_command *)
 			((t_mininode *)first_rightnode->content)->content,
 			(int *)root->content,
-			OUTFILE);
+			INFILE);
 	}
 	return (status);
 }

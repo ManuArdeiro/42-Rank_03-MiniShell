@@ -22,6 +22,8 @@ t_minitree	*ft_get_lasttreenode(t_minitree *root, t_bool direction)
 	{
 		if (ft_is_emptynode(root->rightchild) == TRUE)
 			node = root;
+		else if (((t_mininode *)root->content)->type == n_or)
+			ft_get_lasttreenode(root->leftchild, direction);
 		else
 			ft_get_lasttreenode(root->rightchild, direction);
 	}

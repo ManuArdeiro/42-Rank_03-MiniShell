@@ -6,7 +6,7 @@
 #    By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/01 18:51:45 by jolopez-          #+#    #+#              #
-#    Updated: 2023/10/16 19:07:42 by jolopez-         ###   ########.fr        #
+#    Updated: 2023/10/22 21:35:33 by jolopez-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -80,7 +80,7 @@ TREE 			= minitree.c treetraversal.c is_emptynode.c create_mininode.c \
 EXEC			= executecommand.c openfile.c execute_commandline.c
 
 SRC 			= $(ENV) $(UTILS) $(SUMMARIZER) $(LEXER) \
-					$(CMD) $(PARSER) $(TREE) $(EXEC) main.c
+					$(CMD) $(PARSER) $(TREE) $(EXEC) signals.c main.c
 
 COMMANDS		= 	Pipex
 BUILTINS		= 	$(addprefix "src/cmd/", $(COMMANDS))

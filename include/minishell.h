@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:47:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/10/16 19:40:33 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/10/22 21:36:11 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,9 @@ typedef struct s_global
 	char	*line;
 	t_list	*envlist;
 }	t_global;
+
+// Signals
+
 
 // File utils/print_msg.c
 void		ft_printhelp(void);

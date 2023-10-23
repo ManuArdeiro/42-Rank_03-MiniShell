@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:10:53 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/23 19:25:29 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/23 19:32:11 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,5 +128,14 @@ struct s_mininode
 	t_nodetype	type;
 	void		*content;
 };
+
+typedef struct s_global
+{
+	t_bool	status;
+	char	*line;
+	t_list	*envlist;
+	int		laststatus;
+}	t_global;
+
 
 #endif		/*Mini struct header*/

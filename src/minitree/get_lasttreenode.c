@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 20:16:49 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/21 20:38:53 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/23 19:47:20 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ t_minitree	*ft_get_lasttreenode(t_minitree *root, t_bool direction)
 {
 	t_minitree	*node;
 
+	node = NULL;
 	if (root == NULL)
 		return (NULL);
 	if (direction == RIGHT)

@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 18:05:17 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/21 12:47:29 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/23 19:43:41 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ t_list	*ft_expand_startoken(char *fullpath)
 	int				lastpos;
 
 	files_list = NULL;
-	if (path == NULL)
+	dirent = NULL;
+	path = NULL;
+	if (fullpath == NULL)
 		return (NULL);
 	lastpos = ft_countchr(fullpath, '/');
 	path = ft_strchr_pos(fullpath, '/', lastpos);

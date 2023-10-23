@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 20:07:17 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/15 18:36:50 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/23 19:41:33 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,5 +60,5 @@ t_bool		ft_is_semicolon(t_token token);
 
 //CONVERT FUNCTIONS
 char		**ft_lstconvert_strarr(t_list *list);
-t_file		*ft_lstconvert_filearr(t_list *list, int std_stream);
+//t_file		*ft_lstconvert_filearr(t_list *list, int std_stream);
 #endif		/*Mini Parser*/

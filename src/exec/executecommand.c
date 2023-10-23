@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 16:44:36 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/21 19:00:27 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/23 19:52:12 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int	ft_eval_processstatus(int status)
 static void	ft_execute(
 	t_command *command, t_file infile, t_file outfile, char **envp)
 {
+	//builtins
 	if (infile.name != NULL)
 		infile.fd = ft_openfile(infile.name, infile.mode);
 	if (outfile.name != NULL)
@@ -55,29 +56,30 @@ static int	ft_initiate_childprocess(
 	char	**envp;
 
 	count = 0;
+	(void)envp;
 	///get file array
-	pidcount = ft_filelist_size(command->outfile);
+	pidcount = ft_lstsize(command->outfile);
 	if (pidcount == 0)
 		pidcount = 1;
 	*pid = malloc(sizeof(pid_t) * pidcount);
 	if (!*pid)
-		return ;
+		return (0);
 	envp = ft_lstconvert_strarr(global->envlist);
-	while (count < pidcount)
-	{
-		(*pid)[count] = fork();
-		if ((*pid)[count] == 0)
-		{
-			if (ft_isbuiltin(command->name) == TRUE)
-				ft_builtins(command->args, global->envlist, global);
-			ft_execute(
-				command, command->infile[0], command->outfile[count], envp);
-
-		}
-		else if ((*pid)[count] < 0)
-			ft_printerror(NULL, "Fork");
-		++count;
-	}
+//	while (count < pidcount)
+//	{
+//		(*pid)[count] = fork();
+//		if ((*pid)[count] == 0)
+//		{
+//			if (ft_isbuiltin(command->name) == TRUE)
+//				ft_builtins(command->args, global->envlist, global);
+//			ft_execute(
+//				command, command->infile[0], command->outfile[count], envp);
+//
+//		}
+//		else if ((*pid)[count] < 0)
+//			ft_printerror(NULL, "Fork");
+//		++count;
+//	}
 	return (pidcount);
 }
 
@@ -104,15 +106,16 @@ static int	ft_waitprocess(pid_t *pid, int pidcount)
 t_bool	ft_executecommand(t_command *command, char **envp, t_global *global)
 {
 	pid_t	*pidarray;
-	char	*pathvariables;
 	int		pidcount;
 
 	pidarray = NULL;
+	(void)envp;
 	if (command == NULL)
-		return ;
+		return 0;
 	ft_printcommand(command);
 	//Expand *
 	//Expand dollar
 	pidcount = ft_initiate_childprocess(command, &pidarray, global);
 	global->laststatus = ft_waitprocess(pidarray, pidcount);
+	return 0;
 }

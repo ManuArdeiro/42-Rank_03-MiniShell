@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:47:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/10/23 19:25:13 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/23 19:37:00 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,6 @@
 # include "miniparser.h"
 # include "miniexecuter.h"
 # include "tokenizer.h"
-
-typedef struct s_global
-{
-	t_bool	status;
-	char	*line;
-	t_list	*envlist;
-	int		laststatus;
-}	t_global;
-
-// Signals
 
 
 // File utils/print_msg.c
@@ -89,6 +79,6 @@ int			ft_modifydict(
 				t_list **envlist, const char *key, const char *newvalue);
 void		ft_add_to_dict(t_list **envlist, char *key, char *value);
 
-//FIXME - DELETE BEFORE MERGE
-int			ft_builtins(char **args, t_list *envList, t_global *global);
+
+t_minitree	*ft_get_lasttreenode(t_minitree *root, t_bool direction);
 #endif

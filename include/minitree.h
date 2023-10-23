@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 18:59:13 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/23 19:22:48 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/23 19:36:46 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define MINITREE_H
 
 # include "libft.h"
-# include "miniexecuter.h"
+# include "ministruct.h"
 
 typedef struct s_minitree	t_minitree;
 
@@ -36,8 +36,6 @@ void		ft_treeinsert(t_minitree **root,
 void		ft_postorder_traversal(t_minitree *root, void (*function)(void *));
 void		ft_preorder_traversal(t_minitree *root, void (*function)(void *));
 void		ft_inorder_traversal(t_minitree *root, void (*function)(void *));
-
-t_minitree	*ft_get_lasttreenode(t_minitree *root, t_bool direction);
 
 void		ft_printtree(t_minitree *root);
 

@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 15:51:54 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/21 18:18:36 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/23 19:41:17 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	**ft_lstconvert_strarr(t_list *list)
 	stringarray[i] = NULL;
 	return (stringarray);
 }
-
+/*
 static t_file	*ft_create_filearray(size_t size, int std_stream)
 {
 	t_file	*filearray;
@@ -84,3 +84,4 @@ t_file	*ft_lstconvert_filearr(t_list *list, int std_stream, int mode)
 	}
 	return (filearray);
 }
+*/

@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 18:11:58 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/21 20:52:58 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/23 19:31:46 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ t_bool	ft_executecommand(
 void	ft_duplicate_descriptors(int *input, int *output);
 void	ft_closefile(int *file_descriptor);
 void	ft_execute_commandline(t_minitree *root, t_global *global);
-
 
 int		ft_goto_childnode(
 			t_minitree *root, char **envp, t_bool childnode, t_global *global);

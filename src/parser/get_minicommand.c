@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 11:05:21 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/19 20:42:12 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/23 19:42:39 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ static t_command	*ft_newcommand(const char *commandline, t_part *tokenlist)
 	newcommand = ft_createcommand(
 			commandname,
 			arglist,
-			ft_extract_filelist(commandline, tokenlist, INFILE);
-			ft_extract_filelist(commandline, tokenlist, OUTFILE);
+			ft_extract_filelist(commandline, tokenlist, INFILE),
+			ft_extract_filelist(commandline, tokenlist, OUTFILE)
 			);
 	return (newcommand);
 }

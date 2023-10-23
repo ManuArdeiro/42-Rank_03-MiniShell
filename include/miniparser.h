@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 20:07:17 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/15 17:39:06 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/15 18:36:50 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void		ft_printcommand(t_command *command);
 
 
 //Parse Tree
+t_bool		ft_is_compoundcommand(t_nodetype nodetype);
 t_bool		ft_is_redirection(t_token token);
 int			ft_filelist_size(t_file *filelist);
 void		ft_printnode(t_mininode *mininode);
@@ -47,6 +48,8 @@ t_list		*ft_extract_filelist(
 t_part		*ft_get_tokennode(
 				t_part *tokenlist, t_token token, t_bool position);
 t_nodetype	ft_get_nodetype(t_part *tokenlist);
+t_file		*ft_create_file(const char *name, int std_stream, int mode);
+int			ft_get_filemode(t_token token);
 
 //Separators
 t_bool		ft_isseparator(t_token token);

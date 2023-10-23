@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ministruct.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
+/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:10:53 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/16 18:52:30 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/10/23 19:25:29 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ enum e_bool
 	LEFT,
 	RIGHT,
 	NEXT_NODE,
-	CURRENT_NODE
+	CURRENT_NODE,
+	O_HEREDOC
 };
 
 struct s_dict
@@ -85,14 +86,15 @@ struct s_file	/*File desciptor and name*/
 {
 	char	*name;
 	int		fd;
+	int		mode;
 };
 
 struct s_command
 {
 	char	*name;
 	char	**args;
-	t_file	*infile;
-	t_file	*outfile;
+	t_list	*infile;
+	t_list	*outfile;
 };
 
 struct s_part
@@ -113,7 +115,8 @@ struct s_summarizer
 
 enum e_nodetype
 {
-	n_and_or = 10,
+	n_and = 10,
+	n_or,
 	n_pipeline,
 	n_command,
 	n_commandlist,

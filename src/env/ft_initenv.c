@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 18:37:26 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/04 17:14:32 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/17 20:40:18 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,9 @@ static void	ft_default_envlist(t_list **envlist)
 	}
 	ft_setenv(&(*envlist), "_", "/usr/bin/env", OVERWRITE_VALUE);
 	ft_setenv(&(*envlist), "SHLVL", "1", OVERWRITE_VALUE);
+	ft_setenv(&(*envlist), "PATH",
+		"/usr/local/bin:/usr/bin:/bin:/usr/sbin:"
+		"/sbin:/usr/local/share/dotnet:/usr/local/munki", OVERWRITE_VALUE);
 }
 
 /*	This function creates a list where to save the environment:

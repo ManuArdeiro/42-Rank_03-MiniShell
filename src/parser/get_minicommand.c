@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 11:05:21 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/15 17:39:26 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/19 20:42:12 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ static t_command	*ft_createcommand(
 		return (NULL);
 	command->name = ft_strdup(name);
 	command->args = ft_lstconvert_strarr(arglist);
-	command->infile = ft_lstconvert_filearr(infile, STDIN_FILENO);
-	command->outfile = ft_lstconvert_filearr(outfile, STDOUT_FILENO);
+	command->infile = infile;
+	command->outfile = outfile;
 	ft_lstclear(&arglist, free);
 	ft_lstclear(&infile, free);
 	ft_lstclear(&outfile, free);
@@ -38,16 +38,17 @@ static t_command	*ft_newcommand(const char *commandline, t_part *tokenlist)
 	char		*commandname;
 
 	newcommand = NULL;
+	if (tokenlist == NULL || commandline == NULL)
+		return (NULL);
 	commandnode = ft_get_tokennode(tokenlist, tk_cmd, CURRENT_NODE);
 	commandname = ft_extract_tokenstring(commandline, commandnode);
 	arglist = ft_extract_argumentlist(commandline, tokenlist);
 	ft_lstinsert(&arglist, commandname, FRONT);
-	newcommand
-		= ft_createcommand(
+	newcommand = ft_createcommand(
 			commandname,
 			arglist,
-			ft_extract_filelist(commandline, tokenlist, INFILE),
-			ft_extract_filelist(commandline, tokenlist, OUTFILE)
+			ft_extract_filelist(commandline, tokenlist, INFILE);
+			ft_extract_filelist(commandline, tokenlist, OUTFILE);
 			);
 	return (newcommand);
 }

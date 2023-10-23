@@ -34,6 +34,7 @@ static void	ft_get_filelist(
 	t_part	*node;
 	t_part	*separatortoken;
 	char	*string;
+	t_file	*file;
 
 	node = tokenlist;
 	separatortoken = NULL;
@@ -44,7 +45,8 @@ static void	ft_get_filelist(
 			separatortoken
 				= ft_get_tokennode(tokenlist, node->token, CURRENT_NODE);
 			string = ft_extract_tokenstring(commandline, separatortoken->next);
-			ft_lstinsert(filelist, (char *)string, BACK);
+			file = ft_create_file(string, std_stream, ft_get_filemode(node->token));
+			ft_lstinsert(filelist, (t_file *)file, BACK);
 		}
 		node = node->next;
 	}

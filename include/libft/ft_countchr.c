@@ -1,32 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printenv.c                                      :+:      :+:    :+:   */
+/*   ft_countchr.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/20 17:36:29 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/09/21 19:30:33 by yzaytoun         ###   ########.fr       */
+/*   Created: 2023/10/21 12:45:22 by yzaytoun          #+#    #+#             */
+/*   Updated: 2023/10/21 12:45:47 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-
-int	ft_printenv(t_list *envlist)
+int	ft_countchr(const char *string, int c)
 {
-	t_list	*node;
-	int		count;
+	int	count;
+	int	i;
 
-	if (!envlist)
-		return (0);
 	count = 0;
-	node = envlist;
-	while (node != NULL)
+	i = 0;
+	if (string)
 	{
-		printf("%s ", ((t_dict *)node->content)->key);
-		printf("= %s\n", ((t_dict *)node->content)->value);
-		++count;
-		node = node->next;
+		while (string[i] != 0)
+		{
+			if (string[i] == (char)c)
+				count++;
+			i++;
+		}
 	}
 	return (count);
 }

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+         #
+#    By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/01 18:51:45 by jolopez-          #+#    #+#              #
-#    Updated: 2023/10/22 21:35:33 by jolopez-         ###   ########.fr        #
+#    Updated: 2023/10/23 19:25:05 by yzaytoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ vpath 			%.c	src
 vpath 			%.c	src/utils
 vpath			%.c src/env
 vpath			%.c src/parser
+vpath			%.c src/cmd
 vpath			%.c src/lexer
 vpath			%.c src/minitree
 vpath			%.c src/summarizer
@@ -57,7 +58,7 @@ READLINE_FLAGS	= -lreadline
 ENV				= ft_getenv.c ft_setenv.c ft_initenv.c ft_printenv.c ft_delenv.c
 
 UTILS			= print_msg.c mini_history.c get_path.c free_string.c \
-					mini_dictionary.c
+					mini_dictionary.c get_commandhistory.c
 
 LEXER			= tokenizer.c tokens.c token_tools_1.c token_tools_2.c \
 					ft_copy_tokenlist.c ft_tokenlist_add.c print_tokens.c
@@ -66,7 +67,8 @@ PARSER			= get_commandlist.c separators.c extract_tokenstring.c \
 					extract_filelist.c get_tokennode.c lstconvert.c printcommand.c \
 					tokensplit.c get_minicommand.c get_nodetype.c \
 					parse_commandline.c free_mininode.c filelist_size.c \
-					is_redirection.c
+					is_redirection.c is_compoundcommand.c expand_startoken.c \
+					expand_dollartoken.c create_file.c get_filemode.c
 
 SUMMARIZER		= minisummary.c printtokens.c get_unique_tokens.c \
 					get_token_summary.c get_token_count.c
@@ -75,15 +77,16 @@ CMD				= mini_cd.c mini_echo.c mini_env.c mini_exit.c mini_export.c mini_pwd.c \
 					mini_unset.c mini_builtins.c
 					
 TREE 			= minitree.c treetraversal.c is_emptynode.c create_mininode.c \
-				print_tree.c
+				print_tree.c get_lasttreenode.c
 					
-EXEC			= executecommand.c openfile.c execute_commandline.c
+EXEC			= executecommand.c openfile.c execute_commandline.c \
+				goto_childnode.c add_pathprefix.c add_pipeline.c
+
+BUILTINS		= is_builtin.c
 
 SRC 			= $(ENV) $(UTILS) $(SUMMARIZER) $(LEXER) \
 					$(CMD) $(PARSER) $(TREE) $(EXEC) signals.c main.c
 
-COMMANDS		= 	Pipex
-BUILTINS		= 	$(addprefix "src/cmd/", $(COMMANDS))
 #------------------------------------------------------------------------
 
 OBJS			=	$(SRC:%.c=$(OBJ_DIR)/%.o)
@@ -102,7 +105,7 @@ $(OBJ_DIR)/%.o : %.c
 
 all: $(NAME)
 
-$(NAME): 	$(BANNER) $(LIBFT) $(BUILTINS) $(OBJS)
+$(NAME): 	$(BANNER) $(LIBFT) $(OBJS)
 			@echo "$(YELLOW) Creating minishell... $(WHITE)"
 			$(CC) $(CFLAGS) $(OBJS) $(READLINE_LIB)\
 			 $(READLINE_FLAGS) $(LIBFT) -o $(NAME)
@@ -112,9 +115,6 @@ $(LIBFT):
 			echo "$(LIGHT_RED) Creating libft files... $(WHITE)"
 			$(MAKE) bonus -C $(LIBFTDIR)
 	
-$(BUILTINS):
-			@echo "$(YELLOW) Creating Object files... $(WHITE)"	
-			@$(MAKE) -C $@
 clean:
 		@echo "\n"
 		@echo "$(LIGHT_RED) Cleaning libft files... $(WHITE)\n"

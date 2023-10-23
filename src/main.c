@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
+/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:55:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/10/22 21:30:56 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/10/23 19:25:22 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,12 @@ static void	ft_loop(t_global *global)
 	t_minitree	*parsetree;
 
 	history = NULL;
+	ft_get_commandhistory(global->envlist);
 	while (global->status != EXITED)
 	{
 		global->line = readline(MINI_PROMPT);
 		if (!global->line)
-			ft_printerror(__func__, "Error reading line (readline function).") ;
+			ft_printerror(__func__, "Error reading line (readline function).");
 		if (ft_strncmp(global->line, "exit", 4) == 0)
 			global->status = EXITED;
 		parsetree = ft_parse_commandline(global->line);

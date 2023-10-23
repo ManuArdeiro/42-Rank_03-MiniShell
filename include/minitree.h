@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 18:59:13 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/21 20:36:26 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/23 19:22:48 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define MINITREE_H
 
 # include "libft.h"
+# include "miniexecuter.h"
 
 typedef struct s_minitree	t_minitree;
 

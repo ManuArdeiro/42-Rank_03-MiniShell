@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execute_pipeline.c                                 :+:      :+:    :+:   */
+/*   add_pipeline.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 20:13:18 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/21 20:54:01 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/23 18:13:36 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	ft_addpipe(t_command *command, int *pipe, t_bool std_stream)
 {
-	t_file	*pipestream:
+	t_file	*pipestream;
 
 	if (command == NULL || pipe == 0)
 		return ;

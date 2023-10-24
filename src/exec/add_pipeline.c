@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 20:13:18 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/23 18:13:36 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/24 20:04:33 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,30 +30,45 @@ static void	ft_addpipe(t_command *command, int *pipe, t_bool std_stream)
 	}
 }
 
-int	ft_add_pipeline(t_minitree *root)
+static void	ft_add_tochild(
+		t_minitree *root, t_minitree *lastleft, t_minitree *firstright)
 {
-	int			status;
-	t_minitree	*last_leftnode;
-	t_minitree	*first_rightnode;
-
-	if (root == NULL)
-		return (EXITED);
-	status = EXIT_SUCCESS;
-	last_leftnode = ft_get_lasttreenode(root, RIGHT);
-	first_rightnode = root->rightchild;
-	if (ft_is_emptynode(root->leftchild) == FALSE
-		&& ft_is_emptynode(root->rightchild) == FALSE)
+	if (lastleft != NULL)
 	{
 		ft_addpipe(
-			(t_command *)
-			((t_mininode *)last_leftnode->content)->content,
+			(t_command *)((t_mininode *)lastleft->content)->content,
 			(int *)root->content,
 			OUTFILE);
+	}
+	if (firstright != NULL)
+	{
 		ft_addpipe(
-			(t_command *)
-			((t_mininode *)first_rightnode->content)->content,
+			(t_command *)((t_mininode *)firstright->content)->content,
 			(int *)root->content,
 			INFILE);
 	}
-	return (status);
+}
+
+void	ft_add_pipeline(t_minitree *root)
+{
+	t_minitree	*lastleft;
+	t_minitree	*firstright;
+
+	if (root == NULL)
+		return ;
+	firstright = root->rightchild;
+	if (ft_is_emptynode(root->leftchild) == FALSE
+		&& ft_is_emptynode(root->rightchild) == FALSE
+		&& ((t_mininode *)root->content)->type == n_or)
+	{
+		lastleft = ft_get_lasttreenode(root, RIGHT);
+		ft_add_tochild(root, lastleft, firstright);
+		lastleft = ft_get_lasttreenode(root, LEFT);
+		ft_add_tochild(root, lastleft, NULL);
+	}
+	else
+	{
+		lastleft = ft_get_lasttreenode(root, RIGHT);
+		ft_add_tochild(root, lastleft, firstright);
+	}
 }

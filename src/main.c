@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:55:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/10/23 19:25:22 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/24 19:35:33 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static void	ft_loop(t_global *global)
 		if (ft_strncmp(global->line, "exit", 4) == 0)
 			global->status = EXITED;
 		parsetree = ft_parse_commandline(global->line);
-		ft_execute_commandline(parsetree, global->envlist);
+		ft_execute_commandline(parsetree, global);
 		ft_register_and_clean(&history, &global, &parsetree);
 	}
 	//rl_clear_history();

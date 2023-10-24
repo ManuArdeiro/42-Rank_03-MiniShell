@@ -6,57 +6,50 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 12:40:08 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/21 20:52:17 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/24 20:03:18 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	ft_evaluate_relation(
-		t_minitree *root, char **envp, t_global *global)
+static void	ft_evaluate_relation(t_minitree *root, t_global *global)
 {
-	int			status;
 	t_nodetype	nodetype;
 
-	status = EXIT_SUCCESS;
+	global->status = EXIT_SUCCESS;
 	nodetype = ((t_mininode *)root->content)->type;
 	if (nodetype == n_and)
 	{
-		ft_goto_childnode(root, envp, LEFT, global);
-		ft_goto_childnode(root, envp, RIGHT, global);
+		ft_goto_childnode(root, LEFT, global);
+		ft_goto_childnode(root, RIGHT, global);
 	}
 	else if (nodetype == n_or)
 	{
-		status = ft_goto_childnode(root, envp, LEFT, global);
-		if (status == EXIT_FAILURE)
-			status = ft_goto_childnode(root, envp, RIGHT, global);
+		ft_goto_childnode(root, LEFT, global);
+		if (global->status == EXIT_FAILURE)
+			ft_goto_childnode(root, RIGHT, global);
 	}
 	else if (nodetype == n_pipeline)
 		ft_add_pipeline(root);
 	else if (nodetype == n_command)
-		status = ft_executecommand(
-				(t_command *)((t_mininode *)root->content)->content,
-				envp, global);
+		ft_executecommand(
+			(t_command *)((t_mininode *)root->content)->content, global);
 }
 
-static void	ft_navigate_and_execute(
-		t_minitree *root, char **envp, t_global *global)
+static void	ft_navigate_and_execute(t_minitree *root, t_global *global)
 {
 	if (root == NULL)
 		return ;
-	ft_evaluate_relation(root, envp, global);
+	ft_evaluate_relation(root, global);
 	if (ft_is_emptynode(root->leftchild) == FALSE)
-		ft_navigate_and_execute(root->leftchild, envp, global);
+		ft_navigate_and_execute(root->leftchild, global);
 	if (ft_is_emptynode(root->rightchild) == FALSE)
-		ft_navigate_and_execute(root->rightchild, envp, global);
+		ft_navigate_and_execute(root->rightchild, global);
 }
 
 void	ft_execute_commandline(t_minitree *root, t_global *global)
 {
-	char	**envp;
-
 	if (root == NULL)
 		return ;
-	envp = ft_lstconvert_strarr(global->envlist);
-	ft_navigate_and_execute(root, envp, global);
+	ft_navigate_and_execute(root, global);
 }

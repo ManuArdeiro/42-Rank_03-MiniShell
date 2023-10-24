@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 16:48:34 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/10/21 15:44:52 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/24 20:37:07 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,6 @@ char			*ft_strchr_pos(const char *s, int c, int pos);
 void			ft_lstclear_nodes(t_list **lst);
 void			ft_lstinsert(t_list **list, void *content, t_location location);
 t_list			*ft_lstcopy(t_list *list, t_list *limit);
-int				ft_countchr(const char *string, int c);
+int				ft_chrcount(const char *string, int c);
 int				ft_strequal(const char *str1, const char *str2);
 #endif

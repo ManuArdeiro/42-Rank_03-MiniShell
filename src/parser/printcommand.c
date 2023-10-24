@@ -6,48 +6,50 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 16:02:47 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/15 18:09:19 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/24 20:17:23 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	ft_print_filearray(t_file *filearray)
+static void	ft_printlist(t_list *list)
 {
-	int	count;
+	t_list	*node;
+	int		count;
 
 	count = 0;
-	if (filearray == NULL)
-		return ;
-	while (filearray[count].name != NULL)
+	if (list == NULL)
 	{
-		printf("File[%d] -> %s\n", count, filearray[count].name);
+		printf("%s\n", NULL);
+		return ;
+	}
+	node = list;
+	while (node != NULL)
+	{
+		printf("File[%d] -> %s -> mode = %d\n",
+			count,
+			((t_file *)(node->content))->name,
+			((t_file *)(node->content))->mode);
 		count++;
+		node = node->next;
 	}
 }
 
-static void	ft_printarray(void *array, t_casttype type)
+static void	ft_print_stringarray(char **strarray)
 {
-	char	**strarray;
 	int		count;
 
-	if (array == NULL)
+	if (strarray == NULL)
 	{
 		printf("%s\n", NULL);
 		return ;
 	}
 	count = 0;
-	if (type == TYPE_STRING)
+	while (strarray[count] != NULL)
 	{
-		strarray = (char **)array;
-		while (strarray[count] != NULL)
-		{
-			printf("argument[%d] -> %s\n", count, strarray[count]);
-			count++;
-		}
+		printf("argument[%d] -> %s\n", count, strarray[count]);
+		count++;
 	}
-	else if (type == TYPE_FILE)
-		ft_print_filearray((t_file *)array);
 }
 
 void	ft_printcommand(t_command *command)
@@ -59,12 +61,12 @@ void	ft_printcommand(t_command *command)
 		return ;
 	printf("****** Command ********\n\n"
 		"name = %s\n", command->name);
-	ft_printarray(command->args, TYPE_STRING);
+	ft_print_stringarray(command->args);
 	printf("-----------------------------\n"
 		"****** Input files ********\n\n");
-	ft_printarray(command->infile, TYPE_FILE);
+	ft_printlist(command->infile);
 	printf("-----------------------------\n"
 		"****** output files ********\n\n");
-	ft_printarray(command->outfile, TYPE_FILE);
+	ft_printlist(command->outfile);
 	printf("-----------------------------\n");
 }

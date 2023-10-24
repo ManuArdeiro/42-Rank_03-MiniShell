@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   extract_tokenstring.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
+/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 14:50:43 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/19 20:23:25 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/10/24 20:51:28 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,14 @@ t_list	*ft_extract_argumentlist(const char *commandline, t_part *tokenlist)
 	prev_node = NULL;
 	while (node != NULL && ft_isseparator(node->token) == FALSE)
 	{
-		if (node->token == tk_arg
+		if ((node->token == tk_arg || node->token == tk_mul)
 			&& ft_is_redirection(prev_node->token) == FALSE)
 		{
 			string = ft_extract_tokenstring(commandline, node);
-			ft_lstinsert(&stringlist, (char *)string, BACK);
+			if (ft_strchr(string, '*') != NULL)
+				ft_lstadd_back(&stringlist, ft_expand_startoken(string));
+			else
+				ft_lstinsert(&stringlist, (char *)string, BACK);
 		}
 		prev_node = node;
 		node = node->next;

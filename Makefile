@@ -6,7 +6,7 @@
 #    By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/01 18:51:45 by jolopez-          #+#    #+#              #
-#    Updated: 2023/10/23 19:50:14 by yzaytoun         ###   ########.fr        #
+#    Updated: 2023/10/24 19:34:58 by yzaytoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -83,7 +83,7 @@ EXEC			= executecommand.c openfile.c execute_commandline.c \
 				goto_childnode.c add_pathprefix.c add_pipeline.c
 
 SRC 			= $(ENV) $(UTILS) $(SUMMARIZER) $(LEXER) \
-					$(CMD) $(PARSER) $(TREE) $(EXEC) signals.c main.c
+					$(CMD) $(PARSER) $(TREE) $(EXEC) main.c
 
 #------------------------------------------------------------------------
 

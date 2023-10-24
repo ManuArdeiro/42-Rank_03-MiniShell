@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   mini_cd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
+/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:05:20 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/16 19:25:58 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/10/24 19:42:16 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/minishell.h"
+#include "minishell.h"
 
 /*	This function tries to change the cwd to the path dir passed as argument.
 	-	If it is not possible, an error message is sent to the standard error
@@ -74,5 +74,5 @@ int	ft_mini_cd(char **arg, t_list *envList)
 		return (ft_new_folder(envList, ft_getenv("OLDPWD", envList)));
 	else
 		return (ft_new_folder(envList, dir));
-	return (0);
+	return (EXIT_SUCCESS);
 }

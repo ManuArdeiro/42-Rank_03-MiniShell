@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 20:07:17 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/23 19:41:33 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/24 20:36:02 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,9 @@ t_part		*ft_get_commandlist(t_part *tokenlist, t_part *delimiter);
 t_minitree	*ft_get_minicommand(const char *commandline, t_part *tokenlist);
 void		ft_printcommand(t_command *command);
 
-
 //Parse Tree
 t_bool		ft_is_compoundcommand(t_nodetype nodetype);
 t_bool		ft_is_redirection(t_token token);
-int			ft_filelist_size(t_file *filelist);
 void		ft_printnode(t_mininode *mininode);
 void		ft_free_mininode(void *content);
 t_bool		ft_is_emptynode(t_minitree *root);
@@ -57,6 +55,11 @@ t_bool		ft_is_logicalseparator(t_token token);
 t_bool		ft_is_pipeseparator(t_token token);
 t_bool		ft_is_subshellseparator(t_token token);
 t_bool		ft_is_semicolon(t_token token);
+
+//Expansions
+t_list		*ft_expand_startoken(char *fullpath);
+char		*ft_expand_dollartoken(
+				const char *argument, t_list *envlist, int laststatus);
 
 //CONVERT FUNCTIONS
 char		**ft_lstconvert_strarr(t_list *list);

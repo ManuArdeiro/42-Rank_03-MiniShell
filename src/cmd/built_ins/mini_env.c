@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   mini_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
+/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 18:38:09 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/10/14 19:56:20 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/10/24 19:42:21 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/minishell.h"
+#include "minishell.h"
 
 /*	This function prints all the key/values stored in the envList list.	*/
 
-int		ft_mini_env(t_list *envList)
+int	ft_mini_env(t_list *envList)
 {
 	t_list	*node;
 
@@ -25,7 +25,7 @@ int		ft_mini_env(t_list *envList)
 	{
 		ft_putstr_fd(((t_dict *)node->content)->key, STDOUT_FILENO);
 		ft_putstr_fd("=", STDOUT_FILENO);
-		ft_putendl_fd(((t_dict *)node->content)->value,STDOUT_FILENO);
+		ft_putendl_fd(((t_dict *)node->content)->value, STDOUT_FILENO);
 		node = node->next;
 	}
 	return (EXIT_SUCCESS);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_builtins.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
+/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 19:53:03 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/10/16 19:49:03 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/10/24 20:27:00 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,19 +34,19 @@ int	ft_arg_nbr(char **args)
 
 int	ft_builtins(char **args, t_list *envList, t_global *global)
 {
-	if (!ft_strncmp(args[0], "cd", 3))
+	if (ft_strequal(args[0], "cd") == TRUE)
 		return (ft_mini_cd(args, envList));
-	else if (!ft_strncmp(args[0], "echo", 5))
+	else if (ft_strequal(args[0], "echo") == TRUE)
 		return (ft_mini_echo(args));
-	else if (!ft_strncmp(args[0], "env", 4))
+	else if (ft_strequal(args[0], "env") == TRUE)
 		return (ft_mini_env(envList));
-	else if (!ft_strncmp(args[0], "exit", 5))
+	else if (ft_strequal(args[0], "exit") == TRUE)
 		return (ft_mini_exit(global, args));
-	else if (!ft_strncmp(args[0], "export", 7))
+	else if (ft_strequal(args[0], "export") == TRUE)
 		return (ft_mini_export(envList, args));
-	else if (!ft_strncmp(args[0], "pwd", 4))
+	else if (ft_strequal(args[0], "pwd") == TRUE)
 		return (ft_mini_pwd());
-	else if (!ft_strncmp(args[0], "unset", 6))
+	else if (ft_strequal(args[0], "unset") == TRUE)
 		return (ft_mini_unset(envList, args));
 	return (EXIT_FAILURE);
 }

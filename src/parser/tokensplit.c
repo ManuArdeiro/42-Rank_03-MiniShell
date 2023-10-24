@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 11:52:43 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/21 19:46:43 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/24 20:09:22 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,13 @@ static void	ft_fill_treenode(
 			(t_part *)leftcontent, ft_get_nodetype(leftcontent));
 	nodetype = ft_get_nodetype(token);
 	if (nodetype == n_pipeline)
-		separator = ft_create_mininode((int *)newpipe, ft_get_nodetype(token));
+	{
+		if (pipe(newpipe) < 0)
+			return ;
+		separator = ft_create_mininode((int *)newpipe, nodetype);
+	}
 	else
-		separator = ft_create_mininode(NULL, ft_get_nodetype(token));
+		separator = ft_create_mininode(NULL, nodetype);
 	ft_treeinsert(treenode, left, separator, right);
 }
 

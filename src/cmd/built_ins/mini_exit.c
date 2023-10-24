@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   mini_exit.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
+/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 01:42:21 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/10/16 19:32:59 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/10/24 19:42:27 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "minishell.h"
 
 /*	This function returs a TRUE if the string passed as argument is a number,
 	a FALSE if not. */

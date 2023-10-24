@@ -6,11 +6,11 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 12:45:22 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/21 12:45:47 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/24 20:37:07 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_countchr(const char *string, int c)
+int	ft_chrcount(const char *string, int c)
 {
 	int	count;
 	int	i;

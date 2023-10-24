@@ -38,9 +38,6 @@ static int	ft_unset_var(t_list *envList, char **args)
 
 int	ft_mini_unset(t_list *envList, char **args)
 {
-	int		i;
-
-	i = 0;
 	if (ft_arg_nbr(args) < 2)
 	{
 		ft_putendl_fd("unset: at least one argument is needed.", STDERR_FILENO);

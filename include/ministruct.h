@@ -92,7 +92,7 @@ struct s_file	/*File desciptor and name*/
 struct s_command
 {
 	char	*name;
-	char	**args;
+	t_list	*args;
 	t_list	*infile;
 	t_list	*outfile;
 };

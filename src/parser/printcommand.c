@@ -20,7 +20,7 @@ static void	ft_printlist(t_list *list)
 	count = 0;
 	if (list == NULL)
 	{
-		printf("%s\n", NULL);
+		printf("%s\n", (char *)NULL);
 		return ;
 	}
 	node = list;
@@ -41,7 +41,7 @@ static void	ft_print_stringarray(char **strarray)
 
 	if (strarray == NULL)
 	{
-		printf("%s\n", NULL);
+		printf("%s\n", (char *)NULL);
 		return ;
 	}
 	count = 0;
@@ -54,9 +54,6 @@ static void	ft_print_stringarray(char **strarray)
 
 void	ft_printcommand(t_command *command)
 {
-	int	count;
-
-	count = 0;
 	if (command == NULL)
 		return ;
 	printf("****** Command ********\n\n"

@@ -76,9 +76,9 @@ static int	ft_print_not_found(char **args, int i)
 
 int	ft_mini_export(t_list *envList, char **args)
 {
-	int	i;
+	//int	i;
 
-	i = 0;
+	//i = 0;
 	if (!args)
 		ft_mini_env(envList);
 		/*

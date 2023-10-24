@@ -21,12 +21,9 @@ static t_command	*ft_createcommand(
 	if (!command)
 		return (NULL);
 	command->name = ft_strdup(name);
-	command->args = ft_lstconvert_strarr(arglist);
+	command->args = arglist;
 	command->infile = infile;
 	command->outfile = outfile;
-	ft_lstclear(&arglist, free);
-	ft_lstclear(&infile, free);
-	ft_lstclear(&outfile, free);
 	return (command);
 }
 

@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:55:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/10/22 21:30:56 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/10/23 20:05:48 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,16 @@ static void	ft_loop(t_global *global)
 	t_minitree	*parsetree;
 
 	history = NULL;
+	signal(SIGINT, ft_handler_sigint);
+	signal(SIGQUIT, ft_handler_sigint);
 	while (global->status != EXITED)
 	{
 		global->line = readline(MINI_PROMPT);
 		if (!global->line)
-			ft_printerror(__func__, "Error reading line (readline function).") ;
+		{
+			ft_putendl_fd(" -> exit", STDERR_FILENO);
+			exit(EXIT_SUCCESS);
+		}
 		if (ft_strncmp(global->line, "exit", 4) == 0)
 			global->status = EXITED;
 		parsetree = ft_parse_commandline(global->line);

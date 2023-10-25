@@ -27,6 +27,15 @@ static t_bool	ft_check_filetype(t_token token, t_bool std_stream)
 	return (FALSE);
 }
 
+static int	ft_get_stdstream(t_bool std_stream)
+{
+	if (std_stream == INFILE)
+		return (STDIN_FILENO);
+	else if (std_stream == OUTFILE)
+		return (STDOUT_FILENO);
+	return (std_stream);
+}
+
 static void	ft_get_filelist(
 	t_list **filelist,
 	const char *commandline, t_part *tokenlist, t_bool std_stream)
@@ -46,11 +55,22 @@ static void	ft_get_filelist(
 				= ft_get_tokennode(tokenlist, node->token, CURRENT_NODE);
 			string = ft_extract_tokenstring(commandline, separatortoken->next);
 			file = ft_create_file(
-					string, std_stream, ft_get_filemode(node->token));
+					string, ft_get_stdstream(std_stream), ft_get_filemode(node->token));
 			ft_lstinsert(filelist, (t_file *)file, BACK);
 		}
 		node = node->next;
 	}
+}
+
+static t_list	*ft_default_filelist(int std_stream)
+{
+	t_list	*newfilelist;
+	t_file	*file;
+
+	newfilelist = NULL;
+	file = ft_create_file("STD", std_stream, 0);
+	ft_lstinsert(&newfilelist, (t_file *)file, BACK);
+	return (newfilelist);
 }
 
 t_list	*ft_extract_filelist(
@@ -62,5 +82,7 @@ t_list	*ft_extract_filelist(
 	if (commandline == NULL || tokenlist == NULL)
 		return (NULL);
 	ft_get_filelist(&filelist, commandline, tokenlist, std_stream);
+	if (filelist == NULL)
+		filelist = ft_default_filelist(ft_get_stdstream(std_stream));
 	return (filelist);
 }

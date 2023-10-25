@@ -14,6 +14,7 @@
 
 t_bool	ft_isbuiltin(char *commandname)
 {
+	printf("commandname = %s\n", commandname);
 	if (commandname == NULL)
 		return (EXITED);
 	else if (ft_strequal(commandname, "ls") == TRUE)

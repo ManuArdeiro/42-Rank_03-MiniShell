@@ -41,14 +41,16 @@ void	ft_execute_subprocess(
 {
 	char	**args;
 
-	if (infile->name != NULL && infile->mode != -1)
+	args = NULL;
+	if (infile->name != NULL && ft_strequal(infile->name, "STD") == FALSE)
 		infile->fd = ft_openfile(infile->name, infile->mode);
-	if (outfile->name != NULL)
+	if (outfile->name != NULL && ft_strequal(outfile->name, "STD") == FALSE)
 		outfile->fd = ft_openfile(outfile->name, outfile->mode);
 	ft_duplicate_descriptors(&infile->fd, &outfile->fd);
 	ft_closefile(&infile->fd);
 	ft_closefile(&outfile->fd);
 	args = ft_lstconvert_strarr(command->args);
+	printf("command name = %s\n", command->name);
 	if (ft_isbuiltin(command->name) == TRUE)
 		ft_execute_builtin(global, args);
 	else

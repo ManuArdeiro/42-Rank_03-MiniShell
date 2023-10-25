@@ -64,5 +64,7 @@ int	ft_strequal(const char *str1, const char *str2)
 	result = ft_strncmp(string1, string2, len);
 	free(string1);
 	free(string2);
+	if (result == 0)
+		return (TRUE);
 	return (result);
 }

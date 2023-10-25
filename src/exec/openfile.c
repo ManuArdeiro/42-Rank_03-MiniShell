@@ -17,6 +17,7 @@ int	ft_openfile(char *filename, int mode)
 	int	file_descriptor;
 
 	file_descriptor = -1;
+	printf("filename = %s\n", filename);
 	if (filename == NULL)
 		return (file_descriptor);
 	if (mode == O_RDONLY)
@@ -30,7 +31,7 @@ int	ft_openfile(char *filename, int mode)
 
 void	ft_closefile(int *file_descriptor)
 {
-	if (file_descriptor < 0)
+	if (*file_descriptor < 0)
 		return ;
 	if (close(*file_descriptor) < 0)
 		ft_printerror(__func__, "close");

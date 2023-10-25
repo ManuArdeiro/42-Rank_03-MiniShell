@@ -12,7 +12,6 @@
 
 #include "minishell.h"
 
-//FIXME -  ADD Empty file
 static void	ft_fork_subprocess(
 			t_command *command, pid_t **pid, int pidcount, t_global *global)
 {
@@ -20,8 +19,7 @@ static void	ft_fork_subprocess(
 	int		count;
 
 	count = 0;
-	if (command == NULL || *pid == NULL || global == NULL
-		|| command->outfile == NULL || command->infile == NULL)
+	if (command == NULL || *pid == NULL || global == NULL)
 		return ;
 	node = command->outfile;
 	while (count < pidcount)

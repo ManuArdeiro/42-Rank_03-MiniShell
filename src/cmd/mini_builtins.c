@@ -34,6 +34,7 @@ int	ft_arg_nbr(char **args)
 
 int	ft_builtins(char **args, t_list *envList, t_global *global)
 {
+	printf("HERE222\n");
 	if (ft_strequal(args[0], "cd") == TRUE)
 		return (ft_mini_cd(args, envList));
 	else if (ft_strequal(args[0], "echo") == TRUE)

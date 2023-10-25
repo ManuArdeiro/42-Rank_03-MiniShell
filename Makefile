@@ -46,10 +46,10 @@ BANNER = 	$(info $(WHITE_BAN))\
 USER			= $(shell whoami)
 INCLUDE 		= -Iinclude/
 INC_LIB 		= -Iinclude/libft
-INC_READLINE	= -I/Users/$(USER)/.brew/opt/readline/include
-READLINE_LIB	= -L/Users/$(USER)/.brew/opt/readline/lib
-#INC_READLINE	="-L/usr/local/opt/readline/lib"
-#READLINE_LIB	="-I/usr/local/opt/readline/include"
+#INC_READLINE	= -I/Users/$(USER)/.brew/opt/readline/include
+#READLINE_LIB	= -L/Users/$(USER)/.brew/opt/readline/lib
+INC_READLINE	="-L/usr/local/opt/readline/lib"
+READLINE_LIB	="-I/usr/local/opt/readline/include"
 SANITIZER		= -g3 -fsanitize=address -g
 
 READLINE_FLAGS	= -lreadline

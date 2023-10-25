@@ -17,6 +17,7 @@
 
 int	ft_mini_pwd(void)
 {
+	printf("HERE\n");
 	char	cwd[PATH_MAX];
 
 	if (getcwd(cwd, PATH_MAX))

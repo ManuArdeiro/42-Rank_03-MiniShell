@@ -50,7 +50,7 @@ static void	ft_loop(t_global *global)
 		global->line = readline(MINI_PROMPT);
 		if (!global->line)
 			ft_printerror(__func__, "Error reading line (readline function).");
-		if (ft_strncmp(global->line, "exit", 4) == 0)
+		if (ft_strequal(global->line, "exit") == TRUE)
 			global->status = EXITED;
 		parsetree = ft_parse_commandline(global->line);
 		ft_execute_commandline(parsetree, global);

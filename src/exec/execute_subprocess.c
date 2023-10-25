@@ -1,32 +1,56 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   execute_subprocess.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/25 17:50:35 by yzaytoun          #+#    #+#             */
+/*   Updated: 2023/10/25 18:28:03 by yzaytoun         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-void	ft_execute_subprocess(
-	t_command *command, t_file infile, t_file outfile, t_global *global)
+static void	ft_execute_givencommand(
+		t_command *command, t_global *global, char **args)
 {
-	//extract env
-	if (infile.name != NULL)
-		infile.fd = ft_openfile(infile.name, infile.mode);
-	if (outfile.name != NULL)
-		outfile.fd = ft_openfile(outfile.name, outfile.mode);
-	ft_duplicate_descriptors(&infile.fd, &outfile.fd);
-	ft_closefile(&infile.fd);
-	ft_closefile(&outfile.fd);
-	if (ft_isbuiltin(command->name) == TRUE)
+	char	**envp;
+
+	envp = ft_lstconvert_strarr(global->envlist);
+	if (execve(command->name, args, envp) < 0)
 	{
-		if (ft_builtins(command->args, global->envlist, global) == EXIT_FAILURE)
-		{
-			ft_printerror(NULL, "No such file or directory");
-			exit(127);
-		}
-		else
-			exit(EXIT_SUCCESS);
+		ft_printerror(NULL, "No such file or directory");
+		exit(127);
+	}
+}
+
+static void	ft_execute_builtin(t_global *global, char **args)
+{
+	if (ft_builtins(args, global->envlist, global) == EXIT_FAILURE)
+	{
+		ft_printerror(NULL, "No such file or directory");
+		exit(127);
 	}
 	else
-	{
-		if (execve(command->name, command->args, envp) < 0)
-		{
-			ft_printerror(NULL, "No such file or directory");
-			exit(127);
-		}
-	}
+		exit(EXIT_SUCCESS);
+}
+
+void	ft_execute_subprocess(
+		t_command *command, t_file *infile, t_file *outfile, t_global *global)
+{
+	char	**args;
+
+	if (infile->name != NULL && infile->mode != -1)
+		infile->fd = ft_openfile(infile->name, infile->mode);
+	if (outfile->name != NULL)
+		outfile->fd = ft_openfile(outfile->name, outfile->mode);
+	ft_duplicate_descriptors(&infile->fd, &outfile->fd);
+	ft_closefile(&infile->fd);
+	ft_closefile(&outfile->fd);
+	args = ft_lstconvert_strarr(command->args);
+	if (ft_isbuiltin(command->name) == TRUE)
+		ft_execute_builtin(global, args);
+	else
+		ft_execute_givencommand(command, global, args);
 }

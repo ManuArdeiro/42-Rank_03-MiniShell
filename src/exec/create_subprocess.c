@@ -1,31 +1,56 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   create_subprocess.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/25 17:50:44 by yzaytoun          #+#    #+#             */
+/*   Updated: 2023/10/25 18:35:33 by yzaytoun         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-int	ft_create_subprocess(
-		t_command *command, pid_t **pid, t_global *global)
+//FIXME -  ADD Empty file
+static void	ft_fork_subprocess(
+			t_command *command, pid_t **pid, int pidcount, t_global *global)
 {
+	t_list	*node;
 	int		count;
-	int		pidcount;
-	char	**envp;
 
 	count = 0;
-	//get argument string array
-	///get file array
+	if (command == NULL || *pid == NULL || global == NULL
+		|| command->outfile == NULL || command->infile == NULL)
+		return ;
+	node = command->outfile;
+	while (count < pidcount)
+	{
+		(*pid)[count] = fork();
+		if ((*pid)[count] == 0)
+		{
+			ft_execute_subprocess(command,
+				(t_file *)command->infile->content,
+				(t_file *)node->content,
+				global);
+			node = node->next;
+		}
+		else if ((*pid)[count] < 0)
+			ft_printerror(NULL, "Fork");
+		++count;
+	}
+}
+
+int	ft_create_subprocess(t_command *command, pid_t **pid, t_global *global)
+{
+	int		pidcount;
+
 	pidcount = ft_lstsize(command->outfile);
 	if (pidcount == 0)
 		pidcount = 1;
 	*pid = malloc(sizeof(pid_t) * pidcount);
 	if (!*pid)
 		return (0);
-	envp = ft_lstconvert_strarr(global->envlist);
-	while (count < pidcount)
-	{
-		(*pid)[count] = fork();
-		if ((*pid)[count] == 0)
-			ft_execute(
-				command, command->infile[0], command->outfile[count], global);	
-		else if ((*pid)[count] < 0)
-			ft_printerror(NULL, "Fork");
-		++count;
-	}
+	ft_fork_subprocess(command, pid, pidcount, global);
 	return (pidcount);
 }

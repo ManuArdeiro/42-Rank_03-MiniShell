@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 16:02:47 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/24 20:17:23 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/25 18:19:54 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,16 +35,19 @@ static void	ft_printlist(t_list *list)
 	}
 }
 
-static void	ft_print_stringarray(char **strarray)
+static void	ft_print_stringarray(t_list *list)
 {
 	int		count;
+	char	**strarray;
 
+
+	count = 0;
+	strarray = ft_lstconvert_strarr(list);
 	if (strarray == NULL)
 	{
-		printf("%s\n", (char *)NULL);
+		printf("%s\n", (char *) NULL);
 		return ;
 	}
-	count = 0;
 	while (strarray[count] != NULL)
 	{
 		printf("argument[%d] -> %s\n", count, strarray[count]);

@@ -6,7 +6,7 @@
 #    By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/01 18:51:45 by jolopez-          #+#    #+#              #
-#    Updated: 2023/10/24 19:34:58 by yzaytoun         ###   ########.fr        #
+#    Updated: 2023/10/25 18:28:38 by yzaytoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,7 +68,7 @@ PARSER			= get_commandlist.c separators.c extract_tokenstring.c \
 					tokensplit.c get_minicommand.c get_nodetype.c \
 					parse_commandline.c free_mininode.c \
 					is_redirection.c is_compoundcommand.c expand_startoken.c \
-					expand_dollartoken.c create_file.c get_filemode.c
+					expand_dollartoken.c create_file.c get_filemode.c add_pipeline.c
 
 SUMMARIZER		= minisummary.c printtokens.c get_unique_tokens.c \
 					get_token_summary.c get_token_count.c
@@ -80,7 +80,8 @@ TREE 			= minitree.c treetraversal.c is_emptynode.c create_mininode.c \
 				print_tree.c get_lasttreenode.c
 					
 EXEC			= executecommand.c openfile.c execute_commandline.c \
-				goto_childnode.c add_pathprefix.c add_pipeline.c
+				goto_childnode.c add_pathprefix.c evaluate_subprocess.c \
+				wait_subprocess.c create_subprocess.c execute_subprocess.c
 
 SRC 			= $(ENV) $(UTILS) $(SUMMARIZER) $(LEXER) \
 					$(CMD) $(PARSER) $(TREE) $(EXEC) main.c

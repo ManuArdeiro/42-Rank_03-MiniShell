@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 16:44:36 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/24 20:58:26 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/25 18:20:13 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	ft_executecommand(t_command *command, t_global *global)
 	dollar_expansion
 		= ft_expand_dollartoken(command->name, global->envlist, laststatus);
 	if (dollar_expansion != NULL)
-		ft_lstinsert(&command->args, (char *)dollar_expansion);
+		ft_lstinsert(&command->args, (char *)dollar_expansion, BACK);
 	pidcount = ft_create_subprocess(command, &pidarray, global);
-	global->laststatus = ft_waitprocess(pidarray, pidcount);
+	global->laststatus = ft_wait_subprocess(pidarray, pidcount);
 }

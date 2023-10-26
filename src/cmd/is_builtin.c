@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 17:50:18 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/21 18:45:40 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/26 20:25:34 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,8 @@
 
 t_bool	ft_isbuiltin(char *commandname)
 {
-	printf("commandname = %s\n", commandname);
 	if (commandname == NULL)
 		return (EXITED);
-	else if (ft_strequal(commandname, "ls") == TRUE)
-		return (TRUE);
 	else if (ft_strequal(commandname, "echo") == TRUE)
 		return (TRUE);
 	else if (ft_strequal(commandname, "unset") == TRUE)

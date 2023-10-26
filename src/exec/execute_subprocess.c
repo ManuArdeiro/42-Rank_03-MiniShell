@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:50:35 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/25 18:28:03 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/26 21:08:01 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,16 @@ static void	ft_execute_givencommand(
 		t_command *command, t_global *global, char **args)
 {
 	char	**envp;
+	char	*pathvariables;
 
 	envp = ft_lstconvert_strarr(global->envlist);
+	pathvariables = ft_getenv("PATH", global->envlist);
+	command->name = ft_add_pathprefix(command->name, pathvariables);
 	if (execve(command->name, args, envp) < 0)
 	{
-		ft_printerror(NULL, "No such file or directory");
+		ft_putstr_fd("MiniShell: command not found: ", STDERR_FILENO);
+		ft_putstr_fd(command->name, STDERR_FILENO);
+		ft_putstr_fd("\n", STDERR_FILENO);
 		exit(127);
 	}
 }
@@ -47,10 +52,11 @@ void	ft_execute_subprocess(
 	if (outfile->name != NULL && ft_strequal(outfile->name, "STD") == FALSE)
 		outfile->fd = ft_openfile(outfile->name, outfile->mode);
 	ft_duplicate_descriptors(&infile->fd, &outfile->fd);
-	ft_closefile(&infile->fd);
-	ft_closefile(&outfile->fd);
+	if (infile->fd != STDIN_FILENO)
+		ft_closefile(&infile->fd);
+	if (outfile->fd != STDOUT_FILENO)
+		ft_closefile(&outfile->fd);
 	args = ft_lstconvert_strarr(command->args);
-	printf("command name = %s\n", command->name);
 	if (ft_isbuiltin(command->name) == TRUE)
 		ft_execute_builtin(global, args);
 	else

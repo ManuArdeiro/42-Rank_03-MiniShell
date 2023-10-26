@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 18:03:52 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/14 17:05:02 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/26 20:34:15 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int	ft_openfile(char *filename, int mode)
 	int	file_descriptor;
 
 	file_descriptor = -1;
-	printf("filename = %s\n", filename);
 	if (filename == NULL)
 		return (file_descriptor);
 	if (mode == O_RDONLY)

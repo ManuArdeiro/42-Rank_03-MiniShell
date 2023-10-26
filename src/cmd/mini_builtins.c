@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 19:53:03 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/10/24 20:27:00 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/26 20:45:49 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ int	ft_arg_nbr(char **args)
 
 int	ft_builtins(char **args, t_list *envList, t_global *global)
 {
-	printf("HERE222\n");
 	if (ft_strequal(args[0], "cd") == TRUE)
 		return (ft_mini_cd(args, envList));
 	else if (ft_strequal(args[0], "echo") == TRUE)

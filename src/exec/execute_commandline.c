@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 12:40:08 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/24 20:03:18 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/26 21:01:10 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,21 @@ static void	ft_evaluate_relation(t_minitree *root, t_global *global)
 	nodetype = ((t_mininode *)root->content)->type;
 	if (nodetype == n_and)
 	{
+		global->lastnodetype = nodetype;
 		ft_goto_childnode(root, LEFT, global);
 		ft_goto_childnode(root, RIGHT, global);
 	}
 	else if (nodetype == n_or)
 	{
+		global->lastnodetype = nodetype;
 		ft_goto_childnode(root, LEFT, global);
 		if (global->status == EXIT_FAILURE)
 			ft_goto_childnode(root, RIGHT, global);
 	}
 	else if (nodetype == n_pipeline)
 		ft_add_pipeline(root);
-	else if (nodetype == n_command)
+	else if (nodetype == n_command
+		&& (global->lastnodetype != n_or))
 		ft_executecommand(
 			(t_command *)((t_mininode *)root->content)->content, global);
 }

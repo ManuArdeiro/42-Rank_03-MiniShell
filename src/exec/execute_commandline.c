@@ -12,47 +12,32 @@
 
 #include "minishell.h"
 
-static void	ft_evaluate_relation(t_minitree *root, t_global *global)
+static void	ft_navigate_and_execute(t_minitree *root, t_global *global)
 {
-	t_nodetype	nodetype;
+	t_nodetype	*nodetype;
 
-	global->status = EXIT_SUCCESS;
+	if (root == NULL)
+		return ;
 	nodetype = ((t_mininode *)root->content)->type;
-	if (nodetype == n_and)
+	if (nodetype == n_command)
+		ft_executecommand(
+			(t_command *)((t_mininode *)root->content)->content, global);
+	else if (nodetype == n_and)
 	{
-		global->lastnodetype = nodetype;
-		ft_goto_childnode(root, LEFT, global);
-		ft_goto_childnode(root, RIGHT, global);
+		ft_navigate_and_execute(root->leftchild, global);
+		ft_navigate_and_execute(root->rightchild, global);
 	}
 	else if (nodetype == n_or)
 	{
-		global->lastnodetype = nodetype;
-		ft_goto_childnode(root, LEFT, global);
-		if (global->status == EXIT_FAILURE)
-			ft_goto_childnode(root, RIGHT, global);
-	}
-	else if (nodetype == n_pipeline)
-		ft_add_pipeline(root);
-	else if (nodetype == n_command
-		&& (global->lastnodetype != n_or))
-		ft_executecommand(
-			(t_command *)((t_mininode *)root->content)->content, global);
-}
-
-static void	ft_navigate_and_execute(t_minitree *root, t_global *global)
-{
-	if (root == NULL)
-		return ;
-	ft_evaluate_relation(root, global);
-	if (ft_is_emptynode(root->leftchild) == FALSE)
 		ft_navigate_and_execute(root->leftchild, global);
-	if (ft_is_emptynode(root->rightchild) == FALSE)
-		ft_navigate_and_execute(root->rightchild, global);
+		if (global->laststatus == EXIT_FAILURE)
+			ft_navigate_and_execute(root->rightchild, global);
+	}
 }
 
 void	ft_execute_commandline(t_minitree *root, t_global *global)
 {
-	if (root == NULL)
+	if (root == NULL || global == NULL)
 		return ;
 	ft_navigate_and_execute(root, global);
 }

@@ -14,9 +14,9 @@
 
 static void	ft_navigate_and_execute(t_minitree *root, t_global *global)
 {
-	t_nodetype	*nodetype;
+	t_nodetype	nodetype;
 
-	if (root == NULL)
+	if (root == NULL || root->content == NULL)
 		return ;
 	nodetype = ((t_mininode *)root->content)->type;
 	if (nodetype == n_command)

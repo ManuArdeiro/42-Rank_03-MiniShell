@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 12:24:07 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/28 20:15:57 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/28 20:25:00 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ static void	ft_tokensplit_all(
 					*root = newnode;
 					break ;
 				}
-				system("leaks minishell");
 			}
 			++token;
 		}

@@ -6,33 +6,37 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 12:40:08 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/26 21:01:10 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/28 11:02:16 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	ft_navigate_and_execute(t_minitree *root, t_global *global)
+static int	ft_navigate_and_execute(t_minitree *root, t_global *global)
 {
 	t_nodetype	nodetype;
+	int			laststatus;
 
+	laststatus = EXIT_SUCCESS;
 	if (root == NULL || root->content == NULL)
-		return ;
+		return (EXITED);
 	nodetype = ((t_mininode *)root->content)->type;
 	if (nodetype == n_command)
-		ft_executecommand(
-			(t_command *)((t_mininode *)root->content)->content, global);
+		laststatus
+			= ft_executecommand(
+				(t_command *)((t_mininode *)root->content)->content, global);
 	else if (nodetype == n_and)
 	{
-		ft_navigate_and_execute(root->leftchild, global);
-		ft_navigate_and_execute(root->rightchild, global);
+		laststatus = ft_navigate_and_execute(root->leftchild, global);
+		laststatus = ft_navigate_and_execute(root->rightchild, global);
 	}
 	else if (nodetype == n_or)
 	{
-		ft_navigate_and_execute(root->leftchild, global);
-		if (global->laststatus == EXIT_FAILURE)
-			ft_navigate_and_execute(root->rightchild, global);
+		laststatus = ft_navigate_and_execute(root->leftchild, global);
+		if (laststatus == EXIT_FAILURE)
+			laststatus = ft_navigate_and_execute(root->rightchild, global);
 	}
+	return (laststatus);
 }
 
 void	ft_execute_commandline(t_minitree *root, t_global *global)

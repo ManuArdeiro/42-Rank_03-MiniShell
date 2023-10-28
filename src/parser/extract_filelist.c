@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 18:36:15 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/26 20:35:48 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/28 17:13:16 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	ft_get_filelist(
 
 	node = tokenlist;
 	separatortoken = NULL;
-	while (node != NULL && ft_isseparator(node->token) == FALSE)
+	while (node != NULL && ft_is_tokenseparator(node->token) == FALSE)
 	{
 		if (ft_check_filetype(node->token, std_stream) == TRUE)
 		{
@@ -56,7 +56,8 @@ static void	ft_get_filelist(
 			string = ft_extract_tokenstring(commandline, separatortoken->next);
 			file = ft_create_file(
 					string,
-					ft_get_stdstream(std_stream), ft_get_filemode(node->token));
+					ft_get_stdstream(std_stream),
+					ft_get_filemode(node->token));
 			ft_lstinsert(filelist, (t_file *)file, BACK);
 		}
 		node = node->next;

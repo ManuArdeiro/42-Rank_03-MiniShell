@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:47:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/10/23 19:37:00 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/28 13:47:33 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,6 @@
 void		ft_printhelp(void);
 void		ft_printwellcome(void);
 void		ft_printerror(const char *function, const char *string);
-
-// ReadLine Functions
-void		rl_clear_history(void);
-void		rl_replace_line(const char *text, int clear_undo);
 
 // Environment
 void		ft_setenv(t_list **envlist, char *key, char *value, int overwrite);

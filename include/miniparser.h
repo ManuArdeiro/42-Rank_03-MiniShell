@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 20:07:17 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/24 20:36:02 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/28 17:13:16 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_mininode	*ft_create_mininode(void *content, t_nodetype type);
 t_minitree	*ft_tokensplit(t_part *tokenlist, t_token token);
 
 char		*ft_extract_tokenstring(const char *commandline, t_part *node);
-t_list		*ft_extract_argumentlist(
+t_list		*ft_extract_arglist(
 				const char *commandline, t_part *tokenlist);
 t_list		*ft_extract_filelist(
 				const char *commandline,
@@ -50,7 +50,7 @@ t_file		*ft_create_file(const char *name, int std_stream, int mode);
 int			ft_get_filemode(t_token token);
 
 //Separators
-t_bool		ft_isseparator(t_token token);
+t_bool		ft_is_tokenseparator(t_token token);
 t_bool		ft_is_logicalseparator(t_token token);
 t_bool		ft_is_pipeseparator(t_token token);
 t_bool		ft_is_subshellseparator(t_token token);

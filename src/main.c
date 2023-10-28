@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:55:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/10/24 19:35:33 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/28 13:54:56 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,10 @@ static void	ft_register_and_clean(
 {
 	ft_postorder_traversal(*parsetree, ft_free_mininode);
 	ft_destroytree(parsetree);
-	if ((*global)->line && (*global)->line[0] != 32)
+	if ((*global)->line && *((*global)->line))
 	{
 		ft_register_command(history, (*global)->line);
 		add_history((*global)->line);
-	}
-	if ((*global)->line)
-	{
 		free((*global)->line);
 		(*global)->line = NULL;
 	}
@@ -56,9 +53,9 @@ static void	ft_loop(t_global *global)
 		ft_execute_commandline(parsetree, global);
 		ft_register_and_clean(&history, &global, &parsetree);
 	}
-	//rl_clear_history();
 	ft_write_command_history(&history, global);
 	ft_lstclear(&history, ft_free_string);
+	clear_history();
 }
 
 /*	This function first frees the list of environment strings then frees the

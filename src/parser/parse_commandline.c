@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 12:24:07 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/28 17:13:16 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/28 20:15:57 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,30 @@
 static void	ft_tokensplit_all(
 		t_minitree **root, t_part *tokenlist, const char *commandline)
 {
-	t_token	token;
+	t_token		token;
+	t_minitree	*newnode;
 
 	token = 0;
-	while (token < max_token)
+	newnode = NULL;
+	if (ft_contains_tokenseparator(tokenlist) == TRUE)
 	{
-		if (ft_is_tokenseparator(token) == TRUE)
+		while (token < max_token)
 		{
-			*root = ft_tokensplit(tokenlist, token);
-			if (*root != NULL)
-				break ;
+			if (ft_is_tokenseparator(token) == TRUE)
+			{
+				newnode = ft_tokensplit(tokenlist, token);
+				if (newnode != NULL)
+				{
+					ft_destroytree(root, ft_free_mininode);
+					*root = newnode;
+					break ;
+				}
+				system("leaks minishell");
+			}
+			++token;
 		}
-		++token;
 	}
-	if (*root == NULL)
+	else
 		*root = ft_get_minicommand(commandline, tokenlist);
 }
 
@@ -75,12 +85,9 @@ t_minitree	*ft_parse_commandline(const char *commandline)
 	parsetree = NULL;
 	if (commandline == NULL)
 		return (NULL);
-	system("leaks minishell");
 	tokenlist = ft_tokenizer((char *)commandline, &token_count);
-	system("leaks minishell");
 	//ft_print_tokenlist(tokenlist);
 	parsetree = ft_generate_parsetree(commandline, tokenlist);
-	system("leaks minishell");
 	//ft_printtree(parsetree);
 	return (parsetree);
 }

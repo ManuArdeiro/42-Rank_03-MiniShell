@@ -1,29 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_file.c                                      :+:      :+:    :+:   */
+/*   free_commandlist.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/23 19:44:00 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/23 19:44:51 by yzaytoun         ###   ########.fr       */
+/*   Created: 2023/10/28 19:30:06 by yzaytoun          #+#    #+#             */
+/*   Updated: 2023/10/28 19:36:32 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_file	*ft_create_file(const char *name, int std_stream, int mode)
+void	ft_free_commandlist(t_command *command)
 {
-	t_file	*newfile;
-
-	newfile = NULL;
-	if (name == NULL)
-		return (NULL);
-	newfile = malloc(sizeof(t_file));
-	if (!newfile)
-		return (NULL);
-	newfile->name = (char *)name;
-	newfile->fd = std_stream;
-	newfile->mode = mode;
-	return (newfile);
+	if (command == NULL)
+		return ;
+	free(command->name);
+	ft_lstclear(&command->args, ft_free_string);
+	ft_lstclear(&command->infile, ft_free_filelist);
+	ft_lstclear(&command->outfile, ft_free_filelist);
+	free(command);
 }

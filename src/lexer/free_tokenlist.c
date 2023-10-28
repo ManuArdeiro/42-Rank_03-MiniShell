@@ -1,22 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_emptynode.c                                     :+:      :+:    :+:   */
+/*   free_tokenlist.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/13 20:07:19 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/28 20:06:01 by yzaytoun         ###   ########.fr       */
+/*   Created: 2023/10/28 19:07:54 by yzaytoun          #+#    #+#             */
+/*   Updated: 2023/10/28 19:11:50 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_bool	ft_is_emptynode(t_minitree *root)
+void	ft_free_tokenlist(t_part **tokenlist)
 {
-	if (root == NULL
-		|| (t_mininode *)root->content == NULL
-		|| ((t_mininode *)root->content)->content == NULL)
-		return (TRUE);
-	return (FALSE);
+	t_part	*node;
+	t_part	*next;
+
+	if (tokenlist == NULL)
+		return ;
+	node = *tokenlist;
+	next = NULL;
+	while (node != NULL)
+	{
+		(*tokenlist) = node->next;
+		free(node);
+		node = (*tokenlist);
+	}
 }

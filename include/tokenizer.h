@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
+/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 11:18:23 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/18 16:40:59 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/10/28 19:12:29 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,6 @@ void		ft_tokenlist_add(t_part **tokenlist, t_part *newtoken);
 void		ft_print_tokenlist(t_part *tokenlist);
 void		ft_print_token(t_token token);
 
+void		ft_free_tokenlist(t_part **tokenlist);
 
 #endif

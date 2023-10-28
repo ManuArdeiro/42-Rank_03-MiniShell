@@ -1,22 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_emptynode.c                                     :+:      :+:    :+:   */
+/*   create_file.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/13 20:07:19 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/28 20:06:01 by yzaytoun         ###   ########.fr       */
+/*   Created: 2023/10/23 19:44:00 by yzaytoun          #+#    #+#             */
+/*   Updated: 2023/10/28 20:21:33 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_bool	ft_is_emptynode(t_minitree *root)
+t_file	*ft_create_file(const char *name, int std_stream, int mode)
 {
-	if (root == NULL
-		|| (t_mininode *)root->content == NULL
-		|| ((t_mininode *)root->content)->content == NULL)
-		return (TRUE);
-	return (FALSE);
+	t_file	*newfile;
+
+	newfile = NULL;
+	if (name == NULL)
+		return (NULL);
+	newfile = malloc(sizeof(t_file));
+	if (!newfile)
+		return (NULL);
+	newfile->name = (char *)name;
+	newfile->fd = std_stream;
+	newfile->mode = mode;
+	return (newfile);
 }

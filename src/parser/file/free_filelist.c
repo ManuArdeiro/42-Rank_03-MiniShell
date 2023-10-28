@@ -1,22 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_emptynode.c                                     :+:      :+:    :+:   */
+/*   free_filelist.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/13 20:07:19 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/28 20:06:01 by yzaytoun         ###   ########.fr       */
+/*   Created: 2023/10/28 19:37:02 by yzaytoun          #+#    #+#             */
+/*   Updated: 2023/10/28 19:39:42 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_bool	ft_is_emptynode(t_minitree *root)
+void	ft_free_filelist(void *content)
 {
-	if (root == NULL
-		|| (t_mininode *)root->content == NULL
-		|| ((t_mininode *)root->content)->content == NULL)
-		return (TRUE);
-	return (FALSE);
+	t_file	*file;
+
+	if (content == NULL)
+		return ;
+	file = (t_file *)content;
+	if (file->name != NULL)
+		free(file->name);
+	free(file);
 }

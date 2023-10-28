@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:55:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/10/28 13:54:56 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/28 20:22:52 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 static void	ft_register_and_clean(
 		t_list **history, t_global **global, t_minitree **parsetree)
 {
-	ft_postorder_traversal(*parsetree, ft_free_mininode);
-	ft_destroytree(parsetree);
+	//system("leaks minishell");
+	ft_destroytree(parsetree, ft_free_mininode);
 	if ((*global)->line && *((*global)->line))
 	{
 		ft_register_command(history, (*global)->line);

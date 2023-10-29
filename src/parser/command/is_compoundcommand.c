@@ -14,7 +14,7 @@
 
 t_bool	ft_is_compoundcommand(t_nodetype nodetype)
 {
-	if (nodetype != n_command)
+	if (nodetype == n_and || nodetype == n_or || nodetype == n_subshell)
 		return (TRUE);
 	return (FALSE);
 }

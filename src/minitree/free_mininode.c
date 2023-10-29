@@ -36,5 +36,4 @@ void	ft_free_mininode(void *content)
 		mininode->content = NULL;
 	}
 	free(mininode);
-	system("leaks minishell");
 }

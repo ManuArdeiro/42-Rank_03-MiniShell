@@ -22,5 +22,4 @@ void	ft_free_commandlist(t_command **command)
 	ft_lstclear(&(*command)->outfile, ft_free_filelist);
 	free(*command);
 	*command = NULL;
-	ft_printcommand(*command);
 }

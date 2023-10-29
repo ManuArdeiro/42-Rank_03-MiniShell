@@ -21,11 +21,15 @@ static void	ft_execute_givencommand(
 	envp = ft_lstconvert_strarr(global->envlist);
 	pathvariables = ft_getenv("PATH", global->envlist);
 	command->name = ft_add_pathprefix(command->name, pathvariables);
+	free(pathvariables);
 	if (execve(command->name, args, envp) < 0)
 	{
+		ft_clear_strarray(args);
+		ft_clear_strarray(envp);
 		ft_putstr_fd("MiniShell: command not found: ", STDERR_FILENO);
 		ft_putstr_fd(command->name, STDERR_FILENO);
 		ft_putstr_fd("\n", STDERR_FILENO);
+		ft_free_commandlist(&command);
 		exit(127);
 	}
 }
@@ -38,7 +42,10 @@ static void	ft_execute_builtin(t_global *global, char **args)
 		exit(127);
 	}
 	else
+	{
+		ft_clear_strarray(args);
 		exit(EXIT_SUCCESS);
+	}
 }
 
 void	ft_execute_subprocess(

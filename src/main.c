@@ -15,7 +15,7 @@
 static void	ft_register_and_clean(
 		t_list **history, t_global **global, t_minitree **parsetree)
 {
-	//system("leaks minishell");
+	system("leaks minishell");
 	if ((*global)->line && *((*global)->line))
 	{
 		ft_register_command(history, (*global)->line);

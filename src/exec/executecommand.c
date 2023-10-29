@@ -49,6 +49,8 @@ int	ft_executecommand(t_command *command, t_global *global)
 	ft_printcommand(command);
 	pidcount = ft_create_subprocess(command, &pidarray, global);
 	laststatus = ft_wait_subprocess(pidarray, pidcount);
+	if (pidarray != NULL)	
+		free(pidarray);
 	global->laststatus = laststatus;
 	return (laststatus);
 }

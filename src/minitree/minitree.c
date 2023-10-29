@@ -48,6 +48,7 @@ void	ft_destroytree(t_minitree **root, void (*free_function)(void *))
 	ft_destroytree(&(*root)->rightchild, free_function);
 	free_function(node->content);
 	free(node);
+	*root = NULL;
 }
 
 void	ft_treeinsert(

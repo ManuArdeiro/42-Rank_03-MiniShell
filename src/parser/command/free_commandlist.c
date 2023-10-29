@@ -12,13 +12,15 @@
 
 #include "minishell.h"
 
-void	ft_free_commandlist(t_command *command)
+void	ft_free_commandlist(t_command **command)
 {
-	if (command == NULL)
+	if (*command == NULL)
 		return ;
-	free(command->name);
-	ft_lstclear(&command->args, ft_free_string);
-	ft_lstclear(&command->infile, ft_free_filelist);
-	ft_lstclear(&command->outfile, ft_free_filelist);
-	free(command);
+	free((*command)->name);
+	ft_lstclear(&(*command)->args, ft_free_string);
+	ft_lstclear(&(*command)->infile, ft_free_filelist);
+	ft_lstclear(&(*command)->outfile, ft_free_filelist);
+	free(*command);
+	*command = NULL;
+	ft_printcommand(*command);
 }

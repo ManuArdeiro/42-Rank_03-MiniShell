@@ -29,7 +29,8 @@ static void	ft_tokensplit_all(
 				newnode = ft_tokensplit(tokenlist, token);
 				if (newnode != NULL)
 				{
-					ft_destroytree(root, ft_free_mininode);
+					if (ft_is_emptynode(*root) == FALSE)
+						ft_destroytree(root, ft_free_mininode);
 					*root = newnode;
 					break ;
 				}
@@ -47,14 +48,16 @@ static void	ft_parse_tokenlist(
 	if (tokenlist == NULL)
 		return ;
 	ft_tokensplit_all(root, tokenlist, commandline);
-	if (ft_is_emptynode((*root)->leftchild) == FALSE)
+	if (*root != NULL
+		&& ft_is_emptynode((*root)->leftchild) == FALSE)
 	{
 		ft_parse_tokenlist(
 			&(*root)->leftchild,
 			((t_mininode *)((*root)->leftchild->content))->content,
 			commandline);
 	}
-	if (ft_is_emptynode((*root)->rightchild) == FALSE)
+	if (*root != NULL
+		&& ft_is_emptynode((*root)->rightchild) == FALSE)
 	{
 		ft_parse_tokenlist(
 			&(*root)->rightchild,
@@ -70,6 +73,7 @@ static t_minitree	*ft_generate_parsetree(
 
 	if (tokenlist == NULL)
 		return (NULL);
+	parsetree = NULL;
 	ft_parse_tokenlist(&parsetree, tokenlist, commandline);
 	return (parsetree);
 }
@@ -87,6 +91,7 @@ t_minitree	*ft_parse_commandline(const char *commandline)
 	tokenlist = ft_tokenizer((char *)commandline, &token_count);
 	//ft_print_tokenlist(tokenlist);
 	parsetree = ft_generate_parsetree(commandline, tokenlist);
+	ft_free_tokenlist(&tokenlist);
 	//ft_printtree(parsetree);
 	return (parsetree);
 }

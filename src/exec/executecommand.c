@@ -41,7 +41,7 @@ int	ft_executecommand(t_command *command, t_global *global)
 	int		laststatus;
 
 	pidarray = NULL;
-	if (command == NULL || global == NULL)
+	if (command == NULL || global == NULL || command->name == NULL)
 		return (EXITED);
 	laststatus = global->laststatus;
 	global->laststatus = EXIT_SUCCESS;

@@ -41,7 +41,7 @@ void	ft_destroytree(t_minitree **root, void (*free_function)(void *))
 {
 	t_minitree	*node;
 
-	if (*root == NULL)
+	if (root == NULL || (*root) == NULL)
 		return ;
 	node = *root;
 	ft_destroytree(&(*root)->leftchild, free_function);

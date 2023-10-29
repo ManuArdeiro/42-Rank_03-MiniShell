@@ -58,7 +58,7 @@ t_minitree	*ft_get_minicommand(const char *commandline, t_part *tokenlist)
 
 	minitree = NULL;
 	minicommand = NULL;
-	if (tokenlist == NULL)
+	if (tokenlist == NULL || commandline == NULL)
 		return (NULL);
 	command = ft_newcommand(commandline, tokenlist);
 	minicommand = ft_create_mininode(command, n_command);

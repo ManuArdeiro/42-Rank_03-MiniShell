@@ -26,6 +26,8 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	size_t			i;
 
 	i = 0;
+	if (*s1 == '\0' || *s2 == '\0')
+		return (-1);
 	while (s1[i] && s2[i] && i < n)
 	{
 		if (cmp_char(s1[i], s2[i]))
@@ -36,16 +38,3 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 		return (cmp_char(s1[i], s2[i]));
 	return (0);
 }
-
-/*int	main(void)
-{
-	unsigned long 	i1, i2, i3;
-	char	*s1 = "\x12\xff\x65\x12\xbd\xde\xad";
-	char	*s2 = "\x12\x03";
-
-	i3 = 6;
-	i1 = strncmp(s1, s2, i3);
-	i2 = ft_strncmp(s1, s2, i3);
-	printf ("strncmp result = %lu \nft_strncmp result = %lu \n", i1, i2);
-	return (0);
-}*/

@@ -43,7 +43,7 @@ t_bool		ft_is_compoundcommand(t_nodetype nodetype);
 char		*ft_extract_tokenstring(const char *commandline, t_part *node);
 t_list		*ft_extract_arglist(
 				const char *commandline, t_part *tokenlist);
-void		ft_free_commandlist(t_command *command);
+void		ft_free_commandlist(t_command **command);
 
 //File
 t_list		*ft_extract_filelist(

@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:05:20 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/26 20:34:02 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/30 20:26:35 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,25 +18,39 @@
 	-	If it works and the previous directory is saved as OLDPWD in the
 		envList.	*/
 
+static void	ft_save_directory(t_list *envlist, char *oldpwd)
+{
+	char	*newpwd;
+
+	newpwd = NULL;
+	newpwd = getcwd(NULL, 0);
+	ft_setenv(&envlist, "PWD", newpwd, OVERWRITE_VALUE);
+	ft_setenv(&envlist, "OLDPWD", oldpwd, OVERWRITE_VALUE);
+	if (newpwd != NULL)
+		free(newpwd);
+}
+
 static int	ft_new_folder(t_list *envlist, char *dir)
 {
-	char	*current;
+	char	*oldpwd;
 
+	oldpwd = NULL;
 	if (dir == NULL)
-		return (1);
-	current = getcwd(NULL, 0);
+		return (EXIT_FAILURE);
+	oldpwd = getcwd(NULL, 0);
 	if (chdir(dir) != 0)
 	{
 		ft_putstr_fd(dir, STDERR_FILENO);
 		ft_putstr_fd(" ", STDERR_FILENO);
 		ft_putendl_fd("error", STDERR_FILENO);
-		free (current);
-		return (1);
+		free (oldpwd);
+		return (EXIT_FAILURE);
 	}
 	else
-		ft_setenv(&envlist, "OLDPWD", current, OVERWRITE_VALUE);
-	free(current);
-	return (0);
+		ft_save_directory(envlist, oldpwd);
+	if (oldpwd != NULL)
+		free(oldpwd);
+	return (EXIT_SUCCESS);
 }
 
 /*	This function tries to apply the "cd" commands follwing the next rules:
@@ -54,7 +68,8 @@ int	ft_mini_cd(char **arg, t_list *envList)
 {
 	char	*dir;
 
-	if (ft_arg_nbr(arg) > 2)
+
+	if (ft_arg_nbr(arg) > 3)
 	{
 		ft_print_screen("cd: Too many arguments.");
 		return (EXIT_SUCCESS);
@@ -65,7 +80,7 @@ int	ft_mini_cd(char **arg, t_list *envList)
 		if (dir == NULL)
 		{
 			ft_print_screen("cd: HOME directory not valid.");
-			return (EXIT_SUCCESS);
+			return (EXIT_FAILURE);
 		}
 		return (ft_new_folder(envList, dir));
 	}

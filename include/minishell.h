@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:47:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/10/28 13:47:33 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/30 19:48:12 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int			ft_mini_echo(char **args);
 int			ft_mini_env(t_list *envList);
 int			ft_mini_exit(t_global *global, char **args);
 int			ft_mini_export(t_list *envList, char **args);
-int			ft_mini_pwd(void);
+int			ft_mini_pwd(t_list *envlist);
 int			ft_mini_unset(t_list *envList, char **args);
 
 // Util

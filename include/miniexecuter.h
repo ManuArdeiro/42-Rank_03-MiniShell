@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 18:11:58 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/28 11:00:08 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/30 20:57:59 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	*ft_add_pathprefix(char *commandname, char *pathvariables);
 //Builtins
 t_bool	ft_isbuiltin(char *commandname);
 
-int		ft_wait_subprocess(pid_t *pid, int pidcount);
+int		ft_wait_subprocess(t_command *command, pid_t *pid, int pidcount);
 void	ft_execute_subprocess(t_command *command, t_file *infile,
 			t_file *outfile, t_global *global);
 int		ft_create_subprocess(t_command *command, pid_t **pid, t_global *global);

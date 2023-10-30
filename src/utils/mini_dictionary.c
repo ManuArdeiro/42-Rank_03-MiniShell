@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 19:48:16 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/14 20:48:36 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/30 19:10:55 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ void	ft_add_to_dict(t_list **envlist, char *key, char *value)
 /*	This function checks if the t_dict item (key or value) is empty and
 	returns TRUE if so.	It returns FALSE if both key and value are not 
 	empty.	*/
-	
+
 int	ft_emptydict(t_dict *dict)
 {
 	if (dict->key == NULL || dict->value == NULL)

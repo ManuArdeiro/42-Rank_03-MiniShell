@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:10:53 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/26 20:57:07 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/30 20:55:01 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,9 @@ enum e_bool
 	RIGHT,
 	NEXT_NODE,
 	CURRENT_NODE,
-	O_HEREDOC
+	O_HEREDOC,
+	FORK,
+	BUILTIN
 };
 
 struct s_dict

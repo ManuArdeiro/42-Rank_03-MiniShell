@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:50:35 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/28 21:04:11 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/30 20:31:07 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,20 +34,6 @@ static void	ft_execute_givencommand(
 	}
 }
 
-static void	ft_execute_builtin(t_global *global, char **args)
-{
-	if (ft_builtins(args, global->envlist, global) == EXIT_FAILURE)
-	{
-		ft_printerror(NULL, "No such file or directory");
-		exit(127);
-	}
-	else
-	{
-		ft_clear_strarray(args);
-		exit(EXIT_SUCCESS);
-	}
-}
-
 void	ft_execute_subprocess(
 		t_command *command, t_file *infile, t_file *outfile, t_global *global)
 {
@@ -64,8 +50,5 @@ void	ft_execute_subprocess(
 	if (outfile->fd != STDOUT_FILENO)
 		ft_closefile(&outfile->fd);
 	args = ft_lstconvert_strarr(command->args);
-	if (ft_isbuiltin(command->name) == TRUE)
-		ft_execute_builtin(global, args);
-	else
-		ft_execute_givencommand(command, global, args);
+	ft_execute_givencommand(command, global, args);
 }

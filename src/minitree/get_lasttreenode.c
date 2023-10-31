@@ -12,6 +12,7 @@
 
 #include "minishell.h"
 
+//FIXME - Retrun in place of node = root
 t_minitree	*ft_get_lasttreenode(t_minitree *root, t_bool direction)
 {
 	t_minitree	*node;

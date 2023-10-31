@@ -12,6 +12,7 @@
 
 #include "minishell.h"
 
+//FIXME - Clean text from new line
 static void	ft_add_commandhistory(int file_descriptor)
 {
 	char	*line;

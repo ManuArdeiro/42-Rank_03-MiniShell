@@ -28,15 +28,7 @@ static void	ft_fork_subprocess(
 		ft_printerror(NULL, "Fork");
 }
 
-static void	ft_execute_builtin(
-			t_command *command, pid_t *pid, t_list *node, t_global *global)
-{
-	char	**args;
-
-	args = ft_lstconvert_strarr(command->args);
-	*pid = ft_builtins(args, global->envlist, global);
-}
-
+//FIXME - Add builin child case with pipes and subshell
 static void	ft_initiate_subprocess(
 			t_command *command, pid_t **pid, int pidcount, t_global *global)
 {

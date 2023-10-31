@@ -49,7 +49,7 @@ int	ft_builtins(char **args, t_list *envlist, t_global *global)
 	else if (ft_strequal(args[0], "export") == TRUE)
 		return (ft_mini_export(envlist, args));
 	else if (ft_strequal(args[0], "pwd") == TRUE)
-		return (ft_mini_pwd(envlist));
+		return (ft_mini_pwd());
 	else if (ft_strequal(args[0], "unset") == TRUE)
 		return (ft_mini_unset(envlist, args));
 	return (EXIT_FAILURE);

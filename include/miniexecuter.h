@@ -34,4 +34,6 @@ void	ft_execute_subprocess(t_command *command, t_file *infile,
 			t_file *outfile, t_global *global);
 int		ft_create_subprocess(t_command *command, pid_t **pid, t_global *global);
 int		ft_evaluate_subprocess(int status);
+void	ft_execute_builtin(
+			t_command *command, pid_t *pid, t_list *node, t_global *global);
 #endif

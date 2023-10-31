@@ -15,21 +15,13 @@
 /*	This function gets the current directory via getcwd() function from the
 	unistd library, then print it to the standard output. */
 
-int	ft_mini_pwd(t_list *envlist)
+int	ft_mini_pwd(void)
 {
-	char	*cwd;
-
-	//char	cwd[PATH_MAX];
-	cwd = NULL;
-	//if (getcwd(cwd, PATH_MAX))
-	if (envlist == NULL)
-		return (EXIT_FAILURE);
-	cwd = ft_getenv("PWD", envlist);
-	printf("cwd =%s\n", cwd);
-	if (cwd != NULL)
+	char	cwd[PATH_MAX];
+	
+	if (getcwd(cwd, PATH_MAX))
 	{
 		ft_putendl_fd(cwd, STDOUT_FILENO);
-		free(cwd);
 		return (EXIT_SUCCESS);
 	}
 	else

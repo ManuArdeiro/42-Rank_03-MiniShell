@@ -24,14 +24,27 @@ static void	ft_execute_givencommand(
 	free(pathvariables);
 	if (execve(command->name, args, envp) < 0)
 	{
-		ft_clear_strarray(args);
 		ft_clear_strarray(envp);
+		ft_clear_strarray(args);
 		ft_putstr_fd("MiniShell: command not found: ", STDERR_FILENO);
 		ft_putstr_fd(command->name, STDERR_FILENO);
 		ft_putstr_fd("\n", STDERR_FILENO);
 		ft_free_commandlist(&command);
 		exit(127);
 	}
+}
+
+static void	ft_execute_builtincommand(char **args, t_global *global)
+{
+	if (ft_builtins(args, global->envlist, global) == EXIT_FAILURE)
+	{
+		ft_putstr_fd("MiniShell: command not found: ", STDERR_FILENO);
+		ft_putstr_fd(args[0], STDERR_FILENO);
+		ft_putstr_fd("\n", STDERR_FILENO);
+		ft_clear_strarray(args);
+		exit(127);
+	}
+	exit(EXIT_SUCCESS);
 }
 
 void	ft_execute_subprocess(
@@ -50,5 +63,8 @@ void	ft_execute_subprocess(
 	if (outfile->fd != STDOUT_FILENO)
 		ft_closefile(&outfile->fd);
 	args = ft_lstconvert_strarr(command->args);
-	ft_execute_givencommand(command, global, args);
+	if (ft_isbuiltin(command->name) == TRUE)
+		ft_execute_builtincommand(args, global);
+	else
+		ft_execute_givencommand(command, global, args);
 }

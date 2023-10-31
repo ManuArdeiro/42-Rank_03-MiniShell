@@ -79,7 +79,7 @@ TREE 			= minitree.c treetraversal.c is_emptynode.c create_mininode.c \
 EXEC			= executecommand.c openfile.c execute_commandline.c \
 				goto_childnode.c add_pathprefix.c evaluate_subprocess.c \
 				wait_subprocess.c create_subprocess.c execute_subprocess.c \
-				expand_startoken.c expand_dollartoken.c
+				expand_startoken.c expand_dollartoken.c execute_builtin.c
 
 SRC 			= $(ENV) $(UTILS) $(SUMMARIZER) $(LEXER) \
 					$(CMD) $(PARSER) $(TREE) $(EXEC) main.c

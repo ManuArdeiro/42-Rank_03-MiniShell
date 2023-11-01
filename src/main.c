@@ -48,7 +48,6 @@ static void	ft_loop(t_global *global)
 			ft_printerror(__func__, "Error reading line (readline function).");
 		if (ft_strequal(global->line, "exit") == TRUE)
 			global->status = EXITED;
-		printf("line = %d\n", ft_isbuiltin(global->line));
 		parsetree = ft_parse_commandline(global->line);
 		ft_execute_commandline(parsetree, global);
 		ft_register_and_clean(&history, &global, &parsetree);

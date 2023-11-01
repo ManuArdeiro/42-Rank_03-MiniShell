@@ -86,4 +86,6 @@ void			ft_lstinsert(t_list **list, void *content, t_location location);
 t_list			*ft_lstcopy(t_list *list, t_list *limit);
 int				ft_chrcount(const char *string, int c);
 int				ft_strequal(const char *str1, const char *str2);
+char			*ft_strstrip(const char *string);
+
 #endif

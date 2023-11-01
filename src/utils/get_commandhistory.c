@@ -12,18 +12,21 @@
 
 #include "minishell.h"
 
-//FIXME - Clean text from new line
 static void	ft_add_commandhistory(int file_descriptor)
 {
 	char	*line;
+	char	*cleanline;
 
 	line = "";
+	cleanline = NULL;
 	while (line != NULL)
 	{
 		line = get_next_line(file_descriptor);
-		if (line != NULL)
-			add_history(line);
+		cleanline = ft_strstrip(line);
+		if (cleanline != NULL)
+			add_history(cleanline);
 		free(line);
+		free(cleanline);
 	}
 }
 

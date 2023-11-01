@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+         #
+#    By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/01 18:51:45 by jolopez-          #+#    #+#              #
-#    Updated: 2023/10/28 20:26:03 by yzaytoun         ###   ########.fr        #
+#    Updated: 2023/11/01 20:15:22 by jolopez-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,7 +50,7 @@ READLINE_FLAGS	= -lreadline
 ENV				= ft_getenv.c ft_setenv.c ft_initenv.c ft_delenv.c
 
 UTILS			= print_msg.c mini_history.c get_path.c free_string.c \
-					mini_dictionary.c get_commandhistory.c
+					mini_dictionary.c signals.c
 
 LEXER			= tokenizer.c tokens.c token_tools_1.c token_tools_2.c \
 					ft_copy_tokenlist.c ft_tokenlist_add.c print_tokens.c \
@@ -82,9 +82,7 @@ EXEC			= executecommand.c openfile.c execute_commandline.c \
 				expand_startoken.c expand_dollartoken.c
 
 SRC 			= $(ENV) $(UTILS) $(SUMMARIZER) $(LEXER) \
-					$(CMD) $(PARSER) $(TREE) $(EXEC) main.c
-
-#------------------------------------------------------------------------
+					$(CMD) $(PARSER) $(TREE) $(EXEC)  main.c
 
 OBJS			=	$(SRC:%.c=$(OBJ_DIR)/%.o)
 

@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:47:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/11/01 20:14:36 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/11/01 20:26:36 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,6 @@ typedef struct	s_signals
 	int		exit_status;
 	pid_t	pid;
 }		t_signals;
-
-typedef struct	s_global
-{
-	int		status;
-	//int		laststatus;
-	char	*line;
-	t_list	*envlist;
-}	t_global;
 
 // Global variable (for signals)
 

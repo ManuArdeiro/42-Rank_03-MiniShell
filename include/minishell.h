@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:47:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/10/25 19:11:41 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/10/30 21:51:26 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,20 +30,29 @@
 # include "miniexecuter.h"
 # include "tokenizer.h"
 
-// Global variable for signals exit status:
-
-int	g_status;
-
-typedef struct s_global
+typedef struct	s_signals
 {
-	t_bool	status;
+	int		sig_int;
+	int		sig_quit;
+	int		exit_status;
+	pid_t	pid;
+}		t_signals;
+
+typedef struct	s_global
+{
+	int		status;
+	//int		laststatus;
 	char	*line;
 	t_list	*envlist;
-	int		laststatus;
 }	t_global;
 
+// Global variable (for signals)
+
+t_signals	g_signals;
+
 // Signals
-void		ft_handler_sigint(int sig_num);
+void		ft_sig_int(int sig_num);
+void		ft_sig_quit(int sig_num);
 
 // File utils/print_msg.c
 void		ft_printhelp(void);

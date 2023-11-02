@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:50:44 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/30 21:04:34 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/02 20:36:29 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ static void	ft_fork_subprocess(
 		ft_printerror(NULL, "Fork");
 }
 
-//FIXME - Add builin child case with pipes and subshell
 static void	ft_initiate_subprocess(
 			t_command *command, pid_t **pid, int pidcount, t_global *global)
 {
@@ -39,12 +38,12 @@ static void	ft_initiate_subprocess(
 	if (command == NULL || *pid == NULL || global == NULL)
 		return ;
 	node = command->outfile;
-	while (count < pidcount)
+	while (count < pidcount && node != NULL)
 	{
 		if (ft_isbuiltin(command->name) == TRUE)
-			ft_execute_builtin(command, pid[count], node, global);
+			ft_execute_builtin(command, &(*pid)[count], node, global);
 		else
-			ft_fork_subprocess(command, pid[count], node, global);
+			ft_fork_subprocess(command, &(*pid)[count], node, global);
 		node = node->next;
 		++count;
 	}

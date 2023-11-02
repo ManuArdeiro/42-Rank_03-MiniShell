@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 18:11:58 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/30 20:57:59 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/02 19:09:08 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,6 @@ int		ft_create_subprocess(t_command *command, pid_t **pid, t_global *global);
 int		ft_evaluate_subprocess(int status);
 void	ft_execute_builtin(
 			t_command *command, pid_t *pid, t_list *node, t_global *global);
+int		ft_navigate_and_execute(t_minitree *root, t_global *global);
+
 #endif

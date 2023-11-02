@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 18:05:17 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/24 20:56:16 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/02 19:32:57 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ t_list	*ft_expand_startoken(char *fullpath)
 	path = ft_strchr_pos(fullpath, '/', lastpos);
 	if (path == NULL)
 		path = ".";
-	printf("path = %s\n", path);
 	directory = opendir(path);
 	ft_add_dir(&files_list, directory, path);
 	return (files_list);

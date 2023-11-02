@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 20:13:18 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/24 20:04:33 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/02 20:39:28 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	ft_addpipe(t_command *command, int *pipe, t_bool std_stream)
 	else if (std_stream == OUTFILE)
 	{
 		pipestream = ft_create_file(ft_strdup("out_pipe"), pipe[1], std_stream);
-		ft_lstinsert(&command->outfile, pipestream, BACK);
+		ft_lstinsert(&command->outfile, pipestream, FRONT);
 	}
 }
 
@@ -56,7 +56,9 @@ void	ft_add_pipeline(t_minitree *root)
 
 	if (root == NULL)
 		return ;
-	firstright = root->rightchild;
+	lastleft = NULL;
+	firstright = NULL;
+	firstright = ft_get_lasttreenode(root->rightchild, LEFT);
 	if (ft_is_emptynode(root->leftchild) == FALSE
 		&& ft_is_emptynode(root->rightchild) == FALSE
 		&& ((t_mininode *)root->content)->type == n_or)
@@ -68,7 +70,8 @@ void	ft_add_pipeline(t_minitree *root)
 	}
 	else
 	{
-		lastleft = ft_get_lasttreenode(root, RIGHT);
+		if (ft_is_emptynode(root->leftchild) == FALSE)
+			lastleft = ft_get_lasttreenode(root->leftchild, RIGHT);
 		ft_add_tochild(root, lastleft, firstright);
 	}
 }

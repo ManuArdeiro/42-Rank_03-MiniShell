@@ -6,13 +6,36 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 12:40:08 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/30 19:59:03 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/02 19:11:01 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	ft_navigate_and_execute(t_minitree *root, t_global *global)
+static void	ft_evaluate_relation(
+		t_minitree *root,
+		t_global *global, int *laststatus, t_nodetype nodetype)
+{
+	if (nodetype == n_and)
+	{
+		*laststatus = ft_navigate_and_execute(root->leftchild, global);
+		*laststatus = ft_navigate_and_execute(root->rightchild, global);
+	}
+	else if (nodetype == n_or)
+	{
+		*laststatus = ft_navigate_and_execute(root->leftchild, global);
+		if (*laststatus == EXIT_FAILURE)
+			*laststatus = ft_navigate_and_execute(root->rightchild, global);
+	}
+	else if (nodetype == n_pipeline)
+	{
+		ft_add_pipeline(root);
+		*laststatus = ft_navigate_and_execute(root->leftchild, global);
+		*laststatus = ft_navigate_and_execute(root->rightchild, global);
+	}
+}
+
+int	ft_navigate_and_execute(t_minitree *root, t_global *global)
 {
 	t_nodetype	nodetype;
 	int			laststatus;
@@ -25,19 +48,9 @@ static int	ft_navigate_and_execute(t_minitree *root, t_global *global)
 		laststatus
 			= ft_executecommand(
 				(t_command *)((t_mininode *)root->content)->content, global);
-	else if (nodetype == n_and)
-	{
-		laststatus = ft_navigate_and_execute(root->leftchild, global);
-		laststatus = ft_navigate_and_execute(root->rightchild, global);
-	}
-	else if (nodetype == n_or)
-	{
-		laststatus = ft_navigate_and_execute(root->leftchild, global);
-		if (laststatus == EXIT_FAILURE)
-			laststatus = ft_navigate_and_execute(root->rightchild, global);
-	}
-	else if (nodetype == n_pipeline)
-		ft_add_pipeline(root);
+	else if (ft_is_compoundcommand(nodetype) == TRUE
+		|| nodetype == n_pipeline)
+		ft_evaluate_relation(root, global, &laststatus, nodetype);
 	return (laststatus);
 }
 

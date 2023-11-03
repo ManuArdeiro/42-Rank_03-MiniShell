@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 13:26:26 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/11/02 18:56:29 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/03 20:42:01 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,6 @@ int	ft_strequal(const char *str1, const char *str2)
 	free(string2);
 	if (result == 0)
 		return (TRUE);
-	return (result);
+	else
+		return (FALSE);
 }

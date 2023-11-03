@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 17:03:19 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/10/30 20:10:58 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/03 20:40:18 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 int	ft_mini_pwd(void)
 {
 	char	cwd[PATH_MAX];
-	
+
 	if (getcwd(cwd, PATH_MAX))
 	{
 		ft_putendl_fd(cwd, STDOUT_FILENO);

@@ -6,13 +6,25 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 18:05:17 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/11/02 19:32:57 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/03 20:43:21 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	ft_add_dir(t_list **files_list, DIR *directory, char *path)
+static void	ft_filter_path(
+	const char *path, t_list **fileslist, struct dirent *dirent)
+{
+	if (ft_strequal(path, "..") == FALSE && *path != '.')
+		ft_lstinsert(fileslist,
+			ft_strjoin(path, (char *)dirent->d_name), BACK);
+	//else if ()
+	//{
+	//	find string that starts with
+	//}
+}
+
+static void	ft_add_dir(t_list **fileslist, DIR *directory, char *path)
 {
 	struct dirent	*dirent;
 
@@ -23,11 +35,9 @@ static void	ft_add_dir(t_list **files_list, DIR *directory, char *path)
 		{
 			if (path[0] == '.')
 				ft_lstinsert(
-					files_list, ft_strdup((char *)dirent->d_name), BACK);
+					fileslist, ft_strdup((char *)dirent->d_name), BACK);
 			else
-				ft_lstinsert(
-					files_list,
-					ft_strjoin(path, (char *)dirent->d_name), BACK);
+				ft_filter_path(path, fileslist, dirent);
 			dirent = readdir(directory);
 		}
 	}
@@ -35,10 +45,10 @@ static void	ft_add_dir(t_list **files_list, DIR *directory, char *path)
 
 t_list	*ft_expand_startoken(char *fullpath)
 {
-	char			*path;
-	DIR				*directory;
-	t_list			*files_list;
-	int				lastpos;
+	char	*path;
+	DIR		*directory;
+	t_list	*files_list;
+	int		lastpos;
 
 	files_list = NULL;
 	path = NULL;

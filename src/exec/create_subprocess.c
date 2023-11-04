@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_subprocess.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:50:44 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/11/02 20:36:29 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/04 20:18:52 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ int	ft_create_subprocess(t_command *command, pid_t **pid, t_global *global)
 	if (pidcount == 0)
 		pidcount = 1;
 	*pid = malloc(sizeof(pid_t) * pidcount);
+	g_signals.pidarray = *pid;
 	if (!*pid)
 		return (0);
 	ft_initiate_subprocess(command, pid, pidcount, global);

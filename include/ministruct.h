@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:10:53 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/11/04 16:48:37 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/11/04 18:01:11 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,6 +139,4 @@ typedef struct s_global
 	int			laststatus;
 	t_nodetype	lastnodetype;
 }	t_global;
-
-
-#endif		/*Mini struct header*/
+#endif

@@ -6,7 +6,7 @@
 #    By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/01 18:51:45 by jolopez-          #+#    #+#              #
-#    Updated: 2023/11/04 16:48:31 by jolopez-         ###   ########.fr        #
+#    Updated: 2023/11/04 20:26:22 by jolopez-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,10 +38,10 @@ BANNER = 	$(info $(WHITE_BAN))\
 USER			= $(shell whoami)
 INCLUDE 		= -Iinclude/
 INC_LIB 		= -Iinclude/libft
-#INC_READLINE	= -I/Users/$(USER)/.brew/opt/readline/include
-#READLINE_LIB	= -L/Users/$(USER)/.brew/opt/readline/lib
-INC_READLINE	="-L/usr/local/opt/readline/lib"
-READLINE_LIB	="-I/usr/local/opt/readline/include"
+INC_READLINE	= -I/Users/$(USER)/.brew/opt/readline/include
+READLINE_LIB	= -L/Users/$(USER)/.brew/opt/readline/lib -I include/
+#INC_READLINE	="-L/usr/local/opt/readline/lib"
+#READLINE_LIB	="-I/usr/local/opt/readline/include"
 SANITIZER		= -g3 -fsanitize=address -g
 
 READLINE_FLAGS	= -lreadline
@@ -88,7 +88,7 @@ OBJS			=	$(SRC:%.c=$(OBJ_DIR)/%.o)
 
 RM 				=	/bin/rm -rf
 CC 				= 	gcc
-CFLAGS 			= 	-Wall -Werror -Wextra $(INCLUDE) $(INC_LIB) $(READLINE_INC) $(SANITIZER)
+CFLAGS 			= 	-Wall -Werror -Wextra $(INCLUDE) $(INC_LIB) $(INC_READLINE) $(SANITIZER)
 
 LIBFT			= 	include/libft/libft.a
 LIBFTDIR		= 	include/libft
@@ -102,8 +102,7 @@ all: $(NAME)
 
 $(NAME): 	$(BANNER) $(LIBFT) $(OBJS)
 			@echo "$(YELLOW) Creating minishell... $(WHITE)"
-			$(CC) $(CFLAGS) $(OBJS) $(READLINE_LIB)\
-			 $(READLINE_FLAGS) $(LIBFT) -o $(NAME)
+			$(CC) $(CFLAGS) $(OBJS) $(READLINE_LIB) $(READLINE_FLAGS) $(LIBFT) -o $(NAME)
 			@echo "\n$(LIGHT_GRAY)---------- MiniShell Ready ------------\n"
 .SILENT:
 $(LIBFT):

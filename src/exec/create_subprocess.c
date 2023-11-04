@@ -50,11 +50,10 @@ static void	ft_initiate_subprocess(
 	}
 }
 
-
 int	ft_create_subprocess(t_command *command, pid_t **pid, t_global *global)
 {
 	int		pidcount;
-	t_file	*file;
+	//t_file	*file;
 
 	pidcount = ft_lstsize(command->outfile);
 	if (pidcount == 0)
@@ -63,7 +62,7 @@ int	ft_create_subprocess(t_command *command, pid_t **pid, t_global *global)
 	if (!*pid)
 		return (0);
 	//file = ft_compress_filelist(command->infile);
-	ft_lstinsert(&command->infile, file, FRONT);
+	//ft_lstinsert(&command->infile, file, FRONT);
 	ft_initiate_subprocess(command, pid, pidcount, global);
 	return (pidcount);
 }

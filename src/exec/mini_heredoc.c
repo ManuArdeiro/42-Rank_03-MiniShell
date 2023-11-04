@@ -56,7 +56,8 @@ void	ft_get_heredoc(const char *delimiter)
 		ft_printerror(__func__, "Fork");
 	else
 	{
-		ft_duplicate_descriptors(herepipe[0], STDOUT_FILENO);
+		if (dup2(herepipe[0], STDOUT_FILENO) < 0)
+			ft_printerror(__func__, "Dup2");
 		ft_closefile(&herepipe[0]);
 		ft_closefile(&herepipe[1]);
 	}

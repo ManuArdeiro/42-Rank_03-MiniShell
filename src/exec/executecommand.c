@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-static void	ft_find_and_expand(
+static void	ft_expand_wildcards(
 		t_command *command, t_global *global, int laststatus)
 {
 	char	*dollar_expansion;
@@ -45,7 +45,8 @@ int	ft_executecommand(t_command *command, t_global *global)
 		return (EXITED);
 	laststatus = global->laststatus;
 	global->laststatus = EXIT_SUCCESS;
-	ft_find_and_expand(command, global, laststatus);
+	ft_expand_wildcards(command, global, laststatus);
+	ft_expand_filelist(command->infile);
 	ft_printcommand(command);
 	pidcount = ft_create_subprocess(command, &pidarray, global);
 	laststatus = ft_wait_subprocess(command, pidarray, pidcount);

@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:55:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/11/04 12:53:17 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/04 16:29:28 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ static void	ft_loop(t_global *global)
 	t_minitree	*parsetree;
 
 	history = NULL;
-	//ft_get_commandhistory(global->envlist);
 	while (global->status != EXITED)
 	{
 		global->line = readline(MINI_PROMPT);

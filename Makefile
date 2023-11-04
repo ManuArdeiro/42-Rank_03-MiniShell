@@ -6,7 +6,7 @@
 #    By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/01 18:51:45 by jolopez-          #+#    #+#              #
-#    Updated: 2023/10/30 18:40:36 by yzaytoun         ###   ########.fr        #
+#    Updated: 2023/11/04 18:29:20 by yzaytoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,7 +50,7 @@ READLINE_FLAGS	= -lreadline
 ENV				= ft_getenv.c ft_setenv.c ft_initenv.c ft_delenv.c
 
 UTILS			= print_msg.c mini_history.c get_path.c free_string.c \
-					mini_dictionary.c get_commandhistory.c
+					mini_dictionary.c
 
 LEXER			= tokenizer.c tokens.c token_tools_1.c token_tools_2.c \
 					ft_copy_tokenlist.c ft_tokenlist_add.c print_tokens.c \
@@ -61,7 +61,7 @@ COMMAND			= extract_tokenstring.c get_commandlist.c lstconvert.c \
 					extract_arglist.c is_compoundcommand.c free_commandlist.c
 					
 FILE			= create_file.c get_filemode.c add_pipeline.c is_redirection.c \
-					free_filelist.c
+					free_filelist.c append_filecontent.c
 
 PARSER			=  separators.c get_tokennode.c tokensplit.c get_nodetype.c \
 					parse_commandline.c contains_tokenseparator.c \
@@ -79,7 +79,8 @@ TREE 			= minitree.c treetraversal.c is_emptynode.c create_mininode.c \
 EXEC			= executecommand.c openfile.c execute_commandline.c \
 				goto_childnode.c add_pathprefix.c evaluate_subprocess.c \
 				wait_subprocess.c create_subprocess.c execute_subprocess.c \
-				expand_startoken.c expand_dollartoken.c execute_builtin.c
+				expand_startoken.c expand_dollartoken.c execute_builtin.c \
+				mini_heredoc.c
 
 SRC 			= $(ENV) $(UTILS) $(SUMMARIZER) $(LEXER) \
 					$(CMD) $(PARSER) $(TREE) $(EXEC) main.c

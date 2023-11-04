@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 20:07:17 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/11/04 14:02:43 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/04 17:51:38 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ t_file		*ft_create_file(const char *name, int std_stream, int mode);
 int			ft_get_filemode(t_token token);
 t_bool		ft_is_redirection(t_token token);
 void		ft_free_filelist(void *content);
+t_file		*ft_compress_filelist(t_list *filelist);
 
 //Separators
 t_bool		ft_is_tokenseparator(t_token token);

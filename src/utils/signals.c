@@ -6,53 +6,11 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 21:33:30 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/11/01 19:45:05 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/11/04 16:51:39 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-/*static void	ft_process(int sig_num)
-{
-	if (!kill(g_pid, sig_num))
-	{
-		if (sig_num == SIGQUIT)
-		{
-			ft_putstr_fd("Quit: 3\n", 1);
-			g_status = 131;
-		}
-		else if (sig_num == SIGINT)
-		{
-			ft_putchar_fd('\n', 1);
-			g_status = 130;
-		}
-	}
-	else if (sig_num == SIGINT)
-	{
-		ft_putchar_fd('\n', 1);
-		g_status = 1;
-		prompt();
-	}
-}
-
-void	ft_sigint_handler(int sig_num)
-{
-	if ((sig_num == SIGINT || sig_num == SIGQUIT) && g_pid != 0)
-		ft_process(g_pid, sig_num);
-	else
-	{
-		if (sig_num == SIGINT)
-		{
-			ft_putchar_fd('\n', 1);
-			rl_replace_line("", 1);
-			rl_on_new_line();
-			rl_redisplay();
-			g_status = 1;
-		}
-		else if (sig_num == SIGQUIT)
-			ft_putstr_fd("\b\b  \b\b", 1);
-	}
-}*/
 
 void	ft_sig_int(int sig_num)
 {
@@ -96,6 +54,8 @@ void	ft_signals(void)
 	g_signals.sig_quit = 0;
 	g_signals.exit_status = 0;
 	g_signals.pid = 0;
+	signal(SIGINT, &ft_sig_int);
+	signal(SIGQUIT, &ft_sig_quit);
 }
 
 /* poner en ejecución:

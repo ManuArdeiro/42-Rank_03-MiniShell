@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 20:50:54 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/28 11:43:11 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/04 12:18:33 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,14 @@
 static void	ft_add_commandhistory(int file_descriptor)
 {
 	char	*line;
-	char	*cleanline;
 
 	line = "";
-	cleanline = NULL;
 	while (line != NULL)
 	{
 		line = get_next_line(file_descriptor);
-		cleanline = ft_strstrip(line);
-		if (cleanline != NULL)
-			add_history(cleanline);
+		if (line != NULL)
+			add_history(line);
 		free(line);
-		free(cleanline);
 	}
 }
 

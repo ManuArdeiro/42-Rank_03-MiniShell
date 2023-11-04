@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:55:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/11/03 19:05:38 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/04 12:53:17 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,12 @@
 static void	ft_register_and_clean(
 		t_list **history, t_global **global, t_minitree **parsetree)
 {
-	char	*cleanedline;
-
-	cleanedline = NULL;
 	if ((*global)->line && *((*global)->line))
 	{
-		cleanedline = ft_strstrip((*global)->line);
-		ft_register_command(history, cleanedline);
-		add_history(cleanedline);
+		ft_register_command(history, (*global)->line);
+		add_history((*global)->line);
 		free((*global)->line);
-		free(cleanedline);
 		(*global)->line = NULL;
-		cleanedline = NULL;
 	}
 	ft_destroytree(parsetree, ft_free_mininode);
 }
@@ -46,7 +40,7 @@ static void	ft_loop(t_global *global)
 	t_minitree	*parsetree;
 
 	history = NULL;
-	ft_get_commandhistory(global->envlist);
+	//ft_get_commandhistory(global->envlist);
 	while (global->status != EXITED)
 	{
 		global->line = readline(MINI_PROMPT);

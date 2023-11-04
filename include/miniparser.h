@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 20:07:17 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/28 20:11:32 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/04 14:02:43 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ t_bool		ft_is_compoundcommand(t_nodetype nodetype);
 char		*ft_extract_tokenstring(const char *commandline, t_part *node);
 t_list		*ft_extract_arglist(
 				const char *commandline, t_part *tokenlist);
-void		ft_free_commandlist(t_command *command);
+void		ft_free_commandlist(t_command **command);
 
 //File
 t_list		*ft_extract_filelist(
@@ -62,7 +62,7 @@ t_bool		ft_is_subshellseparator(t_token token);
 t_bool		ft_is_semicolon(t_token token);
 
 //Expansions
-t_list		*ft_expand_startoken(char *fullpath);
+t_list		*ft_expand_startoken(const char *fullpath);
 char		*ft_expand_dollartoken(
 				const char *argument, t_list *envlist, int laststatus);
 

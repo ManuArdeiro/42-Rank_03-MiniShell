@@ -6,30 +6,46 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:50:22 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/25 18:23:55 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/30 21:01:38 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_wait_subprocess(pid_t *pid, int pidcount)
+static void	ft_wait_process(pid_t *pid, int *laststatus, t_bool processtype)
 {
-	int	count;
 	int	status;
-	int	laststatus;
 
 	status = EXIT_SUCCESS;
+	if (processtype == FORK)
+	{
+		if (waitpid(*pid, &status, EXIT_SUCCESS) < 0)
+			*laststatus = ft_evaluate_subprocess(status);
+	}
+	else if (processtype == BUILTIN)
+	{
+		if (*pid != EXIT_SUCCESS)
+			*laststatus = *pid;
+	}
+}
+
+int	ft_wait_subprocess(t_command *command, pid_t *pid, int pidcount)
+{
+	int	count;
+	int	laststatus;
+
 	laststatus = EXIT_SUCCESS;
 	if (pidcount == 0)
 		return (EXITED);
 	count = 0;
 	while (count < pidcount)
 	{
-		if (waitpid(pid[count], &status, EXIT_SUCCESS) < 0)
-		{
-			laststatus = ft_evaluate_subprocess(status);
+		if (ft_isbuiltin(command->name) == TRUE)
+			ft_wait_process(&pid[count], &laststatus, BUILTIN);
+		else
+			ft_wait_process(&pid[count], &laststatus, FORK);
+		if (laststatus != EXIT_SUCCESS)
 			return (laststatus);
-		}
 		++count;
 	}
 	return (laststatus);

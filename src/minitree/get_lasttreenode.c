@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 20:16:49 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/24 19:57:01 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/02 19:19:32 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,23 @@ t_minitree	*ft_get_lasttreenode(t_minitree *root, t_bool direction)
 {
 	t_minitree	*node;
 
-	node = NULL;
 	if (root == NULL)
 		return (NULL);
-	if (direction == RIGHT)
+	node = root;
+	while (node != NULL)
 	{
-		if (ft_is_emptynode(root->rightchild) == TRUE)
-			node = root;
-		else
-			ft_get_lasttreenode(root->rightchild, direction);
+		if (direction == RIGHT)
+		{
+			if (ft_is_emptynode(node->rightchild) == TRUE)
+				return (node);
+			node = node->rightchild;
+		}
+		else if (direction == LEFT)
+		{
+			if (ft_is_emptynode(node->leftchild) == TRUE)
+				return (node);
+			node = node->leftchild;
+		}
 	}
-	else if (direction == LEFT)
-	{
-		if (ft_is_emptynode(root->leftchild) == TRUE)
-			node = root;
-		else
-			ft_get_lasttreenode(root->leftchild, direction);
-	}
-	return (node);
+	return (NULL);
 }

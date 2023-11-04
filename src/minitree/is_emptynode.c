@@ -14,8 +14,7 @@
 
 t_bool	ft_is_emptynode(t_minitree *root)
 {
-	if (root == NULL
-		|| (t_mininode *)root->content == NULL
+	if (root == NULL || root->content == NULL
 		|| ((t_mininode *)root->content)->content == NULL)
 		return (TRUE);
 	return (FALSE);

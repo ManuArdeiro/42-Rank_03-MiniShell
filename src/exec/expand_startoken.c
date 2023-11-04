@@ -6,50 +6,94 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 18:05:17 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/24 20:56:16 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/04 16:27:16 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	ft_add_dir(t_list **files_list, DIR *directory, char *path)
+static void	ft_filter_path(
+	const char *path,
+	t_list **fileslist, struct dirent *dirent, char *fileprefix)
+{
+	if (fileprefix != NULL
+		&& *fileprefix != '\0'
+		&& *fileprefix != ' ')
+	{
+		if (ft_startswith(dirent->d_name, fileprefix) == TRUE)
+			ft_lstinsert(fileslist,
+				ft_strjoin(path, (char *)dirent->d_name), BACK);
+	}
+	else if (*(dirent->d_name) != '.')
+		ft_lstinsert(fileslist,
+			ft_strjoin(path, (char *)dirent->d_name), BACK);
+}
+
+static void	ft_add_dirfiles(
+		t_list **fileslist, DIR *directory, char *path, char *pathsuffix)
 {
 	struct dirent	*dirent;
+	int				pathlen;
+	char			*fileprefix;
 
+	fileprefix = ft_strstrip(pathsuffix);
+	pathlen = ft_strlen(path);
+	if (pathlen > 1)
+		path = ft_strjoin_get(path, "/");
 	if (directory != NULL)
 	{
 		dirent = readdir(directory);
 		while (dirent != NULL)
 		{
-			if (path[0] == '.')
+			if (ft_strncmp(path, ".", 1) == 0 && pathlen == 1)
 				ft_lstinsert(
-					files_list, ft_strdup((char *)dirent->d_name), BACK);
+					fileslist, ft_strdup((char *)dirent->d_name), BACK);
 			else
-				ft_lstinsert(
-					files_list,
-					ft_strjoin(path, (char *)dirent->d_name), BACK);
+				ft_filter_path(path, fileslist, dirent, fileprefix);
 			dirent = readdir(directory);
 		}
 	}
 }
 
-t_list	*ft_expand_startoken(char *fullpath)
+static char	*ft_get_dirpath(const char *fullpath, char **pathsuffix)
 {
-	char			*path;
-	DIR				*directory;
-	t_list			*files_list;
-	int				lastpos;
+	char	*path;
+	char	*pathlimit;
+	int		lastpos;
 
-	files_list = NULL;
 	path = NULL;
+	pathlimit = NULL;
+	lastpos = 0;
+	if (ft_strlen(fullpath) == 1)
+		path = ".";
+	else
+	{
+		lastpos = ft_chrcount(fullpath, '/');
+		pathlimit = ft_strchr_pos(fullpath, '/', lastpos);
+		path = ft_cutstr(fullpath, pathlimit);
+	}
+	*pathsuffix = ft_strrchr(fullpath, '/');
+	return (path);
+}
+
+t_list	*ft_expand_startoken(const char *fullpath)
+{
+	char	*dirpath;
+	DIR		*directory;
+	t_list	*fileslist;
+	char	*pathsuffix;
+
+	fileslist = NULL;
+	dirpath = NULL;
+	pathsuffix = NULL;
+	directory = NULL;
 	if (fullpath == NULL)
 		return (NULL);
-	lastpos = ft_chrcount(fullpath, '/');
-	path = ft_strchr_pos(fullpath, '/', lastpos);
-	if (path == NULL)
-		path = ".";
-	printf("path = %s\n", path);
-	directory = opendir(path);
-	ft_add_dir(&files_list, directory, path);
-	return (files_list);
+	dirpath = ft_get_dirpath(fullpath, &pathsuffix);
+	if (dirpath != NULL)
+		directory = opendir(dirpath);
+	ft_add_dirfiles(&fileslist, directory, dirpath, pathsuffix);
+	if (ft_strncmp(dirpath, ".", 1) == 0 && ft_strlen(dirpath) == 1)
+		free(dirpath);
+	return (fileslist);
 }

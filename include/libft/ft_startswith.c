@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_commandlist.c                                 :+:      :+:    :+:   */
+/*   ft_startswith.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/28 19:30:06 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/28 19:36:32 by yzaytoun         ###   ########.fr       */
+/*   Created: 2023/11/04 13:47:45 by yzaytoun          #+#    #+#             */
+/*   Updated: 2023/11/04 13:58:32 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-void	ft_free_commandlist(t_command **command)
+int	ft_startswith(const char *string, const char *prefix)
 {
-	if (*command == NULL)
-		return ;
-	free((*command)->name);
-	ft_lstclear(&(*command)->args, ft_free_string);
-	ft_lstclear(&(*command)->infile, ft_free_filelist);
-	ft_lstclear(&(*command)->outfile, ft_free_filelist);
-	free(*command);
-	*command = NULL;
+	int	prefixlen;
+
+	if (string == NULL || prefix == NULL)
+		return (0);
+	prefixlen = ft_strlen(prefix);
+	if (ft_strncmp(prefix, string, prefixlen) == 0)
+		return (1);
+	return (0);
 }

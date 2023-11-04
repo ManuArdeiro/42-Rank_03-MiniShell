@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 16:02:47 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/25 18:19:54 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/10/30 18:32:15 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ static void	ft_print_stringarray(t_list *list)
 		printf("argument[%d] -> %s\n", count, strarray[count]);
 		count++;
 	}
+	ft_clear_strarray(strarray);
 }
 
 void	ft_printcommand(t_command *command)

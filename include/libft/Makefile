@@ -6,7 +6,7 @@
 #    By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/26 17:03:15 by jolopez-          #+#    #+#              #
-#    Updated: 2023/10/24 20:37:35 by yzaytoun         ###   ########.fr        #
+#    Updated: 2023/11/04 14:01:23 by yzaytoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,8 @@ BONUS			= ft_lstadd_front_bonus.c ft_lstclear_bonus.c \
 				  ft_lstmap_bonus.c ft_lstnew_bonus.c ft_lstsize_bonus.c \
 				  ft_lstadd_back_bonus.c ft_strarraylen.c ft_clear_strarray.c \
 				  ft_strchr_pos.c ft_lstclear_nodes.c ft_lstinsert.c ft_lstcopy.c \
-				  ft_chrcount.c ft_strequal.c
+				  ft_chrcount.c ft_strequal.c ft_strstrip.c ft_cutstr.c \
+				  ft_startswith.c
 
 OBJS			= $(SRCS:.c=.o)
 

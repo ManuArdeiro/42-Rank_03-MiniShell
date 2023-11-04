@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:10:53 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/11/01 20:14:27 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/11/04 16:48:37 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,9 @@ enum e_bool
 	RIGHT,
 	NEXT_NODE,
 	CURRENT_NODE,
-	O_HEREDOC
+	O_HEREDOC,
+	FORK,
+	BUILTIN
 };
 
 struct s_dict

@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:55:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/11/01 20:14:47 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/11/04 16:48:55 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 static void	ft_register_and_clean(
 		t_list **history, t_global **global, t_minitree **parsetree)
 {
-	//system("leaks minishell");
-	ft_destroytree(parsetree, ft_free_mininode);
 	if ((*global)->line && *((*global)->line))
 	{
 		ft_register_command(history, (*global)->line);
@@ -24,6 +22,7 @@ static void	ft_register_and_clean(
 		free((*global)->line);
 		(*global)->line = NULL;
 	}
+	ft_destroytree(parsetree, ft_free_mininode);
 }
 
 /*	The loop will be running continuously as long as "exit" is not written on 
@@ -41,7 +40,7 @@ static void	ft_loop(t_global *global)
 	t_minitree	*parsetree;
 
 	history = NULL;
-	ft_get_commandhistory(global->envlist);
+	//ft_get_commandhistory(global->envlist);
 	while (global->status != EXITED)
 	{
 		ft_signals();

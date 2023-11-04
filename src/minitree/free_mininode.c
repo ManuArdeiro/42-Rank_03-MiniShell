@@ -16,6 +16,7 @@ void	ft_free_mininode(void *content)
 {
 	t_mininode	*mininode;
 	t_part		*tokenlist;
+	t_command	*command;
 
 	if (content == NULL)
 		return ;
@@ -28,7 +29,10 @@ void	ft_free_mininode(void *content)
 			ft_free_tokenlist(&tokenlist);
 		}
 		else if (mininode->type == n_command)
-			ft_free_commandlist((t_command *)mininode->content);
+		{
+			command = (t_command *)mininode->content;
+			ft_free_commandlist(&command);
+		}
 		mininode->content = NULL;
 	}
 	free(mininode);

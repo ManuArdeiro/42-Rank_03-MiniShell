@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokens.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
+/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 18:12:50 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/10/18 16:45:11 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/11/04 12:05:32 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ static void	ft_token_3(t_part *tokens, char *line, int *i, int *ok)
 
 static void	ft_token_2(t_part *tokens, char *line, int *i, int *ok)
 {
-	if (line[*i] == '*')
+	if (line[*i] == '*' && ft_isalpha(line[*i - 1]) == FALSE)
 	{
 		*ok = ft_add_tkn(tokens, tk_mul, *i, *i + 1);
 		*i = *i + 1;

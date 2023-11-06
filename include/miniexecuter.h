@@ -37,5 +37,6 @@ int		ft_evaluate_subprocess(int status);
 void	ft_execute_builtin(
 			t_command *command, pid_t *pid, t_list *node, t_global *global);
 int		ft_navigate_and_execute(t_minitree *root, t_global *global);
+void	ft_expand_filelist(t_list **filelist);
 
 #endif

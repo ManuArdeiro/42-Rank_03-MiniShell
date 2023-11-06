@@ -9,7 +9,7 @@ void	ft_expand_filelist(t_list **filelist)
 	node = *filelist;
 	while (node != NULL)
 	{
-		if (((t_file *)node->content)->mode == O_APPEND)
+		if (((t_file *)node->content)->mode == O_HEREDOC)
 			ft_get_heredoc(&((t_file *)(node->content))->name);
 		node = node->next;
 	}

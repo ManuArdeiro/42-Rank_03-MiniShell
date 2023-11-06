@@ -44,7 +44,9 @@ void	ft_writetofile(const char *delimiter, int *herepipe)
 	}
 }
 
-void	ft_get_heredoc(const char *delimiter)
+//Save in the pipe
+//Make file fd an array to save both files and pipes
+void	ft_get_heredoc(t_file **file)
 {
 	pid_t	child;
 	int		status;
@@ -60,11 +62,10 @@ void	ft_get_heredoc(const char *delimiter)
 		ft_printerror(__func__, "Fork");
 	else
 	{
-		if (dup2(herepipe[0], STDOUT_FILENO) < 0)
-			ft_printerror(__func__, "Dup2");
+		ft_duplicate_descriptors(&herepipe[0], /*Pipe goes here*/);
 		ft_closefile(&herepipe[0], &herepipe[1]);
 	}
-	if (waitpid(child, &status, 0) < 0)
+	if (waitpid(child, &status, EXIT_SUCCESS) < 0)
 		ft_printerror(__func__, "Wait");
 	ft_evaluate_subprocess(status);
 }

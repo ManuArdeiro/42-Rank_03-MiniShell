@@ -12,6 +12,12 @@
 
 #include "minishell.h"
 
+static void	ft_close_pipes(int *input, int *output)
+{
+	ft_closefile(input);
+	ft_closefile(output);
+}
+
 void	ft_writetofile(const char *delimiter, int *herepipe)
 {
 	char	*line;
@@ -25,14 +31,12 @@ void	ft_writetofile(const char *delimiter, int *herepipe)
 		line = get_next_line(STDIN_FILENO);
 		if (!line)
 		{
-			ft_closefile(&herepipe[0]);
-			ft_closefile(&herepipe[1]);
+			ft_closefile(&herepipe[0], &herepipe[1]);
 			ft_printerror(__func__, "Get next line");
 		}
 		if (ft_strncmp(line, delimiter, delimiterlen) == 0)
 		{
-			ft_closefile(&herepipe[0]);
-			ft_closefile(&herepipe[1]);
+			ft_closefile(&herepipe[0], &herepipe[1]);
 			exit(EXIT_SUCCESS);
 		}
 		ft_putstr_fd(line, herepipe[1]);
@@ -58,8 +62,7 @@ void	ft_get_heredoc(const char *delimiter)
 	{
 		if (dup2(herepipe[0], STDOUT_FILENO) < 0)
 			ft_printerror(__func__, "Dup2");
-		ft_closefile(&herepipe[0]);
-		ft_closefile(&herepipe[1]);
+		ft_closefile(&herepipe[0], &herepipe[1]);
 	}
 	if (waitpid(child, &status, 0) < 0)
 		ft_printerror(__func__, "Wait");

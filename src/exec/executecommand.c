@@ -39,6 +39,7 @@ int	ft_executecommand(t_command *command, t_global *global)
 	pid_t	*pidarray;
 	int		pidcount;
 	int		laststatus;
+	t_file	*infile;
 
 	pidarray = NULL;
 	if (command == NULL || global == NULL || command->name == NULL)
@@ -47,7 +48,9 @@ int	ft_executecommand(t_command *command, t_global *global)
 	global->laststatus = EXIT_SUCCESS;
 	ft_expand_wildcards(command, global, laststatus);
 	ft_expand_filelist(command->infile);
+	infile = ft_compress_filelist(command->infile);
 	ft_printcommand(command);
+	ft_lstinsert(&command->infile, infile, FRONT);
 	pidcount = ft_create_subprocess(command, &pidarray, global);
 	laststatus = ft_wait_subprocess(command, pidarray, pidcount);
 	if (pidarray != NULL)

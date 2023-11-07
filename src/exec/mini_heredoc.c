@@ -31,12 +31,12 @@ void	ft_writetofile(const char *delimiter, int *herepipe)
 		line = get_next_line(STDIN_FILENO);
 		if (!line)
 		{
-			ft_closefile(&herepipe[0], &herepipe[1]);
+			ft_close_pipes(&herepipe[0], &herepipe[1]);
 			ft_printerror(__func__, "Get next line");
 		}
 		if (ft_strncmp(line, delimiter, delimiterlen) == 0)
 		{
-			ft_closefile(&herepipe[0], &herepipe[1]);
+			ft_close_pipes(&herepipe[0], &herepipe[1]);
 			exit(EXIT_SUCCESS);
 		}
 		ft_putstr_fd(line, herepipe[1]);
@@ -44,8 +44,6 @@ void	ft_writetofile(const char *delimiter, int *herepipe)
 	}
 }
 
-//Save in the pipe
-//Make file fd an array to save both files and pipes
 void	ft_get_heredoc(t_file **file)
 {
 	pid_t	child;
@@ -55,15 +53,23 @@ void	ft_get_heredoc(t_file **file)
 	status = 0;
 	if (pipe(herepipe) < 0)
 		ft_printerror(__func__, "Pipe");
+	if (pipe((*file)->fd) < 0)
+		ft_printerror(__func__, "Pipe");
 	child = fork();
 	if (child == 0)
-		ft_writetofile(delimiter, herepipe);
+	{
+		ft_close_pipes(&(*file)->fd[0], &(*file)->fd[1]);
+		ft_writetofile((*file)->name, herepipe);
+	}
 	else if (child < 0)
 		ft_printerror(__func__, "Fork");
 	else
 	{
-		ft_duplicate_descriptors(&herepipe[0], /*Pipe goes here*/);
-		ft_closefile(&herepipe[0], &herepipe[1]);
+		printf("Inside execute\n");
+		ft_duplicate_descriptors(&herepipe[0], &(*file)->fd[1]);
+		ft_close_pipes(&herepipe[0], &herepipe[1]);
+		ft_close_pipes(&(*file)->fd[0], &(*file)->fd[1]);
+		printf("Inside execute\n");
 	}
 	if (waitpid(child, &status, EXIT_SUCCESS) < 0)
 		ft_printerror(__func__, "Wait");

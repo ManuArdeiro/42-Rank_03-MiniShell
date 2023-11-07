@@ -30,15 +30,17 @@ static void	ft_clone_streams(int *inputclone, int *outputclone)
 
 static void	ft_redirect_streams(t_file *infile, t_file *outfile)
 {
-	if (infile->name != NULL && ft_strequal(infile->name, "STD") == FALSE)
-		infile->fd = ft_openfile(infile->name, infile->mode);
+	if (infile->name != NULL
+		&& ft_strequal(infile->name, "STD") == FALSE
+		&& infile->mode != O_HEREDOC)
+		infile->fd[0] = ft_openfile(infile->name, infile->mode);
 	if (outfile->name != NULL && ft_strequal(outfile->name, "STD") == FALSE)
-		outfile->fd = ft_openfile(outfile->name, outfile->mode);
-	ft_duplicate_descriptors(&infile->fd, &outfile->fd);
-	if (infile->fd != STDIN_FILENO)
-		ft_closefile(&infile->fd);
-	if (outfile->fd != STDOUT_FILENO)
-		ft_closefile(&outfile->fd);
+		outfile->fd[0] = ft_openfile(outfile->name, outfile->mode);
+	ft_duplicate_descriptors(&infile->fd[0], &outfile->fd[0]);
+	if (infile->fd[0] != STDIN_FILENO)
+		ft_closefile(&infile->fd[0]);
+	if (outfile->fd[0] != STDOUT_FILENO)
+		ft_closefile(&outfile->fd[0]);
 }
 
 

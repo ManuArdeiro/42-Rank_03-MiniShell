@@ -62,8 +62,11 @@ int	ft_create_subprocess(t_command *command, pid_t **pid, t_global *global)
 	if (!*pid)
 		return (0);
 	ft_expand_filelist(&command->infile);
-	file = ft_compress_filelist(command->infile);
-	ft_lstinsert(&command->infile, infile, FRONT);
+	if (ft_lstsize(command->infile) > 1)
+	{
+		file = ft_compress_filelist(command->infile);
+		ft_lstinsert(&command->infile, file, FRONT);
+	}
 	ft_initiate_subprocess(command, pid, pidcount, global);
 	return (pidcount);
 }

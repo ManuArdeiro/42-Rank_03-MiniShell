@@ -39,7 +39,6 @@ int	ft_executecommand(t_command *command, t_global *global)
 	pid_t	*pidarray;
 	int		pidcount;
 	int		laststatus;
-	t_file	*infile;
 
 	pidarray = NULL;
 	if (command == NULL || global == NULL || command->name == NULL)

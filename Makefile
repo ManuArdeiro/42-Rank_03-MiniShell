@@ -91,7 +91,7 @@ OBJS			=	$(SRC:%.c=$(OBJ_DIR)/%.o)
 
 RM 				=	/bin/rm -rf
 CC 				= 	gcc
-CFLAGS 			= 	-Wall -Werror -Wextra $(INCLUDE) $(INC_LIB) $(INC_READLINE) $(SANITIZER)
+CFLAGS 			= 	-Wall -Werror -Wextra $(INCLUDE) $(INC_LIB) $(READLINE_LIB) $(SANITIZER)
 
 LIBFT			= 	include/libft/libft.a
 LIBFTDIR		= 	include/libft
@@ -105,7 +105,7 @@ all: $(NAME)
 
 $(NAME): 	$(BANNER) $(LIBFT) $(OBJS)
 			@echo "$(YELLOW) Creating minishell... $(WHITE)"
-			$(CC) $(CFLAGS) $(OBJS) $(READLINE_LIB)\
+			$(CC) $(CFLAGS) $(OBJS) $(INC_READLINE)\
 			 $(READLINE_FLAGS) $(LIBFT) -o $(NAME)
 			@echo "\n$(LIGHT_GRAY)---------- MiniShell Ready ------------\n"
 .SILENT:
@@ -121,6 +121,7 @@ clean:
 
 fclean: clean
 		$(RM) $(NAME) $(OBJ_DIR)
+		$(RM) src/exec/fullinfile
 		@echo "$(GREEN) *** **** DONE **** *** $(WHITE)\n"
 				
 

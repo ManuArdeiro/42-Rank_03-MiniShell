@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:50:35 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/30 20:31:07 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/08 18:53:21 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,17 +53,11 @@ void	ft_execute_subprocess(
 	char	**args;
 
 	args = NULL;
-	if (infile->name != NULL
-		&& ft_strequal(infile->name, "STD") == FALSE
-		&& infile->mode != O_HEREDOC)
-		infile->fd[0] = ft_openfile(infile->name, infile->mode);
-	if (outfile->name != NULL && ft_strequal(outfile->name, "STD") == FALSE)
-		outfile->fd[0] = ft_openfile(outfile->name, outfile->mode);
-	ft_duplicate_descriptors(&infile->fd[0], &outfile->fd[0]);
-	if (infile->fd[0] != STDIN_FILENO)
-		ft_closefile(&infile->fd[0]);
-	if (outfile->fd[0] != STDOUT_FILENO)
-		ft_closefile(&outfile->fd[0]);
+	infile->fd[0] = ft_openfile(infile->name, infile->mode);
+	outfile->fd[0] = ft_openfile(outfile->name, outfile->mode);
+	//ft_duplicate_descriptors(&infile->fd[0], &outfile->fd[0]);
+	ft_closefile(&infile->fd[0]);
+	ft_closefile(&outfile->fd[0]);
 	args = ft_lstconvert_strarr(command->args);
 	if (ft_isbuiltin(command->name) == TRUE)
 		ft_execute_builtincommand(args, global);

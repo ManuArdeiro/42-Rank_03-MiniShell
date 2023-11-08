@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 16:44:36 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/11/04 17:49:51 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/08 19:09:15 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ static void	ft_expand_wildcards(
 
 	dollar_expansion = NULL;
 	node = command->args;
+	command->name
+		= ft_expand_dollartoken(command->name, global->envlist, laststatus);
 	while (node != NULL)
 	{
 		dollar_expansion

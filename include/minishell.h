@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
+/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:47:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/11/04 16:48:23 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/11/09 18:03:24 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,6 @@
 # include "miniexecuter.h"
 # include "tokenizer.h"
 
-typedef struct	s_signals
-{
-	int		sig_int;
-	int		sig_quit;
-	int		exit_status;
-	pid_t	pid;
-}		t_signals;
-
 // Global variable (for signals)
 
 t_signals	g_signals;
@@ -46,6 +38,7 @@ t_signals	g_signals;
 // Signals
 void		ft_sig_int(int sig_num);
 void		ft_sig_quit(int sig_num);
+void		ft_signals(void);
 
 // File utils/print_msg.c
 void		ft_printhelp(void);

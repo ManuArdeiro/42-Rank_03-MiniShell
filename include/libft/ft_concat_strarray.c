@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 19:27:46 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/11/08 20:06:55 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/09 14:08:37 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,12 @@ char	*ft_concat_strarray(char **strarray, int joinchar)
 
 	fullstring = NULL;
 	count = 0;
-	if (strarray == NULL || *strarray == NULL || !joinchar)
+	if (strarray == NULL || *strarray == NULL)
 		return (NULL);
 	strcount = ft_strarraylen(strarray);
 	while (count < strcount)
 	{
-		if (count < strcount - 1)
+		if (count < strcount - 1 && joinchar != 0)
 			ft_copy_and_join(&fullstring, strarray[count], joinchar);
 		else
 		{

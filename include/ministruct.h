@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:10:53 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/30 20:55:01 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/09 14:09:04 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,6 +139,5 @@ typedef struct s_global
 	int			laststatus;
 	t_nodetype	lastnodetype;
 }	t_global;
-
 
 #endif		/*Mini struct header*/

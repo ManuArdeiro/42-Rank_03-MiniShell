@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 16:44:36 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/11/08 19:09:15 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/09 16:17:10 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ static void	ft_expand_wildcards(
 		dollar_expansion
 			= ft_expand_dollartoken(
 				(char *)node->content, global->envlist, laststatus);
-		if (dollar_expansion != NULL)
+		if (dollar_expansion != NULL
+			&& (char *)node->content != dollar_expansion)
 		{
 			free(node->content);
 			node->content = dollar_expansion;

@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:55:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/11/04 20:01:54 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/11/09 18:01:56 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	ft_loop(t_global *global)
 		global->line = readline(MINI_PROMPT);
 		if (!global->line)
 		{
-			ft_putendl_fd("exit", STDERR_FILENO);
+			ft_putstr_fd("exit", STDERR_FILENO);
 			exit(EXIT_SUCCESS);
 		}
 		if (ft_strncmp(global->line, "exit", 4) == 0)

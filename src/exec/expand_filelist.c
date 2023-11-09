@@ -1,29 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_file.c                                      :+:      :+:    :+:   */
+/*   expand_filelist.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/23 19:44:00 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/28 20:21:33 by yzaytoun         ###   ########.fr       */
+/*   Created: 2023/11/08 19:28:06 by yzaytoun          #+#    #+#             */
+/*   Updated: 2023/11/08 19:28:08 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_file	*ft_create_file(const char *name, int std_stream, int mode)
+void	ft_expand_filelist(t_list **filelist)
 {
-	t_file	*newfile;
+	t_list	*node;
+	t_file	*file;
 
-	newfile = NULL;
-	if (name == NULL)
-		return (NULL);
-	newfile = malloc(sizeof(t_file));
-	if (!newfile)
-		return (NULL);
-	newfile->name = (char *)name;
-	newfile->fd[0] = std_stream;
-	newfile->mode = mode;
-	return (newfile);
+	if (filelist == NULL)
+		return ;
+	node = *filelist;
+	while (node != NULL)
+	{
+		file = (t_file *)node->content;
+		if (file->mode == O_HEREDOC)
+			ft_get_heredoc(&file);
+		node = node->next;
+	}
 }

@@ -6,13 +6,13 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 16:44:36 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/11/04 16:56:42 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/11/09 18:28:27 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	ft_find_and_expand(
+static void	ft_expand_wildcards(
 		t_command *command, t_global *global, int laststatus)
 {
 	char	*dollar_expansion;
@@ -20,12 +20,15 @@ static void	ft_find_and_expand(
 
 	dollar_expansion = NULL;
 	node = command->args;
+	command->name
+		= ft_expand_dollartoken(command->name, global->envlist, laststatus);
 	while (node != NULL)
 	{
 		dollar_expansion
 			= ft_expand_dollartoken(
 				(char *)node->content, global->envlist, laststatus);
-		if (dollar_expansion != NULL)
+		if (dollar_expansion != NULL
+			&& (char *)node->content != dollar_expansion)
 		{
 			free(node->content);
 			node->content = dollar_expansion;
@@ -45,7 +48,7 @@ int	ft_executecommand(t_command *command, t_global *global)
 		return (EXITED);
 	laststatus = global->laststatus;
 	global->laststatus = EXIT_SUCCESS;
-	ft_find_and_expand(command, global, laststatus);
+	ft_expand_wildcards(command, global, laststatus);
 	ft_printcommand(command);
 	pidcount = ft_create_subprocess(command, &pidarray, global);
 	laststatus = ft_wait_subprocess(command, pidarray, pidcount);

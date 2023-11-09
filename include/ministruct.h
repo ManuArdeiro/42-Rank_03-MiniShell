@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:10:53 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/11/04 18:01:11 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/11/09 18:29:48 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include "libft.h"
 # include "minitree.h"
 
+typedef struct s_global			t_global;
+typedef struct s_signals		t_signals;
 typedef struct s_dict			t_dict;
 typedef struct s_command		t_command;
 typedef struct s_file			t_file;
@@ -87,7 +89,7 @@ enum e_token
 struct s_file	/*File desciptor and name*/
 {
 	char	*name;
-	int		fd;
+	int		fd[2];
 	int		mode;
 };
 
@@ -131,12 +133,21 @@ struct s_mininode
 	void		*content;
 };
 
-typedef struct s_global
+struct s_global
 {
 	t_bool		status;
 	char		*line;
 	t_list		*envlist;
 	int			laststatus;
 	t_nodetype	lastnodetype;
-}	t_global;
-#endif
+};
+
+struct s_signals
+{
+	int		sig_int;
+	int		sig_quit;
+	int		exit_status;
+	pid_t	*pidarray;
+};
+
+#endif		/*Mini struct header*/

@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:50:44 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/11/04 20:18:52 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/11/09 18:29:17 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ static void	ft_initiate_subprocess(
 	node = command->outfile;
 	while (count < pidcount && node != NULL)
 	{
+
 		if (ft_isbuiltin(command->name) == TRUE)
 			ft_execute_builtin(command, &(*pid)[count], node, global);
 		else
@@ -49,18 +50,24 @@ static void	ft_initiate_subprocess(
 	}
 }
 
-
 int	ft_create_subprocess(t_command *command, pid_t **pid, t_global *global)
 {
 	int		pidcount;
+	t_file	*file;
 
 	pidcount = ft_lstsize(command->outfile);
 	if (pidcount == 0)
 		pidcount = 1;
-	*pid = malloc(sizeof(pid_t) * pidcount);
-	g_signals.pidarray = *pid;
+	*pid = malloc(sizeof(pid_t) * (pidcount + 1));
 	if (!*pid)
 		return (0);
+	g_signals.pidarray = *pid;
+	ft_expand_filelist(&command->infile);
+	if (ft_lstsize(command->infile) > 1)
+	{
+		file = ft_compress_filelist(command->infile);
+		ft_lstinsert(&command->infile, file, FRONT);
+	}
 	ft_initiate_subprocess(command, pid, pidcount, global);
 	return (pidcount);
 }

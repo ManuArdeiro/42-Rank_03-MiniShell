@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 18:03:52 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/26 20:34:15 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/08 18:51:55 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ int	ft_openfile(char *filename, int mode)
 	int	file_descriptor;
 
 	file_descriptor = -1;
-	if (filename == NULL)
+	if (filename == NULL
+		|| ft_strequal(filename, "STD") == TRUE || mode == O_HEREDOC)
 		return (file_descriptor);
 	if (mode == O_RDONLY)
 		file_descriptor = open(filename, mode);
@@ -31,6 +32,9 @@ int	ft_openfile(char *filename, int mode)
 void	ft_closefile(int *file_descriptor)
 {
 	if (*file_descriptor < 0)
+		return ;
+	if (*file_descriptor == STDIN_FILENO
+		|| *file_descriptor == STDOUT_FILENO)
 		return ;
 	if (close(*file_descriptor) < 0)
 		ft_printerror(__func__, "close");

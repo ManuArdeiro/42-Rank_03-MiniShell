@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:50:22 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/30 21:01:38 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/04 18:07:15 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ static void	ft_wait_process(pid_t *pid, int *laststatus, t_bool processtype)
 	if (processtype == FORK)
 	{
 		if (waitpid(*pid, &status, EXIT_SUCCESS) < 0)
-			*laststatus = ft_evaluate_subprocess(status);
+			return ;
+		*laststatus = ft_evaluate_subprocess(status);
 	}
 	else if (processtype == BUILTIN)
 	{
@@ -44,8 +45,6 @@ int	ft_wait_subprocess(t_command *command, pid_t *pid, int pidcount)
 			ft_wait_process(&pid[count], &laststatus, BUILTIN);
 		else
 			ft_wait_process(&pid[count], &laststatus, FORK);
-		if (laststatus != EXIT_SUCCESS)
-			return (laststatus);
 		++count;
 	}
 	return (laststatus);

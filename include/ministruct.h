@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ministruct.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
+/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:10:53 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/11/04 16:48:37 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/11/09 18:00:20 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ enum e_token
 struct s_file	/*File desciptor and name*/
 {
 	char	*name;
-	int		fd;
+	int		fd[2];
 	int		mode;
 };
 
@@ -139,6 +139,5 @@ typedef struct s_global
 	int			laststatus;
 	t_nodetype	lastnodetype;
 }	t_global;
-
 
 #endif		/*Mini struct header*/

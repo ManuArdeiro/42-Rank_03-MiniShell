@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+         #
+#    By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/01 18:51:45 by jolopez-          #+#    #+#              #
-#    Updated: 2023/11/04 16:48:31 by jolopez-         ###   ########.fr        #
+#    Updated: 2023/11/09 18:00:40 by yzaytoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,10 +38,10 @@ BANNER = 	$(info $(WHITE_BAN))\
 USER			= $(shell whoami)
 INCLUDE 		= -Iinclude/
 INC_LIB 		= -Iinclude/libft
-#INC_READLINE	= -I/Users/$(USER)/.brew/opt/readline/include
-#READLINE_LIB	= -L/Users/$(USER)/.brew/opt/readline/lib
-INC_READLINE	="-L/usr/local/opt/readline/lib"
-READLINE_LIB	="-I/usr/local/opt/readline/include"
+READLINE_LIB	= -I/Users/$(USER)/.brew/opt/readline/include
+INC_READLINE	= -L/Users/$(USER)/.brew/opt/readline/lib
+#INC_READLINE	= -L/usr/local/opt/readline/lib
+#READLINE_LIB	= -I/usr/local/opt/readline/include
 SANITIZER		= -g3 -fsanitize=address -g
 
 READLINE_FLAGS	= -lreadline
@@ -61,12 +61,12 @@ COMMAND			= extract_tokenstring.c get_commandlist.c lstconvert.c \
 					extract_arglist.c is_compoundcommand.c free_commandlist.c
 					
 FILE			= create_file.c get_filemode.c add_pipeline.c is_redirection.c \
-					free_filelist.c
+					free_filelist.c append_filecontent.c
 
 PARSER			=  separators.c get_tokennode.c tokensplit.c get_nodetype.c \
 					parse_commandline.c contains_tokenseparator.c \
 					$(COMMAND) $(FILE)
-
+					
 SUMMARIZER		= minisummary.c printtokens.c get_unique_tokens.c \
 					get_token_summary.c get_token_count.c
 
@@ -79,7 +79,8 @@ TREE 			= minitree.c treetraversal.c is_emptynode.c create_mininode.c \
 EXEC			= executecommand.c openfile.c execute_commandline.c \
 				goto_childnode.c add_pathprefix.c evaluate_subprocess.c \
 				wait_subprocess.c create_subprocess.c execute_subprocess.c \
-				expand_startoken.c expand_dollartoken.c execute_builtin.c
+				expand_startoken.c expand_dollartoken.c execute_builtin.c \
+				mini_heredoc.c expand_filelist.c
 
 SRC 			= $(ENV) $(UTILS) $(SUMMARIZER) $(LEXER) \
 					$(CMD) $(PARSER) $(TREE) $(EXEC)  main.c
@@ -88,7 +89,7 @@ OBJS			=	$(SRC:%.c=$(OBJ_DIR)/%.o)
 
 RM 				=	/bin/rm -rf
 CC 				= 	gcc
-CFLAGS 			= 	-Wall -Werror -Wextra $(INCLUDE) $(INC_LIB) $(READLINE_INC) $(SANITIZER)
+CFLAGS 			= 	-Wall -Werror -Wextra $(INCLUDE) $(INC_LIB) $(READLINE_LIB) $(SANITIZER)
 
 LIBFT			= 	include/libft/libft.a
 LIBFTDIR		= 	include/libft
@@ -102,7 +103,7 @@ all: $(NAME)
 
 $(NAME): 	$(BANNER) $(LIBFT) $(OBJS)
 			@echo "$(YELLOW) Creating minishell... $(WHITE)"
-			$(CC) $(CFLAGS) $(OBJS) $(READLINE_LIB)\
+			$(CC) $(CFLAGS) $(OBJS) $(INC_READLINE)\
 			 $(READLINE_FLAGS) $(LIBFT) -o $(NAME)
 			@echo "\n$(LIGHT_GRAY)---------- MiniShell Ready ------------\n"
 .SILENT:
@@ -118,6 +119,7 @@ clean:
 
 fclean: clean
 		$(RM) $(NAME) $(OBJ_DIR)
+		$(RM) src/exec/fullinfile
 		@echo "$(GREEN) *** **** DONE **** *** $(WHITE)\n"
 				
 

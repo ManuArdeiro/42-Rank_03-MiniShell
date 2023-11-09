@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:50:35 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/11/08 18:53:21 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/09 18:36:42 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	ft_execute_subprocess(
 	args = NULL;
 	infile->fd[0] = ft_openfile(infile->name, infile->mode);
 	outfile->fd[0] = ft_openfile(outfile->name, outfile->mode);
-	//ft_duplicate_descriptors(&infile->fd[0], &outfile->fd[0]);
+	ft_duplicate_descriptors(&infile->fd[0], &outfile->fd[0]);
 	ft_closefile(&infile->fd[0]);
 	ft_closefile(&outfile->fd[0]);
 	args = ft_lstconvert_strarr(command->args);

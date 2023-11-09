@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:10:53 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/11/09 18:29:48 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/11/09 18:36:28 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,8 +144,7 @@ struct s_global
 
 struct s_signals
 {
-	int		sig_int;
-	int		sig_quit;
+	int		sig_exit_status;
 	int		exit_status;
 	pid_t	*pidarray;
 };

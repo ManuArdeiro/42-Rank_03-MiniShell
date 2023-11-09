@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:50:44 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/11/09 18:29:17 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/11/09 19:18:47 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ int	ft_create_subprocess(t_command *command, pid_t **pid, t_global *global)
 	*pid = malloc(sizeof(pid_t) * (pidcount + 1));
 	if (!*pid)
 		return (0);
-	g_signals.pidarray = *pid;
 	ft_expand_filelist(&command->infile);
 	if (ft_lstsize(command->infile) > 1)
 	{

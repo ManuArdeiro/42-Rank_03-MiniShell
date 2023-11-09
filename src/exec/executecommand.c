@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 16:44:36 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/11/09 18:28:27 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/11/09 20:06:25 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,20 @@ int	ft_executecommand(t_command *command, t_global *global)
 	pidarray = NULL;
 	if (command == NULL || global == NULL || command->name == NULL)
 		return (EXITED);
+	g_signals.pidarray = pidarray;
 	laststatus = global->laststatus;
 	global->laststatus = EXIT_SUCCESS;
 	ft_expand_wildcards(command, global, laststatus);
 	ft_printcommand(command);
 	pidcount = ft_create_subprocess(command, &pidarray, global);
+	g_signals.pidarray = pidarray;
 	laststatus = ft_wait_subprocess(command, pidarray, pidcount);
 	if (pidarray != NULL)
 		free(pidarray);
-	global->laststatus = laststatus;
+	g_signals.pidarray = NULL;
+	if (g_signals.sig_exit_status != 0)
+		global->laststatus = g_signals.exit_status;
+	else
+		global->laststatus = laststatus;
 	return (laststatus);
 }

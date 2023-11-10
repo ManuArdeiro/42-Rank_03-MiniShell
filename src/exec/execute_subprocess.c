@@ -53,11 +53,13 @@ void	ft_execute_subprocess(
 	char	**args;
 
 	args = NULL;
-	infile->fd[0] = ft_openfile(infile->name, infile->mode);
-	outfile->fd[0] = ft_openfile(outfile->name, outfile->mode);
-	ft_duplicate_descriptors(&infile->fd[0], &outfile->fd[0]);
-	ft_closefile(&infile->fd[0]);
-	ft_closefile(&outfile->fd[0]);
+	if (ft_strequal(infile->name, "STD") == FALSE && infile->mode != O_HEREDOC)
+		infile->fd = ft_openfile(infile->name, infile->mode);
+	if (ft_strequal(outfile->name, "STD") == FALSE && outfile->mode != O_HEREDOC)
+		outfile->fd = ft_openfile(outfile->name, outfile->mode);
+	ft_duplicate_descriptors(&infile->fd, &outfile->fd);
+	ft_closefile(&infile->fd);
+	ft_closefile(&outfile->fd);
 	args = ft_lstconvert_strarr(command->args);
 	if (ft_isbuiltin(command->name) == TRUE)
 		ft_execute_builtincommand(args, global);

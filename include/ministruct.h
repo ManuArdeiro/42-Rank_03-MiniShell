@@ -89,7 +89,7 @@ enum e_token
 struct s_file	/*File desciptor and name*/
 {
 	char	*name;
-	int		fd[2];
+	int		fd;
 	int		mode;
 };
 

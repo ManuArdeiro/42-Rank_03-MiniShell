@@ -20,7 +20,7 @@ static void	ft_wait_process(pid_t *pid, int *laststatus, t_bool processtype)
 	if (processtype == FORK)
 	{
 		if (waitpid(*pid, &status, EXIT_SUCCESS) < 0)
-			return ;
+			ft_printerror(__func__, "Wait process");
 		*laststatus = ft_evaluate_subprocess(status);
 	}
 	else if (processtype == BUILTIN)

@@ -17,8 +17,7 @@ int	ft_openfile(char *filename, int mode)
 	int	file_descriptor;
 
 	file_descriptor = -1;
-	if (filename == NULL
-		|| ft_strequal(filename, "STD") == TRUE || mode == O_HEREDOC)
+	if (filename == NULL)
 		return (file_descriptor);
 	if (mode == O_RDONLY)
 		file_descriptor = open(filename, mode);

@@ -23,7 +23,7 @@ int	ft_evaluate_subprocess(int status)
 		if (exitstatus != EXIT_SUCCESS)
 		{
 			printf("Process Exited with status -> %d \n", exitstatus);
-			return (EXIT_FAILURE);
+			return (exitstatus);
 		}
 	}
 	return (EXIT_SUCCESS);

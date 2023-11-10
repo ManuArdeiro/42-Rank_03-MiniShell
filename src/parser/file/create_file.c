@@ -23,7 +23,7 @@ t_file	*ft_create_file(const char *name, int std_stream, int mode)
 	if (!newfile)
 		return (NULL);
 	newfile->name = (char *)name;
-	newfile->fd[0] = std_stream;
+	newfile->fd = std_stream;
 	newfile->mode = mode;
 	return (newfile);
 }

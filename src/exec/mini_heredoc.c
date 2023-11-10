@@ -37,7 +37,6 @@ void	ft_writetofile(const char *delimiter, int *herepipe)
 		if (ft_strncmp(line, delimiter, delimiterlen) == 0)
 		{
 			ft_close_pipes(&herepipe[0], &herepipe[1]);
-			printf("after heredoc\n");
 			exit(EXIT_SUCCESS);
 		}
 		ft_putstr_fd(line, herepipe[1]);
@@ -50,9 +49,7 @@ static void	ft_wait_and_close(int child, t_file *file, int *herepipe)
 	int		status;
 
 	status = EXIT_SUCCESS;
-	if (dup2(herepipe[0], STDIN_FILENO) < 0)
-		ft_printerror(__func__, "DUP2");
-	ft_close_pipes(&file->fd[0], &file->fd[1]);
+	file->fd = dup(herepipe[0]);
 	ft_close_pipes(&herepipe[0], &herepipe[1]);
 	if (waitpid(child, &status, EXIT_SUCCESS) < 0)
 		ft_printerror(__func__, "Wait");
@@ -66,14 +63,9 @@ void	ft_get_heredoc(t_file **file)
 
 	if (pipe(herepipe) < 0)
 		ft_printerror(__func__, "Pipe");
-	if (pipe((*file)->fd) < 0)
-		ft_printerror(__func__, "Pipe");
 	child = fork();
 	if (child == 0)
-	{
-		ft_close_pipes(&(*file)->fd[0], &(*file)->fd[1]);
 		ft_writetofile((*file)->name, herepipe);
-	}
 	else if (child < 0)
 		ft_printerror(__func__, "Fork");
 	else

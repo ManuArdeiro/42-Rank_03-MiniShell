@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 20:13:18 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/11/02 20:39:28 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/11 11:46:56 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,17 @@ static void	ft_addpipe(t_command *command, int *pipe, t_bool std_stream)
 		return ;
 	if (std_stream == INFILE)
 	{
-		pipestream = ft_create_file(ft_strdup("in_pipe"), pipe[0], std_stream);
+		pipestream = ft_create_file(
+				ft_strdup("in_pipe"), dup(pipe[0]), std_stream);
 		ft_lstinsert(&command->infile, pipestream, FRONT);
+		ft_closefile(&pipe[0]);
 	}
 	else if (std_stream == OUTFILE)
 	{
-		pipestream = ft_create_file(ft_strdup("out_pipe"), pipe[1], std_stream);
+		pipestream = ft_create_file(
+				ft_strdup("out_pipe"), dup(pipe[1]), std_stream);
 		ft_lstinsert(&command->outfile, pipestream, FRONT);
+		ft_closefile(&pipe[1]);
 	}
 }
 
@@ -39,13 +43,15 @@ static void	ft_add_tochild(
 	if (lastleft != NULL)
 	{
 		command = (t_command *)((t_mininode *)lastleft->content)->content;
-		ft_addpipe(command, (int *)root->content, OUTFILE);
+		ft_addpipe(
+			command, (int *)((t_mininode *)root->content)->content, OUTFILE);
 		ft_delete_filenode(&command->outfile, "STD");
 	}
 	if (firstright != NULL)
 	{
 		command = (t_command *)((t_mininode *)firstright->content)->content;
-		ft_addpipe(command, (int *)root->content, INFILE);
+		ft_addpipe(
+			command, (int *)((t_mininode *)root->content)->content, INFILE);
 		ft_delete_filenode(&command->infile, "STD");
 	}
 }

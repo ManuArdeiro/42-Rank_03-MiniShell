@@ -6,11 +6,29 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 11:52:43 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/28 18:01:04 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/11 11:45:18 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static t_mininode	*ft_create_pipeline(t_nodetype nodetype)
+{
+	t_mininode	*separator;
+	int			*newpipe;
+
+	separator = NULL;
+	newpipe = malloc(sizeof(int) * 2);
+	if (!newpipe)
+	{
+		ft_printerror(__func__, "malloc");
+		return (NULL);
+	}
+	if (pipe(newpipe) < 0)
+		return (NULL);
+	separator = ft_create_mininode(newpipe, nodetype);
+	return (separator);
+}
 
 static void	ft_fill_treenode(
 		t_minitree **treenode,
@@ -20,7 +38,6 @@ static void	ft_fill_treenode(
 	t_mininode	*left;
 	t_mininode	*separator;
 	t_nodetype	nodetype;
-	int			newpipe[2];
 
 	right = ft_create_mininode(
 			(t_part *)rightcontent, ft_get_nodetype(rightcontent));
@@ -28,11 +45,7 @@ static void	ft_fill_treenode(
 			(t_part *)leftcontent, ft_get_nodetype(leftcontent));
 	nodetype = ft_get_nodetype(token);
 	if (nodetype == n_pipeline)
-	{
-		if (pipe(newpipe) < 0)
-			return ;
-		separator = ft_create_mininode((int *)newpipe, nodetype);
-	}
+		separator = ft_create_pipeline(nodetype);
 	else
 		separator = ft_create_mininode(NULL, nodetype);
 	ft_treeinsert(treenode, left, separator, right);

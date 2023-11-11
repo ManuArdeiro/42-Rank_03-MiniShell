@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:50:35 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/11/09 19:06:05 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/11 11:58:54 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,10 @@ void	ft_execute_subprocess(
 
 	args = NULL;
 	if (ft_strequal(infile->name, "STD") == FALSE && infile->mode != O_HEREDOC
-		&& ft_strnstr(infile->name, "pipe", 4) == NULL)
+		&& ft_strequal(outfile->name, "out_pipe") == FALSE)
 		infile->fd = ft_openfile(infile->name, infile->mode);
 	if (ft_strequal(outfile->name, "STD") == FALSE && outfile->mode != O_HEREDOC
-		&& ft_strnstr(infile->name, "pipe", 4) == NULL)
+		&& ft_strequal(outfile->name, "out_pipe") == FALSE)
 		outfile->fd = ft_openfile(outfile->name, outfile->mode);
 	ft_duplicate_descriptors(&infile->fd, &outfile->fd);
 	ft_closefile(&infile->fd);

@@ -51,8 +51,9 @@ t_list		*ft_extract_filelist(
 t_file		*ft_create_file(const char *name, int std_stream, int mode);
 int			ft_get_filemode(t_token token);
 t_bool		ft_is_redirection(t_token token);
-void		ft_free_filelist(void *content);
+void		ft_freefile(void *content);
 t_file		*ft_compress_filelist(t_list *filelist);
+void		ft_delete_filenode(t_list **filelist, char *file_todelete);
 
 //Separators
 t_bool		ft_is_tokenseparator(t_token token);

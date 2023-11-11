@@ -33,19 +33,20 @@ static void	ft_addpipe(t_command *command, int *pipe, t_bool std_stream)
 static void	ft_add_tochild(
 		t_minitree *root, t_minitree *lastleft, t_minitree *firstright)
 {
+	t_command	*command;
+
+	command = NULL;
 	if (lastleft != NULL)
 	{
-		ft_addpipe(
-			(t_command *)((t_mininode *)lastleft->content)->content,
-			(int *)root->content,
-			OUTFILE);
+		command = (t_command *)((t_mininode *)lastleft->content)->content;
+		ft_addpipe(command, (int *)root->content, OUTFILE);
+		ft_delete_filenode(&command->outfile, "STD");
 	}
 	if (firstright != NULL)
 	{
-		ft_addpipe(
-			(t_command *)((t_mininode *)firstright->content)->content,
-			(int *)root->content,
-			INFILE);
+		command = (t_command *)((t_mininode *)firstright->content)->content;
+		ft_addpipe(command, (int *)root->content, INFILE);
+		ft_delete_filenode(&command->infile, "STD");
 	}
 }
 

@@ -28,7 +28,11 @@ static void	ft_evaluate_relation(
 			*laststatus = ft_navigate_and_execute(root->rightchild, global);
 	}
 	else if (nodetype == n_pipeline)
+	{
 		ft_add_pipeline(root);
+		*laststatus = ft_navigate_and_execute(root->leftchild, global);
+		*laststatus = ft_navigate_and_execute(root->rightchild, global);
+	}
 	//subshell
 }
 

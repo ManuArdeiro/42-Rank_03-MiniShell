@@ -61,7 +61,7 @@ COMMAND			= extract_tokenstring.c get_commandlist.c lstconvert.c \
 					extract_arglist.c is_compoundcommand.c free_commandlist.c
 					
 FILE			= create_file.c get_filemode.c add_pipeline.c is_redirection.c \
-					free_filelist.c append_filecontent.c
+					freefile.c append_filecontent.c delete_filenode.c
 
 PARSER			=  separators.c get_tokennode.c tokensplit.c get_nodetype.c \
 					parse_commandline.c contains_tokenseparator.c \

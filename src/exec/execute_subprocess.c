@@ -53,9 +53,11 @@ void	ft_execute_subprocess(
 	char	**args;
 
 	args = NULL;
-	if (ft_strequal(infile->name, "STD") == FALSE && infile->mode != O_HEREDOC)
+	if (ft_strequal(infile->name, "STD") == FALSE && infile->mode != O_HEREDOC
+		&& ft_strnstr(infile->name, "pipe", 4) == NULL)
 		infile->fd = ft_openfile(infile->name, infile->mode);
-	if (ft_strequal(outfile->name, "STD") == FALSE && outfile->mode != O_HEREDOC)
+	if (ft_strequal(outfile->name, "STD") == FALSE && outfile->mode != O_HEREDOC
+		&& ft_strnstr(infile->name, "pipe", 4) == NULL)
 		outfile->fd = ft_openfile(outfile->name, outfile->mode);
 	ft_duplicate_descriptors(&infile->fd, &outfile->fd);
 	ft_closefile(&infile->fd);

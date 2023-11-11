@@ -32,15 +32,15 @@ static void	ft_redirect_streams(t_file *infile, t_file *outfile)
 {
 	if (infile->name != NULL
 		&& ft_strequal(infile->name, "STD") == FALSE
+		&& ft_strnstr(infile->name, "pipe", 4) == NULL
 		&& infile->mode != O_HEREDOC)
 		infile->fd = ft_openfile(infile->name, infile->mode);
-	if (outfile->name != NULL && ft_strequal(outfile->name, "STD") == FALSE)
+	if (outfile->name != NULL && ft_strequal(outfile->name, "STD") == FALSE
+		&& ft_strnstr(infile->name, "pipe", 4) == NULL)
 		outfile->fd = ft_openfile(outfile->name, outfile->mode);
 	ft_duplicate_descriptors(&infile->fd, &outfile->fd);
-	if (infile->fd != STDIN_FILENO)
-		ft_closefile(&infile->fd);
-	if (outfile->fd != STDOUT_FILENO)
-		ft_closefile(&outfile->fd);
+	ft_closefile(&infile->fd);
+	ft_closefile(&outfile->fd);
 }
 
 

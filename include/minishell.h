@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:47:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/11/09 18:03:24 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/11 13:07:36 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,8 @@ int			ft_mini_unset(t_list *envList, char **args);
 char		*ft_get_localpath(void);
 char		*ft_get_rootpath(const char *path);
 void		ft_free_string(void *content);
-void		ft_get_commandhistory(t_list *envlist);
+void		ft_print_commanderror(const char *commandname);
+
 
 //History
 void		ft_write_command_history(t_list **history, t_global *global);

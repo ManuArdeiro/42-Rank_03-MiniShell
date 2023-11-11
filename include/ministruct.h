@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:10:53 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/11/09 18:05:13 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/11 16:48:42 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,6 +140,7 @@ struct s_global
 	t_list		*envlist;
 	int			laststatus;
 	t_nodetype	lastnodetype;
+	int			*pipeline;
 };
 
 struct s_signals

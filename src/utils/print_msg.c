@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 18:53:59 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/10/14 20:48:45 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/11 13:06:29 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,12 @@ void	ft_printerror(const char *function, const char *string)
 		ft_putstr_fd("\n Exited from -> ", STDERR_FILENO);
 	}
 	ft_putstr_fd(string, STDERR_FILENO);
+	ft_putstr_fd("\n", STDERR_FILENO);
+}
+
+void	ft_print_commanderror(const char *commandname)
+{
+	ft_putstr_fd("MiniShell: command not found: ", STDERR_FILENO);
+	ft_putstr_fd(commandname, STDERR_FILENO);
 	ft_putstr_fd("\n", STDERR_FILENO);
 }

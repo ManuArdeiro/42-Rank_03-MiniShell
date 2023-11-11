@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   openfile.c                                         :+:      :+:    :+:   */
+/*   filestreams.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/01 18:03:52 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/11/08 18:51:55 by yzaytoun         ###   ########.fr       */
+/*   Created: 2023/11/11 13:49:52 by yzaytoun          #+#    #+#             */
+/*   Updated: 2023/11/11 17:12:43 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,7 @@ int	ft_openfile(char *filename, int mode)
 
 void	ft_closefile(int *file_descriptor)
 {
-	if (*file_descriptor < 0)
-		return ;
-	if (*file_descriptor == STDIN_FILENO
+	if (*file_descriptor < 0 || *file_descriptor == STDIN_FILENO
 		|| *file_descriptor == STDOUT_FILENO)
 		return ;
 	if (close(*file_descriptor) < 0)
@@ -41,12 +39,30 @@ void	ft_closefile(int *file_descriptor)
 
 void	ft_duplicate_descriptors(int *input, int *output)
 {
-	if (*input < 0 || *output < 0)
-		return ;
-	if (*input != STDIN_FILENO)
+	if (*input != STDIN_FILENO && *input > 0)
+	{
 		if (dup2(*input, STDIN_FILENO) < 0)
 			ft_printerror(NULL, "Dup IN failed");
-	if (*output != STDOUT_FILENO)
+	}
+	if (*output != STDOUT_FILENO && *output > 0)
+	{
 		if (dup2(*output, STDOUT_FILENO) < 0)
 			ft_printerror(NULL, "Dup OUT failed");
+	}
+}
+
+void	ft_open_filestreams(t_file **infile, t_file **outfile)
+{
+	if (ft_strequal((*infile)->name, "STD") == FALSE
+		&& (*infile)->mode != O_HEREDOC)
+		(*infile)->fd = ft_openfile((*infile)->name, (*infile)->mode);
+	if (ft_strequal((*outfile)->name, "STD") == FALSE
+		&& (*outfile)->mode != O_HEREDOC)
+		(*outfile)->fd = ft_openfile((*outfile)->name, (*outfile)->mode);
+}
+
+void	ft_clone_streams(int *inputclone, int *outputclone)
+{
+	*inputclone = dup(STDIN_FILENO);
+	*outputclone = dup(STDOUT_FILENO);
 }

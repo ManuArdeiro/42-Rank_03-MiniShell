@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 16:44:36 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/11/09 16:17:10 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/11 17:59:19 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	ft_executecommand(t_command *command, t_global *global)
 	laststatus = global->laststatus;
 	global->laststatus = EXIT_SUCCESS;
 	ft_expand_wildcards(command, global, laststatus);
-	ft_printcommand(command);
+	//ft_printcommand(command);
 	pidcount = ft_create_subprocess(command, &pidarray, global);
 	laststatus = ft_wait_subprocess(command, pidarray, pidcount);
 	if (pidarray != NULL)

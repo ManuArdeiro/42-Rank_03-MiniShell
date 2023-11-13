@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 17:50:18 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/28 20:49:37 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/13 20:03:26 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ t_bool	ft_isbuiltin(char *commandname)
 	else if (ft_strequal(commandname, "export") == TRUE)
 		return (TRUE);
 	else if (ft_strequal(commandname, "exit") == TRUE)
+		return (TRUE);
+	else if (ft_strequal(commandname, "clear") == TRUE)
 		return (TRUE);
 	return (FALSE);
 }

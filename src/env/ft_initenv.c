@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 18:37:26 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/17 20:40:18 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/13 20:28:09 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ static void	ft_default_envlist(t_list **envlist)
 		}
 	}
 	ft_setenv(&(*envlist), "_", "/usr/bin/env", OVERWRITE_VALUE);
+	ft_setenv(&(*envlist), "TERM", "xterm-256color", OVERWRITE_VALUE);
+	ft_setenv(&(*envlist), "SHELL", "/bin/zsh", OVERWRITE_VALUE);
 	ft_setenv(&(*envlist), "SHLVL", "1", OVERWRITE_VALUE);
 	ft_setenv(&(*envlist), "PATH",
 		"/usr/local/bin:/usr/bin:/bin:/usr/sbin:"

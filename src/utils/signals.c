@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 21:33:30 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/11/11 17:15:39 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/11/13 15:42:24 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,9 @@ static void	handle_sigquit(int signum)
 {
 	int		i;
 	char	*nbr;
-
+printf("******************SIG QUIT******************\n");
 	i = 0;
 	nbr = ft_itoa(signum);
-	if (signum != SIGQUIT)
-		return ;
 	ft_putstr_fd("Quit: ", STDERR_FILENO);
 	ft_putendl_fd(nbr, STDERR_FILENO);
 	rl_replace_line("", 1);
@@ -61,7 +59,6 @@ static void	handle_sigquit(int signum)
 
 void	ft_signals(void)
 {
-	g_signals.sig_exit_status = 0;
 	signal(SIGINT, handle_sigint);
 	if (g_signals.pidarray == NULL)
 		signal(SIGQUIT, SIG_IGN);

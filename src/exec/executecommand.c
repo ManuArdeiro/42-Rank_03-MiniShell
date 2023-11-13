@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 16:44:36 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/11/11 17:52:58 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/11/13 15:41:32 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,36 +43,52 @@ int	ft_executecommand(t_command *command, t_global *global)
 	int		pidcount;
 	int		laststatus;
 
+printf("COMIENZO EXECUTE COMMAND\n");
+printf("g_signals.sig_exit_status = %d\n", g_signals.sig_exit_status);
+printf("g_signals.exit_status = %d\n", g_signals.exit_status);
+printf("global->laststatus = %d\n\n\n", global->laststatus);
 	pidarray = NULL;
 	if (command == NULL || global == NULL || command->name == NULL)
 		return (EXITED);
 	g_signals.pidarray = pidarray;
-	if (g_signals.sig_exit_status != 0)
+	if (g_signals.sig_exit_status == 1)
 		global->laststatus = g_signals.exit_status;
-	else
-		global->laststatus = EXIT_SUCCESS;
+	g_signals.sig_exit_status = 0;
 	laststatus = global->laststatus;
+printf("ANTES PROCESO\n");
+printf("g_signals.pidarray = %p\n", g_signals.pidarray);
+printf("g_signals.sig_exit_status = %d\n", g_signals.sig_exit_status);
+printf("g_signals.exit_status = %d\n", g_signals.exit_status);
+printf("global->laststatus = %d\n", global->laststatus);
+printf("laststatus = %d\n\n\n", laststatus);
 	ft_expand_wildcards(command, global, laststatus);
 	ft_printcommand(command);
 	pidcount = ft_create_subprocess(command, &pidarray, global);
 	g_signals.pidarray = pidarray;
 	g_signals.pidcount = pidcount;
-	laststatus = ft_wait_subprocess(command, pidarray, pidcount);
+	ft_signals();
+printf("A MEDIAS PROCESO\n");
+printf("g_signals.pidarray = %p\n", g_signals.pidarray);
 printf("g_signals.sig_exit_status = %d\n", g_signals.sig_exit_status);
 printf("g_signals.exit_status = %d\n", g_signals.exit_status);
 printf("global->laststatus = %d\n", global->laststatus);
-printf("laststatus = %d\n", laststatus);
+printf("laststatus = %d\n\n\n", laststatus);
+	laststatus = ft_wait_subprocess(command, pidarray, pidcount);
+printf("DESPUES PROCESO\n");
+printf("g_signals.pidarray = %p\n", g_signals.pidarray);
+printf("g_signals.sig_exit_status = %d\n", g_signals.sig_exit_status);
+printf("g_signals.exit_status = %d\n", g_signals.exit_status);
+printf("global->laststatus = %d\n", global->laststatus);
+printf("laststatus = %d\n\n\n", laststatus);
 	if (g_signals.sig_exit_status != 0)
 		laststatus = g_signals.exit_status;
 	global->laststatus = laststatus;
-	ft_signals();
 	if (pidarray != NULL)
 		free(pidarray);
 	g_signals.pidarray = NULL;
 	ft_signals();
-printf("g_signals.sig_exit_status = %d\n", g_signals.sig_exit_status);
-printf("g_signals.exit_status = %d\n", g_signals.exit_status);
+printf("FIN EXECUTE COMMAND\n");
 printf("global->laststatus = %d\n", global->laststatus);
-printf("laststatus = %d\n", laststatus);
+printf("laststatus = %d\n\n\n", laststatus);
 	return (laststatus);
 }

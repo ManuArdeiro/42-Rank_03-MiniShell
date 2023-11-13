@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 12:24:07 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/30 18:28:40 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/13 20:32:05 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,6 @@ t_minitree	*ft_parse_commandline(const char *commandline)
 	//ft_print_tokenlist(tokenlist);
 	parsetree = ft_generate_parsetree(commandline, tokenlist);
 	ft_free_tokenlist(&tokenlist);
-	//ft_printtree(parsetree);
+	ft_printtree(parsetree);
 	return (parsetree);
 }

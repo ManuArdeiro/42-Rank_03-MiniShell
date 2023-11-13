@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 12:40:08 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/11/11 18:01:29 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/13 20:57:50 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	ft_evaluate_relation(
 		t_minitree *root,
 		t_global *global, int *laststatus, t_nodetype nodetype)
 {
-	if (nodetype == n_and)
+	if (nodetype == n_and || nodetype == n_commandlist)
 	{
 		*laststatus = ft_navigate_and_execute(root->leftchild, global);
 		*laststatus = ft_navigate_and_execute(root->rightchild, global);

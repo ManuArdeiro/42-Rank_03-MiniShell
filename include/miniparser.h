@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 20:07:17 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/11/09 14:08:04 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/11 13:50:51 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,10 @@ t_list		*ft_extract_filelist(
 t_file		*ft_create_file(const char *name, int std_stream, int mode);
 int			ft_get_filemode(t_token token);
 t_bool		ft_is_redirection(t_token token);
-void		ft_free_filelist(void *content);
+void		ft_freefile(void *content);
 t_file		*ft_compress_filelist(t_list *filelist);
+void		ft_delete_filenode(t_list **filelist, char *file_todelete);
+void		ft_clone_streams(int *inputclone, int *outputclone);
 
 //Separators
 t_bool		ft_is_tokenseparator(t_token token);

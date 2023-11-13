@@ -21,12 +21,12 @@ static char	*ft_readfile(t_file	*file)
 	buffer = NULL;
 	if (file == NULL || file->name == NULL)
 		return (NULL);
-	file->fd[0] = ft_openfile(file->name, file->mode);
-	if (file->fd[0] < 0)
+	file->fd = ft_openfile(file->name, file->mode);
+	if (file->fd < 0)
 		return (NULL);
 	while (line != NULL)
 	{
-		line = get_next_line(file->fd[0]);
+		line = get_next_line(file->fd);
 		if (line != NULL)
 			buffer = ft_strjoin_get(buffer, line);
 		free(line);
@@ -44,7 +44,7 @@ static void	ft_read_and_append(t_file **fullfile, t_list *filelist)
 	while (node != NULL)
 	{
 		buffer = ft_readfile((t_file *)node->content);
-		ft_putstr_fd(buffer, (*fullfile)->fd[0]);
+		ft_putstr_fd(buffer, (*fullfile)->fd);
 		node = node->next;
 	}
 }
@@ -59,11 +59,11 @@ t_file	*ft_compress_filelist(t_list *filelist)
 	fullfile = ft_create_file(ft_strdup("obj/fullinfile"), INFILE, O_APPEND);
 	if (fullfile == NULL)
 		return (NULL);
-	fullfile->fd[0] = ft_openfile(fullfile->name, fullfile->mode);
-	if (fullfile->fd[0] < 0)
+	fullfile->fd = ft_openfile(fullfile->name, fullfile->mode);
+	if (fullfile->fd < 0)
 		return (NULL);
 	ft_read_and_append(&fullfile, filelist);
 	fullfile->mode = O_RDONLY;
-	close(fullfile->fd[0]);
+	close(fullfile->fd);
 	return (fullfile);
 }

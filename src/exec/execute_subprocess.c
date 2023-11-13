@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:50:35 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/11/08 18:53:21 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/11 17:06:06 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,7 @@ static void	ft_execute_givencommand(
 	{
 		ft_clear_strarray(envp);
 		ft_clear_strarray(args);
-		ft_putstr_fd("MiniShell: command not found: ", STDERR_FILENO);
-		ft_putstr_fd(command->name, STDERR_FILENO);
-		ft_putstr_fd("\n", STDERR_FILENO);
+		ft_print_commanderror(command->name);
 		ft_free_commandlist(&command);
 		exit(127);
 	}
@@ -38,9 +36,7 @@ static void	ft_execute_builtincommand(char **args, t_global *global)
 {
 	if (ft_builtins(args, global->envlist, global) == EXIT_FAILURE)
 	{
-		ft_putstr_fd("MiniShell: command not found: ", STDERR_FILENO);
-		ft_putstr_fd(args[0], STDERR_FILENO);
-		ft_putstr_fd("\n", STDERR_FILENO);
+		ft_print_commanderror(args[0]);
 		ft_clear_strarray(args);
 		exit(127);
 	}
@@ -53,11 +49,10 @@ void	ft_execute_subprocess(
 	char	**args;
 
 	args = NULL;
-	infile->fd[0] = ft_openfile(infile->name, infile->mode);
-	outfile->fd[0] = ft_openfile(outfile->name, outfile->mode);
-	//ft_duplicate_descriptors(&infile->fd[0], &outfile->fd[0]);
-	ft_closefile(&infile->fd[0]);
-	ft_closefile(&outfile->fd[0]);
+	ft_open_filestreams(&infile, &outfile);
+	ft_duplicate_descriptors(&infile->fd, &outfile->fd);
+	ft_closefile(&infile->fd);
+	ft_closefile(&outfile->fd);
 	args = ft_lstconvert_strarr(command->args);
 	if (ft_isbuiltin(command->name) == TRUE)
 		ft_execute_builtincommand(args, global);

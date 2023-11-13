@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 18:28:55 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/11/08 18:47:13 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/09 19:10:36 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void	ft_writetofile(const char *delimiter, int *herepipe)
 		if (ft_strncmp(line, delimiter, delimiterlen) == 0)
 		{
 			ft_close_pipes(&herepipe[0], &herepipe[1]);
-			printf("after heredoc\n");
 			exit(EXIT_SUCCESS);
 		}
 		ft_putstr_fd(line, herepipe[1]);
@@ -45,34 +44,30 @@ void	ft_writetofile(const char *delimiter, int *herepipe)
 	}
 }
 
-void	ft_get_heredoc(t_file **file)
+static void	ft_wait_and_close(int child, t_file *file, int *herepipe)
 {
-	pid_t	child;
 	int		status;
-	int		herepipe[2];
 
-	status = 0;
-	if (pipe(herepipe) < 0)
-		ft_printerror(__func__, "Pipe");
-	if (pipe((*file)->fd) < 0)
-		ft_printerror(__func__, "Pipe");
-	child = fork();
-	if (child == 0)
-	{
-		ft_close_pipes(&(*file)->fd[0], &(*file)->fd[1]);
-		ft_writetofile((*file)->name, herepipe);
-		printf("Inside execute\n");
-	}
-	else if (child < 0)
-		ft_printerror(__func__, "Fork");
-	else
-	{
-		if (dup2(herepipe[0], (*file)->fd[1]) < 0)
-			ft_printerror(__func__, "DUP2");
-		ft_close_pipes(&herepipe[0], &herepipe[1]);
-		ft_close_pipes(&(*file)->fd[0], &(*file)->fd[1]);
-	}
+	status = EXIT_SUCCESS;
+	file->fd = dup(herepipe[0]);
+	ft_close_pipes(&herepipe[0], &herepipe[1]);
 	if (waitpid(child, &status, EXIT_SUCCESS) < 0)
 		ft_printerror(__func__, "Wait");
 	ft_evaluate_subprocess(status);
+}
+
+void	ft_get_heredoc(t_file **file)
+{
+	pid_t	child;
+	int		herepipe[2];
+
+	if (pipe(herepipe) < 0)
+		ft_printerror(__func__, "Pipe");
+	child = fork();
+	if (child == 0)
+		ft_writetofile((*file)->name, herepipe);
+	else if (child < 0)
+		ft_printerror(__func__, "Fork");
+	else
+		ft_wait_and_close(child, *file, herepipe);
 }

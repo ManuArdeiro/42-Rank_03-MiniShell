@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:10:53 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/11/11 13:14:25 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/11/13 19:11:51 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ enum e_token
 struct s_file	/*File desciptor and name*/
 {
 	char	*name;
-	int		fd[2];
+	int		fd;
 	int		mode;
 };
 
@@ -140,6 +140,7 @@ struct s_global
 	t_list		*envlist;
 	int			laststatus;
 	t_nodetype	lastnodetype;
+	int			*pipeline;
 };
 
 struct s_signals

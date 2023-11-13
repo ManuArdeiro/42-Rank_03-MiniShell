@@ -6,7 +6,7 @@
 #    By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/01 18:51:45 by jolopez-          #+#    #+#              #
-#    Updated: 2023/11/09 18:27:03 by jolopez-         ###   ########.fr        #
+#    Updated: 2023/11/13 19:11:07 by jolopez-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,8 +60,8 @@ COMMAND			= extract_tokenstring.c get_commandlist.c lstconvert.c \
 					printcommand.c extract_filelist.c get_minicommand.c \
 					extract_arglist.c is_compoundcommand.c free_commandlist.c
 					
-FILE			= create_file.c get_filemode.c add_pipeline.c is_redirection.c \
-					free_filelist.c append_filecontent.c
+FILE			= filestreams.c create_file.c get_filemode.c is_redirection.c \
+					freefile.c append_filecontent.c delete_filenode.c
 
 PARSER			=  separators.c get_tokennode.c tokensplit.c get_nodetype.c \
 					parse_commandline.c contains_tokenseparator.c \
@@ -76,11 +76,11 @@ CMD				= mini_cd.c mini_echo.c mini_env.c mini_exit.c mini_export.c mini_pwd.c \
 TREE 			= minitree.c treetraversal.c is_emptynode.c create_mininode.c \
 				print_tree.c get_lasttreenode.c free_mininode.c
 					
-EXEC			= executecommand.c openfile.c execute_commandline.c \
+EXEC			= executecommand.c execute_commandline.c \
 				goto_childnode.c add_pathprefix.c evaluate_subprocess.c \
 				wait_subprocess.c create_subprocess.c execute_subprocess.c \
 				expand_startoken.c expand_dollartoken.c execute_builtin.c \
-				mini_heredoc.c expand_filelist.c
+				mini_heredoc.c expand_filelist.c execute_pipeline.c
 
 SRC 			= $(ENV) $(UTILS) $(SUMMARIZER) $(LEXER) \
 					$(CMD) $(PARSER) $(TREE) $(EXEC)  main.c

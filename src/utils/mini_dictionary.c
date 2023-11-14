@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 19:48:16 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/30 19:10:55 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/13 19:50:56 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	ft_modifydict(t_list **envlist, const char *key, const char *newvalue)
 	len = ft_strlen(key);
 	while (node != NULL)
 	{
-		if (ft_strncmp(((t_dict *)node->content)->key, key, len) == 0)
+		if (ft_strequal(((t_dict *)node->content)->key, key) == TRUE)
 		{
 			free(((t_dict *)node->content)->value);
 			((t_dict *)node->content)->value = NULL;
@@ -76,7 +76,7 @@ int	ft_searchdict(t_list *list, const char *key)
 	len = ft_strlen(key);
 	while (node != NULL)
 	{
-		if (ft_strncmp(((t_dict *)node->content)->key, key, len) == 0)
+		if (ft_strequal(((t_dict *)node->content)->key, key) == TRUE)
 			return (TRUE);
 		node = node->next;
 	}

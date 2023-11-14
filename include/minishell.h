@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:47:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/11/13 19:10:27 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/11/14 19:20:40 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 # include "miniparser.h"
 # include "miniexecuter.h"
 # include "tokenizer.h"
+# include "termcap.h"
 
 // Global variable (for signals)
 
@@ -65,6 +66,7 @@ int			ft_mini_exit(t_global *global, char **args);
 int			ft_mini_export(t_list *envList, char **args);
 int			ft_mini_pwd(void);
 int			ft_mini_unset(t_list *envList, char **args);
+int			ft_clearscreen(t_list *envlist);
 
 // Util
 char		*ft_get_localpath(void);

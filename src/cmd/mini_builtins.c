@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 19:53:03 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/10/30 20:11:29 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/13 20:03:55 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,7 @@ int	ft_builtins(char **args, t_list *envlist, t_global *global)
 		return (ft_mini_pwd());
 	else if (ft_strequal(args[0], "unset") == TRUE)
 		return (ft_mini_unset(envlist, args));
+	else if (ft_strequal(args[0], "clear") == TRUE)
+		return (ft_clearscreen(envlist));
 	return (EXIT_FAILURE);
 }

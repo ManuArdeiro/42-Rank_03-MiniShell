@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:47:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/11/14 19:20:40 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/11/13 20:31:04 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ void		ft_printerror(const char *function, const char *string);
 void		ft_setenv(t_list **envlist, char *key, char *value, int overwrite);
 char		*ft_getenv(const char *key, t_list *envlist);
 t_list		*ft_initenv(char **env);
-int			ft_printenv(t_list *envlist);
 int			ft_delenv(t_list *envList, char *key);
 
 // Built-ins

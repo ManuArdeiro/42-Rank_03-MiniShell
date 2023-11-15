@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:10:53 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/11/13 19:11:51 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/11/13 20:56:41 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ enum e_bool
 	OUTFILE,
 	LEFT,
 	RIGHT,
-	NEXT_NODE,
+	PREV_NODE,
 	CURRENT_NODE,
 	O_HEREDOC,
 	FORK,

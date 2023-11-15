@@ -37,12 +37,10 @@ void	ft_cleardict(void *content)
 int	ft_modifydict(t_list **envlist, const char *key, const char *newvalue)
 {
 	t_list	*node;
-	size_t	len;
 
 	if (!envlist || *envlist == NULL || !newvalue)
 		return (EXITED);
 	node = *envlist;
-	len = ft_strlen(key);
 	while (node != NULL)
 	{
 		if (ft_strequal(((t_dict *)node->content)->key, key) == TRUE)
@@ -68,12 +66,10 @@ El nombre de la función no sería mejor ft_search_env? */
 int	ft_searchdict(t_list *list, const char *key)
 {
 	t_list	*node;
-	size_t	len;
 
 	if (!list || !key || list->content == NULL)
 		return (EXITED);
 	node = list;
-	len = ft_strlen(key);
 	while (node != NULL)
 	{
 		if (ft_strequal(((t_dict *)node->content)->key, key) == TRUE)

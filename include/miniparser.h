@@ -29,8 +29,7 @@ t_bool		ft_is_emptynode(t_minitree *root);
 t_minitree	*ft_parse_commandline(const char *commandline);
 t_mininode	*ft_create_mininode(void *content, t_nodetype type);
 t_minitree	*ft_tokensplit(t_part *tokenlist, t_token token);
-t_part		*ft_get_tokennode(
-				t_part *tokenlist, t_token token, t_bool position);
+t_part		*ft_get_tokennode(t_part *tokenlist, t_token token);
 t_nodetype	ft_get_nodetype(t_part *tokenlist);
 t_bool		ft_contains_tokenseparator(t_part *tokenlist);
 

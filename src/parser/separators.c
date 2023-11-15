@@ -14,7 +14,7 @@
 
 t_bool	ft_is_tokenseparator(t_token token)
 {
-	if (token == tk_and || token == tk_or || token == tk_semi
+	if (token == tk_and || token == tk_or || token == tk_semi || token == tk_pipe
 		|| token == tk_ampersand)
 		return (TRUE);
 	return (FALSE);

@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-t_part	*ft_get_tokennode(t_part *tokenlist, t_token token, t_bool position)
+t_part	*ft_get_tokennode(t_part *tokenlist, t_token token)
 {
 	t_part	*node;
 
@@ -21,14 +21,11 @@ t_part	*ft_get_tokennode(t_part *tokenlist, t_token token, t_bool position)
 	node = tokenlist;
 	while (node != NULL)
 	{
-		if (node->token == token && position == CURRENT_NODE
-			&& node->used == FALSE)
+		if (node->token == token && node->used == FALSE)
 		{
 			node->used = TRUE;
 			return (node);
 		}
-		else if (node->token == token && position == NEXT_NODE)
-			return (node->next);
 		node = node->next;
 	}
 	return (NULL);

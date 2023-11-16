@@ -6,38 +6,42 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 12:24:07 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/11/13 20:32:05 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/16 20:13:42 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	ft_tokensplit_all(
-		t_minitree **root, t_part *tokenlist, const char *commandline)
+static void	ft_get_newnode(t_minitree **root, t_part *tokenlist)
 {
 	t_token		token;
 	t_minitree	*newnode;
 
 	token = 0;
 	newnode = NULL;
-	if (ft_contains_tokenseparator(tokenlist) == TRUE)
+	while (token < max_token)
 	{
-		while (token < max_token)
+		if (ft_is_tokenseparator(token) == TRUE)
 		{
-			if (ft_is_tokenseparator(token) == TRUE)
+			newnode = ft_tokensplit(tokenlist, token);
+			if (newnode != NULL)
 			{
-				newnode = ft_tokensplit(tokenlist, token);
-				if (newnode != NULL)
-				{
-					if (ft_is_emptynode(*root) == FALSE)
-						ft_destroytree(root, ft_free_mininode);
-					*root = newnode;
-					break ;
-				}
+				if (ft_is_emptynode(*root) == FALSE)
+					ft_destroytree(root, ft_free_mininode);
+				*root = newnode;
+				break ;
 			}
-			++token;
 		}
+		++token;
 	}
+}
+
+static void	ft_tokensplit_all(
+		t_minitree **root, t_part *tokenlist, const char *commandline)
+{
+	if (ft_contains_tokenseparator(tokenlist) == TRUE
+		&& ft_contains_tokenpair(tokenlist) == FALSE)
+		ft_get_newnode(root, tokenlist);
 	else
 		*root = ft_get_minicommand(commandline, tokenlist);
 }
@@ -89,9 +93,12 @@ t_minitree	*ft_parse_commandline(const char *commandline)
 	if (commandline == NULL)
 		return (NULL);
 	tokenlist = ft_tokenizer((char *)commandline, &token_count);
-	//ft_print_tokenlist(tokenlist);
-	parsetree = ft_generate_parsetree(commandline, tokenlist);
-	ft_free_tokenlist(&tokenlist);
+	ft_print_tokenlist(tokenlist);
+	if (ft_isvalid_commandlist(tokenlist) == TRUE)
+		parsetree = ft_generate_parsetree(commandline, tokenlist);
+	else
+		ft_printerror(NULL, "Parser error: Open parenthesis o quotations");
 	ft_printtree(parsetree);
+	ft_free_tokenlist(&tokenlist);
 	return (parsetree);
 }

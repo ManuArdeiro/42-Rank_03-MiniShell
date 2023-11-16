@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_history.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
+/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:22:29 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/03 18:35:10 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/11/14 19:57:54 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /*	Function to write a string (command) in the passed file descriptor and
 	add a new line.	*/
-	
+
 static void	ft_write_command(const char *string, int file_descriptor)
 {
 	ft_putstr_fd(string, file_descriptor);

@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 11:05:21 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/28 15:51:02 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/16 20:44:05 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,13 @@ static t_command	*ft_newcommand(const char *commandline, t_part *tokenlist)
 	newcommand = NULL;
 	if (tokenlist == NULL || commandline == NULL)
 		return (NULL);
-	commandnode = ft_get_tokennode(tokenlist, tk_cmd);
-	commandname = ft_extract_tokenstring(commandline, commandnode);
+	if (ft_contains_tokenpair(tokenlist) == FALSE)
+	{
+		commandnode = ft_get_tokennode(tokenlist, tk_cmd);
+		commandname = ft_extract_tokenstring(commandline, commandnode);
+	}
+	else
+		commandname = ft_extract_commandseries(commandline, tokenlist);
 	arglist = ft_extract_arglist(commandline, tokenlist);
 	ft_lstinsert(&arglist, commandname, FRONT);
 	newcommand = ft_createcommand(

@@ -55,7 +55,6 @@ t_nodetype	ft_get_nodetype(t_part *tokenlist)
 
 	token_summary = NULL;
 	token_summary = ft_summarize(tokenlist);
-	//ft_printsummary(token_summary);
 	nodetype = ft_find_listtype(token_summary);
 	ft_lstclear_nodes(&token_summary);
 	return (nodetype);

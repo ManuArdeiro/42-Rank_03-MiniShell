@@ -35,7 +35,7 @@ t_bool		ft_contains_tokenseparator(t_part *tokenlist);
 t_bool		ft_isvalid_commandlist(t_part *tokenlist);
 t_bool		ft_is_tokenpair(t_token token);
 t_bool		ft_contains_tokenpair(t_part *token);
-
+t_token		ft_get_tokenpair(t_token token);
 
 //Command list
 t_part		*ft_get_commandlist(t_part *tokenlist, t_part *delimiter);

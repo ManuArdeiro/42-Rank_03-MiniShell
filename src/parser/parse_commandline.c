@@ -93,12 +93,12 @@ t_minitree	*ft_parse_commandline(const char *commandline)
 	if (commandline == NULL)
 		return (NULL);
 	tokenlist = ft_tokenizer((char *)commandline, &token_count);
-	ft_print_tokenlist(tokenlist);
+	//ft_print_tokenlist(tokenlist);
 	if (ft_isvalid_commandlist(tokenlist) == TRUE)
 		parsetree = ft_generate_parsetree(commandline, tokenlist);
 	else
 		ft_printerror(NULL, "Parser error: Open parenthesis o quotations");
-	ft_printtree(parsetree);
+	//ft_printtree(parsetree);
 	ft_free_tokenlist(&tokenlist);
 	return (parsetree);
 }

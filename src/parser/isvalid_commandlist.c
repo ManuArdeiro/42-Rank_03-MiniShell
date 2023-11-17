@@ -12,6 +12,33 @@
 
 #include "minishell.h"
 
+static t_bool	ft_is_validtokenpair(t_list *summary, t_summarizer *nodesummary)
+{
+	t_list			*node;
+	t_token			tokenpair;
+	t_summarizer	*secondsummary;
+
+	secondsummary = NULL;
+	if (summary == NULL)
+		return (TRUE);
+	node = summary;
+	if (ft_is_tokenpair(nodesummary->token) == TRUE)
+	{
+		tokenpair = ft_get_tokenpair(nodesummary->token);
+		while (node != NULL)
+		{
+			secondsummary = ((t_summarizer *)node->content);
+			if (secondsummary != NULL && secondsummary->token == tokenpair)
+			{
+				if (secondsummary->count != nodesummary->count)
+					return (FALSE);
+			}
+			node = node->next;
+		}
+	}
+	return (TRUE);
+}
+
 static t_bool	ft_validate_summary(t_list *summary)
 {
 	t_list			*node;
@@ -26,8 +53,7 @@ static t_bool	ft_validate_summary(t_list *summary)
 		nodesummary = (t_summarizer *)node->content;
 		if (nodesummary != NULL)
 		{
-			if (ft_is_tokenpair(nodesummary->token) == TRUE
-				&& nodesummary->count % 2 != 0)
+			if (ft_is_validtokenpair(node, nodesummary) == FALSE)
 				return (FALSE);
 		}
 		node = node->next;

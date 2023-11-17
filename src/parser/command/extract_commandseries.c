@@ -12,17 +12,6 @@
 
 #include "minishell.h"
 
-static t_token	ft_get_secondpair(t_token token)
-{
-	if (token == tk_lprnths)
-		return (tk_rprnths);
-	else if (token == tk_dblquot)
-		return (tk_dblquot);
-	else if (token == tk_sglquot)
-		return (tk_sglquot);
-	return (token);
-}
-
 char	*ft_extract_commandseries(const char *commandline, t_part *tokenlist)
 {
 	t_part	*node;
@@ -37,7 +26,7 @@ char	*ft_extract_commandseries(const char *commandline, t_part *tokenlist)
 	{
 		if (ft_is_tokenpair(node->token) == TRUE)
 		{
-			secondnode = ft_get_tokennode(node, ft_get_secondpair(node->token));
+			secondnode = ft_get_tokennode(node, ft_get_tokenpair(node->token));
 			if (secondnode != NULL && secondnode->end > node->start)
 				commandseries
 					= ft_substr(

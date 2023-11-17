@@ -13,7 +13,7 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# define MINI_PROMPT	"\x1b[31mMiniShell $> \x1b[0m"
+# define MINI_PROMPT	"\x1b\e[0;36mMiniShell $> \x1b[0m"
 
 # include <stdarg.h>
 # include <unistd.h>

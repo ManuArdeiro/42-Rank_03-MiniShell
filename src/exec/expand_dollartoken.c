@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 12:35:59 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/11/09 17:48:49 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/18 14:34:35 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,8 @@ char	*ft_expand_dollartoken(
 	else if (dollarcount == 1)
 	{
 		variable_name = ft_strchr(argument, '$');
+		if (*(variable_name - 1) != '\0' && *(variable_name - 1) == '\'')
+			return ((char *)argument);
 		if (variable_name != NULL)
 		{
 			variable_name++;

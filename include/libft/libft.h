@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 16:48:34 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/11/08 20:07:44 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/18 18:08:53 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,5 +90,7 @@ char			*ft_strstrip(const char *string);
 char			*ft_cutstr(const char *str, const char *strlimit);
 int				ft_startswith(const char *string, const char *prefix);
 char			*ft_concat_strarray(char **strarray, int joinchar);
+int				ft_countalpha(const char *string);
+int				ft_endswith(const char *string, const char *suffix);
 
 #endif

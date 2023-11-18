@@ -6,7 +6,7 @@
 #    By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/01 18:51:45 by jolopez-          #+#    #+#              #
-#    Updated: 2023/11/18 12:11:51 by yzaytoun         ###   ########.fr        #
+#    Updated: 2023/11/18 16:07:39 by yzaytoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,7 +50,7 @@ READLINE_FLAGS	= -lreadline -ltermcap
 ENV				= ft_getenv.c ft_setenv.c ft_initenv.c ft_delenv.c
 
 UTILS			= print_msg.c mini_history.c get_path.c free_string.c \
-					mini_dictionary.c signals.c clearscreen.c
+					mini_dictionary.c signals.c clearscreen.c get_completeline.c
 
 LEXER			= tokenizer.c tokens.c token_tools_1.c token_tools_2.c \
 					ft_copy_tokenlist.c ft_tokenlist_add.c print_tokens.c \

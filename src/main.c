@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:55:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/11/18 14:03:04 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/18 16:24:29 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ static void	ft_loop(t_global *global)
 			ft_putendl_fd("exit", STDERR_FILENO);
 			exit(EXIT_SUCCESS);
 		}
+		global->line = ft_get_completeline(global->line);
 		if (ft_strequal(global->line, "exit") == TRUE)
 			global->status = EXITED;
 		parsetree = ft_parse_commandline(global->line);

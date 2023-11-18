@@ -1,41 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strstrip.c                                      :+:      :+:    :+:   */
+/*   ft_countalpha.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/02 20:41:21 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/11/18 17:19:28 by yzaytoun         ###   ########.fr       */
+/*   Created: 2023/11/18 17:19:41 by yzaytoun          #+#    #+#             */
+/*   Updated: 2023/11/18 17:19:53 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strstrip(const char *string)
+int	ft_countalpha(const char *string)
 {
-	int		i;
-	char	*cleanedstring;
 	int		alphacount;
+	int		count;
 
-	i = 0;
-	cleanedstring = NULL;
-	if (string == NULL)
-		return (NULL);
-	alphacount = ft_countalpha(string);
-	cleanedstring = malloc(sizeof(char) * (alphacount + 1));
-	if (!cleanedstring)
-		return (NULL);
 	alphacount = 0;
-	while (string[i] != '\0')
+	count = 0;
+	if (string == NULL)
+		return (0);
+	while (string[count] != '\0')
 	{
-		if (ft_isalpha(string[i]) != 0)
-		{
-			cleanedstring[alphacount] = string[i];
-			++alphacount;
-		}
-		++i;
+		if (ft_isalpha(string[count]) != 0)
+			alphacount++;
+		count++;
 	}
-	cleanedstring[alphacount] = '\0';
-	return (cleanedstring);
+	return (alphacount);
 }

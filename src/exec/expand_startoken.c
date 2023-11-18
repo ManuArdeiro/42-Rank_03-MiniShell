@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 18:05:17 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/11/04 16:27:16 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/18 17:18:51 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void	ft_add_dirfiles(
 		dirent = readdir(directory);
 		while (dirent != NULL)
 		{
-			if (ft_strncmp(path, ".", 1) == 0 && pathlen == 1)
+			if (ft_strequal(path, ".") == TRUE && pathlen == 1)
 				ft_lstinsert(
 					fileslist, ft_strdup((char *)dirent->d_name), BACK);
 			else

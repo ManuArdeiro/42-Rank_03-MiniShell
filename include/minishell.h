@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
+/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:47:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/11/13 20:31:04 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/18 17:32:44 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define MINISHELL_H
 
 # define MINI_PROMPT	"\x1b\e[0;36mMiniShell $> \x1b[0m"
+# define BACKSLASH		"$> "
+# define PIPELINE		"pipe $> "
 
 # include <stdarg.h>
 # include <unistd.h>
@@ -40,7 +42,6 @@ t_signals	g_signals;
 void		ft_signals(void);
 void		ft_sig_int(int sig_num);
 void		ft_sig_quit(int sig_num);
-void		ft_signals(void);
 
 // File utils/print_msg.c
 void		ft_printhelp(void);
@@ -72,7 +73,7 @@ char		*ft_get_localpath(void);
 char		*ft_get_rootpath(const char *path);
 void		ft_free_string(void *content);
 void		ft_print_commanderror(const char *commandname);
-
+char		*ft_get_completeline(const char *commandline);
 
 //History
 void		ft_write_command_history(t_list **history, t_global *global);

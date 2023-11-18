@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 12:24:07 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/11/18 13:59:05 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/18 18:19:41 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,10 @@ t_minitree	*ft_parse_commandline(const char *commandline)
 	if (ft_isvalid_commandlist(tokenlist) == TRUE)
 		parsetree = ft_generate_parsetree(commandline, tokenlist);
 	else
-		ft_printerror(NULL, "MiniShell: parser error");
+	{
+		if (token_count > 0)
+			ft_printerror(NULL, "MiniShell: parser error");
+	}
 	ft_free_tokenlist(&tokenlist);
 	return (parsetree);
 }

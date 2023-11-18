@@ -33,6 +33,8 @@ static t_bool	ft_is_validtokenpair(t_list *summary, t_summarizer *nodesummary)
 				if (secondsummary->count != nodesummary->count)
 					return (FALSE);
 			}
+			else if (secondsummary == NULL)
+				return (FALSE);
 			node = node->next;
 		}
 	}

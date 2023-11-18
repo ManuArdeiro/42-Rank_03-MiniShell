@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
+/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:55:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/11/13 20:33:55 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/18 14:03:04 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static void	ft_loop(t_global *global)
 			ft_putendl_fd("exit", STDERR_FILENO);
 			exit(EXIT_SUCCESS);
 		}
-		if (ft_strncmp(global->line, "exit", 4) == 0)
+		if (ft_strequal(global->line, "exit") == TRUE)
 			global->status = EXITED;
 		parsetree = ft_parse_commandline(global->line);
 		ft_execute_commandline(parsetree, global);

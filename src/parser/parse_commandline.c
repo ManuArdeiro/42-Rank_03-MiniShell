@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 12:24:07 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/11/16 20:13:42 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/18 13:59:05 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,12 +93,10 @@ t_minitree	*ft_parse_commandline(const char *commandline)
 	if (commandline == NULL)
 		return (NULL);
 	tokenlist = ft_tokenizer((char *)commandline, &token_count);
-	//ft_print_tokenlist(tokenlist);
 	if (ft_isvalid_commandlist(tokenlist) == TRUE)
 		parsetree = ft_generate_parsetree(commandline, tokenlist);
 	else
-		ft_printerror(NULL, "Parser error: Open parenthesis o quotations");
-	//ft_printtree(parsetree);
+		ft_printerror(NULL, "MiniShell: parser error");
 	ft_free_tokenlist(&tokenlist);
 	return (parsetree);
 }

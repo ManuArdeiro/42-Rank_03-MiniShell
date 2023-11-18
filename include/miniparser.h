@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 20:07:17 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/11/16 20:43:38 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/18 12:10:06 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ char		*ft_extract_tokenstring(const char *commandline, t_part *node);
 t_list		*ft_extract_arglist(
 				const char *commandline, t_part *tokenlist);
 void		ft_free_commandlist(t_command **command);
-char		*ft_extract_commandseries(const char *commandline, t_part *tokenlist);
+char		*ft_extract_commandseries(
+				const char *commandline, t_part *tokenlist);
 
 //File
 t_list		*ft_extract_filelist(

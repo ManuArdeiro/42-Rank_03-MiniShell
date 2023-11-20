@@ -6,64 +6,81 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 20:44:19 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/11/04 17:51:38 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/20 20:33:28 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	*ft_readfile(t_file	*file)
+static void	ft_write_to_pipe(t_file *file, int *filepipe)
 {
-	char	*buffer;
 	char	*line;
 
 	line = "";
-	buffer = NULL;
 	if (file == NULL || file->name == NULL)
-		return (NULL);
+		return ;
 	file->fd = ft_openfile(file->name, file->mode);
 	if (file->fd < 0)
-		return (NULL);
+		return ;
 	while (line != NULL)
 	{
 		line = get_next_line(file->fd);
-		if (line != NULL)
-			buffer = ft_strjoin_get(buffer, line);
+		if (line == NULL)
+		{
+			ft_closepipe(&filepipe[0], &filepipe[1]);
+			ft_printerror(__func__, "Get Next Line");
+		}
+		ft_putstr_fd(line, filepipe[1]);
 		free(line);
 	}
-	return (buffer);
 }
 
-static void	ft_read_and_append(t_file **fullfile, t_list *filelist)
+static void	ft_wait_and_close(int child, t_file *file, int *herepipe)
+{
+	int		status;
+
+	status = EXIT_SUCCESS;
+	file->fd = dup(herepipe[0]);
+	ft_closepipe(&herepipe[0], &herepipe[1]);
+	if (waitpid(child, &status, EXIT_SUCCESS) < 0)
+		ft_printerror(__func__, "Wait");
+	ft_evaluate_subprocess(status);
+}
+
+static void	ft_read_and_append(
+		t_file **fullfile, t_list *filelist, int *filepipe)
 {
 	t_list	*node;
-	char	*buffer;
+	pid_t	child;
 
-	node = filelist;
-	buffer = NULL;
-	while (node != NULL)
+	child = fork();
+	if (child == 0)
 	{
-		buffer = ft_readfile((t_file *)node->content);
-		ft_putstr_fd(buffer, (*fullfile)->fd);
-		node = node->next;
+		node = filelist;
+		while (node != NULL)
+		{
+			ft_write_to_pipe((t_file *)node->content, filepipe);
+			node = node->next;
+		}
 	}
+	else if (child < 0)
+		ft_printerror(__func__, "Fork");
+	ft_wait_and_close(child, *fullfile, filepipe);
 }
 
 t_file	*ft_compress_filelist(t_list *filelist)
 {
 	t_file	*fullfile;
+	int		filepipe[2];
 
 	fullfile = NULL;
 	if (filelist == NULL)
 		return (NULL);
-	fullfile = ft_create_file(ft_strdup("obj/fullinfile"), INFILE, O_APPEND);
+	fullfile = ft_create_file(ft_strdup("fullfile"), INFILE, O_APPEND);
 	if (fullfile == NULL)
 		return (NULL);
-	fullfile->fd = ft_openfile(fullfile->name, fullfile->mode);
-	if (fullfile->fd < 0)
+	if (pipe(filepipe) < 0)
 		return (NULL);
-	ft_read_and_append(&fullfile, filelist);
-	fullfile->mode = O_RDONLY;
-	close(fullfile->fd);
+	ft_read_and_append(&fullfile, filelist, filepipe);
 	return (fullfile);
 }

@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:55:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/11/18 16:24:29 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/20 19:55:46 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,12 +76,13 @@ static void	ft_free(t_global **global)
 	the environment passed as argument (or not) calling to ft_initenv()
 	function.	*/
 
-static void	ft_init(t_global **global, char **env)
+static void	ft_init(t_global **global, char **env, int shell_level)
 {
 	*global = ft_calloc(sizeof(t_global), 1);
 	if (*global == NULL)
 		return ;
-	(*global)->envlist = ft_initenv(env);
+	shell_level++;
+	(*global)->envlist = ft_initenv(env, shell_level);
 }
 
 //For Debugging
@@ -101,15 +102,19 @@ static void	ft_init(t_global **global, char **env)
 int	main(int ac, char **av, char **env)
 {
 	t_global	*global;
+	int			shell_level;
 
 	//atexit(ft_panic);
+	shell_level = 0;
 	if (ac >= 2)
 	{
-		if (ft_strncmp(av[1], "--help", 6) == 0)
+		if (ft_isdigit(av[1][0]) == TRUE)
+			shell_level = ft_atoi(av[1]);
+		else if (ft_strequal(av[1], "--help") == TRUE)
 			ft_printhelp();
 	}
 	ft_printwellcome();
-	ft_init(&global, env);
+	ft_init(&global, env, shell_level);
 	ft_loop(global);
 	ft_free(&global);
 	return (EXIT_SUCCESS);

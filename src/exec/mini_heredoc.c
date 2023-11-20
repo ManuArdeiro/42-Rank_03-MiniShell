@@ -6,17 +6,11 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 18:28:55 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/11/09 19:10:36 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/20 20:22:05 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static void	ft_close_pipes(int *input, int *output)
-{
-	ft_closefile(input);
-	ft_closefile(output);
-}
 
 void	ft_writetofile(const char *delimiter, int *herepipe)
 {
@@ -31,12 +25,12 @@ void	ft_writetofile(const char *delimiter, int *herepipe)
 		line = get_next_line(STDIN_FILENO);
 		if (!line)
 		{
-			ft_close_pipes(&herepipe[0], &herepipe[1]);
+			ft_closepipe(&herepipe[0], &herepipe[1]);
 			ft_printerror(__func__, "Get next line");
 		}
 		if (ft_strncmp(line, delimiter, delimiterlen) == 0)
 		{
-			ft_close_pipes(&herepipe[0], &herepipe[1]);
+			ft_closepipe(&herepipe[0], &herepipe[1]);
 			exit(EXIT_SUCCESS);
 		}
 		ft_putstr_fd(line, herepipe[1]);
@@ -44,13 +38,13 @@ void	ft_writetofile(const char *delimiter, int *herepipe)
 	}
 }
 
-static void	ft_wait_and_close(int child, t_file *file, int *herepipe)
+static void	ft_wait_and_close(pid_t child, t_file *file, int *herepipe)
 {
 	int		status;
 
 	status = EXIT_SUCCESS;
 	file->fd = dup(herepipe[0]);
-	ft_close_pipes(&herepipe[0], &herepipe[1]);
+	ft_closepipe(&herepipe[0], &herepipe[1]);
 	if (waitpid(child, &status, EXIT_SUCCESS) < 0)
 		ft_printerror(__func__, "Wait");
 	ft_evaluate_subprocess(status);

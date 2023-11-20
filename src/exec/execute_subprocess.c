@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:50:35 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/11/11 17:06:06 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/20 19:31:21 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,20 @@ void	ft_execute_subprocess(
 		t_command *command, t_file *infile, t_file *outfile, t_global *global)
 {
 	char	**args;
+	char	*shelvl;
 
 	args = NULL;
+	shelvl = NULL;
 	ft_open_filestreams(&infile, &outfile);
 	ft_duplicate_descriptors(&infile->fd, &outfile->fd);
 	ft_closefile(&infile->fd);
 	ft_closefile(&outfile->fd);
+	if (ft_strequal(command->name, "./minishell") == TRUE)
+	{
+		shelvl = ft_getenv("SHLVL", global->envlist);
+		if (shelvl != NULL)
+			ft_lstinsert(&command->args, shelvl, BACK);
+	}
 	args = ft_lstconvert_strarr(command->args);
 	if (ft_isbuiltin(command->name) == TRUE)
 		ft_execute_builtincommand(args, global);

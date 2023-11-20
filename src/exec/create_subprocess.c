@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_subprocess.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
+/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:50:44 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/11/13 19:11:42 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/11/20 19:59:50 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,6 @@ int	ft_create_subprocess(t_command *command, pid_t **pid, t_global *global)
 	if (!*pid)
 		return (0);
 	ft_expand_filelist(&command->infile);
-	//if (ft_lstsize(command->infile) > 1)
-	//{
-	//	file = ft_compress_filelist(command->infile);
-	//	ft_lstinsert(&command->infile, file, FRONT);
-	//}
 	ft_initiate_subprocess(command, pid, pidcount, global);
 	return (pidcount);
 }

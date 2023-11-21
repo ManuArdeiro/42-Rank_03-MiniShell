@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 13:26:26 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/11/03 20:42:01 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/21 20:36:38 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ int	ft_strequal(const char *str1, const char *str2)
 {
 	char	*string1;
 	char	*string2;
-	int		len;
+	int		len1;
+	int		len2;
 	int		result;
 
 	if (str1 == NULL || str2 == NULL)
@@ -60,8 +61,12 @@ int	ft_strequal(const char *str1, const char *str2)
 	string2 = ft_strdup(str2);
 	ft_strlower(string1);
 	ft_strlower(string2);
-	len = ft_strlen(string1);
-	result = ft_strncmp(string1, string2, len);
+	len1 = ft_strlen(string1);
+	len2 = ft_strlen(string2);
+	if (len2 > len1)
+		result = ft_strncmp(string1, string2, len2);
+	else
+		result = ft_strncmp(string1, string2, len1);
 	free(string1);
 	free(string2);
 	if (result == 0)

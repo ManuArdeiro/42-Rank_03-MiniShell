@@ -6,7 +6,7 @@
 #    By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/01 18:51:45 by jolopez-          #+#    #+#              #
-#    Updated: 2023/11/20 20:18:25 by yzaytoun         ###   ########.fr        #
+#    Updated: 2023/11/21 20:28:42 by yzaytoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,7 +70,7 @@ PARSER			=  separators.c get_tokennode.c tokensplit.c get_nodetype.c \
 					get_tokenpair.c
 					
 SUMMARIZER		= minisummary.c printtokens.c get_unique_tokens.c \
-					get_token_summary.c get_token_count.c
+					get_token_summary.c get_token_count.c clearsummary.c
 
 CMD				= mini_cd.c mini_echo.c mini_env.c mini_exit.c mini_export.c mini_pwd.c \
 					mini_unset.c mini_builtins.c is_builtin.c
@@ -82,7 +82,7 @@ EXEC			= executecommand.c execute_commandline.c \
 				goto_childnode.c add_pathprefix.c evaluate_subprocess.c \
 				wait_subprocess.c create_subprocess.c execute_subprocess.c \
 				expand_startoken.c expand_dollartoken.c execute_builtin.c \
-				mini_heredoc.c expand_filelist.c execute_pipeline.c
+				mini_heredoc.c expand_filelist.c execute_pipeline.c wait_close_heredoc.c
 
 SRC 			= $(ENV) $(UTILS) $(SUMMARIZER) $(LEXER) \
 					$(CMD) $(PARSER) $(TREE) $(EXEC)  main.c

@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 18:53:59 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/11/11 13:06:29 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/21 20:04:22 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,16 @@
 void	ft_printhelp(void)
 {
 	printf("\nInstructions to use minishell:\n"
-		"1.- Type just (./)minishell to enter it. No arguments admited!\n"
-		"2.- Once you get inside type \"exit\" to stop execution.\n\n");
+		"1- Type just (./)minishell to enter it. No arguments admited!\n"
+		"2- Once you get inside type \"exit\" to stop execution.\n\n");
+	printf("\nSupported builtins:\n\n"
+		"-cd -> Change directory\n"
+		"-pwd -> Get local directory\n"
+		"-env -> list environment variables\n"
+		"-unset -> Delete environment variables\n"
+		"-echo -> Print to screen\n"
+		"-export -> Define and add to environment variables\n"
+		"-clear -> To clear console\n");
 	exit(EXIT_SUCCESS);
 }
 

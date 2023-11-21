@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 18:37:26 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/11/20 19:35:46 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/21 20:09:56 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ static void	ft_default_envlist(t_list **envlist)
 	char	*rootdir;
 	char	*localdir;
 
+	rootdir = NULL;
+	localdir = NULL;
 	localdir = ft_get_localpath();
 	if (localdir != NULL)
 	{
@@ -63,6 +65,8 @@ static void	ft_default_envlist(t_list **envlist)
 	ft_setenv(&(*envlist), "PATH",
 		"/usr/local/bin:/usr/bin:/bin:/usr/sbin:"
 		"/sbin:/usr/local/share/dotnet:/usr/local/munki", OVERWRITE_VALUE);
+	free(localdir);
+	free(rootdir);
 }
 
 /*	This function creates a list where to save the environment:
@@ -72,12 +76,16 @@ static void	ft_default_envlist(t_list **envlist)
 t_list	*ft_initenv(char **env, int shell_level)
 {
 	t_list	*envlist;
+	char	*shlevel_string;
 
+	shlevel_string = NULL;
 	envlist = NULL;
 	if (*env == NULL || shell_level >= 1)
 		ft_default_envlist(&envlist);
 	else
 		ft_copy_envlist(&envlist, env);
-	ft_setenv(&envlist, "SHLVL", ft_itoa(shell_level), OVERWRITE_VALUE);
+	shlevel_string = ft_itoa(shell_level);
+	ft_setenv(&envlist, "SHLVL", shlevel_string, OVERWRITE_VALUE);
+	free(shlevel_string);
 	return (envlist);
 }

@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 20:44:19 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/11/20 20:33:28 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/21 19:50:47 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,26 +25,11 @@ static void	ft_write_to_pipe(t_file *file, int *filepipe)
 	while (line != NULL)
 	{
 		line = get_next_line(file->fd);
-		if (line == NULL)
-		{
-			ft_closepipe(&filepipe[0], &filepipe[1]);
-			ft_printerror(__func__, "Get Next Line");
-		}
-		ft_putstr_fd(line, filepipe[1]);
+		if (line != NULL)
+			ft_putstr_fd(line, filepipe[1]);
 		free(line);
 	}
-}
-
-static void	ft_wait_and_close(int child, t_file *file, int *herepipe)
-{
-	int		status;
-
-	status = EXIT_SUCCESS;
-	file->fd = dup(herepipe[0]);
-	ft_closepipe(&herepipe[0], &herepipe[1]);
-	if (waitpid(child, &status, EXIT_SUCCESS) < 0)
-		ft_printerror(__func__, "Wait");
-	ft_evaluate_subprocess(status);
+	ft_closefile(&file->fd);
 }
 
 static void	ft_read_and_append(
@@ -62,10 +47,12 @@ static void	ft_read_and_append(
 			ft_write_to_pipe((t_file *)node->content, filepipe);
 			node = node->next;
 		}
+		ft_closepipe(&filepipe[0], &filepipe[1]);
+		exit(EXIT_SUCCESS);
 	}
 	else if (child < 0)
 		ft_printerror(__func__, "Fork");
-	ft_wait_and_close(child, *fullfile, filepipe);
+	ft_wait_close_heredoc(child, *fullfile, filepipe);
 }
 
 t_file	*ft_compress_filelist(t_list *filelist)
@@ -76,7 +63,7 @@ t_file	*ft_compress_filelist(t_list *filelist)
 	fullfile = NULL;
 	if (filelist == NULL)
 		return (NULL);
-	fullfile = ft_create_file(ft_strdup("fullfile"), INFILE, O_APPEND);
+	fullfile = ft_create_file(ft_strdup("fullfile"), INFILE, O_HEREDOC);
 	if (fullfile == NULL)
 		return (NULL);
 	if (pipe(filepipe) < 0)

@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:55:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/11/20 19:55:46 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/21 20:30:15 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void	ft_loop(t_global *global)
 			exit(EXIT_SUCCESS);
 		}
 		global->line = ft_get_completeline(global->line);
-		if (ft_strequal(global->line, "exit") == TRUE)
+		if (ft_strequal("exit", global->line) == TRUE)
 			global->status = EXITED;
 		parsetree = ft_parse_commandline(global->line);
 		ft_execute_commandline(parsetree, global);
@@ -86,11 +86,11 @@ static void	ft_init(t_global **global, char **env, int shell_level)
 }
 
 //For Debugging
-/*static void	ft_panic(void)
-{
-	system("leaks minishell");
-}
-*/
+//static void	ft_panic(void)
+//{
+//	system("leaks minishell");
+//}
+
 
 /*	Main function:
 	- Checks the number of arguments and prints help if they are not correct.

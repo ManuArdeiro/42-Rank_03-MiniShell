@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 19:22:27 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/11/18 13:02:26 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/21 20:25:53 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,6 @@ t_bool	ft_isvalid_commandlist(t_part *tokenlist)
 	if (ft_validate_tokenlist(tokenlist) == TRUE
 		&& ft_validate_summary(summary) == TRUE)
 		result = TRUE;
-	ft_lstclear_nodes(&summary);
+	ft_lstclear(&summary, ft_clearsummary);
 	return (result);
 }

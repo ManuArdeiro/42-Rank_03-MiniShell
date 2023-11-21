@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 20:07:17 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/11/20 20:18:49 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/21 20:25:04 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ t_list		*ft_summarize(t_part *tokenlist);
 t_list		*ft_get_token_summary(t_part *tokenlist, t_list *unique_token_list);
 int			ft_get_tokencount(t_list *summary, t_token token);
 void		ft_printsummary(t_list *command_summary);
+void		ft_clearsummary(void *content);
 
 //Parse Tree
 void		ft_printnode(t_mininode *mininode);
@@ -61,6 +62,7 @@ t_file		*ft_compress_filelist(t_list *filelist);
 void		ft_delete_filenode(t_list **filelist, char *file_todelete);
 void		ft_clone_streams(int *inputclone, int *outputclone);
 void		ft_closepipe(int *input, int *output);
+
 
 //Separators
 t_bool		ft_is_tokenseparator(t_token token);

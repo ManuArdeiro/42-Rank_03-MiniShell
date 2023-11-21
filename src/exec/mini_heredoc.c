@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 18:28:55 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/11/20 20:22:05 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/21 19:29:37 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,18 +38,6 @@ void	ft_writetofile(const char *delimiter, int *herepipe)
 	}
 }
 
-static void	ft_wait_and_close(pid_t child, t_file *file, int *herepipe)
-{
-	int		status;
-
-	status = EXIT_SUCCESS;
-	file->fd = dup(herepipe[0]);
-	ft_closepipe(&herepipe[0], &herepipe[1]);
-	if (waitpid(child, &status, EXIT_SUCCESS) < 0)
-		ft_printerror(__func__, "Wait");
-	ft_evaluate_subprocess(status);
-}
-
 void	ft_get_heredoc(t_file **file)
 {
 	pid_t	child;
@@ -63,5 +51,5 @@ void	ft_get_heredoc(t_file **file)
 	else if (child < 0)
 		ft_printerror(__func__, "Fork");
 	else
-		ft_wait_and_close(child, *file, herepipe);
+		ft_wait_close_heredoc(child, *file, herepipe);
 }

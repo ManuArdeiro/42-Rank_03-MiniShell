@@ -25,8 +25,14 @@ static void	ft_filter_path(
 				ft_strjoin(path, (char *)dirent->d_name), BACK);
 	}
 	else if (*(dirent->d_name) != '.')
-		ft_lstinsert(fileslist,
-			ft_strjoin(path, (char *)dirent->d_name), BACK);
+	{
+		if (ft_strequal(path, ".") == TRUE && ft_strlen(path) == 1)
+			ft_lstinsert(
+				fileslist, ft_strdup((char *)dirent->d_name), BACK);
+		else
+			ft_lstinsert(fileslist,
+				ft_strjoin(path, (char *)dirent->d_name), BACK);
+	}
 }
 
 static void	ft_add_dirfiles(
@@ -45,11 +51,7 @@ static void	ft_add_dirfiles(
 		dirent = readdir(directory);
 		while (dirent != NULL)
 		{
-			if (ft_strequal(path, ".") == TRUE && pathlen == 1)
-				ft_lstinsert(
-					fileslist, ft_strdup((char *)dirent->d_name), BACK);
-			else
-				ft_filter_path(path, fileslist, dirent, fileprefix);
+			ft_filter_path(path, fileslist, dirent, fileprefix);
 			dirent = readdir(directory);
 		}
 	}
@@ -65,7 +67,7 @@ static char	*ft_get_dirpath(const char *fullpath, char **pathsuffix)
 	pathlimit = NULL;
 	lastpos = 0;
 	if (ft_strlen(fullpath) == 1)
-		path = ".";
+		path = ft_strdup(".");
 	else
 	{
 		lastpos = ft_chrcount(fullpath, '/');

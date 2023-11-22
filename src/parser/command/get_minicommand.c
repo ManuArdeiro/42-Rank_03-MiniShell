@@ -45,13 +45,17 @@ static t_command	*ft_newcommand(const char *commandline, t_part *tokenlist)
 	else
 		commandname = ft_extract_commandseries(commandline, tokenlist);
 	arglist = ft_extract_arglist(commandline, tokenlist);
-	ft_lstinsert(&arglist, commandname, FRONT);
+	if (commandname != NULL)
+		ft_lstinsert(&arglist, commandname, FRONT);
+	if (commandname == NULL && arglist != NULL && arglist->content != NULL)
+		commandname = ft_strdup((char *)arglist->content);
 	newcommand = ft_createcommand(
 			commandname,
 			arglist,
 			ft_extract_filelist(commandline, tokenlist, INFILE),
 			ft_extract_filelist(commandline, tokenlist, OUTFILE)
 			);
+	ft_printcommand(newcommand);
 	return (newcommand);
 }
 

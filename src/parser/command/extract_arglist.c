@@ -16,8 +16,9 @@ static t_bool	ft_is_argument(t_part *prev_node, t_part *node)
 {
 	if (node == NULL)
 		return (FALSE);
-	if ((node->token == tk_arg || node->token == tk_mul)
+	if ((node->token == tk_arg
 		&& (prev_node != NULL && ft_is_redirection(prev_node->token) == FALSE))
+		|| node->token == tk_mul)
 		return (TRUE);
 	return (FALSE);
 }

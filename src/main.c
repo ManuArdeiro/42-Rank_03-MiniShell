@@ -81,6 +81,8 @@ static void	ft_init(t_global **global, char **env, int shell_level)
 	*global = ft_calloc(sizeof(t_global), 1);
 	if (*global == NULL)
 		return ;
+	if (shell_level < 0)
+		shell_level = 0;
 	shell_level++;
 	(*global)->envlist = ft_initenv(env, shell_level);
 }
@@ -110,7 +112,7 @@ int	main(int ac, char **av, char **env)
 	{
 		if (ft_isdigit(av[1][0]) == TRUE)
 			shell_level = ft_atoi(av[1]);
-		else if (ft_strequal(av[1], "--help") == TRUE)
+		else
 			ft_printhelp();
 	}
 	ft_printwellcome();

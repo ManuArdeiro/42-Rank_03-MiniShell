@@ -80,7 +80,7 @@ static void	ft_token_3(t_part *tokens, char *line, int *i, int *ok)
 
 static void	ft_token_2(t_part *tokens, char *line, int *i, int *ok)
 {
-	if (line[*i] == '*' && ft_isalpha(line[*i - 1]) == FALSE)
+	if (line[*i] == '*')
 	{
 		*ok = ft_add_tkn(tokens, tk_mul, *i, *i + 1);
 		*i = *i + 1;

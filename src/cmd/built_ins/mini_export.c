@@ -14,9 +14,7 @@
 
 /*	This function manages the case where the arg is like "name=??"; the actions
 	are different depending on the ?? is some character or just '\0'.	*/
-
-/*
-static void	ft_name_equal(t_list *envList, char **args, int *i)
+/*static void	ft_name_equal(t_list *envList, char **args, int *i)
 {
 	int		j;
 	char	*name;
@@ -45,9 +43,7 @@ static void	ft_name_equal(t_list *envList, char **args, int *i)
 	}
 }
 */
-
 /*	This function just prints the "not found" error message.	*/
-
 /*
 static int	ft_print_not_found(char **args, int i)
 {
@@ -57,7 +53,6 @@ static int	ft_print_not_found(char **args, int i)
 	return (EXIT_SUCCESS);
 }
 */
-
 /*	This function depends on the arguments:
 	-	No arguments: - it prints all environment variables (including 
 		unnassigned ones).
@@ -76,13 +71,12 @@ static int	ft_print_not_found(char **args, int i)
 
 int	ft_mini_export(t_list *envList, char **args)
 {
-	//int	i;
-
-	//i = 0;
+//	int	i;
+//
+//	i = 0;
 	if (!args)
 		ft_mini_env(envList);
-		/*
-	while (args[i])
+/*	while (args[i])
 	{
 		if (ft_strncmp(args[i], "=", 2))
 		{

@@ -20,13 +20,13 @@ void	ft_printhelp(void)
 		"1- Type just (./)minishell to enter it. No arguments admited!\n"
 		"2- Once you get inside type \"exit\" to stop execution.\n\n");
 	printf("\nSupported builtins:\n\n"
-		"-cd -> Change directory\n"
-		"-pwd -> Get local directory\n"
-		"-env -> list environment variables\n"
-		"-unset -> Delete environment variables\n"
-		"-echo -> Print to screen\n"
-		"-export -> Define and add to environment variables\n"
-		"-clear -> To clear console\n");
+		" - cd -> Change directory\n"
+		" - pwd -> Get local directory\n"
+		" - env -> list environment variables\n"
+		" - unset -> Delete environment variables\n"
+		" - echo -> Print to screen\n"
+		" - export -> Define and add to environment variables\n"
+		" - clear -> To clear console\n\n");
 	exit(EXIT_SUCCESS);
 }
 

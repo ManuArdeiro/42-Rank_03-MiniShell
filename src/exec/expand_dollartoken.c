@@ -78,10 +78,10 @@ char	*ft_expand_dollartoken(
 	else if (dollarcount == 1)
 	{
 		variable_name = ft_strchr(argument, '$');
-		if (*(variable_name - 1) != '\0' && *(variable_name - 1) == '\'')
-			return ((char *)argument);
 		if (variable_name != NULL)
 		{
+			if (*(variable_name + 1) != '\0' && *(variable_name + 1) == '\'')
+				return ((char *)argument);
 			variable_name++;
 			value = ft_get_stringvalue(variable_name, envlist, laststatus);
 		}

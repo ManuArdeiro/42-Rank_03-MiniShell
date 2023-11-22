@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 18:12:50 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/11/23 00:33:50 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/11/23 00:38:57 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,11 @@ static void	ft_token_2(t_part *tokens, char *line, int *i, int *ok)
 			*i = *i + 1;
 		}
 	}
-	else if (line[*i] == '*')
+	else if (!line[*i - 1] && line[*i] == '*')
+	{
 			*ok = ft_add_tkn(tokens, tk_mul, *i, *i + 1);
+			*i = *i + 1;
+	}
 	else if (line[*i] == ';')
 	{
 		*ok = ft_add_tkn(tokens, tk_semi, *i, *i + 1);

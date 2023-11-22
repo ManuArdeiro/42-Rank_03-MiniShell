@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 18:12:50 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/11/23 00:25:07 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/11/23 00:28:01 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,16 +85,11 @@ static void	ft_token_3(t_part *tokens, char *line, int *i, int *ok)
 
 static void	ft_token_2(t_part *tokens, char *line, int *i, int *ok)
 {
-	if (line[*i - 1])
+	if (line[*i] == '*')
 	{
-		if (line[*i] == '*' && ft_isalpha(line[*i - 1]) == FALSE)
-		{
-			*ok = ft_add_tkn(tokens, tk_mul, *i, *i + 1);
-			*i = *i + 1;
-		}
+		*ok = ft_add_tkn(tokens, tk_mul, *i, *i + 1);
+		*i = *i + 1;
 	}
-	else if (line[*i] == '*')
-			*ok = ft_add_tkn(tokens, tk_mul, *i, *i + 1);
 	else if (line[*i] == ';')
 	{
 		*ok = ft_add_tkn(tokens, tk_semi, *i, *i + 1);

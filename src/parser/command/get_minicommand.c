@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 11:05:21 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/11/16 20:44:05 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/23 19:42:57 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,26 @@ static t_command	*ft_createcommand(
 	command->infile = infile;
 	command->outfile = outfile;
 	return (command);
+}
+
+static t_command	*ft_create_newcommand(
+	char *commandname,
+	t_list *arglist, const char *commandline, t_part *tokenlist
+)
+{
+	t_command	*newcommand;
+
+	newcommand = NULL;
+	if (commandname == NULL && arglist != NULL && arglist->content != NULL)
+		commandname = ft_strdup((char *)arglist->content);
+	newcommand
+		= ft_createcommand(
+			commandname,
+			arglist,
+			ft_extract_filelist(commandline, tokenlist, INFILE),
+			ft_extract_filelist(commandline, tokenlist, OUTFILE)
+			);
+	return (newcommand);
 }
 
 static t_command	*ft_newcommand(const char *commandline, t_part *tokenlist)
@@ -47,15 +67,8 @@ static t_command	*ft_newcommand(const char *commandline, t_part *tokenlist)
 	arglist = ft_extract_arglist(commandline, tokenlist);
 	if (commandname != NULL)
 		ft_lstinsert(&arglist, commandname, FRONT);
-	if (commandname == NULL && arglist != NULL && arglist->content != NULL)
-		commandname = ft_strdup((char *)arglist->content);
-	newcommand = ft_createcommand(
-			commandname,
-			arglist,
-			ft_extract_filelist(commandline, tokenlist, INFILE),
-			ft_extract_filelist(commandline, tokenlist, OUTFILE)
-			);
-	ft_printcommand(newcommand);
+	newcommand
+		= ft_create_newcommand(commandname, arglist, commandline, tokenlist);
 	return (newcommand);
 }
 

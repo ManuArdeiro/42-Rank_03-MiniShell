@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 18:37:26 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/11/21 20:09:56 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/23 19:44:44 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ t_list	*ft_initenv(char **env, int shell_level)
 
 	shlevel_string = NULL;
 	envlist = NULL;
-	if (*env == NULL || shell_level >= 1)
+	if (*env == NULL || shell_level > 1)
 		ft_default_envlist(&envlist);
 	else
 		ft_copy_envlist(&envlist, env);

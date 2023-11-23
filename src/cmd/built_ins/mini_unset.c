@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 15:23:35 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/10/24 19:42:10 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/23 21:13:15 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	ft_mini_unset(t_list *envList, char **args)
 {
 	if (ft_arg_nbr(args) < 2)
 	{
-		ft_putendl_fd("unset: at least one argument is needed.", STDERR_FILENO);
+		ft_putendl_fd("unset: not enough arguments", STDERR_FILENO);
 		return (EXIT_FAILURE);
 	}
 	return (ft_unset_var(envList, args));

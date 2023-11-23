@@ -3,43 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   ft_delenv.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
+/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 17:09:49 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/10/12 17:53:53 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/11/23 21:03:59 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "minishell.h"
 
 /*	This function deletes a node from the environmet list if its "key" is equal
 	to the key passed as argument.	*/
 
-static int ft_del_node(t_list *envList, char *key)
+static int	ft_del_node(t_list *prev_node, t_list *node)
 {
-	int		len;
-	t_list	*node;
-	t_list	*node_next;
+	t_list	*pointer;
 
-	len = ft_strlen(key);
-	node = envList;
-	node_next = node->next;
-	if (ft_strncmp(((t_dict *)node->content)->key, key, len + 1))
+	pointer = node;
+	if (node != NULL && prev_node != NULL)
 	{
-		envList = node_next;
-		free (node);
+		prev_node->next = node->next;
+		free(node);
 		return (EXIT_SUCCESS);
 	}
-	while (node_next != NULL)
-	{	
-		if (ft_strncmp(((t_dict *)node_next->content)->key, key, len + 1))
-		{
-			node->next = node_next->next;
-			free(node_next);
-			return (EXIT_SUCCESS);
-		}
-		node = node->next;
-		node_next= node_next->next;
+	else if (node != NULL)
+	{
+		pointer = node->next;
+		free(node);
+		node = pointer;
 	}
 	return (EXIT_FAILURE);
 }
@@ -50,21 +41,17 @@ static int ft_del_node(t_list *envList, char *key)
 int	ft_delenv(t_list *envList, char *key)
 {
 	t_list	*node;
-	size_t	len;
+	t_list	*prev_node;
 
 	if (!key || envList == NULL)
 		return (EXIT_FAILURE);
-	len = ft_strlen(key);
+	prev_node = NULL;
 	node = envList;
 	while (node != NULL)
 	{
-		if (ft_strncmp(((t_dict *)node->content)->key, key, len + 1) == 0)
-		{
-			if (ft_del_node(envList, key) == EXIT_SUCCESS)
-				return (EXIT_SUCCESS);
-			else
-				return (EXIT_FAILURE);
-		}
+		if (ft_strequal(((t_dict *)node->content)->key, key) == TRUE)
+			return (ft_del_node(prev_node, node));
+		prev_node = node;
 		node = node->next;
 	}
 	return (EXIT_FAILURE);

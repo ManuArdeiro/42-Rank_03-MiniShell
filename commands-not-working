@@ -1,0 +1,29 @@
+echo $"PATH"
+MiniShell $> echo "$PATH"
+MiniShell $> echo '$PATH'
+MiniShell $> echo $a
+MiniShell $> echo $a $a
+MiniShell $> $a
+MiniShell $> ls $a
+MiniShell $> /bin/ls $a
+MiniShell $> $a ls
+bash-3.2$ cat << a
+> '$TERM'
+> a
+'xterm-256color'
+bash-3.2$ cat << 'a'
+> $TERM
+> a
+$TERM
+bash-3.2$ cat << a''
+> $TERM
+> a
+$TERM
+bash-3.2$ cat << a' -> error
+bash-3.2$ export hola=adios
+bash-3.2$ echo $hola
+adios
+bash-3.2$ cat << $hola
+> adios
+> $hola
+adios

@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:05:20 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/11/03 20:07:14 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/23 21:08:21 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,6 @@ int	ft_mini_cd(char **arg, t_list *envlist)
 {
 	char	*dir;
 
-
 	if (ft_arg_nbr(arg) > 3)
 	{
 		ft_print_screen("cd: Too many arguments.");
@@ -106,7 +105,7 @@ int	ft_mini_cd(char **arg, t_list *envlist)
 		dir = ft_getenv("HOME", envlist);
 		if (dir == NULL)
 		{
-			ft_print_screen("cd: HOME directory not valid.");
+			ft_print_screen("MiniShell: cd: HOME not set");
 			return (EXIT_FAILURE);
 		}
 		return (ft_new_folder(envlist, dir));

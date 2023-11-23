@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 18:30:15 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/11/04 12:58:08 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/23 20:03:39 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int	ft_count_tokens(char *line)
 /*	This function is the continuation of ft_get_tokens function.	*/
 
 static void	ft_get_tokens_2(char *line, t_part *tokens, int *i, int *start)
-{	
+{
 	if (*start == -1 && (ft_strchr("()\'\"*;<>|&", line[*i + 1])
 			|| ft_is_space(line, *i + 1)))
 	{

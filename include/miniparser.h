@@ -49,6 +49,8 @@ t_list		*ft_extract_arglist(
 void		ft_free_commandlist(t_command **command);
 char		*ft_extract_commandseries(
 				const char *commandline, t_part *tokenlist);
+t_bool		ft_is_commandseries(t_part *tokenlist);
+
 
 //File
 t_list		*ft_extract_filelist(
@@ -75,6 +77,7 @@ t_bool		ft_is_semicolon(t_token token);
 t_list		*ft_expand_startoken(const char *fullpath);
 char		*ft_expand_dollartoken(
 				const char *argument, t_list *envlist, int laststatus);
+void		ft_lst_nodejoin(t_list *prev_node, t_list *node);
 
 //CONVERT FUNCTIONS
 char		**ft_lstconvert_strarr(t_list *list);

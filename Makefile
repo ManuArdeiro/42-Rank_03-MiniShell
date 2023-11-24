@@ -38,10 +38,10 @@ BANNER = 	$(info $(WHITE_BAN))\
 USER			= $(shell whoami)
 INCLUDE 		= -Iinclude/
 INC_LIB 		= -Iinclude/libft
-READLINE_LIB	= -I/Users/$(USER)/.brew/opt/readline/include
-INC_READLINE	= -L/Users/$(USER)/.brew/opt/readline/lib
-#INC_READLINE	= -L/usr/local/opt/readline/lib
-#READLINE_LIB	= -I/usr/local/opt/readline/include
+#READLINE_LIB	= -I/Users/$(USER)/.brew/opt/readline/include
+#INC_READLINE	= -L/Users/$(USER)/.brew/opt/readline/lib
+INC_READLINE	= -L/usr/local/opt/readline/lib
+READLINE_LIB	= -I/usr/local/opt/readline/include
 SANITIZER		= -g3 -fsanitize=address -g
 
 READLINE_FLAGS	= -lreadline -ltermcap
@@ -59,7 +59,7 @@ LEXER			= tokenizer.c tokens.c token_tools_1.c token_tools_2.c \
 COMMAND			= extract_tokenstring.c get_commandlist.c lstconvert.c \
 					printcommand.c extract_filelist.c get_minicommand.c \
 					extract_arglist.c is_compoundcommand.c free_commandlist.c\
-					extract_commandseries.c
+					extract_commandseries.c is_commandseries.c
 					
 FILE			= filestreams.c create_file.c get_filemode.c is_redirection.c \
 					freefile.c append_filecontent.c delete_filenode.c closepipe.c
@@ -67,7 +67,7 @@ FILE			= filestreams.c create_file.c get_filemode.c is_redirection.c \
 PARSER			=  separators.c get_tokennode.c tokensplit.c get_nodetype.c \
 					parse_commandline.c contains_tokenseparator.c \
 					$(COMMAND) $(FILE) isvalid_commandlist.c tokenpairs.c\
-					get_tokenpair.c
+					get_tokenpair.c lst_nodejoin.c
 					
 SUMMARIZER		= minisummary.c printtokens.c get_unique_tokens.c \
 					get_token_summary.c get_token_count.c clearsummary.c

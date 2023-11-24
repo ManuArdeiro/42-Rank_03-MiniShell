@@ -57,7 +57,7 @@ static t_command	*ft_newcommand(const char *commandline, t_part *tokenlist)
 	newcommand = NULL;
 	if (tokenlist == NULL || commandline == NULL)
 		return (NULL);
-	if (ft_contains_tokenpair(tokenlist) == FALSE)
+	if (ft_is_commandseries(tokenlist) == FALSE)
 	{
 		commandnode = ft_get_tokennode(tokenlist, tk_cmd);
 		commandname = ft_extract_tokenstring(commandline, commandnode);

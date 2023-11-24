@@ -12,29 +12,47 @@
 
 #include "minishell.h"
 
-static void	ft_expand_wildcards(
-		t_command *command, t_global *global, int laststatus)
+static void	ft_expandlist(
+	t_list **list, t_list *envlist, int laststatus)
 {
-	char	*dollar_expansion;
 	t_list	*node;
+	char	*dollar_expansion;
+	t_list	*prev_node;
 
 	dollar_expansion = NULL;
-	node = command->args;
-	command->name
-		= ft_expand_dollartoken(command->name, global->envlist, laststatus);
+	node = (*list);
+	prev_node = NULL;
 	while (node != NULL)
 	{
 		dollar_expansion
 			= ft_expand_dollartoken(
-				(char *)node->content, global->envlist, laststatus);
+				(char *)node->content, envlist, laststatus);
 		if (dollar_expansion != NULL
 			&& (char *)node->content != dollar_expansion)
 		{
 			free(node->content);
 			node->content = dollar_expansion;
 		}
+		else if (dollar_expansion != NULL
+			&& (char *)node->content == dollar_expansion)
+		{
+			if (ft_strrchr((char *)node->content, '\"') != NULL
+				|| ft_strchr((char *)node->content, '\'') != NULL)
+				ft_lst_nodejoin(prev_node, node);
+		}
+		prev_node = node;
 		node = node->next;
 	}
+}
+
+static void	ft_expand_wildcards(
+		t_command *command, t_global *global, int laststatus)
+{
+	command->name
+		= ft_expand_dollartoken(command->name, global->envlist, laststatus);
+	ft_expandlist(&command->args, global->envlist, laststatus);
+	ft_expandlist(&command->infile, global->envlist, laststatus);
+	ft_expandlist(&command->outfile, global->envlist, laststatus);
 }
 
 int	ft_executecommand(t_command *command, t_global *global)

@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 19:32:52 by jolopez-          #+#    #+#             */
-/*   Updated: 2022/04/01 18:52:17 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/11/23 22:38:15 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@ int	cmp_char(char c1, char c2)
 		return ((unsigned char)c1 - (unsigned char)c2);
 	return (0);
 }
+
+/*	Devuelve 0 si las cadenas son iguales hasta el caracter n, si no devuelve
+	la diferencia o -1 si alguna de las cadenas está vacía.	*/
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
+/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 19:32:52 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/11/23 22:38:15 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/11/25 17:46:30 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include<stdio.h>
-#include<string.h>
+#include <stdio.h>
+#include <string.h>
 
 int	cmp_char(char c1, char c2)
 {

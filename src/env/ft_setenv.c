@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_setenv.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
+/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 18:49:32 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/11/25 00:22:37 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/11/25 17:44:51 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,7 @@
 			* If it is, the function overwrite the key (environment item name) 
 			  using the ft_modifydict() function.
 			* If it is not, the function uses ft_add_to_dict() to include it."
-	
-
-Por qué usas 32? No es mejor utilizar ' '. 
-Y que sentido tiene si el string es igual solo a 32?
-Estás pasando overwrite = TRUE que no está contemplado como opción!! */
+*/	
 
 void	ft_setenv(t_list **envlist, char *key, char *value, int overwrite)
 {

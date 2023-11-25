@@ -3,48 +3,61 @@
 /*                                                        :::      ::::::::   */
 /*   mini_export.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 18:43:48 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/10/24 19:37:40 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/25 01:16:27 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+static void	ft_set_variable(char *arg, char *name, char *value)
+{
+	int	j;
+	int	k;
+
+	j = 0;
+	k = 0;
+	while ((char)arg[j] != '=')
+	{
+		name[j] = arg[j];
+		j++;
+	}
+	name[j] = '\0';
+	j++;
+	while (arg[j])
+	{
+		value[k] = arg[j];
+		k++;
+		j++;
+	}
+	value[k] = '\0';
+	return ;
+}
+
 /*	This function manages the case where the arg is like "name=??"; the actions
 	are different depending on the ?? is some character or just '\0'.	*/
-/*static void	ft_name_equal(t_list *envList, char **args, int *i)
+	
+static void	ft_name_equal(t_list *envList, char **args, int *i)
 {
-	int		j;
 	char	*name;
 	char	*value;
 
-	j = 0;
-	while ((char)args[*i][j] != '=')
-	{
-		name = ft_strnjoin(name, args[*i][j]);
-		j++;
-	}
-	j++;
-	if (args[*i][j])
-	{
-		while (args[*i][j])
-		{
-			value = ft_strjoin(value, args[*i][j]);
-			j++;
-		}
-		ft_setenv(envList, name, value, ADD_VALUE);
-	}
-	else if (!args[*i][j])
-	{
-		if (!ft_getenv(args[*i], envList))
-			ft_setenv(envList, args[*i], '\0', ADD_VALUE);
-	}
+	name = malloc(sizeof(char) * (ft_strlen(args[*i])
+		- ft_strlen(ft_strchr_pos(args[*i], '=', 0))) + 1);
+	value = malloc(sizeof(char)
+		* ft_strlen(ft_strchr_pos(args[*i], '=', 0)));
+	if (!name || !value)
+		return ;
+	ft_set_variable(args[*i], name, value);
+	ft_setenv(&envList, name, value, ADD_VALUE);
+	free (name);
+	free (value);
 }
-*/
+
 /*	This function just prints the "not found" error message.	*/
-/*
+
 static int	ft_print_not_found(char **args, int i)
 {
 	ft_putstr_fd("export: ", STDERR_FILENO);
@@ -52,7 +65,7 @@ static int	ft_print_not_found(char **args, int i)
 	ft_putendl_fd(" not found.", STDERR_FILENO);
 	return (EXIT_SUCCESS);
 }
-*/
+
 /*	This function depends on the arguments:
 	-	No arguments: - it prints all environment variables (including 
 		unnassigned ones).
@@ -71,30 +84,29 @@ static int	ft_print_not_found(char **args, int i)
 
 int	ft_mini_export(t_list *envList, char **args)
 {
-//	int	i;
-//
-//	i = 0;
+	int	i;
+
+	i = 0;
 	if (!args)
 		ft_mini_env(envList);
-/*	while (args[i])
+	while (args[++i])
 	{
-		if (ft_strncmp(args[i], "=", 2))
+		if (!ft_strncmp(args[i], "=", 1))
 		{
 			ft_putendl_fd("export: bad assigment.", STDERR_FILENO);
 			return (EXIT_SUCCESS);
 		}
-		else if (ft_strchr(args[i], "=") != NULL && args[i][0] != "=")
+		else if (ft_strchr(args[i], '=') != NULL && args[i][0] != '=')
 			ft_name_equal(envList, args, &i);
-		else if (ft_strchr(args[i], "=") != NULL && args[i][0] == "=")
+		else if (ft_strchr(args[i], '=') != NULL && args[i][0] == '=')
 			return (ft_print_not_found(args, i));
-		else if (ft_strchr(args[i], "=") == NULL)
+		else if (ft_strchr(args[i], '=') == NULL)
 		{
 			if (ft_getenv(args[i], envList))
 				return (EXIT_SUCCESS);
 			else if (!ft_getenv(args[i], envList))
-				ft_setenv(envList, args[i], '\0', ADD_VALUE);
+				ft_setenv(&envList, args[i], "\0", OVERWRITE_VALUE);
 		}
 	}
-	*/
 	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 18:43:48 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/11/25 01:16:27 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/11/25 10:46:58 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int	ft_mini_export(t_list *envList, char **args)
 	int	i;
 
 	i = 0;
-	if (!args)
+	if (!args || !args[1])
 		ft_mini_env(envList);
 	while (args[++i])
 	{

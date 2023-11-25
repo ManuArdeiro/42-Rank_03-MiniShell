@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 12:35:59 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/11/18 14:34:35 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/25 11:04:00 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static char	*ft_get_stringvalue(
 	value = NULL;
 	if (variable_name == NULL || variable_name[0] == '\0')
 		return (NULL);
- 	if (*variable_name == '?' && *(variable_name + 1) == '\0')
+	if (*variable_name == '?' && *(variable_name + 1) == '\0')
 		value = ft_itoa(laststatus);
 	else
 		value = ft_getenv(variable_name, envlist);
@@ -60,14 +60,30 @@ static char	*ft_expand_dollarchain(
 	return (expandedstring);
 }
 
+static char	*ft_expand_dollar(
+		const char *argument, t_list *envlist, int laststatus)
+{
+	char	*value;
+	char	*variable_name;
+
+	value = NULL;
+	variable_name = ft_strchr(argument, '$');
+	if (variable_name != NULL)
+	{
+		if (*(variable_name + 1) != '\0' && *(variable_name + 1) == '\'')
+			return ((char *)argument);
+		variable_name++;
+		value = ft_get_stringvalue(variable_name, envlist, laststatus);
+	}
+	return (value);
+}
+
 char	*ft_expand_dollartoken(
 		const char *argument, t_list *envlist, int laststatus)
 {
-	char	*variable_name;
 	char	*value;
 	int		dollarcount;
 
-	variable_name = NULL;
 	value = NULL;
 	if (argument == NULL || envlist == NULL)
 		return (NULL);
@@ -76,16 +92,7 @@ char	*ft_expand_dollartoken(
 		value
 			= ft_expand_dollarchain(argument, laststatus, envlist);
 	else if (dollarcount == 1)
-	{
-		variable_name = ft_strchr(argument, '$');
-		if (variable_name != NULL)
-		{
-			if (*(variable_name + 1) != '\0' && *(variable_name + 1) == '\'')
-				return ((char *)argument);
-			variable_name++;
-			value = ft_get_stringvalue(variable_name, envlist, laststatus);
-		}
-	}
+		value = ft_expand_dollar(argument, envlist, laststatus);
 	else
 		return ((char *)argument);
 	return (value);

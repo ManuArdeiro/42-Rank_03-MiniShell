@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 11:05:21 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/11/23 19:42:57 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/25 17:34:58 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static t_command	*ft_newcommand(const char *commandline, t_part *tokenlist)
 		return (NULL);
 	if (ft_is_commandseries(tokenlist) == FALSE)
 	{
-		commandnode = ft_get_tokennode(tokenlist, tk_cmd);
+		commandnode = ft_get_tokennode(tokenlist, tk_cmd, TRUE);
 		commandname = ft_extract_tokenstring(commandline, commandnode);
 	}
 	else

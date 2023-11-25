@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 19:22:27 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/11/21 20:25:53 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/25 17:00:45 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static t_bool	ft_validate_summary(t_list *summary)
 		nodesummary = (t_summarizer *)node->content;
 		if (nodesummary != NULL && ft_is_tokenpair(nodesummary->token) == TRUE)
 		{
-			if (ft_is_validtokenpair(node, nodesummary) == FALSE)
+			if (ft_is_validtokenpair(summary, nodesummary) == FALSE)
 				return (FALSE);
 		}
 		node = node->next;

@@ -6,7 +6,7 @@
 #    By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/01 18:51:45 by jolopez-          #+#    #+#              #
-#    Updated: 2023/11/23 18:47:57 by yzaytoun         ###   ########.fr        #
+#    Updated: 2023/11/25 11:26:49 by yzaytoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,10 +38,10 @@ BANNER = 	$(info $(WHITE_BAN))\
 USER			= $(shell whoami)
 INCLUDE 		= -Iinclude/
 INC_LIB 		= -Iinclude/libft
-#READLINE_LIB	= -I/Users/$(USER)/.brew/opt/readline/include
-#INC_READLINE	= -L/Users/$(USER)/.brew/opt/readline/lib
-INC_READLINE	= -L/usr/local/opt/readline/lib
-READLINE_LIB	= -I/usr/local/opt/readline/include
+READLINE_LIB	= -I/Users/$(USER)/.brew/opt/readline/include
+INC_READLINE	= -L/Users/$(USER)/.brew/opt/readline/lib
+#INC_READLINE	= -L/usr/local/opt/readline/lib
+#READLINE_LIB	= -I/usr/local/opt/readline/include
 SANITIZER		= -g3 -fsanitize=address -g
 
 READLINE_FLAGS	= -lreadline -ltermcap
@@ -82,7 +82,8 @@ EXEC			= executecommand.c execute_commandline.c \
 				goto_childnode.c add_pathprefix.c evaluate_subprocess.c \
 				wait_subprocess.c create_subprocess.c execute_subprocess.c \
 				expand_startoken.c expand_dollartoken.c execute_builtin.c \
-				mini_heredoc.c expand_filelist.c execute_pipeline.c wait_close_heredoc.c
+				mini_heredoc.c expand_filelist.c execute_pipeline.c wait_close_heredoc.c\
+				expand_command.c
 
 SRC 			= $(ENV) $(UTILS) $(SUMMARIZER) $(LEXER) \
 					$(CMD) $(PARSER) $(TREE) $(EXEC)  main.c

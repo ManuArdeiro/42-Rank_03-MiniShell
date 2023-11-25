@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 20:07:17 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/11/21 20:25:04 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/25 17:14:36 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_bool		ft_is_emptynode(t_minitree *root);
 t_minitree	*ft_parse_commandline(const char *commandline);
 t_mininode	*ft_create_mininode(void *content, t_nodetype type);
 t_minitree	*ft_tokensplit(t_part *tokenlist, t_token token);
-t_part		*ft_get_tokennode(t_part *tokenlist, t_token token);
+t_part		*ft_get_tokennode(t_part *tokenlist, t_token token, t_bool strict);
 t_nodetype	ft_get_nodetype(t_part *tokenlist);
 t_bool		ft_contains_tokenseparator(t_part *tokenlist);
 t_bool		ft_isvalid_commandlist(t_part *tokenlist);
@@ -51,7 +51,6 @@ char		*ft_extract_commandseries(
 				const char *commandline, t_part *tokenlist);
 t_bool		ft_is_commandseries(t_part *tokenlist);
 
-
 //File
 t_list		*ft_extract_filelist(
 				const char *commandline,
@@ -65,7 +64,6 @@ void		ft_delete_filenode(t_list **filelist, char *file_todelete);
 void		ft_clone_streams(int *inputclone, int *outputclone);
 void		ft_closepipe(int *input, int *output);
 
-
 //Separators
 t_bool		ft_is_tokenseparator(t_token token);
 t_bool		ft_is_logicalseparator(t_token token);
@@ -77,6 +75,7 @@ t_bool		ft_is_semicolon(t_token token);
 t_list		*ft_expand_startoken(const char *fullpath);
 char		*ft_expand_dollartoken(
 				const char *argument, t_list *envlist, int laststatus);
+void		ft_expand_command(t_command *command, t_global *global);
 void		ft_lst_nodejoin(t_list *prev_node, t_list *node);
 
 //CONVERT FUNCTIONS

@@ -6,13 +6,13 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 11:52:43 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/11/16 20:31:46 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/25 17:35:27 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	ft_fill_treenode(
+void	ft_fill_treenode(
 		t_minitree **treenode,
 		t_part *leftcontent, t_part *rightcontent, t_part *token)
 {
@@ -35,7 +35,7 @@ static void	ft_split_default(
 {
 	t_part		*delimiter;
 
-	delimiter = ft_get_tokennode(tokenlist, token);
+	delimiter = ft_get_tokennode(tokenlist, token, TRUE, FIRST);
 	if (delimiter != NULL)
 	{
 		ft_fill_treenode(

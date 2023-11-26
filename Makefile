@@ -6,7 +6,7 @@
 #    By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/01 18:51:45 by jolopez-          #+#    #+#              #
-#    Updated: 2023/11/23 18:47:57 by yzaytoun         ###   ########.fr        #
+#    Updated: 2023/11/25 17:50:13 by yzaytoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,10 +38,10 @@ BANNER = 	$(info $(WHITE_BAN))\
 USER			= $(shell whoami)
 INCLUDE 		= -Iinclude/
 INC_LIB 		= -Iinclude/libft
-READLINE_LIB	= -I/Users/$(USER)/.brew/opt/readline/include
-INC_READLINE	= -L/Users/$(USER)/.brew/opt/readline/lib
-#INC_READLINE	= -L/usr/local/opt/readline/lib
-#READLINE_LIB	= -I/usr/local/opt/readline/include
+#READLINE_LIB	= -I/Users/$(USER)/.brew/opt/readline/include
+#INC_READLINE	= -L/Users/$(USER)/.brew/opt/readline/lib
+INC_READLINE	= -L/usr/local/opt/readline/lib
+READLINE_LIB	= -I/usr/local/opt/readline/include
 SANITIZER		= -g3 -fsanitize=address -g
 
 READLINE_FLAGS	= -lreadline -ltermcap
@@ -54,12 +54,13 @@ UTILS			= print_msg.c mini_history.c get_path.c free_string.c \
 
 LEXER			= tokenizer.c tokens.c token_tools_1.c token_tools_2.c \
 					ft_copy_tokenlist.c ft_tokenlist_add.c print_tokens.c \
-					add_tkn.c free_tokenlist.c get_lasttoken.c
+					add_tkn.c free_tokenlist.c get_lasttoken.c reverse_tokenlist.c\
+					get_token_byindex.c
 
 COMMAND			= extract_tokenstring.c get_commandlist.c lstconvert.c \
 					printcommand.c extract_filelist.c get_minicommand.c \
 					extract_arglist.c is_compoundcommand.c free_commandlist.c\
-					extract_commandseries.c
+					extract_commandseries.c is_commandseries.c
 					
 FILE			= filestreams.c create_file.c get_filemode.c is_redirection.c \
 					freefile.c append_filecontent.c delete_filenode.c closepipe.c
@@ -67,11 +68,12 @@ FILE			= filestreams.c create_file.c get_filemode.c is_redirection.c \
 PARSER			=  separators.c get_tokennode.c tokensplit.c get_nodetype.c \
 					parse_commandline.c contains_tokenseparator.c \
 					$(COMMAND) $(FILE) isvalid_commandlist.c tokenpairs.c\
-					get_tokenpair.c
+					get_tokenpair.c lst_nodejoin.c contains_subshell.c\
+					split_subshell.c split_tokenlist.c
 					
 SUMMARIZER		= minisummary.c printtokens.c get_unique_tokens.c \
 					get_token_summary.c get_token_count.c clearsummary.c
-
+					
 CMD				= mini_cd.c mini_echo.c mini_env.c mini_exit.c mini_export.c mini_pwd.c \
 					mini_unset.c mini_builtins.c is_builtin.c
 					
@@ -82,7 +84,8 @@ EXEC			= executecommand.c execute_commandline.c \
 				goto_childnode.c add_pathprefix.c evaluate_subprocess.c \
 				wait_subprocess.c create_subprocess.c execute_subprocess.c \
 				expand_startoken.c expand_dollartoken.c execute_builtin.c \
-				mini_heredoc.c expand_filelist.c execute_pipeline.c wait_close_heredoc.c
+				mini_heredoc.c expand_filelist.c execute_pipeline.c wait_close_heredoc.c\
+				expand_command.c
 
 SRC 			= $(ENV) $(UTILS) $(SUMMARIZER) $(LEXER) \
 					$(CMD) $(PARSER) $(TREE) $(EXEC)  main.c

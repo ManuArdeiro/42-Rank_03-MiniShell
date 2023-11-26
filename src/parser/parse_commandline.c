@@ -6,42 +6,24 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 12:24:07 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/11/23 20:05:43 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/25 17:43:01 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	ft_get_newnode(t_minitree **root, t_part *tokenlist)
-{
-	t_token		token;
-	t_minitree	*newnode;
-
-	token = 0;
-	newnode = NULL;
-	while (token < max_token)
-	{
-		if (ft_is_tokenseparator(token) == TRUE)
-		{
-			newnode = ft_tokensplit(tokenlist, token);
-			if (newnode != NULL)
-			{
-				if (ft_is_emptynode(*root) == FALSE)
-					ft_destroytree(root, ft_free_mininode);
-				*root = newnode;
-				break ;
-			}
-		}
-		++token;
-	}
-}
+static void	ft_parse_tokenlist(
+		t_minitree **root, t_part *tokenlist, const char *commandline);
 
 static void	ft_tokensplit_all(
 		t_minitree **root, t_part *tokenlist, const char *commandline)
 {
 	if (ft_contains_tokenseparator(tokenlist) == TRUE
+		&& ft_contains_subshell(tokenlist) == TRUE)
+		*root = ft_split_subshell(tokenlist);
+	else if (ft_contains_tokenseparator(tokenlist) == TRUE
 		&& ft_contains_tokenpair(tokenlist) == FALSE)
-		ft_get_newnode(root, tokenlist);
+		ft_split_tokenlist(root, tokenlist);
 	else
 		*root = ft_get_minicommand(commandline, tokenlist);
 }

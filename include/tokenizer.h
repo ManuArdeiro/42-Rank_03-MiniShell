@@ -33,5 +33,6 @@ void		ft_print_token(t_token token);
 
 void		ft_free_tokenlist(t_part **tokenlist);
 t_part		*ft_get_lasttoken(t_part *tokenlist);
-
+void		ft_reverse_tokenlist(t_part **tokenlist);
+t_part		*ft_get_token_byindex(t_part *tokenlist, t_part *token_tofind);
 #endif

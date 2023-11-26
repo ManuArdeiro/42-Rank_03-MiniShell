@@ -1,36 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tokenpairs.c                                       :+:      :+:    :+:   */
+/*   split_tokenlist.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/16 19:45:12 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/11/25 17:37:13 by yzaytoun         ###   ########.fr       */
+/*   Created: 2023/10/09 11:52:43 by yzaytoun          #+#    #+#             */
+/*   Updated: 2023/11/25 17:35:27 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_bool	ft_is_tokenpair(t_token token)
+void	ft_split_tokenlist(t_minitree **root, t_part *tokenlist)
 {
-	if (token == tk_dblquot || token == tk_sglquot)
-		return (TRUE);
-	return (FALSE);
-}
+	t_token		token;
+	t_minitree	*newnode;
 
-t_bool	ft_contains_tokenpair(t_part *tokenlist)
-{
-	t_part	*node;
-
-	if (tokenlist == NULL)
-		return (FALSE);
-	node = tokenlist;
-	while (node != NULL)
+	token = 0;
+	newnode = NULL;
+	while (token < max_token)
 	{
-		if (ft_is_tokenpair(node->token) == TRUE)
-			return (TRUE);
-		node = node->next;
+		if (ft_is_tokenseparator(token) == TRUE)
+		{
+			newnode = ft_tokensplit(tokenlist, token);
+			if (newnode != NULL)
+			{
+				if (ft_is_emptynode(*root) == FALSE)
+					ft_destroytree(root, ft_free_mininode);
+				*root = newnode;
+				break ;
+			}
+		}
+		++token;
 	}
-	return (FALSE);
 }

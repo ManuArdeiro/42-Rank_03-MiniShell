@@ -24,7 +24,7 @@ static void	ft_evaluate_relation(
 	else if (nodetype == n_or)
 	{
 		*laststatus = ft_navigate_and_execute(root->leftchild, global);
-		if (*laststatus == EXIT_FAILURE)
+		if (*laststatus == EXIT_FAILURE || *laststatus == 127)
 			*laststatus = ft_navigate_and_execute(root->rightchild, global);
 	}
 	else if (nodetype == n_pipeline)

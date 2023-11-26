@@ -52,7 +52,9 @@ enum e_bool
 	CURRENT_NODE,
 	O_HEREDOC,
 	FORK,
-	BUILTIN
+	BUILTIN,
+	FIRST,
+	LAST
 };
 
 struct s_dict

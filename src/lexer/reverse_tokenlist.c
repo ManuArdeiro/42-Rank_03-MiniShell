@@ -1,36 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tokenpairs.c                                       :+:      :+:    :+:   */
+/*   reverse_tokenlist.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/16 19:45:12 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/11/25 17:37:13 by yzaytoun         ###   ########.fr       */
+/*   Created: 2023/10/09 11:52:43 by yzaytoun          #+#    #+#             */
+/*   Updated: 2023/11/25 17:35:27 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_bool	ft_is_tokenpair(t_token token)
+void	ft_reverse_tokenlist(t_part **tokenlist)
 {
-	if (token == tk_dblquot || token == tk_sglquot)
-		return (TRUE);
-	return (FALSE);
-}
-
-t_bool	ft_contains_tokenpair(t_part *tokenlist)
-{
-	t_part	*node;
-
-	if (tokenlist == NULL)
-		return (FALSE);
-	node = tokenlist;
-	while (node != NULL)
+	t_part	*nextnode;
+	t_part	*currentnode;
+	t_part	*prevnode;
+	
+	if ((*tokenlist) == NULL)
+		return ;
+	nextnode = NULL;
+	prevnode = NULL;
+	currentnode = (*tokenlist);
+	while (currentnode != NULL)
 	{
-		if (ft_is_tokenpair(node->token) == TRUE)
-			return (TRUE);
-		node = node->next;
+		nextnode = currentnode->next;
+		currentnode->next = prevnode;
+		prevnode = currentnode;
+		currentnode = nextnode;
 	}
-	return (FALSE);
+	(*tokenlist) = prevnode;
 }

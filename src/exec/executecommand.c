@@ -6,35 +6,24 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 16:44:36 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/11/18 14:30:27 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/25 17:10:02 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	ft_expand_wildcards(
-		t_command *command, t_global *global, int laststatus)
+static void	ft_check_commandname(t_command *command)
 {
-	char	*dollar_expansion;
-	t_list	*node;
-
-	dollar_expansion = NULL;
-	node = command->args;
-	command->name
-		= ft_expand_dollartoken(command->name, global->envlist, laststatus);
-	while (node != NULL)
+	if (command == NULL)
+		return ;
+	if (command->name != NULL
+		&& ft_strequal(command->name, (char *)command->args->content) == FALSE)
 	{
-		dollar_expansion
-			= ft_expand_dollartoken(
-				(char *)node->content, global->envlist, laststatus);
-		if (dollar_expansion != NULL
-			&& (char *)node->content != dollar_expansion)
-		{
-			free(node->content);
-			node->content = dollar_expansion;
-		}
-		node = node->next;
+		free(command->name);
+		command->name = ft_strdup((char *)command->args->content);
 	}
+	else if (command->name == NULL && command->args->content != NULL)
+		command->name = ft_strdup((char *)command->args->content);
 }
 
 int	ft_executecommand(t_command *command, t_global *global)
@@ -48,9 +37,9 @@ int	ft_executecommand(t_command *command, t_global *global)
 		return (EXITED);
 	if (g_signals.sig_exit_status == 1)
 		global->laststatus = g_signals.exit_status;
-	laststatus = global->laststatus;
 	g_signals.sig_exit_status = 0;
-	ft_expand_wildcards(command, global, laststatus);
+	ft_expand_command(command, global);
+	ft_check_commandname(command);
 	pidcount = ft_create_subprocess(command, &pidarray, global);
 	g_signals.pidarray = pidarray;
 	g_signals.pidcount = pidcount;

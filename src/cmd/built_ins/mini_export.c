@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 18:43:48 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/11/25 10:46:58 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/11/26 21:17:13 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,16 @@ static void	ft_set_variable(char *arg, char *name, char *value)
 
 /*	This function manages the case where the arg is like "name=??"; the actions
 	are different depending on the ?? is some character or just '\0'.	*/
-	
+
 static void	ft_name_equal(t_list *envList, char **args, int *i)
 {
 	char	*name;
 	char	*value;
 
 	name = malloc(sizeof(char) * (ft_strlen(args[*i])
-		- ft_strlen(ft_strchr_pos(args[*i], '=', 0))) + 1);
+				- ft_strlen(ft_strchr_pos(args[*i], '=', 0))) + 1);
 	value = malloc(sizeof(char)
-		* ft_strlen(ft_strchr_pos(args[*i], '=', 0)));
+			* ft_strlen(ft_strchr_pos(args[*i], '=', 0)));
 	if (!name || !value)
 		return ;
 	ft_set_variable(args[*i], name, value);

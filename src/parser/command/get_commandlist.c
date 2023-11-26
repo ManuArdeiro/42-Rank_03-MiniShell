@@ -22,7 +22,8 @@ t_part	*ft_get_commandlist(t_part *tokenlist, t_part *delimiter)
 	if (tokenlist == NULL)
 		return (NULL);
 	node = tokenlist;
-	while (node != delimiter)
+	while (node != NULL && (node != delimiter
+		|| (delimiter != NULL && node->index != delimiter->index)))
 	{
 		tokencopy = ft_copytoken(node);
 		ft_tokenlist_add(&commandlist, tokencopy);

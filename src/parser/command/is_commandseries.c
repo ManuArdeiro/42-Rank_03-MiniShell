@@ -42,7 +42,7 @@ t_bool	ft_is_commandseries(t_part *tokenlist)
 			{
 				endnode
 					= ft_get_tokennode(
-						node, ft_get_tokenpair(node->token), FALSE);
+						node, ft_get_tokenpair(node->token), FALSE, FIRST);
 				if (endnode != NULL)
 					result = ft_verify_series(node, endnode);
 			}

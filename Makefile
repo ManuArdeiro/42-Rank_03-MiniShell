@@ -54,7 +54,8 @@ UTILS			= print_msg.c mini_history.c get_path.c free_string.c \
 
 LEXER			= tokenizer.c tokens.c token_tools_1.c token_tools_2.c \
 					ft_copy_tokenlist.c ft_tokenlist_add.c print_tokens.c \
-					add_tkn.c free_tokenlist.c get_lasttoken.c
+					add_tkn.c free_tokenlist.c get_lasttoken.c reverse_tokenlist.c\
+					get_token_byindex.c
 
 COMMAND			= extract_tokenstring.c get_commandlist.c lstconvert.c \
 					printcommand.c extract_filelist.c get_minicommand.c \
@@ -67,11 +68,12 @@ FILE			= filestreams.c create_file.c get_filemode.c is_redirection.c \
 PARSER			=  separators.c get_tokennode.c tokensplit.c get_nodetype.c \
 					parse_commandline.c contains_tokenseparator.c \
 					$(COMMAND) $(FILE) isvalid_commandlist.c tokenpairs.c\
-					get_tokenpair.c lst_nodejoin.c
+					get_tokenpair.c lst_nodejoin.c contains_subshell.c\
+					split_subshell.c split_tokenlist.c
 					
 SUMMARIZER		= minisummary.c printtokens.c get_unique_tokens.c \
 					get_token_summary.c get_token_count.c clearsummary.c
-
+					
 CMD				= mini_cd.c mini_echo.c mini_env.c mini_exit.c mini_export.c mini_pwd.c \
 					mini_unset.c mini_builtins.c is_builtin.c
 					

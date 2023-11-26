@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-static void	ft_fill_treenode(
+void	ft_fill_treenode(
 		t_minitree **treenode,
 		t_part *leftcontent, t_part *rightcontent, t_part *token)
 {
@@ -35,7 +35,7 @@ static void	ft_split_default(
 {
 	t_part		*delimiter;
 
-	delimiter = ft_get_tokennode(tokenlist, token, TRUE);
+	delimiter = ft_get_tokennode(tokenlist, token, TRUE, FIRST);
 	if (delimiter != NULL)
 	{
 		ft_fill_treenode(

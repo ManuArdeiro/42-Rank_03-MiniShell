@@ -1,33 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_commandlist.c                                  :+:      :+:    :+:   */
+/*   split_tokenlist.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/30 12:35:44 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/10 11:27:02 by yzaytoun         ###   ########.fr       */
+/*   Created: 2023/10/09 11:52:43 by yzaytoun          #+#    #+#             */
+/*   Updated: 2023/11/25 17:35:27 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_part	*ft_get_commandlist(t_part *tokenlist, t_part *delimiter)
+void	ft_split_tokenlist(t_minitree **root, t_part *tokenlist)
 {
-	t_part		*node;
-	t_part		*commandlist;
-	t_part		*tokencopy;
+	t_token		token;
+	t_minitree	*newnode;
 
-	commandlist = NULL;
-	if (tokenlist == NULL)
-		return (NULL);
-	node = tokenlist;
-	while (node != NULL && (node != delimiter
-		|| (delimiter != NULL && node->index != delimiter->index)))
+	token = 0;
+	newnode = NULL;
+	while (token < max_token)
 	{
-		tokencopy = ft_copytoken(node);
-		ft_tokenlist_add(&commandlist, tokencopy);
-		node = node->next;
+		if (ft_is_tokenseparator(token) == TRUE)
+		{
+			newnode = ft_tokensplit(tokenlist, token);
+			if (newnode != NULL)
+			{
+				if (ft_is_emptynode(*root) == FALSE)
+					ft_destroytree(root, ft_free_mininode);
+				*root = newnode;
+				break ;
+			}
+		}
+		++token;
 	}
-	return (commandlist);
 }

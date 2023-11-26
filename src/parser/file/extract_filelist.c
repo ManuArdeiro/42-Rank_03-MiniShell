@@ -52,7 +52,7 @@ static void	ft_get_filelist(
 		if (ft_check_filetype(node->token, std_stream) == TRUE)
 		{
 			separatortoken
-				= ft_get_tokennode(tokenlist, node->token, TRUE);
+				= ft_get_tokennode(tokenlist, node->token, TRUE, FIRST);
 			string = ft_extract_tokenstring(commandline, separatortoken->next);
 			file = ft_create_file(
 					string,

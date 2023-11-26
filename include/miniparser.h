@@ -30,13 +30,17 @@ t_bool		ft_is_emptynode(t_minitree *root);
 t_minitree	*ft_parse_commandline(const char *commandline);
 t_mininode	*ft_create_mininode(void *content, t_nodetype type);
 t_minitree	*ft_tokensplit(t_part *tokenlist, t_token token);
-t_part		*ft_get_tokennode(t_part *tokenlist, t_token token, t_bool strict);
+t_part		*ft_get_tokennode(
+			t_part *tokenlist, t_token token, t_bool strict, t_bool direction);
 t_nodetype	ft_get_nodetype(t_part *tokenlist);
 t_bool		ft_contains_tokenseparator(t_part *tokenlist);
 t_bool		ft_isvalid_commandlist(t_part *tokenlist);
 t_bool		ft_is_tokenpair(t_token token);
+t_bool		ft_contains_subshell(t_part *tokenlist);
 t_bool		ft_contains_tokenpair(t_part *token);
 t_token		ft_get_tokenpair(t_token token);
+t_minitree	*ft_split_subshell(t_part *tokenlist);
+void		ft_split_tokenlist(t_minitree **root, t_part *tokenlist);
 
 //Command list
 t_part		*ft_get_commandlist(t_part *tokenlist, t_part *delimiter);
@@ -50,6 +54,7 @@ void		ft_free_commandlist(t_command **command);
 char		*ft_extract_commandseries(
 				const char *commandline, t_part *tokenlist);
 t_bool		ft_is_commandseries(t_part *tokenlist);
+
 
 //File
 t_list		*ft_extract_filelist(

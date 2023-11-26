@@ -1,33 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_commandlist.c                                  :+:      :+:    :+:   */
+/*   contains_subshell.c       		                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/30 12:35:44 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/10 11:27:02 by yzaytoun         ###   ########.fr       */
+/*   Created: 2023/10/28 20:07:46 by yzaytoun          #+#    #+#             */
+/*   Updated: 2023/10/28 20:12:19 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_part	*ft_get_commandlist(t_part *tokenlist, t_part *delimiter)
+t_bool	ft_contains_subshell(t_part *tokenlist)
 {
-	t_part		*node;
-	t_part		*commandlist;
-	t_part		*tokencopy;
+	t_part	*node;
 
-	commandlist = NULL;
 	if (tokenlist == NULL)
-		return (NULL);
+		return (FALSE);
 	node = tokenlist;
-	while (node != NULL && (node != delimiter
-		|| (delimiter != NULL && node->index != delimiter->index)))
+	while (node != NULL)
 	{
-		tokencopy = ft_copytoken(node);
-		ft_tokenlist_add(&commandlist, tokencopy);
+		if (ft_is_subshellseparator(node->token) == TRUE)
+			return (TRUE);
 		node = node->next;
 	}
-	return (commandlist);
+	return (FALSE);
 }

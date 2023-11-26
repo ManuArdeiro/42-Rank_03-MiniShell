@@ -27,7 +27,7 @@ char	*ft_extract_commandseries(const char *commandline, t_part *tokenlist)
 		if (ft_is_tokenpair(node->token) == TRUE && node->next != NULL)
 		{
 			secondnode = ft_get_tokennode(
-					node->next, ft_get_tokenpair(node->token), FALSE);
+					node->next, ft_get_tokenpair(node->token), FALSE, FIRST);
 			if (secondnode != NULL && secondnode->end > node->start)
 				commandseries
 					= ft_substr(

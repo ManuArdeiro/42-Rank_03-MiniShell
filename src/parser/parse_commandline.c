@@ -6,20 +6,19 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 12:24:07 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/11/25 17:43:01 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/27 19:06:25 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 static void	ft_parse_tokenlist(
-		t_minitree **root, t_part *tokenlist, const char *commandline);
+				t_minitree **root, t_part *tokenlist, const char *commandline);
 
 static void	ft_tokensplit_all(
 		t_minitree **root, t_part *tokenlist, const char *commandline)
 {
-	if (ft_contains_tokenseparator(tokenlist) == TRUE
-		&& ft_contains_subshell(tokenlist) == TRUE)
+	if (ft_valid_subshellnode(tokenlist) == TRUE)
 		*root = ft_split_subshell(tokenlist);
 	else if (ft_contains_tokenseparator(tokenlist) == TRUE
 		&& ft_contains_tokenpair(tokenlist) == FALSE)

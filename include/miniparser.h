@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 20:07:17 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/11/25 17:14:36 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/27 19:00:06 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ t_bool		ft_is_emptynode(t_minitree *root);
 t_minitree	*ft_parse_commandline(const char *commandline);
 t_mininode	*ft_create_mininode(void *content, t_nodetype type);
 t_minitree	*ft_tokensplit(t_part *tokenlist, t_token token);
-t_part		*ft_get_tokennode(
-			t_part *tokenlist, t_token token, t_bool strict, t_bool direction);
+t_part		*ft_get_tokennode(t_part *tokenlist, t_token token,
+				t_bool strict, t_bool direction);
 t_nodetype	ft_get_nodetype(t_part *tokenlist);
 t_bool		ft_contains_tokenseparator(t_part *tokenlist);
 t_bool		ft_isvalid_commandlist(t_part *tokenlist);
@@ -41,6 +41,8 @@ t_bool		ft_contains_tokenpair(t_part *token);
 t_token		ft_get_tokenpair(t_token token);
 t_minitree	*ft_split_subshell(t_part *tokenlist);
 void		ft_split_tokenlist(t_minitree **root, t_part *tokenlist);
+t_bool		ft_valid_subshellnode(t_part *tokenlist);
+
 
 //Command list
 t_part		*ft_get_commandlist(t_part *tokenlist, t_part *delimiter);

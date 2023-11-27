@@ -6,35 +6,47 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 19:28:06 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/11/21 19:51:42 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/27 20:34:43 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_expand_filelist(t_list **filelist)
+static t_list	*ft_get_expandedfilelist(t_list *filelist)
 {
 	t_list	*node;
+	t_list	*expandedlist;
 	t_file	*file;
-	t_file	*fullfile;
 
-	if (filelist == NULL)
-		return ;
-	fullfile = NULL;
-	node = *filelist;
+	expandedlist = NULL;
+	node = filelist;
+	file = NULL;
 	while (node != NULL)
 	{
 		file = (t_file *)node->content;
-		if (file->mode == O_HEREDOC)
+		if (file != NULL && file->mode == O_HEREDOC)
 		{
 			ft_get_heredoc(&file);
-			ft_lstinsert(filelist, file, BACK);
+			ft_lstinsert(&expandedlist, file, BACK);
 		}
 		node = node->next;
 	}
-	if (ft_lstsize(*filelist) > 1)
+	return (expandedlist);
+}
+
+void	ft_expand_filelist(t_list **filelist)
+{
+	t_file	*fullfile;
+	t_list	*expandedlist;
+
+	expandedlist = NULL;
+	if (filelist == NULL)
+		return ;
+	fullfile = NULL;
+	expandedlist = ft_get_expandedfilelist(*filelist);
+	if (ft_lstsize(expandedlist) > 1)
 	{
-		fullfile = ft_compress_filelist(*filelist);
+		fullfile = ft_compress_filelist(expandedlist);
 		if (fullfile != NULL)
 			ft_lstinsert(filelist, fullfile, FRONT);
 	}

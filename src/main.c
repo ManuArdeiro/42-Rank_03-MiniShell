@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:55:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/11/21 20:30:15 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/28 20:15:57 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ static void	ft_loop(t_global *global)
 	while (global->status != EXITED)
 	{
 		ft_signals();
+		printf("HOLA\n");
 		global->line = readline(MINI_PROMPT);
 		if (!global->line)
 		{

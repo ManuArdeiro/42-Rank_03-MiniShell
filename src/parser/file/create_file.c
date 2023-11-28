@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 19:44:00 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/28 20:21:33 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/28 19:10:17 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_file	*ft_create_file(const char *name, int std_stream, int mode)
 	newfile = malloc(sizeof(t_file));
 	if (!newfile)
 		return (NULL);
-	newfile->name = (char *)name;
+	newfile->name = ft_strstrip(name);
 	newfile->fd = std_stream;
 	newfile->mode = mode;
 	return (newfile);

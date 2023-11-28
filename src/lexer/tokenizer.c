@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 17:51:52 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/11/16 20:23:33 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/28 19:16:19 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ static void	ft_check_commandnode(
 {
 	if (ft_is_tokenseparator(node->token) == TRUE)
 		*flag = 0;
+	else if (ft_is_redirection(node->token) == TRUE)
+		*flag = 1;
 	else if (prev_token == tk_arg && token_pin == tk_less)
 		node->token = tk_cmd;
 	else if (node->token == tk_less)

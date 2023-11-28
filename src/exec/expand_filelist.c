@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 19:28:06 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/11/27 20:34:43 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/28 19:27:59 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	ft_expand_filelist(t_list **filelist)
 {
 	t_file	*fullfile;
 	t_list	*expandedlist;
-
+	char *s = NULL;
 	expandedlist = NULL;
 	if (filelist == NULL)
 		return ;
@@ -47,6 +47,9 @@ void	ft_expand_filelist(t_list **filelist)
 	if (ft_lstsize(expandedlist) > 1)
 	{
 		fullfile = ft_compress_filelist(expandedlist);
+		read(fullfile->fd, s, 10);
+		if (s != NULL)
+			printf("s = %s\n", s);
 		if (fullfile != NULL)
 			ft_lstinsert(filelist, fullfile, FRONT);
 	}

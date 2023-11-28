@@ -6,11 +6,22 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 18:28:55 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/11/27 20:10:01 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/28 20:34:50 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	ft_get_inputline(char **line, int *herepipe)
+{
+	*line = get_next_line(STDIN_FILENO);
+	if (!line)
+	{
+		ft_closepipe(&herepipe[0], &herepipe[1]);
+		ft_printerror(__func__, "Get next line");
+		exit(EXIT_FAILURE);
+	}
+}
 
 void	ft_writetofile(const char *delimiter, int *herepipe)
 {
@@ -21,19 +32,19 @@ void	ft_writetofile(const char *delimiter, int *herepipe)
 	cleanline = NULL;
 	while (line != NULL)
 	{
+		ft_signals();
 		ft_putstr_fd("heredoc> ", STDOUT_FILENO);
-		line = get_next_line(STDIN_FILENO);
-		if (!line)
-		{
-			ft_closepipe(&herepipe[0], &herepipe[1]);
-			ft_printerror(__func__, "Get next line");
-			exit(EXIT_FAILURE);
-		}
+		ft_get_inputline(&line, herepipe);
 		cleanline = ft_strtrim(line, "\n");
 		if (ft_strequal(cleanline, delimiter) == TRUE)
 		{
 			ft_closepipe(&herepipe[0], &herepipe[1]);
 			exit(EXIT_SUCCESS);
+		}
+		else if (g_signals.sig_exit_status == 1)
+		{
+			ft_closepipe(&herepipe[0], &herepipe[1]);
+			exit(EXIT_FAILURE);
 		}
 		ft_putstr_fd(line, herepipe[1]);
 		free(line);
@@ -50,7 +61,10 @@ void	ft_get_heredoc(t_file **file)
 		ft_printerror(__func__, "Pipe");
 	child = fork();
 	if (child == 0)
+	{
+		g_signals.in_heredoc = TRUE;
 		ft_writetofile((*file)->name, herepipe);
+	}
 	else if (child < 0)
 		ft_printerror(__func__, "Fork");
 	else

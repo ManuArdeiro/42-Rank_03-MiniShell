@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:50:44 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/11/27 20:15:10 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/28 19:25:39 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static void	ft_fork_subprocess(
 			t_command *command, pid_t *pid, t_list *node, t_global *global)
 {
+	ft_printcommand(command);
 	*pid = fork();
 	if (*pid == 0)
 	{
@@ -59,7 +60,6 @@ int	ft_create_subprocess(t_command *command, pid_t **pid, t_global *global)
 	*pid = malloc(sizeof(pid_t) * (pidcount + 1));
 	if (!*pid)
 		return (0);
- 	ft_expand_filelist(&command->infile);
 	ft_initiate_subprocess(command, pid, pidcount, global);
 	return (pidcount);
 }

@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 21:33:30 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/11/27 19:47:16 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/28 20:44:33 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,14 @@ static void	handle_sigint(int signum)
 	if (signum != SIGINT)
 		return ;
 	write(1, "\n", 1);
-	//rl_replace_line("", 1);
-	if (g_signals.pidarray == NULL)
+	rl_replace_line("", 1);
+	if (g_signals.in_heredoc == TRUE)
+	{
+		rl_on_new_line();
+		g_signals.exit_status = 1;
+		exit(EXIT_FAILURE);
+	}
+	else if (g_signals.pidarray == NULL)
 	{
 		g_signals.exit_status = 1;
 		rl_on_new_line();
@@ -38,7 +44,7 @@ static void	handle_sigquit(int signum)
 	nbr = ft_itoa(signum);
 	ft_putstr_fd("Quit: ", STDERR_FILENO);
 	ft_putendl_fd(nbr, STDERR_FILENO);
-	//rl_replace_line("", 1);
+	rl_replace_line("", 1);
 	rl_on_new_line();
 	while (i < g_signals.pidcount)
 	{

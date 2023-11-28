@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 20:44:19 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/11/21 19:50:47 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/28 19:42:57 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,12 @@ static void	ft_write_to_pipe(t_file *file, int *filepipe)
 	line = "";
 	if (file == NULL || file->name == NULL)
 		return ;
-	file->fd = ft_openfile(file->name, file->mode);
-	if (file->fd < 0)
-		return ;
+	if (file->mode != O_HEREDOC)
+	{
+		file->fd = ft_openfile(file->name, file->mode);
+		if (file->fd < 0)
+			return ;
+	}
 	while (line != NULL)
 	{
 		line = get_next_line(file->fd);

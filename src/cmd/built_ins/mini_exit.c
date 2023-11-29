@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_exit.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 01:42:21 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/10/24 19:42:27 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/27 23:31:41 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ int	ft_mini_exit(t_global *global, char **args)
 		else
 		{
 			global->status = EXITED;
+			global->laststatus = ft_atoi(args[1]);
 			return (ft_atoi(args[1]));
 		}
 	}

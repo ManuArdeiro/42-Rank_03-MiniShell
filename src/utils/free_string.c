@@ -12,8 +12,6 @@
 
 #include "minishell.h"
 
-/*	This function frees the (void *)content passed as argument.	*/
-
 void	ft_free_string(void *content)
 {
 	char	*string;

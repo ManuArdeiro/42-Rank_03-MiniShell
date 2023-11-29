@@ -44,7 +44,6 @@ static void	ft_loop(t_global *global)
 	while (global->status != EXITED)
 	{
 		ft_signals();
-		printf("HOLA\n");
 		global->line = readline(MINI_PROMPT);
 		if (!global->line)
 		{

@@ -64,9 +64,10 @@ static void	ft_join_nextnode(t_list *node, t_token token)
 			ft_free_string(node->next->content);
 			free(node->next);
 			node->next = pointer;
+			if (token == tk_sglquot)
+				free(string);
 		}
-		if (token == tk_sglquot)
-			free(string);
+		node->content = string;
 	}
 }
 

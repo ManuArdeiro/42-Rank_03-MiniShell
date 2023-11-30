@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 11:18:23 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/28 19:12:29 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/30 19:41:15 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,5 @@ void		ft_free_tokenlist(t_part **tokenlist);
 t_part		*ft_get_lasttoken(t_part *tokenlist);
 void		ft_reverse_tokenlist(t_part **tokenlist);
 t_part		*ft_get_token_byindex(t_part *tokenlist, t_part *token_tofind);
+void		ft_add_cmdtoken(const char *line, t_part *tokens, int *i);
 #endif

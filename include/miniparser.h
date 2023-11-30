@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 20:07:17 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/11/27 19:00:06 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/30 20:30:47 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ t_token		ft_get_tokenpair(t_token token);
 t_minitree	*ft_split_subshell(t_part *tokenlist);
 void		ft_split_tokenlist(t_minitree **root, t_part *tokenlist);
 t_bool		ft_valid_subshellnode(t_part *tokenlist);
+void		ft_skip_quotes(t_part **token);
 
 
 //Command list

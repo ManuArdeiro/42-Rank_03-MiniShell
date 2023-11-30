@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 16:44:36 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/11/30 20:07:28 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/30 20:17:11 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ int	ft_executecommand(t_command *command, t_global *global)
 	if (g_signals.sig_exit_status == 1)
 		global->laststatus = g_signals.exit_status;
 	g_signals.sig_exit_status = 0;
+	ft_printcommand(command);
 	ft_expand_command(command, global);
 	ft_check_commandname(command);
-	//ft_printcommand(command);
 	pidcount = ft_create_subprocess(command, &pidarray, global);
 	g_signals.pidarray = pidarray;
 	g_signals.pidcount = pidcount;

@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 11:22:10 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/11/30 20:07:06 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/30 20:17:05 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ static void	ft_expand_node(
 		free(node->content);
 		node->content = dollar_expansion;
 	}
+	(void)prev_node;
 }
 
 static void	ft_expandlist(

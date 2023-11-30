@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 17:08:56 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/11/25 17:34:43 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/11/30 20:24:52 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_bool	ft_is_commandseries(t_part *tokenlist)
 			{
 				endnode
 					= ft_get_tokennode(
-						node, ft_get_tokenpair(node->token), FALSE, FIRST);
+						node->next, ft_get_tokenpair(node->token), FALSE, FIRST);
 				if (endnode != NULL)
 					result = ft_verify_series(node, endnode);
 			}

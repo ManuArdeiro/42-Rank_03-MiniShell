@@ -62,20 +62,25 @@ static char	*ft_expand_dollarchain(
 	return (expandedstring);
 }
 
+static char	*ft_get_limiter(const char *string)
+{
+
+}
+
 static char	*ft_expand_dollar(
 		const char *argument, t_list *envlist, int laststatus)
 {
 	char	*value;
-	char	*variable_name;
+	char	*string_toexpand;
+	char	*limit;
 
 	value = NULL;
-	variable_name = ft_strchr(argument, '$');
-	if (variable_name != NULL)
+	string_toexpand = ft_strchr(argument, '$');
+	if (string_toexpand != NULL)
 	{
-		if (*(variable_name + 1) != '\0')
-			return ((char *)argument);
-		variable_name++;
-		value = ft_get_stringvalue(variable_name, envlist, laststatus);
+		limit = ft_get_limiter(string_toexpand);
+		string_toexpand = ft_cutstr(string_toexpand, limit);
+		value = ft_get_stringvalue(string_toexpand, envlist, laststatus);
 	}
 	return (value);
 }

@@ -27,7 +27,7 @@ void		ft_clearsummary(void *content);
 void		ft_printnode(t_mininode *mininode);
 void		ft_free_mininode(void *content);
 t_bool		ft_is_emptynode(t_minitree *root);
-t_minitree	*ft_parse_commandline(const char *commandline);
+t_minitree	*ft_parse_commandline(t_global *global);
 t_mininode	*ft_create_mininode(void *content, t_nodetype type);
 t_minitree	*ft_tokensplit(t_part *tokenlist, t_token token);
 t_part		*ft_get_tokennode(t_part *tokenlist, t_token token,
@@ -47,13 +47,11 @@ void		ft_skip_quotes(t_part **token);
 
 //Command list
 t_part		*ft_get_commandlist(t_part *tokenlist, t_part *delimiter);
-t_minitree	*ft_get_minicommand(
-				const char *commandline, t_part *tokenlist, t_global *global);
+t_minitree	*ft_get_minicommand(t_part *tokenlist, t_global *global);
 void		ft_printcommand(t_command *command);
 t_bool		ft_is_compoundcommand(t_nodetype nodetype);
 char		*ft_extract_tokenstring(const char *commandline, t_part *node);
-t_list		*ft_extract_arglist(
-				const char *commandline, t_part *tokenlist, t_global *global);
+t_list		*ft_extract_arglist(t_part *tokenlist, t_global *global);
 void		ft_free_commandlist(t_command **command);
 char		*ft_extract_commandseries(
 				const char *commandline, t_part *tokenlist);
@@ -62,7 +60,6 @@ t_bool		ft_is_commandseries(t_part *tokenlist);
 
 //File
 t_list		*ft_extract_filelist(
-				const char *commandline,
 				t_part *tokenlist, t_bool filedirection, t_global *global);
 t_file		*ft_create_file(const char *name, int std_stream, int mode);
 int			ft_get_filemode(t_token token);
@@ -83,7 +80,6 @@ t_bool		ft_is_semicolon(t_token token);
 //Expansions
 t_list		*ft_expand_startoken(const char *fullpath);
 char		*ft_expand_dollartoken(const char *argument, t_global *global);
-void		ft_expand_command(t_command *command, t_global *global);
 void		ft_lst_nodejoin(t_list *prev_node, t_list *node);
 
 //CONVERT FUNCTIONS

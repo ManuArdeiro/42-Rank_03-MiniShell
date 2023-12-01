@@ -36,20 +36,20 @@ static void	ft_get_arg(
 	if (ft_strchr(string, '*') != NULL)
 		ft_lstadd_back(stringlist, ft_expand_startoken(string));
 	else if (ft_strchr(string, '$') != NULL)
-		ft_lstadd_back(stringlist, ft_expand_dollartoken(string, global));
+		ft_lstinsert(stringlist,
+			ft_expand_dollartoken(string, global), BACK);
 	else
 		ft_lstinsert(stringlist, (char *)string, BACK);
 }
 
-t_list	*ft_extract_arglist(
-	const char *commandline, t_part *tokenlist, t_global *global)
+t_list	*ft_extract_arglist(t_part *tokenlist, t_global *global)
 {
 	t_part	*node;
 	t_part	*prev_node;
 	t_list	*stringlist;
 
 	stringlist = NULL;
-	if (!commandline || !tokenlist)
+	if (global == NULL || global->line == NULL || !tokenlist)
 		return (NULL);
 	node = tokenlist;
 	prev_node = NULL;
@@ -59,7 +59,7 @@ t_list	*ft_extract_arglist(
 			&& ft_is_commandseries(tokenlist) == TRUE)
 			ft_skip_quotes(&node->next);
 		else if (ft_is_argument(prev_node, node) == TRUE)
-			ft_get_arg(&stringlist, commandline, tokenlist, global);
+			ft_get_arg(&stringlist, global->line, tokenlist, global);
 		prev_node = node;
 		node = node->next;
 	}

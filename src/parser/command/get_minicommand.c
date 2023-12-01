@@ -28,8 +28,7 @@ static t_command	*ft_createcommand(
 }
 
 static t_command	*ft_create_newcommand(
-	char *commandname,
-	const char *commandline, t_part *tokenlist, t_global *global
+	char *commandname, t_part *tokenlist, t_global *global
 )
 {
 	t_command	*newcommand;
@@ -37,7 +36,7 @@ static t_command	*ft_create_newcommand(
 
 	newcommand = NULL;
 	arglist = NULL;
-	arglist = ft_extract_arglist(commandline, tokenlist, global);
+	arglist = ft_extract_arglist(tokenlist, global);
 	if (commandname != NULL)
 		ft_lstinsert(&arglist, commandname, FRONT);
 	else if (commandname == NULL && arglist != NULL && arglist->content != NULL)
@@ -46,16 +45,15 @@ static t_command	*ft_create_newcommand(
 		= ft_createcommand(
 			commandname,
 			arglist,
-			ft_extract_filelist(commandline, tokenlist, INFILE, global),
-			ft_extract_filelist(commandline, tokenlist, OUTFILE, global)
+			ft_extract_filelist(tokenlist, INFILE, global),
+			ft_extract_filelist(tokenlist, OUTFILE, global)
 			);
 	if (newcommand != NULL)
 		ft_expand_filelist(&newcommand->infile);
 	return (newcommand);
 }
 
-static t_command	*ft_newcommand(
-	const char *commandline, t_part *tokenlist, t_global *global)
+static t_command	*ft_newcommand(t_part *tokenlist, t_global *global)
 {
 	t_command	*newcommand;
 	t_part		*commandnode;
@@ -65,18 +63,17 @@ static t_command	*ft_newcommand(
 	if (ft_is_commandseries(tokenlist) == FALSE)
 	{
 		commandnode = ft_get_tokennode(tokenlist, tk_cmd, TRUE, FIRST);
-		commandname = ft_extract_tokenstring(commandline, commandnode);
+		commandname = ft_extract_tokenstring(global->line, commandnode);
 	}
 	else
-		commandname = ft_extract_commandseries(commandline, tokenlist);
+		commandname = ft_extract_commandseries(global->line, tokenlist);
 	commandname = ft_expand_dollartoken(commandname, global);
 	newcommand
-		= ft_create_newcommand(commandname, commandline, tokenlist, global);
+		= ft_create_newcommand(commandname, tokenlist, global);
 	return (newcommand);
 }
 
-t_minitree	*ft_get_minicommand(
-		const char *commandline, t_part *tokenlist, t_global *global)
+t_minitree	*ft_get_minicommand(t_part *tokenlist, t_global *global)
 {
 	t_minitree	*minitree;
 	t_command	*command;
@@ -84,9 +81,9 @@ t_minitree	*ft_get_minicommand(
 
 	minitree = NULL;
 	minicommand = NULL;
-	if (tokenlist == NULL || commandline == NULL || global == NULL)
+	if (tokenlist == NULL || global == NULL)
 		return (NULL);
-	command = ft_newcommand(commandline, tokenlist, global);
+	command = ft_newcommand(tokenlist, global);
 	minicommand = ft_create_mininode((t_command *)command, n_command);
 	ft_treeinsert(&minitree, NULL, minicommand, NULL);
 	return (minitree);

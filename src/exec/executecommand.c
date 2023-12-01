@@ -39,7 +39,6 @@ int	ft_executecommand(t_command *command, t_global *global)
 		global->laststatus = g_signals.exit_status;
 	g_signals.sig_exit_status = 0;
 	ft_printcommand(command);
-	ft_expand_command(command, global);
 	ft_check_commandname(command);
 	pidcount = ft_create_subprocess(command, &pidarray, global);
 	g_signals.pidarray = pidarray;

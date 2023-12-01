@@ -38,43 +38,50 @@ static int	ft_get_stdstream(t_bool std_stream)
 
 static void	ft_get_file(
 	t_list **filelist,
-	t_part *tokenlist, const char *commandline, int std_stream
+	t_part *separatornode, int std_stream, t_global *global
 )
 {
-	t_part	*separatortoken;
+	char	*string;
+	t_file	*file;
 
-	separatortoken = NULL;
-	if (tokenlist == NULL)
+	string = NULL;
+	file = NULL;
+	if (separatornode == NULL)
 		return ;
-	separatortoken
-		= ft_get_tokennode(tokenlist, node->token, TRUE, FIRST);
-	string = ft_extract_tokenstring(commandline, separatortoken->next);
-	file = ft_create_file(
-			string,
-			ft_get_stdstream(std_stream),
-			ft_get_filemode(node->token));
-	ft_lstinsert(filelist, (t_file *)file, BACK);
-	free(string);
+	string = ft_extract_tokenstring(global->line, separatornode->next);
+	if (string != NULL)
+	{
+		string = ft_expand_dollartoken(string, global);
+		file = ft_create_file(
+				string,
+				ft_get_stdstream(std_stream),
+				ft_get_filemode(separatornode->token));
+		ft_lstinsert(filelist, (t_file *)file, BACK);
+		free(string);
+	}
 }
 
 static t_list	*ft_get_filelist(
-	const char *commandline,
-	t_part *tokenlist, t_bool std_stream, t_global *global)
+		t_part *tokenlist, t_bool std_stream, t_global *global)
 {
 	t_part	*node;
-	char	*string;
-	t_file	*file;
 	t_list	*filelist;
+	t_part	*separatornode;
 
 	filelist = NULL;
 	node = tokenlist;
-	string = NULL;
+	separatornode = NULL;
 	while (node != NULL && ft_is_tokenseparator(node->token) == FALSE)
 	{
-		if (ft_is_tokenpair(node->token) == FALSE)
+		if (ft_is_tokenpair(node->token) == FALSE
+			&& ft_is_commandseries(node) == TRUE)
 			ft_skip_quotes(&node->next);
 		if (ft_check_filetype(node->token, std_stream) == TRUE)
-			ft_get_file(&filelist, tokenlist, commandline, std_stream);
+		{
+			separatornode
+				= ft_get_tokennode(tokenlist, node->token, TRUE, FIRST);
+			ft_get_file(&filelist, separatornode, std_stream, global);
+		}
 		node = node->next;
 	}
 	return (filelist);
@@ -92,15 +99,14 @@ static t_list	*ft_default_filelist(int std_stream)
 }
 
 t_list	*ft_extract_filelist(
-	const char *commandline,
 	t_part *tokenlist, t_bool std_stream, t_global *global)
 {
 	t_list	*filelist;
 
 	filelist = NULL;
-	if (commandline == NULL || tokenlist == NULL)
+	if (global == NULL || tokenlist == NULL)
 		return (NULL);
-	filelist = ft_get_filelist(commandline, tokenlist, std_stream, global);
+	filelist = ft_get_filelist(tokenlist, std_stream, global);
 	if (filelist == NULL)
 		filelist = ft_default_filelist(ft_get_stdstream(std_stream));
 	return (filelist);

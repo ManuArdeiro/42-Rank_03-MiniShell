@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 20:07:17 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/11/30 20:30:47 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/01 20:34:52 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,13 @@ void		ft_skip_quotes(t_part **token);
 
 //Command list
 t_part		*ft_get_commandlist(t_part *tokenlist, t_part *delimiter);
-t_minitree	*ft_get_minicommand(const char *commandline, t_part *tokenlist);
+t_minitree	*ft_get_minicommand(
+				const char *commandline, t_part *tokenlist, t_global *global);
 void		ft_printcommand(t_command *command);
 t_bool		ft_is_compoundcommand(t_nodetype nodetype);
 char		*ft_extract_tokenstring(const char *commandline, t_part *node);
 t_list		*ft_extract_arglist(
-				const char *commandline, t_part *tokenlist);
+				const char *commandline, t_part *tokenlist, t_global *global);
 void		ft_free_commandlist(t_command **command);
 char		*ft_extract_commandseries(
 				const char *commandline, t_part *tokenlist);
@@ -62,7 +63,7 @@ t_bool		ft_is_commandseries(t_part *tokenlist);
 //File
 t_list		*ft_extract_filelist(
 				const char *commandline,
-				t_part *tokenlist, t_bool filedirection);
+				t_part *tokenlist, t_bool filedirection, t_global *global);
 t_file		*ft_create_file(const char *name, int std_stream, int mode);
 int			ft_get_filemode(t_token token);
 t_bool		ft_is_redirection(t_token token);
@@ -81,8 +82,7 @@ t_bool		ft_is_semicolon(t_token token);
 
 //Expansions
 t_list		*ft_expand_startoken(const char *fullpath);
-char		*ft_expand_dollartoken(
-				const char *argument, t_list *envlist, int laststatus);
+char		*ft_expand_dollartoken(const char *argument, t_global *global);
 void		ft_expand_command(t_command *command, t_global *global);
 void		ft_lst_nodejoin(t_list *prev_node, t_list *node);
 

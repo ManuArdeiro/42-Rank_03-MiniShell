@@ -6,22 +6,24 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 12:35:59 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/11/25 11:04:00 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/01 19:43:02 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 static char	*ft_get_stringvalue(
-		const char *variable_name, t_list *envlist, int laststatus)
+		char *variable_name, t_list *envlist, int laststatus)
 {
 	char	*value;
 
 	value = NULL;
 	if (variable_name == NULL || variable_name[0] == '\0')
 		return (NULL);
-	if (*variable_name == '?' && *(variable_name + 1) == '\0')
+	if (*variable_name == '?' && ft_strlen(variable_name) == 1)
 		value = ft_itoa(laststatus);
+	else if (*variable_name == '?' && ft_strlen(variable_name) > 1)
+		value = ft_strjoin_get(ft_itoa(laststatus), variable_name++);
 	else
 		value = ft_getenv(variable_name, envlist);
 	return (value);
@@ -70,7 +72,7 @@ static char	*ft_expand_dollar(
 	variable_name = ft_strchr(argument, '$');
 	if (variable_name != NULL)
 	{
-		if (*(variable_name + 1) != '\0' && *(variable_name + 1) == '\'')
+		if (*(variable_name + 1) != '\0')
 			return ((char *)argument);
 		variable_name++;
 		value = ft_get_stringvalue(variable_name, envlist, laststatus);
@@ -78,22 +80,24 @@ static char	*ft_expand_dollar(
 	return (value);
 }
 
-char	*ft_expand_dollartoken(
-		const char *argument, t_list *envlist, int laststatus)
+char	*ft_expand_dollartoken(const char *argument, t_global *global)
 {
 	char	*value;
 	int		dollarcount;
 
 	value = NULL;
-	if (argument == NULL || envlist == NULL)
+	if (argument == NULL || (global != NULL && global->envlist == NULL))
 		return (NULL);
 	dollarcount = ft_chrcount(argument, '$');
 	if (dollarcount > 1)
 		value
-			= ft_expand_dollarchain(argument, laststatus, envlist);
+			= ft_expand_dollarchain(
+				argument, global->laststatus, global->envlist);
 	else if (dollarcount == 1)
-		value = ft_expand_dollar(argument, envlist, laststatus);
+		value = ft_expand_dollar(argument, global->envlist, global->laststatus);
 	else
 		return ((char *)argument);
+	if (value == NULL)
+		value = ft_strdup("");
 	return (value);
 }

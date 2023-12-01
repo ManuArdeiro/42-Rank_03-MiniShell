@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 18:36:15 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/11/30 20:39:20 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/01 20:41:09 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,36 +36,48 @@ static int	ft_get_stdstream(t_bool std_stream)
 	return (std_stream);
 }
 
-static void	ft_get_filelist(
+static void	ft_get_file(
 	t_list **filelist,
-	const char *commandline, t_part *tokenlist, t_bool std_stream)
+	t_part *tokenlist, const char *commandline, int std_stream
+)
+{
+	t_part	*separatortoken;
+
+	separatortoken = NULL;
+	if (tokenlist == NULL)
+		return ;
+	separatortoken
+		= ft_get_tokennode(tokenlist, node->token, TRUE, FIRST);
+	string = ft_extract_tokenstring(commandline, separatortoken->next);
+	file = ft_create_file(
+			string,
+			ft_get_stdstream(std_stream),
+			ft_get_filemode(node->token));
+	ft_lstinsert(filelist, (t_file *)file, BACK);
+	free(string);
+}
+
+static t_list	*ft_get_filelist(
+	const char *commandline,
+	t_part *tokenlist, t_bool std_stream, t_global *global)
 {
 	t_part	*node;
-	t_part	*separatortoken;
 	char	*string;
 	t_file	*file;
+	t_list	*filelist;
 
+	filelist = NULL;
 	node = tokenlist;
 	string = NULL;
-	separatortoken = NULL;
 	while (node != NULL && ft_is_tokenseparator(node->token) == FALSE)
 	{
 		if (ft_is_tokenpair(node->token) == FALSE)
 			ft_skip_quotes(&node->next);
 		if (ft_check_filetype(node->token, std_stream) == TRUE)
-		{
-			separatortoken
-				= ft_get_tokennode(tokenlist, node->token, TRUE, FIRST);
-			string = ft_extract_tokenstring(commandline, separatortoken->next);
-			file = ft_create_file(
-					string,
-					ft_get_stdstream(std_stream),
-					ft_get_filemode(node->token));
-			ft_lstinsert(filelist, (t_file *)file, BACK);
-			free(string);
-		}
+			ft_get_file(&filelist, tokenlist, commandline, std_stream);
 		node = node->next;
 	}
+	return (filelist);
 }
 
 static t_list	*ft_default_filelist(int std_stream)
@@ -80,14 +92,15 @@ static t_list	*ft_default_filelist(int std_stream)
 }
 
 t_list	*ft_extract_filelist(
-	const char *commandline, t_part *tokenlist, t_bool std_stream)
+	const char *commandline,
+	t_part *tokenlist, t_bool std_stream, t_global *global)
 {
 	t_list	*filelist;
 
 	filelist = NULL;
 	if (commandline == NULL || tokenlist == NULL)
 		return (NULL);
-	ft_get_filelist(&filelist, commandline, tokenlist, std_stream);
+	filelist = ft_get_filelist(commandline, tokenlist, std_stream, global);
 	if (filelist == NULL)
 		filelist = ft_default_filelist(ft_get_stdstream(std_stream));
 	return (filelist);

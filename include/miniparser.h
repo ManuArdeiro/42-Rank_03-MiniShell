@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniparser.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 20:07:17 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/11/27 19:00:06 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/02 01:51:53 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void		ft_clearsummary(void *content);
 void		ft_printnode(t_mininode *mininode);
 void		ft_free_mininode(void *content);
 t_bool		ft_is_emptynode(t_minitree *root);
-t_minitree	*ft_parse_commandline(const char *commandline);
+t_minitree	*ft_parse_commandline(t_global *global);
 t_mininode	*ft_create_mininode(void *content, t_nodetype type);
 t_minitree	*ft_tokensplit(t_part *tokenlist, t_token token);
 t_part		*ft_get_tokennode(t_part *tokenlist, t_token token,

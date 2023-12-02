@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_commandline.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 12:24:07 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/11/27 19:06:25 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/01 02:31:03 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static t_minitree	*ft_generate_parsetree(
 	return (parsetree);
 }
 
-t_minitree	*ft_parse_commandline(const char *commandline)
+t_minitree	*ft_parse_commandline(t_global *global)
 {
 	t_part		*tokenlist;
 	t_minitree	*parsetree;
@@ -71,11 +71,11 @@ t_minitree	*ft_parse_commandline(const char *commandline)
 
 	token_count = 0;
 	parsetree = NULL;
-	if (commandline == NULL)
+	if (global->line == NULL)
 		return (NULL);
-	tokenlist = ft_tokenizer((char *)commandline, &token_count);
+	tokenlist = ft_tokenizer(global, &token_count);
 	if (ft_isvalid_commandlist(tokenlist) == TRUE)
-		parsetree = ft_generate_parsetree(commandline, tokenlist);
+		parsetree = ft_generate_parsetree(global->line, tokenlist);
 	else
 	{
 		if (token_count > 0)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 17:51:52 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/11/16 20:23:33 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/02 19:36:41 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static void	ft_cmd_vs_arg(t_part *tokens)
 	}
 }
 
-/*	This function converts a string passed as argument in a lis of tokens,
+/*	This function converts a string passed as argument in a list of tokens,
 	returns the pointer to the first node and save the number of tokens in
 	a variable passed as argument. To do that:
 	- ft_create_tkn_list creates a list of tokens.
@@ -78,15 +78,16 @@ static void	ft_cmd_vs_arg(t_part *tokens)
 	  them.
 	- Finally ft_cmd_vs_arg recognize the arguments in the list of tokens.	*/
 
-t_part	*ft_tokenizer(char *line, int *tk_count)
+t_part	*ft_tokenizer(t_global *global, int *tk_count)
 {
 	t_part	*tokens;
 
+	ft_avoid_quot(global, tokens);
 	tokens = ft_create_tkn_list();
 	if (!tokens)
 		return (tokens);
-	*tk_count = ft_count_tokens(line);
-	ft_get_tokens(line, tokens);
+	*tk_count = ft_count_tokens(global->line);
+	ft_get_tokens(global->line, tokens);
 	ft_cmd_vs_arg(tokens);
 	return (tokens);
 }

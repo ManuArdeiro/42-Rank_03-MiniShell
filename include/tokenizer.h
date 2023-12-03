@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 11:18:23 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/01 18:51:05 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/12/02 21:24:16 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,9 @@ t_part		*ft_create_tkn_list(void);
 int			ft_last_index(t_part *tokens);
 t_part		*ft_last_tkn(t_part *tokens);
 int			ft_add_tkn(t_part *tokens, t_token token, int start, int end);
-int			ft_del_tkn(t_global *global, t_part *tokens, int index);
 void		ft_get_tokens(char *line, t_part *tokens);
 int			ft_count_tokens(char *line);
-t_part		*ft_avoid_quot(t_global *global, t_part *tokens);
+void		ft_avoid_quots(t_global *global);
 int			ft_token_1(t_part *tokens, char *line, int *i);
 void		ft_tokenlist_add(t_part **tokenlist, t_part *newtoken);
 

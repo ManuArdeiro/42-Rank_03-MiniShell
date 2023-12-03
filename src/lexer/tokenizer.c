@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 17:51:52 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/12/02 19:36:41 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/12/02 21:17:03 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ t_part	*ft_tokenizer(t_global *global, int *tk_count)
 {
 	t_part	*tokens;
 
-	ft_avoid_quot(global, tokens);
+	ft_avoid_quots(global);
 	tokens = ft_create_tkn_list();
 	if (!tokens)
 		return (tokens);

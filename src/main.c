@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:55:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/12/02 19:41:06 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/12/03 18:15:54 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ static void	ft_init(t_global **global, char **env, int shell_level)
 
 int	main(int ac, char **av, char **env)
 {
-	t_global	*global;
+t_global	*global;
 	int			shell_level;
 
 	//atexit(ft_panic);

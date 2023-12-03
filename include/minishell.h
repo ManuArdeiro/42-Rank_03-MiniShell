@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:47:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/12/02 19:42:04 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/12/02 21:14:16 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,6 @@ t_signals	g_signals;
 
 // Signals
 void		ft_signals(void);
-void		ft_sig_int(int sig_num);
-void		ft_sig_quit(int sig_num);
 
 // File utils/print_msg.c
 void		ft_printhelp(void);

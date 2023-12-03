@@ -12,20 +12,42 @@
 
 #include "minishell.h"
 
+static char	*ft_get_limiter(const char *string)
+{
+	int	i;
+
+	i = 0;
+	if (string == NULL)
+		return (NULL);
+	while (string[i] != '\0')
+	{
+		if (ft_isalnum(string[i]) == FALSE)
+			return ((char *)string + i);
+		i++;
+	}
+	return (NULL);
+}
+
 static char	*ft_get_stringvalue(
 		char *variable_name, t_list *envlist, int laststatus)
 {
 	char	*value;
+	char	*limiter;
+	char	*stringprefix;
 
 	value = NULL;
+	limiter = ft_get_limiter(variable_name);
+	stringprefix = ft_cutstr(variable_name, limiter);
 	if (variable_name == NULL || variable_name[0] == '\0')
 		return (NULL);
-	if (*variable_name == '?' && ft_strlen(variable_name) == 1)
-		value = ft_itoa(laststatus);
-	else if (*variable_name == '?' && ft_strlen(variable_name) > 1)
-		value = ft_strjoin_get(ft_itoa(laststatus), variable_name++);
+	if (*variable_name == '?')
+		value = ft_strjoin_get(ft_itoa(laststatus), variable_name + 1);
+	else if (limiter != NULL)
+		value = ft_strjoin_get(ft_getenv(stringprefix, envlist), limiter);
 	else
 		value = ft_getenv(variable_name, envlist);
+	if (stringprefix != NULL)
+		free(stringprefix);
 	return (value);
 }
 
@@ -62,28 +84,6 @@ static char	*ft_expand_dollarchain(
 	return (expandedstring);
 }
 
-static char	*ft_get_limiter(const char *string)
-{
-
-}
-
-static char	*ft_expand_dollar(
-		const char *argument, t_list *envlist, int laststatus)
-{
-	char	*value;
-	char	*string_toexpand;
-	char	*limit;
-
-	value = NULL;
-	string_toexpand = ft_strchr(argument, '$');
-	if (string_toexpand != NULL)
-	{
-		limit = ft_get_limiter(string_toexpand);
-		string_toexpand = ft_cutstr(string_toexpand, limit);
-		value = ft_get_stringvalue(string_toexpand, envlist, laststatus);
-	}
-	return (value);
-}
 
 char	*ft_expand_dollartoken(const char *argument, t_global *global)
 {
@@ -94,12 +94,9 @@ char	*ft_expand_dollartoken(const char *argument, t_global *global)
 	if (argument == NULL || (global != NULL && global->envlist == NULL))
 		return (NULL);
 	dollarcount = ft_chrcount(argument, '$');
-	if (dollarcount > 1)
-		value
-			= ft_expand_dollarchain(
+	if (dollarcount >= 1)
+		value = ft_expand_dollarchain(
 				argument, global->laststatus, global->envlist);
-	else if (dollarcount == 1)
-		value = ft_expand_dollar(argument, global->envlist, global->laststatus);
 	else
 		return ((char *)argument);
 	if (value == NULL)

@@ -53,7 +53,7 @@ static void	ft_loop(t_global *global)
 		global->line = ft_get_completeline(global->line);
 		if (ft_strequal("exit", global->line) == TRUE)
 			global->status = EXITED;
-		parsetree = ft_parse_commandline(global->line);
+		parsetree = ft_parse_commandline(global);
 		ft_execute_commandline(parsetree, global);
 		ft_register_and_clean(&history, &global, &parsetree);
 	}

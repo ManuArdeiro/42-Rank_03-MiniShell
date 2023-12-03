@@ -20,7 +20,8 @@ static void	ft_execute_givencommand(
 
 	envp = ft_lstconvert_strarr(global->envlist);
 	pathvariables = ft_getenv("PATH", global->envlist);
-	command->name = ft_add_pathprefix(command->name, pathvariables);
+	if (ft_strlen(command->name) > 0)
+		command->name = ft_add_pathprefix(command->name, pathvariables);
 	free(pathvariables);
 	if (execve(command->name, args, envp) < 0)
 	{

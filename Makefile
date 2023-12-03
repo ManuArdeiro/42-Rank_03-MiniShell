@@ -6,7 +6,7 @@
 #    By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/01 18:51:45 by jolopez-          #+#    #+#              #
-#    Updated: 2023/11/30 20:09:19 by yzaytoun         ###   ########.fr        #
+#    Updated: 2023/12/01 19:45:47 by yzaytoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,7 +61,7 @@ COMMAND			= extract_tokenstring.c get_commandlist.c lstconvert.c \
 					printcommand.c extract_filelist.c get_minicommand.c \
 					extract_arglist.c is_compoundcommand.c free_commandlist.c\
 					extract_commandseries.c is_commandseries.c
-					
+				
 FILE			= filestreams.c create_file.c get_filemode.c is_redirection.c \
 					freefile.c append_filecontent.c delete_filenode.c closepipe.c
 
@@ -69,7 +69,8 @@ PARSER			=  separators.c get_tokennode.c tokensplit.c get_nodetype.c \
 					parse_commandline.c contains_tokenseparator.c \
 					$(COMMAND) $(FILE) isvalid_commandlist.c tokenpairs.c\
 					get_tokenpair.c lst_nodejoin.c contains_subshell.c\
-					split_subshell.c split_tokenlist.c valid_subshellnode.c
+					split_subshell.c split_tokenlist.c valid_subshellnode.c\
+					skip_quotes.c
 					
 SUMMARIZER		= minisummary.c printtokens.c get_unique_tokens.c \
 					get_token_summary.c get_token_count.c clearsummary.c
@@ -84,8 +85,7 @@ EXEC			= executecommand.c execute_commandline.c \
 				goto_childnode.c add_pathprefix.c evaluate_subprocess.c \
 				wait_subprocess.c create_subprocess.c execute_subprocess.c \
 				expand_startoken.c expand_dollartoken.c execute_builtin.c \
-				mini_heredoc.c expand_filelist.c execute_pipeline.c wait_close_heredoc.c\
-				expand_command.c
+				mini_heredoc.c expand_filelist.c execute_pipeline.c wait_close_heredoc.c
 
 SRC 			= $(ENV) $(UTILS) $(SUMMARIZER) $(LEXER) \
 					$(CMD) $(PARSER) $(TREE) $(EXEC)  main.c

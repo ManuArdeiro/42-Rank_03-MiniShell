@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 12:24:07 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/11/30 20:07:41 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/04 18:49:37 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static t_minitree	*ft_generate_parsetree(
 	return (parsetree);
 }
 
-t_minitree	*ft_parse_commandline(const char *commandline)
+t_minitree	*ft_parse_commandline(t_global *global)
 {
 	t_part		*tokenlist;
 	t_minitree	*parsetree;
@@ -71,12 +71,11 @@ t_minitree	*ft_parse_commandline(const char *commandline)
 
 	token_count = 0;
 	parsetree = NULL;
-	if (commandline == NULL)
+	if (global->line == NULL)
 		return (NULL);
-	tokenlist = ft_tokenizer((char *)commandline, &token_count);
-	//ft_print_tokenlist(tokenlist);
+	tokenlist = ft_tokenizer(global, &token_count);
 	if (ft_isvalid_commandlist(tokenlist) == TRUE)
-		parsetree = ft_generate_parsetree(commandline, tokenlist);
+		parsetree = ft_generate_parsetree(global->line, tokenlist);
 	else
 	{
 		if (token_count > 0)

@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:55:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/11/28 20:15:57 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/04 18:49:09 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static void	ft_loop(t_global *global)
 		global->line = ft_get_completeline(global->line);
 		if (ft_strequal("exit", global->line) == TRUE)
 			global->status = EXITED;
-		parsetree = ft_parse_commandline(global->line);
+		parsetree = ft_parse_commandline(global);
 		ft_execute_commandline(parsetree, global);
 		ft_register_and_clean(&history, &global, &parsetree);
 	}
@@ -103,7 +103,7 @@ static void	ft_init(t_global **global, char **env, int shell_level)
 
 int	main(int ac, char **av, char **env)
 {
-	t_global	*global;
+t_global	*global;
 	int			shell_level;
 
 	//atexit(ft_panic);
@@ -115,7 +115,7 @@ int	main(int ac, char **av, char **env)
 		else
 			ft_printhelp();
 	}
-	ft_printwellcome();
+	//ft_printwellcome();
 	ft_init(&global, env, shell_level);
 	ft_loop(global);
 	ft_free(&global);

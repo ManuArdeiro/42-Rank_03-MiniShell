@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   avoid_quots.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
+/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 23:35:31 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/12/03 18:28:06 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/12/04 19:05:21 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	ft_avoid_sglquot(t_global *global)
 	char	*newline;
 
 	i = 0;
-	while (global->line[i])
+	while (global->line[i] != '\0')
 	{
 		if (global->line[i] == '\'')
 		{
@@ -64,6 +64,8 @@ static int	ft_avoid_dblquot(t_global *global)
 	char	*newline;
 
 	i = 0;
+	if (ft_strchr(global->line, '\"') == NULL)
+		return (EXIT_SUCCESS);
 	while (global->line[i])
 	{
 		if (global->line[i] == '\"')
@@ -105,7 +107,5 @@ void	ft_avoid_quots(t_global *global)
 		status = status + ft_avoid_dblquot(global);
 		status = status + ft_avoid_sglquot(global);
 	}
-	return ;	
+	return ;
 }
-	
-	

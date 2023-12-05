@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 18:36:15 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/01 20:41:09 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/05 20:36:20 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ static void	ft_get_file(
 	}
 }
 
+//FIXME - ADD Skip for quotes!!
 static t_list	*ft_get_filelist(
 		t_part *tokenlist, t_bool std_stream, t_global *global)
 {

@@ -6,11 +6,28 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 16:08:48 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/04 20:44:14 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/05 19:50:22 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static char	*ft_getline_aux(const char *buffer, const char *prompt)
+{
+	char	*result;
+
+	result = NULL;
+	if (buffer == NULL)
+		return (NULL);
+	if (ft_endswith(buffer, "\\\n") == FALSE)
+	{
+		if (ft_strequal(prompt, "pipe $> ") == TRUE)
+			result = ft_strclean_withspaces(buffer, FALSE);
+		else
+			result = ft_strclean_withspaces(buffer, TRUE);
+	}
+	return (result);
+}
 
 static char	*ft_completeline(const char *commandline, const char *prompt)
 {
@@ -31,14 +48,9 @@ static char	*ft_completeline(const char *commandline, const char *prompt)
 		if (line != NULL)
 			buffer = ft_strjoin_get(buffer, line);
 		free(line);
-		if (ft_endswith(buffer, "\\") == FALSE)
-		{
-			if (ft_strequal(prompt, "pipe $> ") == TRUE)
-				result = ft_strtrim(buffer, "\n");
-			else
-				result = ft_strtrim(buffer, "\n\\");
+		result = ft_getline_aux(buffer, prompt);
+		if (result != NULL)
 			break ;
-		}
 	}
 	free(buffer);
 	return (result);

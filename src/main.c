@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:55:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/11/28 20:15:57 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/05 19:03:35 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,6 @@ static void	ft_init(t_global **global, char **env, int shell_level)
 //{
 //	system("leaks minishell");
 //}
-
-
 /*	Main function:
 	- Checks the number of arguments and prints help if they are not correct.
 	- Prints the welcome message.

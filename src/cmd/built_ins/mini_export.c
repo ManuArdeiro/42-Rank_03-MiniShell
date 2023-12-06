@@ -3,14 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   mini_export.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
+/*   By: Ardeiro <Ardeiro@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 18:43:48 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/11/27 23:26:44 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/12/05 21:42:25 by Ardeiro          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+/*	This function checks the string passed as argument and returns:
+	1 if only numbers in the string
+	0 if alphabetical characters in the string	*/
+
+static int	ft_check_name(const char *name)
+{
+	int	i;
+
+	i = 0;
+	while (name[i] != '\0')
+	{
+		if (ft_isalpha(name[i]) != TRUE)
+			return (EXIT_FAILURE);
+		i++;
+	}
+	return (EXIT_SUCCESS);
+}
+
+/*	This function splits the arg string in name (the part of arg string
+	before the =) and value (the part of arg string after the =). 
+	Also checks if name is valid (only alphabetical characters and not 
+	only numbers, via ft_check_name function).	*/
 
 static int	ft_set_variable(char *arg, char *name, char *value)
 {
@@ -21,12 +44,14 @@ static int	ft_set_variable(char *arg, char *name, char *value)
 	k = 0;
 	while ((char)arg[j] != '=')
 	{
-		if (ft_strchr("()\'\"-*;", arg[j]))
+		if (!ft_isalnum(arg[j]))
 			return (EXIT_FAILURE);
 		name[j] = arg[j];
 		j++;
 	}
 	name[j] = '\0';
+	if (ft_check_name(name) == EXIT_FAILURE)
+		return (ft_print_not_valid(arg));
 	j++;
 	while (arg[j])
 	{
@@ -52,32 +77,15 @@ static int	ft_name_equal(t_list *envList, char **args, int *i)
 			* ft_strlen(ft_strchr_pos(args[*i], '=', 0)));
 	if (!name || !value)
 		return (EXIT_FAILURE);
-	ft_set_variable(args[*i], name, value);
+	if (ft_set_variable(args[*i], name, value) == EXIT_FAILURE)
+		return (EXIT_FAILURE);
 	ft_setenv(&envList, name, value, ADD_VALUE);
 	free (name);
 	free (value);
 	return (EXIT_SUCCESS);
 }
 
-/*	This function just prints the "not found" error message.	*/
-
-static int	ft_print_not_found(char **args, int i)
-{
-	ft_putstr_fd("export: ", STDERR_FILENO);
-	ft_putstr_fd(args[i] + 1, STDERR_FILENO);
-	ft_putendl_fd(" not found.", STDERR_FILENO);
-	return (EXIT_SUCCESS);
-}
-
-static int	ft_print_not_valid(char **args, int i)
-{
-	ft_putstr_fd("export: ", STDERR_FILENO);
-	ft_putstr_fd(args[i] + 1, STDERR_FILENO);
-	ft_putendl_fd(" : not a valid identifier.", STDERR_FILENO);
-	return (EXIT_SUCCESS);
-}
-
-/*	This function depends on the arguments:
+/*	This functions depends on the arguments:
 	-	No arguments: - it prints all environment variables (including 
 		unnassigned ones).
 	-	Arguments: if there are arguments they should be like this: name[=word]
@@ -93,34 +101,48 @@ static int	ft_print_not_valid(char **args, int i)
 	-	If after the name there is an equalsign then other word, that is the
 		value for key = name.	*/
 
+static int	ft_mini_export_aux(t_list *envList, char **args, char *argument,
+	int *i)
+{
+	if (!ft_strncmp(argument, "=", 2))
+	{
+		ft_putendl_fd("export: bad assigment.", STDERR_FILENO);
+		return (EXIT_FAILURE);
+	}
+	else if (ft_strchr(argument, '=') != NULL && argument[0] != '=')
+	{
+		if (ft_name_equal(envList, args, i) == 1)
+			return (ft_print_not_valid(args[*i]));
+	}
+	else if (ft_strchr(argument, '=') != NULL && argument[0] == '=')
+		return (ft_print_not_found(args[*i]));
+	else if (ft_strchr(argument, '=') == NULL)
+	{
+		if (ft_getenv(argument, envList))
+			return (EXIT_SUCCESS);
+		else if (!ft_getenv(argument, envList))
+		{
+			if (ft_check_name(argument) == EXIT_FAILURE)
+				return (ft_print_not_valid(args[*i]));
+			else
+				ft_setenv(&envList, argument, "\0", OVERWRITE_VALUE);
+		}
+	}
+	return (EXIT_SUCCESS);
+}
+
 int	ft_mini_export(t_list *envList, char **args)
 {
 	int	i;
+	int	result;
 
 	i = 0;
+	result = 0;
 	if (!args || !args[1])
 		ft_mini_env(envList);
 	while (args[++i])
-	{
-		if (!ft_strncmp(args[i], "=", 1))
-		{
-			ft_putendl_fd("export: bad assigment.", STDERR_FILENO);
-			return (EXIT_FAILURE);
-		}
-		else if (ft_strchr(args[i], '=') != NULL && args[i][0] != '=')
-		{
-			if (ft_name_equal(envList, args, &i) == 1)
-				return (ft_print_not_valid(args, i));
-		}
-		else if (ft_strchr(args[i], '=') != NULL && args[i][0] == '=')
-			return (ft_print_not_found(args, i));
-		else if (ft_strchr(args[i], '=') == NULL)
-		{
-			if (ft_getenv(args[i], envList))
-				return (EXIT_SUCCESS);
-			else if (!ft_getenv(args[i], envList))
-				ft_setenv(&envList, args[i], "\0", OVERWRITE_VALUE);
-		}
-	}
+		result += ft_mini_export_aux(envList, args, args[i], &i);
+	if (result != 0)
+		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

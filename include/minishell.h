@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
+/*   By: Ardeiro <Ardeiro@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:47:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/12/02 21:14:16 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/12/05 21:33:17 by Ardeiro          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ int			ft_delenv(t_list *envList, char *key);
 // Built-ins
 
 int			ft_builtins(char **args, t_list *envList, t_global *global);
+int			ft_print_not_found(char *arg);
+int			ft_print_not_valid(char *arg);
 void		ft_print_screen(char *str);
 int			ft_arg_nbr(char **args);
 int			ft_mini_cd(char **arg, t_list *envList);

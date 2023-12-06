@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 12:24:07 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/11/30 20:20:26 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/06 13:43:00 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ static void	ft_tokensplit_all(
 {
 	if (ft_valid_subshellnode(tokenlist) == TRUE)
 		*root = ft_split_subshell(tokenlist);
-	else if (ft_contains_tokenseparator(tokenlist) == TRUE
-		&& ft_contains_tokenpair(tokenlist) == FALSE)
+	else if (ft_tokenlist_contains(tokenlist, ft_is_tokenseparator) == TRUE
+		&& ft_tokenlist_contains(tokenlist, ft_is_tokenpair) == FALSE)
 		ft_split_tokenlist(root, tokenlist);
 	else
 		*root = ft_get_minicommand(tokenlist, global);

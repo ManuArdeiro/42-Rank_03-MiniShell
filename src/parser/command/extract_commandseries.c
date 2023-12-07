@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 20:29:13 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/11/25 17:35:12 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/06 14:02:03 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ char	*ft_extract_commandseries(const char *commandline, t_part *tokenlist)
 						commandline,
 						node->start + 1,
 						(secondnode->end - 1) - (node->start + 1));
+			node = secondnode;
 		}
 		node = node->next;
 	}

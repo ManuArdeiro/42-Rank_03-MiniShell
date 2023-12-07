@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
+/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 16:36:07 by jolopez-          #+#    #+#             */
-/*   Updated: 2022/04/03 12:56:51 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/12/07 18:56:05 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 
 	i = 0;
 	if (!dst && !src)
-	{	
+	{
 		return (NULL);
 	}
 	while (i < n)

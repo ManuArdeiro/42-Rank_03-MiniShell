@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 18:28:55 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/11/28 20:34:50 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/04 20:29:09 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,22 @@ static void	ft_get_inputline(char **line, int *herepipe)
 	{
 		ft_closepipe(&herepipe[0], &herepipe[1]);
 		ft_printerror(__func__, "Get next line");
+		exit(EXIT_FAILURE);
+	}
+}
+
+static void	ft_evaluate_line(
+		const char *cleanline, const char *delimiter, int *herepipe
+)
+{
+	if (ft_strequal(cleanline, delimiter) == TRUE)
+	{
+		ft_closepipe(&herepipe[0], &herepipe[1]);
+		exit(EXIT_SUCCESS);
+	}
+	else if (g_signals.sig_exit_status == 1)
+	{
+		ft_closepipe(&herepipe[0], &herepipe[1]);
 		exit(EXIT_FAILURE);
 	}
 }
@@ -36,20 +52,12 @@ void	ft_writetofile(const char *delimiter, int *herepipe)
 		ft_putstr_fd("heredoc> ", STDOUT_FILENO);
 		ft_get_inputline(&line, herepipe);
 		cleanline = ft_strtrim(line, "\n");
-		if (ft_strequal(cleanline, delimiter) == TRUE)
-		{
-			ft_closepipe(&herepipe[0], &herepipe[1]);
-			exit(EXIT_SUCCESS);
-		}
-		else if (g_signals.sig_exit_status == 1)
-		{
-			ft_closepipe(&herepipe[0], &herepipe[1]);
-			exit(EXIT_FAILURE);
-		}
+		ft_evaluate_line(cleanline, delimiter, herepipe);
 		ft_putstr_fd(line, herepipe[1]);
 		free(line);
 		free(cleanline);
 	}
+	exit(EXIT_SUCCESS);
 }
 
 void	ft_get_heredoc(t_file **file)

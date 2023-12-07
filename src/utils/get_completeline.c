@@ -6,43 +6,37 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 16:08:48 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/11/18 18:49:34 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/05 19:50:22 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	*ft_cleanstring(char *string)
+static char	*ft_getline_aux(const char *buffer, const char *prompt)
 {
-	int		count;
-	int		len;
-	char	*dest;
+	char	*result;
 
-	dest = NULL;
-	if (string == NULL)
+	result = NULL;
+	if (buffer == NULL)
 		return (NULL);
-	len = ft_strlen(string);
-	dest = malloc(sizeof(char) * len);
-	if (dest == NULL)
-		return (NULL);
-	count = 0;
-	while (string[count] != '\0' && count < len - 1)
+	if (ft_endswith(buffer, "\\\n") == FALSE)
 	{
-		dest[count] = string[count];
-		++count;
+		if (ft_strequal(prompt, "pipe $> ") == TRUE)
+			result = ft_strclean_withspaces(buffer, FALSE);
+		else
+			result = ft_strclean_withspaces(buffer, TRUE);
 	}
-	dest[len - 1] = '\0';
-	free(string);
-	return (dest);
+	return (result);
 }
 
-//FIXME -> Cleantext with space
 static char	*ft_completeline(const char *commandline, const char *prompt)
 {
 	char	*line;
 	char	*buffer;
+	char	*result;
 
 	buffer = NULL;
+	result = NULL;
 	line = "";
 	if (commandline == NULL || prompt == NULL)
 		return (NULL);
@@ -54,14 +48,12 @@ static char	*ft_completeline(const char *commandline, const char *prompt)
 		if (line != NULL)
 			buffer = ft_strjoin_get(buffer, line);
 		free(line);
-		if (ft_endswith(buffer, "\\") == FALSE)
-		{
-			if (ft_startswith(prompt, "pipe") == TRUE)
-				buffer = ft_cleanstring(buffer);
+		result = ft_getline_aux(buffer, prompt);
+		if (result != NULL)
 			break ;
-		}
 	}
-	return (buffer);
+	free(buffer);
+	return (result);
 }
 
 static char	*ft_findsplitter(const char *commandline)

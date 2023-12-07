@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:10:53 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/11/27 19:44:45 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/04 20:16:20 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,6 +152,7 @@ struct s_signals
 	int		sig_exit_status;
 	int		pidcount;
 	t_bool	in_heredoc;
+	t_bool	emptyline;
 	pid_t	*pidarray;
 };
 

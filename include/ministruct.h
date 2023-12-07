@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:10:53 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/04 20:16:20 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/07 20:17:17 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,7 @@ struct s_global
 	t_nodetype	lastnodetype;
 	int			*pipeline;
 	int			shell_level;
+	t_bool		expand_dollartoken;
 };
 
 struct s_signals

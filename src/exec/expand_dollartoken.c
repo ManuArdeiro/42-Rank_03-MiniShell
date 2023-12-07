@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 12:35:59 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/06 15:06:46 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/07 19:48:43 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,14 +72,18 @@ static char	*ft_expand_dollarchain(
 {
 	char	*expandedstring;
 	char	**stringarray;
+	char	*delimiter;
+	char	*stringstart;
 
 	expandedstring = NULL;
 	stringarray = NULL;
 	if (fullstring == NULL || envlist == NULL)
 		return (NULL);
-	//save string to the first $ -> cut string -> save it and add it after expansion
-	stringarray = ft_split(fullstring, '$');
+	delimiter = ft_strchr(fullstring, '$');
+	stringstart = ft_cutstr(fullstring, delimiter);
+	stringarray = ft_split(delimiter, '$');
 	ft_expand_stringarray(&stringarray, laststatus, envlist);
+	ft_strarr_add(&stringarray, stringstart, 1);
 	expandedstring = ft_concat_strarray(stringarray, FALSE);
 	ft_clear_strarray(stringarray);
 	return (expandedstring);

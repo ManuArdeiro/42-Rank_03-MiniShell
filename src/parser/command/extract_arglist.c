@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 15:50:08 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/05 20:34:41 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/07 20:27:11 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,11 @@
 static void	ft_add_string_tolist(
 		t_list **stringlist, const char *string, t_global *global)
 {
-	if (ft_strchr(string, '*') != NULL)
+	if (global->expand_dollartoken == TRUE
+		&& ft_strchr(string, '*') != NULL)
 		ft_lstadd_back(stringlist, ft_expand_startoken(string));
-	else if (ft_strchr(string, '$') != NULL)
+	else if (global->expand_dollartoken == TRUE
+		&& ft_strchr(string, '$') != NULL)
 		ft_lstinsert(stringlist,
 			ft_expand_dollartoken(string, global), BACK);
 	else
@@ -47,7 +49,7 @@ static void	ft_get_arg(
 		return ;
 	if (prev_node != NULL && ft_is_tokenpair(prev_node->token) == TRUE)
 	{
-		string = ft_extract_commandseries(global->line, prev_node);
+		string = ft_extract_commandseries(global->line, prev_node, global);
 		(*node) = ft_get_tokennode(
 				prev_node->next,
 				ft_get_tokenpair(prev_node->token), FALSE, FIRST);

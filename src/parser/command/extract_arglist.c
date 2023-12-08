@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 15:50:08 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/08 15:04:38 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/08 19:39:48 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,8 @@ t_list	*ft_extract_arglist(t_part *tokenlist, t_global *global)
 		else if (ft_is_argument(prev_node, node) == TRUE)
 			ft_get_arg(&stringlist, &node, prev_node, global);
 		prev_node = node;
-		node = node->next;
+		if (node != NULL)
+			node = node->next;
 	}
 	return (stringlist);
 }

@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 20:29:13 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/08 15:02:53 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/08 19:42:42 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ char	*ft_extract_commandseries(
 				global->expand_dollartoken = TRUE;
 			commandseries = ft_get_series_substring(commandline, &node);
 		}
-		node = node->next;
+		if (node != NULL)
+			node = node->next;
 	}
 	return (commandseries);
 }

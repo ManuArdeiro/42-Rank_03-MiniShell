@@ -54,6 +54,11 @@ static void	ft_get_arg(
 				prev_node->next,
 				ft_get_tokenpair(prev_node->token), FALSE, FIRST);
 	}
+	else if ((*node)->next != NULL && ((*node)->token == tk_arg && ft_is_tokenpair((*node)->next->token == TRUE)))
+	{
+		string = ft_extract_commandseries(global->line, (*node), global);
+		(*node) = ft_get_last_seriestoken((*node));
+	}
 	else
 	{
 		global->expand_dollartoken = TRUE;

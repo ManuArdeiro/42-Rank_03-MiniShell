@@ -12,22 +12,6 @@
 
 #include "minishell.h"
 
-static t_part	*ft_get_last_seriestoken(t_part *tokenlist)
-{
-	t_part	*node;
-
-	if (tokenlist == NULL)
-		return (NULL);
-	node = tokenlist;
-	while (node->next != NULL)
-	{
-		if (node->next->token == tk_space)
-			return (node);
-		node = node->next;
-	}
-	return (node);
-}
-
 static char	*ft_get_series_substring(const char *commandline, t_part **node)
 {
 	t_part	*secondnode;
@@ -35,11 +19,17 @@ static char	*ft_get_series_substring(const char *commandline, t_part **node)
 	char	*buffer;
 
 	commandseries = NULL;
-	secondnode = ft_get_tokennode(
-			(*node)->next, ft_get_tokenpair((*node)->token), FALSE, FIRST);
-	if (secondnode != NULL
-		&& secondnode->next != NULL && secondnode->next->token != tk_space)
-		secondnode = ft_get_last_seriestoken(secondnode);
+	secondnode = NULL;
+	if (ft_is_tokenpair((*node)->token) == TRUE)
+	{
+		secondnode = ft_get_tokennode(
+				(*node)->next, ft_get_tokenpair((*node)->token), FALSE, FIRST);
+		if (secondnode != NULL
+			&& secondnode->next != NULL && secondnode->next->token != tk_space)
+			secondnode = ft_get_last_seriestoken(secondnode);
+	}
+	else
+			secondnode = ft_get_last_seriestoken((*node));
 	if (secondnode != NULL && secondnode->end > (*node)->start)
 	{
 		buffer
@@ -66,7 +56,7 @@ char	*ft_extract_commandseries(
 	while (node != NULL)
 	{
 		if ((ft_is_tokenpair(node->token) == TRUE && node->next != NULL)
-			|| (node->token == tk_cmd
+			|| ((node->token == tk_cmd || node->token == tk_arg)
 				&& node->next != NULL && ft_is_tokenpair(node->next->token) == TRUE))
 		{
 			if (node->token != tk_sglquot)

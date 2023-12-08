@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_export.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Ardeiro <Ardeiro@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 18:43:48 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/12/06 18:14:46 by Ardeiro          ###   ########.fr       */
+/*   Updated: 2023/12/08 14:44:38 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,22 +131,15 @@ static int	ft_mini_export_aux(t_list *envList, char **args, char *argument,
 	return (EXIT_SUCCESS);
 }
 
-int	ft_mini_export(t_global *global, t_list *envList, char **args)
+int	ft_mini_export(t_list *envList, char **args)
 {
 	int		i;
 	int		result;
-	char	*new_line;
 
 	i = 0;
 	result = 0;
 	if (!args || !args[1])
 		ft_mini_env(envList);
-	new_line = malloc(sizeof(char) * ft_strlen(global->line) + 1);
-	if (!new_line)
-		return (EXIT_FAILURE);
-	ft_strlcpy(new_line, global->line, ft_strlen(global->line + 1));
-	if (ft_strchr(new_line, '\"') != NULL || ft_strchr(new_line, '\'') != NULL)
-		return (ft_join_args(envList, new_line));
 	while (args[++i])
 		result += ft_mini_export_aux(envList, args, args[i], &i);
 	if (result != 0)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   avoid_quots.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Ardeiro <Ardeiro@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 23:35:31 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/12/05 17:55:37 by Ardeiro          ###   ########.fr       */
+/*   Updated: 2023/12/08 14:45:07 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,8 @@ static int	ft_avoid_dblquot(t_global *global)
 					return (EXIT_FAILURE);
 			}
 		}
-		i++;
+		if (i < (int)ft_strlen(global->line))
+			i++;
 	}
 	return (EXIT_SUCCESS);
 }

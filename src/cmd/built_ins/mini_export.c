@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 18:43:48 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/12/08 14:44:38 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/12/08 19:19:39 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,9 @@ int	ft_mini_export(t_list *envList, char **args)
 	if (!args || !args[1])
 		ft_mini_env(envList);
 	while (args[++i])
+	{
 		result += ft_mini_export_aux(envList, args, args[i], &i);
+	}
 	if (result != 0)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);

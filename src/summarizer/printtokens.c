@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   printtokens.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 20:23:08 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/09/29 18:22:58 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/08 18:10:06 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ void	ft_case_token(t_token token)
 		printf("%s\t", "tk_dollar");
 	else if (token == tk_ampersand)
 		printf("%s\t", "tk_ampersand");
+	else if (token == tk_space)
+		printf("%s\t", "tk_space");
 }
 
 void	ft_case_token_2(t_token token)

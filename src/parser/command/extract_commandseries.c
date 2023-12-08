@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 20:29:13 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/07 20:24:16 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/08 15:02:53 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char	*ft_extract_commandseries(
 	{
 		if (ft_is_tokenpair(node->token) == TRUE && node->next != NULL)
 		{
-			if (node->token == tk_dblquot)
+			if (node->token != tk_sglquot)
 				global->expand_dollartoken = TRUE;
 			commandseries = ft_get_series_substring(commandline, &node);
 		}

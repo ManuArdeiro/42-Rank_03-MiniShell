@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_tools_2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 18:30:15 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/11/30 20:04:30 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/08 18:38:47 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,15 +88,15 @@ int	ft_count_tokens(char *line)
 
 static void	ft_get_tokens_2(char *line, t_part *tokens, int *i, int *start)
 {
-	if (*start == -1 && (ft_strchr("()\'\"*;<>|&", line[*i + 1])
+	if (*start < 0 -1 && (ft_strchr("()\'\"*;<>|&", line[*i + 1])
 			|| ft_is_space(line, *i + 1)))
 		ft_add_cmdtoken(line, tokens, i);
-	else if (*start == -1)
+	else if (*start < 0)
 	{
 		*start = *i;
 		*i = *i + 1;
 	}
-	else if (*start != -1 && (ft_strchr("()\'\";*<>|&", line[*i + 1])
+	else if (*start >= 0 && (ft_strchr("()\'\";*<>|&", line[*i + 1])
 			|| ft_is_space(line, *i + 1)))
 	{
 		if (line[*i + 1] == '*')
@@ -105,7 +105,7 @@ static void	ft_get_tokens_2(char *line, t_part *tokens, int *i, int *start)
 		*start = -1;
 		*i = *i + 1;
 	}
-	else if (*start != -1 && !ft_strchr("()\'\"*;<>|&", line[*i + 1])
+	else if (*start >= 0 && !ft_strchr("()\'\"*;<>|&", line[*i + 1])
 		&& !ft_is_space(line, *i + 1))
 		*i = *i + 1;
 }
@@ -131,8 +131,10 @@ void	ft_get_tokens(char *line, t_part *tokens)
 		{
 			i = i + 1;
 			start = -1;
+			if (ft_last_tkn(tokens)->token != tk_space)
+				ft_add_tkn(tokens, tk_space, i, i);
 		}
-		else if (ft_strchr("()\'\"*;<>|&", line[i]))
+		else if (ft_strchr("()\"*;<>|&", line[i]))
 		{
 			ft_token_1(tokens, line, &i);
 			start = -1;

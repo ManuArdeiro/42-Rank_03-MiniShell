@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 21:33:30 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/12/08 14:48:48 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/08 18:03:57 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	handle_sigint(int signum)
 	if (signum != SIGINT)
 		return ;
 	write(1, "\n", 1);
-	//rl_replace_line("", 1);
+	rl_replace_line("", 1);
 	if (g_signals.in_heredoc == TRUE)
 	{
 		rl_on_new_line();
@@ -44,7 +44,7 @@ static void	handle_sigquit(int signum)
 	nbr = ft_itoa(signum);
 	ft_putstr_fd("Quit: ", STDERR_FILENO);
 	ft_putendl_fd(nbr, STDERR_FILENO);
-	//rl_replace_line("", 1);
+	rl_replace_line("", 1);
 	rl_on_new_line();
 	while (i < g_signals.pidcount)
 	{

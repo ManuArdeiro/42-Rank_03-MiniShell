@@ -1,34 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr_pos.c                                    :+:      :+:    :+:   */
+/*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Ardeiro <Ardeiro@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/15 19:54:12 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/06 13:12:30 by Ardeiro          ###   ########.fr       */
+/*   Created: 2023/12/08 15:32:51 by jolopez-          #+#    #+#             */
+/*   Updated: 2023/12/08 15:37:10 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strchr_pos(const char *s, int c, int pos)
+char	*ft_strstr(const char *haystack, const char *needle)
 {
-	int	i;
-	int	charcount;
+	size_t	i;
+	size_t	j;
 
-	i = 0;
-	charcount = 0;
-	if (!s || pos < 0)
+	if (!needle[0])
 		return (NULL);
-	while (s[i])
+	i = 0;
+	while (haystack[i])
 	{
-		if (s[i] == (char)c)
-			charcount++;
-		if (s[i] == (char)c && pos == 0)
-			return ((char *)(s + i));
-		else if (s[i] == (char)c && pos == charcount)
-			return ((char *)(s + i));
+		j = 0;
+		while (haystack[i + j] && needle[j] && haystack[i + j] == needle[j])
+			j++;
+		if (needle[j] == '\0')
+			return ((char *)(haystack + i + j - 1));
 		i++;
 	}
 	return (NULL);

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+         #
+#    By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/01 18:51:45 by jolopez-          #+#    #+#              #
-#    Updated: 2023/12/08 14:48:06 by yzaytoun         ###   ########.fr        #
+#    Updated: 2023/12/08 18:40:04 by jolopez-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,7 +55,8 @@ UTILS			= print_msg.c mini_history.c get_path.c free_string.c \
 LEXER			= tokenizer.c tokens.c token_tools_1.c token_tools_2.c \
 					ft_copy_tokenlist.c ft_tokenlist_add.c print_tokens.c \
 					add_tkn.c free_tokenlist.c get_lasttoken.c reverse_tokenlist.c\
-					get_token_byindex.c avoid_quots.c ft_add_cmdtoken.c
+					get_token_byindex.c avoid_quots.c ft_add_cmdtoken.c \
+					token_tools_3.c
 
 COMMAND			= extract_tokenstring.c get_commandlist.c lstconvert.c \
 					printcommand.c extract_filelist.c get_minicommand.c \
@@ -74,8 +75,8 @@ PARSER			=  separators.c get_tokennode.c tokensplit.c get_nodetype.c \
 SUMMARIZER		= minisummary.c printtokens.c get_unique_tokens.c \
 					get_token_summary.c get_token_count.c clearsummary.c
 					
-CMD				= mini_cd.c mini_echo.c mini_env.c mini_exit.c mini_export.c mini_pwd.c \
-					mini_unset.c mini_builtins.c is_builtin.c
+CMD				= mini_cd.c mini_echo.c mini_env.c mini_exit.c mini_export.c \
+					mini_pwd.c mini_unset.c mini_builtins.c is_builtin.c
 					
 TREE 			= minitree.c treetraversal.c is_emptynode.c create_mininode.c \
 				print_tree.c get_lasttreenode.c free_mininode.c

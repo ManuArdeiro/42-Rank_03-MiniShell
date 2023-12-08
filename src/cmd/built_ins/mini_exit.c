@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 01:42:21 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/11/29 17:06:32 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/12/08 20:31:06 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,7 @@ int	ft_mini_exit(t_global *global, char **args)
 			return (1);
 		}
 		else
-		{
-			global->status = EXITED;
 			global->laststatus = ft_atoi(args[1]);
-			return (ft_atoi(args[1]));
-		}
 	}
 	global->status = EXITED;
 	return (global->laststatus);

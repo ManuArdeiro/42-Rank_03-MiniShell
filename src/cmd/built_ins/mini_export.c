@@ -6,7 +6,7 @@
 /*   By: Ardeiro <Ardeiro@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 18:43:48 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/12/05 21:42:25 by Ardeiro          ###   ########.fr       */
+/*   Updated: 2023/12/06 18:14:46 by Ardeiro          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,18 +66,18 @@ static int	ft_set_variable(char *arg, char *name, char *value)
 /*	This function manages the case where the arg is like "name=??"; the actions
 	are different depending on the ?? is some character or just '\0'.	*/
 
-static int	ft_name_equal(t_list *envList, char **args, int *i)
+static int	ft_name_equal(t_list *envList, char *argument)
 {
 	char	*name;
 	char	*value;
 
-	name = malloc(sizeof(char) * (ft_strlen(args[*i])
-				- ft_strlen(ft_strchr_pos(args[*i], '=', 0))) + 1);
+	name = malloc(sizeof(char) * (ft_strlen(argument)
+				- ft_strlen(ft_strchr_pos(argument, '=', 0))) + 1);
 	value = malloc(sizeof(char)
-			* ft_strlen(ft_strchr_pos(args[*i], '=', 0)));
+			* ft_strlen(ft_strchr_pos(argument, '=', 0)));
 	if (!name || !value)
 		return (EXIT_FAILURE);
-	if (ft_set_variable(args[*i], name, value) == EXIT_FAILURE)
+	if (ft_set_variable(argument, name, value) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	ft_setenv(&envList, name, value, ADD_VALUE);
 	free (name);
@@ -111,7 +111,7 @@ static int	ft_mini_export_aux(t_list *envList, char **args, char *argument,
 	}
 	else if (ft_strchr(argument, '=') != NULL && argument[0] != '=')
 	{
-		if (ft_name_equal(envList, args, i) == 1)
+		if (ft_name_equal(envList, args[*i]) == 1)
 			return (ft_print_not_valid(args[*i]));
 	}
 	else if (ft_strchr(argument, '=') != NULL && argument[0] == '=')
@@ -131,15 +131,22 @@ static int	ft_mini_export_aux(t_list *envList, char **args, char *argument,
 	return (EXIT_SUCCESS);
 }
 
-int	ft_mini_export(t_list *envList, char **args)
+int	ft_mini_export(t_global *global, t_list *envList, char **args)
 {
-	int	i;
-	int	result;
+	int		i;
+	int		result;
+	char	*new_line;
 
 	i = 0;
 	result = 0;
 	if (!args || !args[1])
 		ft_mini_env(envList);
+	new_line = malloc(sizeof(char) * ft_strlen(global->line) + 1);
+	if (!new_line)
+		return (EXIT_FAILURE);
+	ft_strlcpy(new_line, global->line, ft_strlen(global->line + 1));
+	if (ft_strchr(new_line, '\"') != NULL || ft_strchr(new_line, '\'') != NULL)
+		return (ft_join_args(envList, new_line));
 	while (args[++i])
 		result += ft_mini_export_aux(envList, args, args[i], &i);
 	if (result != 0)

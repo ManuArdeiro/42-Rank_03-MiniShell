@@ -6,7 +6,7 @@
 /*   By: Ardeiro <Ardeiro@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:47:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/12/05 21:33:17 by Ardeiro          ###   ########.fr       */
+/*   Updated: 2023/12/06 18:06:40 by Ardeiro          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,8 @@ int			ft_mini_cd(char **arg, t_list *envList);
 int			ft_mini_echo(char **args);
 int			ft_mini_env(t_list *envList);
 int			ft_mini_exit(t_global *global, char **args);
-int			ft_mini_export(t_list *envList, char **args);
+int			ft_mini_export(t_global *global, t_list *envList, char **args);
+char    	**ft_join_args(t_list *envList, char *new_line);
 int			ft_mini_pwd(void);
 int			ft_mini_unset(t_list *envList, char **args);
 int			ft_clearscreen(t_list *envlist);

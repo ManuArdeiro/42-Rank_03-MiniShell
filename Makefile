@@ -6,7 +6,7 @@
 #    By: Ardeiro <Ardeiro@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/01 18:51:45 by jolopez-          #+#    #+#              #
-#    Updated: 2023/12/04 23:19:40 by Ardeiro          ###   ########.fr        #
+#    Updated: 2023/12/06 12:17:39 by Ardeiro          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,8 +75,8 @@ PARSER			=  separators.c get_tokennode.c tokensplit.c get_nodetype.c \
 SUMMARIZER		= minisummary.c printtokens.c get_unique_tokens.c \
 					get_token_summary.c get_token_count.c clearsummary.c
 					
-CMD				= mini_cd.c mini_echo.c mini_env.c mini_exit.c mini_export.c mini_pwd.c \
-					mini_unset.c mini_builtins.c is_builtin.c
+CMD				= mini_cd.c mini_echo.c mini_env.c mini_exit.c mini_export.c mini_export_aux.c \
+					mini_pwd.c mini_unset.c mini_builtins.c is_builtin.c
 					
 TREE 			= minitree.c treetraversal.c is_emptynode.c create_mininode.c \
 				print_tree.c get_lasttreenode.c free_mininode.c

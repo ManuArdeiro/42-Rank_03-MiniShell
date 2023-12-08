@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 20:29:13 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/08 20:07:16 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/08 20:59:11 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,12 @@ static char	*ft_get_series_substring(const char *commandline, t_part **node)
 		secondnode = ft_get_last_seriestoken(secondnode);
 	if (secondnode != NULL && secondnode->end > (*node)->start)
 	{
-		buffer = ft_substr(commandline,
-					(*node)->start + 1,
-					((secondnode->end) - ((*node)->start) + 1));
-		commandseries = ft_strclean_withspaces(buffer, TRUE);
+		buffer
+			= ft_substr(
+				commandline,
+				(*node)->start + 1,
+				((secondnode->end) - ((*node)->start) + 1));
+		commandseries = ft_strclean_withspaces(buffer, tk_sglquot);
 	}
 	(*node) = secondnode;
 	return (commandseries);
@@ -63,7 +65,9 @@ char	*ft_extract_commandseries(
 	node = tokenlist;
 	while (node != NULL)
 	{
-		if (ft_is_tokenpair(node->token) == TRUE && node->next != NULL)
+		if ((ft_is_tokenpair(node->token) == TRUE && node->next != NULL)
+			|| (node->token == tk_cmd
+				&& node->next != NULL && ft_is_tokenpair(node->next->token) == TRUE))
 		{
 			if (node->token != tk_sglquot)
 				global->expand_dollartoken = TRUE;

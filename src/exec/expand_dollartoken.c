@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 12:35:59 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/01 19:43:02 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/08 14:32:06 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static char	*ft_get_limiter(const char *string)
 {
-	int	i;
+	int		i;
 
 	i = 0;
 	if (string == NULL)
@@ -72,14 +72,19 @@ static char	*ft_expand_dollarchain(
 {
 	char	*expandedstring;
 	char	**stringarray;
+	char	*delimiter;
+	char	*stringstart;
 
 	expandedstring = NULL;
 	stringarray = NULL;
 	if (fullstring == NULL || envlist == NULL)
 		return (NULL);
-	stringarray = ft_split(fullstring, '$');
+	delimiter = ft_strchr(fullstring, '$');
+	stringstart = ft_cutstr(fullstring, delimiter);
+	stringarray = ft_split(delimiter, '$');
 	ft_expand_stringarray(&stringarray, laststatus, envlist);
-	expandedstring = ft_concat_strarray(stringarray, 0);
+	ft_strarr_add(&stringarray, stringstart, 1);
+	expandedstring = ft_concat_strarray(stringarray, FALSE);
 	ft_clear_strarray(stringarray);
 	return (expandedstring);
 }
@@ -101,5 +106,6 @@ char	*ft_expand_dollartoken(const char *argument, t_global *global)
 		return ((char *)argument);
 	if (value == NULL)
 		value = ft_strdup("");
+	global->expand_dollartoken = FALSE;
 	return (value);
 }

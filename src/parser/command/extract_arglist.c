@@ -6,11 +6,25 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 15:50:08 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/01 19:41:09 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/07 20:27:11 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	ft_add_string_tolist(
+		t_list **stringlist, const char *string, t_global *global)
+{
+	if (global->expand_dollartoken == TRUE
+		&& ft_strchr(string, '*') != NULL)
+		ft_lstadd_back(stringlist, ft_expand_startoken(string));
+	else if (global->expand_dollartoken == TRUE
+		&& ft_strchr(string, '$') != NULL)
+		ft_lstinsert(stringlist,
+			ft_expand_dollartoken(string, global), BACK);
+	else
+		ft_lstinsert(stringlist, (char *)string, BACK);
+}
 
 static t_bool	ft_is_argument(t_part *prev_node, t_part *node)
 {
@@ -26,24 +40,24 @@ static t_bool	ft_is_argument(t_part *prev_node, t_part *node)
 
 static void	ft_get_arg(
 	t_list **stringlist,
-	t_part *node, t_part *prev_node, t_global *global
-)
+	t_part **node, t_part *prev_node, t_global *global)
 {
 	char	*string;
 
 	string = NULL;
-	if (node == NULL)
+	if ((*node) == NULL)
 		return ;
-	string = ft_extract_tokenstring(global->line, node);
-	if (ft_strchr(string, '*') != NULL
-		&& (prev_node == NULL || (prev_node != NULL && prev_node->token != tk_sglquot)))
-		ft_lstadd_back(stringlist, ft_expand_startoken(string));
-	else if (ft_strchr(string, '$') != NULL
-		&& (prev_node == NULL || (prev_node != NULL && prev_node->token != tk_sglquot)))
-		ft_lstinsert(stringlist,
-			ft_expand_dollartoken(string, global), BACK);
+	if (prev_node != NULL && ft_is_tokenpair(prev_node->token) == TRUE)
+	{
+		string = ft_extract_commandseries(global->line, prev_node, global);
+		(*node) = ft_get_tokennode(
+				prev_node->next,
+				ft_get_tokenpair(prev_node->token), FALSE, FIRST);
+	}
 	else
-		ft_lstinsert(stringlist, (char *)string, BACK);
+		string = ft_extract_tokenstring(global->line, (*node));
+	if (string)
+		ft_add_string_tolist(stringlist, string, global);
 }
 
 t_list	*ft_extract_arglist(t_part *tokenlist, t_global *global)
@@ -63,7 +77,7 @@ t_list	*ft_extract_arglist(t_part *tokenlist, t_global *global)
 			&& ft_is_commandseries(tokenlist) == TRUE)
 			ft_skip_quotes(&node->next);
 		else if (ft_is_argument(prev_node, node) == TRUE)
-			ft_get_arg(&stringlist, node, prev_node, global);
+			ft_get_arg(&stringlist, &node, prev_node, global);
 		prev_node = node;
 		node = node->next;
 	}

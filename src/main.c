@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Ardeiro <Ardeiro@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:55:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/12/05 19:13:55 by Ardeiro          ###   ########.fr       */
+/*   Updated: 2023/12/08 14:48:37 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,6 @@ static void	ft_init(t_global **global, char **env, int shell_level)
 //{
 //	system("leaks minishell");
 //}
-
-
 /*	Main function:
 	- Checks the number of arguments and prints help if they are not correct.
 	- Prints the welcome message.

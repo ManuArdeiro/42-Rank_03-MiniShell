@@ -1,29 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   contains_subshell.c       		                    :+:      :+:    :+:   */
+/*   default_filelist.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/28 20:07:46 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/28 20:12:19 by yzaytoun         ###   ########.fr       */
+/*   Created: 2023/12/06 13:24:00 by yzaytoun          #+#    #+#             */
+/*   Updated: 2023/12/06 13:29:50 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_bool	ft_contains_subshell(t_part *tokenlist)
+t_list	*ft_default_filelist(int std_stream)
 {
-	t_part	*node;
+	t_list	*newfilelist;
+	t_file	*file;
 
-	if (tokenlist == NULL)
-		return (FALSE);
-	node = tokenlist;
-	while (node != NULL)
-	{
-		if (ft_is_subshellseparator(node->token) == TRUE)
-			return (TRUE);
-		node = node->next;
-	}
-	return (FALSE);
+	newfilelist = NULL;
+	file = ft_create_file(ft_strdup("STD"), std_stream, 0);
+	ft_lstinsert(&newfilelist, (t_file *)file, BACK);
+	return (newfilelist);
 }

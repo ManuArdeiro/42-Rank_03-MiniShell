@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_commandline.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 12:24:07 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/04 18:56:09 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/08 14:49:11 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ static void	ft_tokensplit_all(
 {
 	if (ft_valid_subshellnode(tokenlist) == TRUE)
 		*root = ft_split_subshell(tokenlist);
-	else if (ft_contains_tokenseparator(tokenlist) == TRUE
-		&& ft_contains_tokenpair(tokenlist) == FALSE)
+	else if (ft_tokenlist_contains(tokenlist, ft_is_tokenseparator) == TRUE
+		&& ft_tokenlist_contains(tokenlist, ft_is_tokenpair) == FALSE)
 		ft_split_tokenlist(root, tokenlist);
 	else
 		*root = ft_get_minicommand(tokenlist, global);
@@ -72,7 +72,8 @@ t_minitree	*ft_parse_commandline(t_global *global)
 	parsetree = NULL;
 	if (global == NULL || (global != NULL && global->line == NULL))
 		return (NULL);
-	tokenlist = ft_tokenizer(global, &token_count);
+	tokenlist = ft_tokenizer(global->line, &token_count);
+	//ft_print_tokenlist(tokenlist);
 	if (ft_isvalid_commandlist(tokenlist) == TRUE)
 		parsetree = ft_generate_parsetree(global, tokenlist);
 	else

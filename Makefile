@@ -6,7 +6,7 @@
 #    By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/01 18:51:45 by jolopez-          #+#    #+#              #
-#    Updated: 2023/12/08 14:45:43 by jolopez-         ###   ########.fr        #
+#    Updated: 2023/12/08 14:48:22 by jolopez-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,14 +63,13 @@ COMMAND			= extract_tokenstring.c get_commandlist.c lstconvert.c \
 					extract_commandseries.c is_commandseries.c
 				
 FILE			= filestreams.c create_file.c get_filemode.c is_redirection.c \
-					freefile.c append_filecontent.c delete_filenode.c closepipe.c
+					freefile.c append_filecontent.c delete_filenode.c closepipe.c\
+					default_filelist.c
 
 PARSER			=  separators.c get_tokennode.c tokensplit.c get_nodetype.c \
-					parse_commandline.c contains_tokenseparator.c \
-					$(COMMAND) $(FILE) isvalid_commandlist.c tokenpairs.c\
-					get_tokenpair.c lst_nodejoin.c contains_subshell.c\
-					split_subshell.c split_tokenlist.c valid_subshellnode.c\
-					skip_quotes.c
+					parse_commandline.c $(COMMAND) $(FILE) isvalid_commandlist.c \
+					tokenpairs.c get_tokenpair.c tokenlist_contains.c split_subshell.c\
+					split_tokenlist.c valid_subshellnode.c skip_quotes.c
 					
 SUMMARIZER		= minisummary.c printtokens.c get_unique_tokens.c \
 					get_token_summary.c get_token_count.c clearsummary.c

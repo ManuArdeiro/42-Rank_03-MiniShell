@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 11:18:23 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/11/30 19:41:15 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/04 18:49:04 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "ministruct.h"
 
-t_part		*ft_tokenizer(char *line, int *tk_count);
+t_part		*ft_tokenizer(t_global *global, int *tk_count);
 int			ft_is_space(char *line, int i);
 t_part		*ft_create_tkn_list(void);
 int			ft_last_index(t_part *tokens);
@@ -23,6 +23,7 @@ t_part		*ft_last_tkn(t_part *tokens);
 int			ft_add_tkn(t_part *tokens, t_token token, int start, int end);
 void		ft_get_tokens(char *line, t_part *tokens);
 int			ft_count_tokens(char *line);
+void		ft_avoid_quots(t_global *global);
 int			ft_token_1(t_part *tokens, char *line, int *i);
 void		ft_tokenlist_add(t_part **tokenlist, t_part *newtoken);
 

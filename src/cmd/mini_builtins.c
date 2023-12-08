@@ -3,14 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   mini_builtins.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Ardeiro <Ardeiro@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 19:53:03 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/11/13 20:03:55 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/05 21:32:41 by Ardeiro          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+/*	This function just prints the "not found" error message.	*/
+
+int	ft_print_not_found(char *arg)
+{
+	ft_putstr_fd("export: ", STDERR_FILENO);
+	ft_putstr_fd(arg + 1, STDERR_FILENO);
+	ft_putendl_fd(" not found.", STDERR_FILENO);
+	return (EXIT_FAILURE);
+}
+
+/*	This function just prints the "not a valid identifier" error message.	*/
+
+int	ft_print_not_valid(char *arg)
+{
+	ft_putstr_fd("export: '", STDERR_FILENO);
+	ft_putstr_fd(arg, STDERR_FILENO);
+	ft_putendl_fd("' : not a valid identifier.", STDERR_FILENO);
+	return (EXIT_FAILURE);
+}
 
 /*	This function prints to screen.	*/
 

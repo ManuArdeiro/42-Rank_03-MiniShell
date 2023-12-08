@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Ardeiro <Ardeiro@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:47:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/11/20 18:45:24 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/05 21:33:17 by Ardeiro          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,6 @@ t_signals	g_signals;
 
 // Signals
 void		ft_signals(void);
-void		ft_sig_int(int sig_num);
-void		ft_sig_quit(int sig_num);
 
 // File utils/print_msg.c
 void		ft_printhelp(void);
@@ -57,6 +55,8 @@ int			ft_delenv(t_list *envList, char *key);
 // Built-ins
 
 int			ft_builtins(char **args, t_list *envList, t_global *global);
+int			ft_print_not_found(char *arg);
+int			ft_print_not_valid(char *arg);
 void		ft_print_screen(char *str);
 int			ft_arg_nbr(char **args);
 int			ft_mini_cd(char **arg, t_list *envList);

@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:55:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/12/08 19:27:24 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/12/08 19:41:03 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void	ft_loop(t_global *global)
 			exit(EXIT_SUCCESS);
 		}
 		global->line = ft_get_completeline(global->line);
-*		if (ft_strequal("exit", global->line) == TRUE)
+		if (ft_strequal("exit", global->line) == TRUE)
 			global->status = EXITED;
 		parsetree = ft_parse_commandline(global);
 		ft_execute_commandline(parsetree, global);

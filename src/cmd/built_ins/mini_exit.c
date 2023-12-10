@@ -6,11 +6,30 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 01:42:21 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/12/08 20:31:06 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/12/10 16:36:29 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+/*	This function deletes the simple/double quots if they are in the string
+	passed as argument.	*/
+
+static void	ft_del_quots(char *argument)
+{
+	int	i;
+
+	i = 0;
+	if (!argument)
+		return ;
+	while (argument[i] != '\0')
+	{
+		if (argument[i] == '\'' || argument[i] == '\"')
+			argument[i] = '0';
+		i++;
+	}
+	return ;
+}
 
 /*	This function returs a TRUE if the string passed as argument is a number,
 	a FALSE if not. */
@@ -22,7 +41,7 @@ static t_bool	ft_is_number(char *str)
 	i = 0;
 	if (!str)
 		return (FALSE);
-	if (str[0] != '-' && !ft_isdigit(str[0]))
+	if (str[0] != '-' && str[0] != '+' && !ft_isdigit(str[0]))
 		return (FALSE);
 	i++;
 	while (str[i] != '\0')
@@ -48,15 +67,16 @@ int	ft_mini_exit(t_global *global, char **args)
 	ft_putendl_fd("exit", STDOUT_FILENO);
 	if (ft_arg_nbr(args) > 2)
 	{
-		ft_putendl_fd("exit: too many arguments.", STDERR_FILENO);
+		ft_putendl_fd("exit: too many arguments", STDERR_FILENO);
 		return (EXIT_FAILURE);
 	}
 	else if (ft_arg_nbr(args) == 2)
 	{
+		ft_del_quots(args[1]);
 		if (!ft_is_number(args[1]))
 		{
-			ft_putendl_fd("exit: numeric argument required.", STDERR_FILENO);
-			return (1);
+			ft_putendl_fd("exit: numeric argument required", STDERR_FILENO);
+			return (255);
 		}
 		else
 			global->laststatus = ft_atoi(args[1]);

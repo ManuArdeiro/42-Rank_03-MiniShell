@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 18:30:15 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/12/08 18:38:47 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/12/10 12:20:46 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,7 @@ void	ft_get_tokens(char *line, t_part *tokens)
 			if (ft_last_tkn(tokens)->token != tk_space)
 				ft_add_tkn(tokens, tk_space, i, i);
 		}
-		else if (ft_strchr("()\"*;<>|&", line[i]))
+		else if (ft_strchr("()\"\'*;<>|&", line[i]))
 		{
 			ft_token_1(tokens, line, &i);
 			start = -1;

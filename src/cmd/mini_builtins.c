@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_builtins.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Ardeiro <Ardeiro@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 19:53:03 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/12/05 21:32:41 by Ardeiro          ###   ########.fr       */
+/*   Updated: 2023/12/10 12:41:04 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	ft_print_not_valid(char *arg)
 {
 	ft_putstr_fd("export: '", STDERR_FILENO);
 	ft_putstr_fd(arg, STDERR_FILENO);
-	ft_putendl_fd("' : not a valid identifier.", STDERR_FILENO);
+	ft_putendl_fd("' : not a valid identifier", STDERR_FILENO);
 	return (EXIT_FAILURE);
 }
 

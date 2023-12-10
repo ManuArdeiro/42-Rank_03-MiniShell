@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_cd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:05:20 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/11/23 21:10:39 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/10 14:59:27 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,7 @@ static int	ft_new_folder(t_list *envlist, char *dir)
 	oldpwd = getcwd(NULL, 0);
 	if (chdir(dir) != 0)
 	{
-		ft_putstr_fd(dir, STDERR_FILENO);
-		ft_putstr_fd(" ", STDERR_FILENO);
-		ft_putendl_fd("error", STDERR_FILENO);
+		ft_putendl_fd(" No such file or directory", STDERR_FILENO);
 		free (oldpwd);
 		return (EXIT_FAILURE);
 	}

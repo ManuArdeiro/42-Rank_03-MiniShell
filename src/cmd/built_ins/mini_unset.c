@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_unset.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Ardeiro <Ardeiro@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 15:23:35 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/12/05 21:46:56 by Ardeiro          ###   ########.fr       */
+/*   Updated: 2023/12/10 14:33:34 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,6 @@ static int	ft_unset_var(t_list *envList, char **args)
 int	ft_mini_unset(t_list *envList, char **args)
 {
 	if (ft_arg_nbr(args) < 2)
-	{
-		ft_putendl_fd("unset: not enough arguments", STDERR_FILENO);
 		return (EXIT_SUCCESS);
-	}
 	return (ft_unset_var(envList, args));
 }

@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 19:26:49 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/05 19:56:57 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/08 20:55:15 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,12 @@ static void	ft_get_cleanstring(
 			(*cleanstring)[count] = string[i];
 			++count;
 		}
+		else if (skip_pipe == 3
+			&& string[i] != '\'' && string[i] != '\"')
+		{
+			(*cleanstring)[count] = string[i];
+			++count;
+		}
 		++i;
 	}
 	(*cleanstring)[count] = '\0';
@@ -55,6 +61,9 @@ static int	ft_countalpha_withspace(const char *string, int skip_pipe)
 			++count;
 		else if (skip_pipe == 1
 			&& (ft_isalpha(string[i]) != 0 || string[i] == ' '))
+			++count;
+		else if (skip_pipe == 3
+			&& (string[i] != '\'' && string[i] != '\"'))
 			++count;
 		++i;
 	}

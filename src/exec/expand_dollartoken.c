@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 12:35:59 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/08 14:32:06 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/11 19:23:19 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,16 +96,18 @@ char	*ft_expand_dollartoken(const char *argument, t_global *global)
 	int		dollarcount;
 
 	value = NULL;
+	global->expand_dollartoken = FALSE;
 	if (argument == NULL || (global != NULL && global->envlist == NULL))
 		return (NULL);
 	dollarcount = ft_chrcount(argument, '$');
-	if (dollarcount >= 1)
+	if (dollarcount == 1 && ft_strlen(argument) == 1 && *argument == '$')
+		value = ft_strdup("");
+	else if (dollarcount >= 1)
 		value = ft_expand_dollarchain(
 				argument, global->laststatus, global->envlist);
 	else
 		return ((char *)argument);
 	if (value == NULL)
 		value = ft_strdup("");
-	global->expand_dollartoken = FALSE;
 	return (value);
 }

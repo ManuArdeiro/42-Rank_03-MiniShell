@@ -47,6 +47,18 @@ t_bool	ft_is_commandseries(t_part *tokenlist)
 				if (endnode != NULL)
 					result = ft_verify_series(node, endnode);
 			}
+			else if ((node->token == tk_cmd && node->next != NULL
+					&& ft_is_tokenpair(node->next->token) == TRUE))
+			{
+				endnode
+					= ft_get_tokennode(
+						node->next->next,
+						ft_get_tokenpair(node->next->token), FALSE, FIRST);
+				if (endnode != NULL)
+					result = ft_verify_series(node, endnode);
+			}
+			if (result == TRUE)
+				break ;
 			node = node->next;
 		}
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniparser.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
+/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 20:07:17 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/08 15:08:25 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/12/11 18:48:24 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void		ft_free_commandlist(t_command **command);
 char		*ft_extract_commandseries(
 				const char *commandline, t_part *tokenlist, t_global *global);
 t_bool		ft_is_commandseries(t_part *tokenlist);
-
+t_part		*ft_get_last_seriestoken(t_part *tokenlist);
 
 //File
 t_list		*ft_extract_filelist(
@@ -68,7 +68,6 @@ void		ft_delete_filenode(t_list **filelist, char *file_todelete);
 void		ft_clone_streams(int *inputclone, int *outputclone);
 void		ft_closepipe(int *input, int *output);
 t_list		*ft_default_filelist(int std_stream);
-
 
 //Separators
 t_bool		ft_is_tokenseparator(t_token token);

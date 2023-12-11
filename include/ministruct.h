@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ministruct.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
+/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:10:53 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/08 16:40:33 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/12/08 20:48:30 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,10 @@ enum e_token
 {
 	tk_and = 1,
 	tk_or,
-	tk_lprnths,
-	tk_rprnths,
 	tk_sglquot,
 	tk_dblquot,
+	tk_lprnths,
+	tk_rprnths,
 	tk_pipe,
 	tk_mul,
 	tk_semi,

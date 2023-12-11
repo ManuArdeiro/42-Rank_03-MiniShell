@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executecommand.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
+/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 16:44:36 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/08 19:25:24 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/12/08 20:59:58 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	ft_executecommand(t_command *command, t_global *global)
 	if (g_signals.sig_exit_status == 1)
 		global->laststatus = g_signals.exit_status;
 	g_signals.sig_exit_status = 0;
-	//ft_printcommand(command);
+	ft_printcommand(command);
 	ft_check_commandname(command);
 	pidcount = ft_create_subprocess(command, &pidarray, global);
 	g_signals.pidarray = pidarray;

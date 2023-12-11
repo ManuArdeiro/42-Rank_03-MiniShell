@@ -6,17 +6,36 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 20:29:13 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/11 19:05:30 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/11 20:12:37 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+static char	*ft_get_substr(
+	const char *commandline, t_part *secondnode, t_part **node
+)
+{
+	char	*commandseries;
+	char	*buffer;
+
+	commandseries = NULL;
+	if (secondnode != NULL && secondnode->end > (*node)->start)
+	{
+		buffer
+			= ft_substr(
+				commandline,
+				(*node)->start,
+				((secondnode->end) - ((*node)->start) + 1));
+		commandseries = ft_strclean_withspaces(buffer, tk_sglquot);
+	}
+	return(commandseries);
+}
+
 static char	*ft_get_series_substring(const char *commandline, t_part **node)
 {
 	t_part	*secondnode;
 	char	*commandseries;
-	char	*buffer;
 
 	commandseries = NULL;
 	secondnode = NULL;
@@ -30,15 +49,7 @@ static char	*ft_get_series_substring(const char *commandline, t_part **node)
 	}
 	else
 		secondnode = ft_get_last_seriestoken((*node));
-	if (secondnode != NULL && secondnode->end > (*node)->start)
-	{
-		buffer
-			= ft_substr(
-				commandline,
-				(*node)->start,
-				((secondnode->end) - ((*node)->start) + 1));
-		commandseries = ft_strclean_withspaces(buffer, tk_sglquot);
-	}
+	commandseries = ft_get_substr(commandline, secondnode, node);
 	(*node) = secondnode;
 	return (commandseries);
 }

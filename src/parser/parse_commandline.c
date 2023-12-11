@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_commandline.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 12:24:07 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/11 19:48:01 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/11 20:35:58 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ t_minitree	*ft_parse_commandline(t_global *global)
 	if (global == NULL || (global != NULL && global->line == NULL))
 		return (NULL);
 	tokenlist = ft_tokenizer(global, &token_count);
-	ft_print_tokenlist(tokenlist);
+	//ft_print_tokenlist(tokenlist);
 	if (ft_isvalid_commandlist(tokenlist) == TRUE)
 		parsetree = ft_generate_parsetree(global, tokenlist);
 	else

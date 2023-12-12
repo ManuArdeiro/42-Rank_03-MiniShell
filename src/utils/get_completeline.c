@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_completeline.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
+/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 16:08:48 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/08 15:09:29 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/12/12 19:15:22 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ static char	*ft_getline_aux(const char *buffer, const char *prompt)
 	if (ft_endswith(buffer, "\\\n") == FALSE)
 	{
 		if (ft_strequal(prompt, "pipe $> ") == TRUE)
-			result = ft_strclean_withspaces(buffer, FALSE);
+			result = ft_strclean_withspaces(buffer, CLEAN_ALL_LEAVE_PIPE);
 		else
-			result = ft_strclean_withspaces(buffer, TRUE);
+			result = ft_strclean_withspaces(buffer, CLEAN_ALL);
 	}
 	return (result);
 }

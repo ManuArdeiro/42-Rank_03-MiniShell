@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:10:53 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/08 20:48:30 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/12 19:15:25 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,15 @@ typedef enum e_nodetype			t_nodetype;
 typedef struct s_summarizer		t_summarizer;
 typedef struct s_part			t_part;
 typedef struct s_mininode		t_mininode;
-typedef enum e_casttype			t_casttype;
+typedef enum e_cleancase		t_cleancase;
 
-enum e_casttype
+enum e_cleancase
 {
-	TYPE_STRING,
-	TYPE_FILE,
-	TYPE_COMMAND,
-	TYPE_LIST
+	CLEAN_ALL_LEAVE_PIPE,
+	CLEAN_ALL,
+	CLEAN_QUOTES,
+	CLEAN_SINGLE_QUOTES,
+	CLEAN_DOUBLE_QUOTES,
 };
 
 enum e_bool

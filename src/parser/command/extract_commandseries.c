@@ -6,17 +6,47 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 20:29:13 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/11 19:05:30 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/12 19:13:06 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	*ft_get_series_substring(const char *commandline, t_part **node)
+static t_cleancase	ft_get_cleancase(t_token token)
 {
-	t_part	*secondnode;
+	if (token == tk_sglquot)
+		return (CLEAN_SINGLE_QUOTES);
+	else if (token == tk_dblquot)
+		return (CLEAN_DOUBLE_QUOTES);
+	return (CLEAN_ALL);
+}
+
+static char	*ft_get_substr(
+	const char *commandline,
+	t_part *secondnode, t_part **node, t_cleancase cleancase
+)
+{
 	char	*commandseries;
 	char	*buffer;
+
+	commandseries = NULL;
+	if (secondnode != NULL && secondnode->end > (*node)->start)
+	{
+		buffer
+			= ft_substr(
+				commandline,
+				(*node)->start,
+				((secondnode->end) - ((*node)->start) + 1));
+		commandseries = ft_strclean_withspaces(buffer, cleancase);
+	}
+	return(commandseries);
+}
+
+static char	*ft_get_series_substring(const char *commandline, t_part **node)
+{
+	t_part		*secondnode;
+	char		*commandseries;
+	t_cleancase	cleancase;
 
 	commandseries = NULL;
 	secondnode = NULL;
@@ -30,15 +60,8 @@ static char	*ft_get_series_substring(const char *commandline, t_part **node)
 	}
 	else
 		secondnode = ft_get_last_seriestoken((*node));
-	if (secondnode != NULL && secondnode->end > (*node)->start)
-	{
-		buffer
-			= ft_substr(
-				commandline,
-				(*node)->start,
-				((secondnode->end) - ((*node)->start) + 1));
-		commandseries = ft_strclean_withspaces(buffer, tk_sglquot);
-	}
+	cleancase = ft_get_cleancase((*node)->token);
+	commandseries = ft_get_substr(commandline, secondnode, node, cleancase);
 	(*node) = secondnode;
 	return (commandseries);
 }

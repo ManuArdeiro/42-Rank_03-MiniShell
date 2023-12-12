@@ -6,11 +6,38 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 19:22:27 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/11/25 17:00:45 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/11 20:36:30 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static t_bool	ft_valid_commandseries(t_part *tokenlist)
+{
+	t_part	*node;
+	t_part	*endnode;
+
+	if (tokenlist == NULL)
+		return (FALSE);
+	node = tokenlist;
+	endnode = NULL;
+	while (node != NULL)
+	{
+		if (ft_is_tokenpair(node->token) == TRUE)
+		{
+			endnode
+				= ft_get_tokennode(
+					node->next,
+					ft_get_tokenpair(node->token), FALSE, FIRST);
+			if (endnode == NULL)
+				return (FALSE);
+			else
+				node = endnode;
+		}
+		node = node->next;
+	}
+	return (TRUE);
+}
 
 static t_bool	ft_validate_tokenlist(t_part *tokenlist)
 {
@@ -73,6 +100,8 @@ t_bool	ft_isvalid_commandlist(t_part *tokenlist)
 	summary = ft_summarize(tokenlist);
 	if (ft_validate_tokenlist(tokenlist) == TRUE
 		&& ft_validate_summary(summary) == TRUE)
+		result = TRUE;
+	if (ft_valid_commandseries(tokenlist) == TRUE)
 		result = TRUE;
 	ft_lstclear(&summary, ft_clearsummary);
 	return (result);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
+/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:55:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/12/11 20:05:51 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/12/12 19:37:42 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,17 +45,15 @@ static void	ft_loop(t_global *global)
 	{
 		ft_signals();
 		global->line = readline(MINI_PROMPT);
-		if (!global->line)
+		if (global->line != NULL)
 		{
-			//ft_putendl_fd("exit", STDERR_FILENO);
-			exit(EXIT_SUCCESS);
+			global->line = ft_get_completeline(global->line);
+			if (ft_strequal("exit", global->line) == TRUE)
+				global->status = EXITED;
+			parsetree = ft_parse_commandline(global);
+			ft_execute_commandline(parsetree, global);
+			ft_register_and_clean(&history, &global, &parsetree);
 		}
-		global->line = ft_get_completeline(global->line);
-		if (ft_strequal("exit", global->line) == TRUE)
-			global->status = EXITED;
-		parsetree = ft_parse_commandline(global);
-		ft_execute_commandline(parsetree, global);
-		ft_register_and_clean(&history, &global, &parsetree);
 	}
 	ft_write_command_history(&history, global);
 	ft_lstclear(&history, ft_free_string);
@@ -76,7 +74,8 @@ static void	ft_free(t_global **global)
 	the environment passed as argument (or not) calling to ft_initenv()
 	function.	*/
 
-static void	ft_init(t_global **global, char **env, int shell_level)
+static void	ft_init(
+	t_global **global, char **env, int shell_level, t_bool devmode)
 {
 	*global = ft_calloc(sizeof(t_global), 1);
 	if (*global == NULL)
@@ -84,6 +83,7 @@ static void	ft_init(t_global **global, char **env, int shell_level)
 	if (shell_level < 0)
 		shell_level = 0;
 	shell_level++;
+	(*global)->devmode = devmode;
 	(*global)->envlist = ft_initenv(env, shell_level);
 }
 
@@ -101,22 +101,26 @@ static void	ft_init(t_global **global, char **env, int shell_level)
 
 int	main(int ac, char **av, char **env)
 {
-t_global	*global;
+	t_global	*global;
 	int			shell_level;
-	int		laststatus;
+	int			laststatus;
+	t_bool		devmode;
 
 	//atexit(ft_panic);
 	laststatus = EXIT_SUCCESS;
+	devmode = FALSE;
 	shell_level = 0;
 	if (ac >= 2)
 	{
 		if (ft_isdigit(av[1][0]) == TRUE)
 			shell_level = ft_atoi(av[1]);
+		else if (ft_strequal(av[1], "--Dev") == TRUE)
+			devmode = TRUE;
 		else
 			ft_printhelp();
 	}
 	//ft_printwellcome();
-	ft_init(&global, env, shell_level);
+	ft_init(&global, env, shell_level, devmode);
 	ft_loop(global);
 	laststatus = global->laststatus;
 	ft_free(&global);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
+/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 16:48:34 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/12/08 15:33:34 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/12/14 20:38:34 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,4 +96,6 @@ int				ft_endswith(const char *string, const char *suffix);
 char			*ft_strclean_withspaces(const char *string, int skip_pipe);
 void			ft_strarr_add(
 					char ***strarray, const char *newstring, int pos);
+int				ft_strcontains(
+					const char *fullstring, const char *string_tofind);
 #endif

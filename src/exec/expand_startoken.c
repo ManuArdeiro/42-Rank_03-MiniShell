@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 18:05:17 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/11/18 17:18:51 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/14 19:23:46 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,15 +66,17 @@ static char	*ft_get_dirpath(const char *fullpath, char **pathsuffix)
 	path = NULL;
 	pathlimit = NULL;
 	lastpos = 0;
-	if (ft_strlen(fullpath) == 1)
-		path = ft_strdup(".");
-	else
+	if (ft_strchr(fullpath, '/') != NULL)
 	{
 		lastpos = ft_chrcount(fullpath, '/');
 		pathlimit = ft_strchr_pos(fullpath, '/', lastpos);
 		path = ft_cutstr(fullpath, pathlimit);
+		*pathsuffix = ft_strrchr(fullpath, '/');
 	}
-	*pathsuffix = ft_strrchr(fullpath, '/');
+	else
+		path = ft_strdup(".");
+	if (ft_strrchr(fullpath, '/') == NULL)
+		*pathsuffix = ft_strdup(fullpath);
 	return (path);
 }
 
@@ -95,7 +97,11 @@ t_list	*ft_expand_startoken(const char *fullpath)
 	if (dirpath != NULL)
 		directory = opendir(dirpath);
 	ft_add_dirfiles(&fileslist, directory, dirpath, pathsuffix);
-	if (ft_strncmp(dirpath, ".", 1) == 0 && ft_strlen(dirpath) == 1)
+	if (ft_strequal(dirpath, ".") == TRUE)
 		free(dirpath);
+	if (pathsuffix != NULL)
+		free(pathsuffix);
+	if (fileslist == NULL)
+		ft_lstinsert(&fileslist, ft_strdup(fullpath), BACK);
 	return (fileslist);
 }

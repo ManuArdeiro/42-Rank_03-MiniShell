@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 15:50:08 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/12 20:29:13 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/14 20:14:10 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ static t_bool	ft_is_argument(t_part *prev_node, t_part *node)
 		return (FALSE);
 	if ((node->token == tk_arg
 			&& (prev_node != NULL
-				&& ft_is_redirection(prev_node->token) == FALSE))
+				&& (ft_is_redirection(prev_node->token) == FALSE
+					|| prev_node->token == tk_mul)))
 		|| node->token == tk_mul)
 		return (TRUE);
 	return (FALSE);

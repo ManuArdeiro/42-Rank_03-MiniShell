@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 15:50:08 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/15 18:56:18 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/15 20:33:57 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,15 @@ static void	ft_check_forseries(
 	if ((*node) == NULL)
 		return ;
 	if ((*node)->next != NULL
-		&& ((*node)->token == tk_arg
-			&& ft_is_tokenpair((*node)->next->token) == TRUE))
-	{
-		(*string) = ft_extract_commandseries(global->line, (*node), global);
-		(*node) = ft_get_last_seriestoken((*node));
-	}
+		&& (((*node)->token == tk_arg
+				&& ft_is_tokenpair((*node)->next->token) == TRUE)
+			|| (ft_is_tokenpair((*node)->token) == TRUE
+				&& (*node)->next->token == tk_arg)))
+		(*string) = ft_extract_commandseries(
+				global->line, (*node), node, global);
 	else if (prev_node != NULL && ft_is_tokenpair(prev_node->token) == TRUE)
-	{
-		(*string) = ft_extract_commandseries(global->line, prev_node, global);
-		(*node) = ft_get_tokennode(
-				prev_node->next,
-				ft_get_tokenpair(prev_node->token), FALSE, FIRST);
-	}
+		(*string) = ft_extract_commandseries(
+				global->line, prev_node, node, global);
 }
 
 static void	ft_add_string_tolist(
@@ -51,7 +47,9 @@ static t_bool	ft_is_argument(t_part *prev_node, t_part *node)
 {
 	if (node == NULL)
 		return (FALSE);
-	if ((node->token == tk_arg
+	if ((ft_is_tokenpair(node->token) == TRUE
+			&& (node->next != NULL && node->next->token == tk_arg))
+		|| (node->token == tk_arg
 			&& (prev_node != NULL
 				&& (ft_is_redirection(prev_node->token) == FALSE
 					|| prev_node->token == tk_mul)))

@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 20:07:17 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/11 18:48:24 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/15 20:33:34 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,10 @@ char		*ft_extract_tokenstring(const char *commandline, t_part *node);
 t_list		*ft_extract_arglist(t_part *tokenlist, t_global *global);
 void		ft_free_commandlist(t_command **command);
 char		*ft_extract_commandseries(
-				const char *commandline, t_part *tokenlist, t_global *global);
+				const char *commandline,
+				t_part *tokenlist, t_part **nextstart, t_global *global);
 t_bool		ft_is_commandseries(t_part *tokenlist);
-t_part		*ft_get_last_seriestoken(t_part *tokenlist);
+t_part		*ft_get_last_seriestoken(t_part *tokenlist, t_part *delimiter);
 
 //File
 t_list		*ft_extract_filelist(
@@ -79,7 +80,6 @@ t_bool		ft_is_semicolon(t_token token);
 //Expansions
 t_list		*ft_expand_startoken(const char *fullpath);
 char		*ft_expand_dollartoken(const char *argument, t_global *global);
-char		**ft_split_dollartoken(const char *commandline, int dollarcount);
 
 //CONVERT FUNCTIONS
 char		**ft_lstconvert_strarr(t_list *list);

@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 18:05:17 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/14 19:23:46 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/15 18:48:08 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,18 @@ static void	ft_filter_path(
 		&& *fileprefix != ' ')
 	{
 		if (ft_startswith(dirent->d_name, fileprefix) == TRUE)
-			ft_lstinsert(fileslist,
-				ft_strjoin(path, (char *)dirent->d_name), BACK);
+		{
+			if (ft_strequal(path, ".") == TRUE)
+				ft_lstinsert(
+					fileslist, ft_strdup((char *)dirent->d_name), BACK);
+			else
+				ft_lstinsert(fileslist,
+					ft_strjoin(path, (char *)dirent->d_name), BACK);
+		}
 	}
 	else if (*(dirent->d_name) != '.')
 	{
-		if (ft_strequal(path, ".") == TRUE && ft_strlen(path) == 1)
+		if (ft_strequal(path, ".") == TRUE)
 			ft_lstinsert(
 				fileslist, ft_strdup((char *)dirent->d_name), BACK);
 		else

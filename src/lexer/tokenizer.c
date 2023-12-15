@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Ardeiro <Ardeiro@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 17:51:52 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/12/05 00:28:14 by Ardeiro          ###   ########.fr       */
+/*   Updated: 2023/12/12 20:04:13 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ t_part	*ft_tokenizer(t_global *global, int *tk_count)
 {
 	t_part	*tokens;
 
-	ft_avoid_quots(global);
+	//ft_avoid_quots(global);
 	tokens = ft_create_tkn_list();
 	if (!tokens)
 		return (tokens);

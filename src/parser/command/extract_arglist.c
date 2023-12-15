@@ -6,11 +6,32 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 15:50:08 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/11 19:08:05 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/15 18:56:18 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	ft_check_forseries(
+		t_part **node, t_part *prev_node, char **string, t_global *global)
+{
+	if ((*node) == NULL)
+		return ;
+	if ((*node)->next != NULL
+		&& ((*node)->token == tk_arg
+			&& ft_is_tokenpair((*node)->next->token) == TRUE))
+	{
+		(*string) = ft_extract_commandseries(global->line, (*node), global);
+		(*node) = ft_get_last_seriestoken((*node));
+	}
+	else if (prev_node != NULL && ft_is_tokenpair(prev_node->token) == TRUE)
+	{
+		(*string) = ft_extract_commandseries(global->line, prev_node, global);
+		(*node) = ft_get_tokennode(
+				prev_node->next,
+				ft_get_tokenpair(prev_node->token), FALSE, FIRST);
+	}
+}
 
 static void	ft_add_string_tolist(
 		t_list **stringlist, const char *string, t_global *global)
@@ -32,7 +53,8 @@ static t_bool	ft_is_argument(t_part *prev_node, t_part *node)
 		return (FALSE);
 	if ((node->token == tk_arg
 			&& (prev_node != NULL
-				&& ft_is_redirection(prev_node->token) == FALSE))
+				&& (ft_is_redirection(prev_node->token) == FALSE
+					|| prev_node->token == tk_mul)))
 		|| node->token == tk_mul)
 		return (TRUE);
 	return (FALSE);
@@ -45,23 +67,8 @@ static void	ft_get_arg(
 	char	*string;
 
 	string = NULL;
-	if ((*node) == NULL)
-		return ;
-	if (prev_node != NULL && ft_is_tokenpair(prev_node->token) == TRUE)
-	{
-		string = ft_extract_commandseries(global->line, prev_node, global);
-		(*node) = ft_get_tokennode(
-				prev_node->next,
-				ft_get_tokenpair(prev_node->token), FALSE, FIRST);
-	}
-	else if ((*node)->next != NULL
-		&& ((*node)->token == tk_arg
-			&& ft_is_tokenpair((*node)->next->token) == TRUE))
-	{
-		string = ft_extract_commandseries(global->line, (*node), global);
-		(*node) = ft_get_last_seriestoken((*node));
-	}
-	else
+	ft_check_forseries(node, prev_node, &string, global);
+	if (string == NULL)
 	{
 		global->expand_dollartoken = TRUE;
 		string = ft_extract_tokenstring(global->line, (*node));

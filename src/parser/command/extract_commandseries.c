@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 20:29:13 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/12 19:13:06 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/15 19:09:41 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static t_cleancase	ft_get_cleancase(t_token token)
 		return (CLEAN_SINGLE_QUOTES);
 	else if (token == tk_dblquot)
 		return (CLEAN_DOUBLE_QUOTES);
-	return (CLEAN_ALL);
+	return (CLEAN_QUOTES);
 }
 
 static char	*ft_get_substr(
@@ -51,13 +51,16 @@ static char	*ft_get_series_substring(const char *commandline, t_part **node)
 	commandseries = NULL;
 	secondnode = NULL;
 	if (ft_is_tokenpair((*node)->token) == TRUE)
-	{
 		secondnode = ft_get_tokennode(
 				(*node)->next, ft_get_tokenpair((*node)->token), FALSE, FIRST);
-		if (secondnode != NULL
-			&& secondnode->next != NULL && secondnode->next->token != tk_space)
-			secondnode = ft_get_last_seriestoken(secondnode);
-	}
+	else if (((*node)->next != NULL
+			&& ft_is_tokenpair((*node)->next->token) == TRUE))
+		secondnode = ft_get_tokennode(
+				(*node)->next->next,
+				ft_get_tokenpair((*node)->next->token), FALSE, FIRST);
+	if (secondnode != NULL
+		&& secondnode->next != NULL && secondnode->next->token != tk_space)
+		secondnode = ft_get_last_seriestoken(secondnode);
 	else
 		secondnode = ft_get_last_seriestoken((*node));
 	cleancase = ft_get_cleancase((*node)->token);
@@ -92,3 +95,4 @@ char	*ft_extract_commandseries(
 	}
 	return (commandseries);
 }
+

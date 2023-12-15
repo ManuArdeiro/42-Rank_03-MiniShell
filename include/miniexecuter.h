@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 18:11:58 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/11/21 19:29:18 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/14 19:59:04 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int		ft_execute_pipeline(t_minitree *root, t_global *global);
 
 
 char	*ft_add_pathprefix(char *commandname, char *pathvariables);
+t_list	*ft_get_lstnode(t_list *lst, const char *string_tofind);
 
 //Builtins
 t_bool	ft_isbuiltin(char *commandname);

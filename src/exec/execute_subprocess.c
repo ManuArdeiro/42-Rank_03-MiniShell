@@ -6,11 +6,26 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:50:35 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/05 20:04:44 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/14 20:39:14 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	ft_checkfor_stars(t_command *command)
+{
+	t_list	*starnode;
+
+	if (command == NULL)
+		return ;
+	starnode = ft_get_lstnode(command->args, "*");
+	if (starnode != NULL)
+	{
+		ft_print_commanderror((char *)starnode->content, TRUE);
+		ft_free_commandlist(&command);
+		exit(127);
+	}
+}
 
 static void	ft_execute_givencommand(
 		t_command *command, t_global *global, char **args)
@@ -27,7 +42,7 @@ static void	ft_execute_givencommand(
 	{
 		ft_clear_strarray(envp);
 		ft_clear_strarray(args);
-		ft_print_commanderror(command->name);
+		ft_print_commanderror(command->name, FALSE);
 		ft_free_commandlist(&command);
 		exit(127);
 	}
@@ -51,6 +66,7 @@ void	ft_execute_subprocess(
 		if (shelvl != NULL)
 			ft_lstinsert(&command->args, shelvl, BACK);
 	}
+	ft_checkfor_stars(command);
 	args = ft_lstconvert_strarr(command->args);
 	ft_execute_givencommand(command, global, args);
 }

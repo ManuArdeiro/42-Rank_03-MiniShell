@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   evaluate_subprocess.c                              :+:      :+:    :+:   */
+/*   get_lstnode.c	                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/25 17:51:19 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/15 19:00:36 by yzaytoun         ###   ########.fr       */
+/*   Created: 2023/12/14 19:54:28 by yzaytoun          #+#    #+#             */
+/*   Updated: 2023/12/14 19:54:39 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_evaluate_subprocess(int status)
+t_list	*ft_get_lstnode(t_list *lst, const char *string_tofind)
 {
-	int	exitstatus;
+	t_list	*node;
 
-	exitstatus = 0;
-	if (WIFEXITED(status))
+	if (lst == NULL || string_tofind == NULL)
+		return (NULL);
+	node = lst;
+	while (node != NULL)
 	{
-		exitstatus = WEXITSTATUS(status);
-		if (exitstatus != EXIT_SUCCESS)
-		{
-			//printf("Process Exited with status -> %d \n", exitstatus);
-			return (exitstatus);
+		if (ft_strcontains((char *)node->content, string_tofind) == TRUE)
+			return (node);
+		node = node->next;
 	}
-	return (EXIT_SUCCESS);
+	return (NULL);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
+/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:47:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/12/08 14:44:47 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/12/14 19:27:41 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int			ft_clearscreen(t_list *envlist);
 char		*ft_get_localpath(void);
 char		*ft_get_rootpath(const char *path);
 void		ft_free_string(void *content);
-void		ft_print_commanderror(const char *commandname);
+void		ft_print_commanderror(const char *commandname, t_bool has_star);
 char		*ft_get_completeline(const char *commandline);
 
 //History

@@ -1,28 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_startswith.c                                    :+:      :+:    :+:   */
+/*   ft_strcontains.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/04 13:47:45 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/15 18:43:00 by yzaytoun         ###   ########.fr       */
+/*   Created: 2023/12/14 20:23:41 by yzaytoun          #+#    #+#             */
+/*   Updated: 2023/12/14 20:37:05 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_startswith(const char *string, const char *prefix)
+int	ft_strcontains(const char *fullstring, const char *string_tofind)
 {
-	int	prefixlen;
+	int	i;
 	int	result;
 
+	i = 0;
 	result = -1;
-	if (string == NULL || prefix == NULL)
+	if (fullstring == NULL || string_tofind == NULL)
 		return (0);
-	prefixlen = ft_strlen(prefix);
-	result = ft_strncmp(prefix, string, prefixlen);
-	if (result == 0)
-		return (1);
+	while (fullstring[i] != '\0')
+	{
+		if (fullstring[i] == string_tofind[0])
+		{
+			result
+				= ft_strncmp(
+					fullstring + i,
+					string_tofind,
+					ft_strlen(string_tofind));
+			if (result == 0)
+				return (1);
+		}
+		++i;
+	}
 	return (0);
 }

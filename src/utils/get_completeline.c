@@ -6,27 +6,20 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 16:08:48 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/15 21:06:35 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/16 10:53:24 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	*ft_getline_aux(const char *buffer, const char *prompt)
+static t_bool	ft_loop_end(const char *line, const char *prompt)
 {
-	char	*result;
-
-	result = NULL;
-	if (buffer == NULL)
-		return (NULL);
-	if (ft_endswith(buffer, "\\\n") == FALSE)
-	{
-		if (ft_strequal(prompt, "pipe $> ") == TRUE)
-			result = ft_strclean_withspaces(buffer, CLEAN_ALL_LEAVE_PIPE);
-		else
-			result = ft_strclean_withspaces(buffer, CLEAN_ALL);
-	}
-	return (result);
+	if ((ft_strequal(prompt, PIPELINE) == TRUE
+			&& ft_strlen(line) > 0 && line[0] != '\n')
+		|| (ft_strequal(prompt, BACKSLASH) == TRUE
+			&& line != NULL))
+		return (TRUE);
+	return (FALSE);
 }
 
 static char	*ft_completeline(const char *commandline, const char *prompt)
@@ -47,11 +40,11 @@ static char	*ft_completeline(const char *commandline, const char *prompt)
 		line = get_next_line(STDIN_FILENO);
 		if (line != NULL)
 			buffer = ft_strjoin_get(buffer, line);
-		free(line);
-		result = ft_getline_aux(buffer, prompt);
-		if (result != NULL)
+		if (ft_loop_end(line, prompt) == TRUE)
 			break ;
+		free(line);
 	}
+	result = ft_strclean_withspaces(buffer, CLEAN_ALL_LEAVE_PIPE);
 	free(buffer);
 	return (result);
 }
@@ -90,6 +83,8 @@ char	*ft_get_completeline(const char *commandline)
 	if (commandline == NULL)
 		return (NULL);
 	completeline = ft_findsplitter(commandline);
+	if (completeline && ft_endswith(completeline, "|") == TRUE)
+		completeline = ft_get_completeline(completeline);
 	if (completeline)
 		free((char *)commandline);
 	else

@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 19:22:27 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/11 20:36:30 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/16 10:39:41 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,12 @@ static t_bool	ft_validate_summary(t_list *summary)
 			if (ft_is_validtokenpair(summary, nodesummary) == FALSE)
 				return (FALSE);
 		}
+		else if (nodesummary != NULL
+			&& ft_is_logicalseparator(nodesummary->token) == TRUE)
+		{
+			if (nodesummary->count >= ft_get_tokencount(summary, tk_cmd))
+				return (FALSE);
+		}
 		node = node->next;
 	}
 	return (TRUE);
@@ -101,7 +107,8 @@ t_bool	ft_isvalid_commandlist(t_part *tokenlist)
 	if (ft_validate_tokenlist(tokenlist) == TRUE
 		&& ft_validate_summary(summary) == TRUE)
 		result = TRUE;
-	if (ft_valid_commandseries(tokenlist) == TRUE)
+	if (ft_tokenlist_contains(tokenlist, ft_is_tokenpair) == TRUE
+		&& ft_valid_commandseries(tokenlist) == TRUE)
 		result = TRUE;
 	ft_lstclear(&summary, ft_clearsummary);
 	return (result);

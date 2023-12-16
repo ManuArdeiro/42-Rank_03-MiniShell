@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 20:07:17 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/15 20:33:34 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/16 11:16:52 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ char		*ft_extract_commandseries(
 				const char *commandline,
 				t_part *tokenlist, t_part **nextstart, t_global *global);
 t_bool		ft_is_commandseries(t_part *tokenlist);
-t_part		*ft_get_last_seriestoken(t_part *tokenlist, t_part *delimiter);
+t_part		*ft_get_last_seriestoken(t_part *tokenlist, t_token token);
 
 //File
 t_list		*ft_extract_filelist(

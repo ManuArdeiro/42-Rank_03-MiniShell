@@ -6,13 +6,13 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 20:29:13 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/15 20:48:03 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/16 11:22:56 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static t_bool	ft_check_combination(t_part *node)
+/*static t_bool	ft_check_combination(t_part *node)
 {
 	if (node == NULL)
 		return (FALSE);
@@ -21,7 +21,7 @@ static t_bool	ft_check_combination(t_part *node)
 		&& node->next->next->token != tk_space)
 		return (TRUE);
 	return (FALSE);
-}
+}*/
 
 static t_cleancase	ft_get_cleancase(t_token token)
 {
@@ -61,20 +61,7 @@ static char	*ft_get_series_substring(const char *commandline, t_part **node)
 
 	commandseries = NULL;
 	secondnode = NULL;
-	if (ft_is_tokenpair((*node)->token) == TRUE)
-		secondnode = ft_get_tokennode(
-				(*node)->next, ft_get_tokenpair((*node)->token), FALSE, FIRST);
-	else if (ft_check_combination(*node) == TRUE)
-		secondnode = ft_get_tokennode(
-				(*node)->next->next,
-				ft_get_tokenpair((*node)->next->token), FALSE, FIRST);
-	if (secondnode != NULL
-		&& secondnode->next != NULL && secondnode->next->token != tk_space)
-		secondnode
-			= ft_get_last_seriestoken(
-				secondnode,
-				ft_get_tokennode(secondnode,
-					ft_get_tokenpair(secondnode->token), TRUE, FIRST));
+	secondnode = ft_get_last_seriestoken((*node)->next, (*node)->token);
 	cleancase = ft_get_cleancase((*node)->token);
 	commandseries = ft_get_substr(commandline, secondnode, node, cleancase);
 	(*node) = secondnode;

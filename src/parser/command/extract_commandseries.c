@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 20:29:13 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/16 11:22:56 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/16 19:53:55 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static char	*ft_get_series_substring(const char *commandline, t_part **node)
 
 	commandseries = NULL;
 	secondnode = NULL;
-	secondnode = ft_get_last_seriestoken((*node)->next, (*node)->token);
+	secondnode = ft_get_last_seriestoken((*node)->next);
 	cleancase = ft_get_cleancase((*node)->token);
 	commandseries = ft_get_substr(commandline, secondnode, node, cleancase);
 	(*node) = secondnode;

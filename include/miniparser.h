@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 20:07:17 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/16 15:37:59 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/16 19:53:37 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ t_bool		ft_tokenlist_contains(
 				t_part *tokenlist, t_bool (*function)(t_token token));
 
 //Command list
+t_bool		ft_is_command(t_token token);
 t_part		*ft_get_commandlist(t_part *tokenlist, t_part *delimiter);
 t_minitree	*ft_get_minicommand(t_part *tokenlist, t_global *global);
 void		ft_printcommand(t_command *command);
@@ -56,7 +57,7 @@ char		*ft_extract_commandseries(
 				const char *commandline,
 				t_part *tokenlist, t_part **nextstart, t_global *global);
 t_bool		ft_is_commandseries(t_part *tokenlist);
-t_part		*ft_get_last_seriestoken(t_part *tokenlist, t_token token);
+t_part		*ft_get_last_seriestoken(t_part *tokenlist);
 
 //File
 t_list		*ft_extract_filelist(

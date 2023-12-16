@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:10:53 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/16 13:19:16 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/16 20:13:28 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,9 @@ enum e_bool
 	FORK,
 	BUILTIN,
 	FIRST,
-	LAST
+	LAST,
+	PERMISSION_DENIED,
+	STAR
 };
 
 struct s_dict

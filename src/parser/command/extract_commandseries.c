@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 20:29:13 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/16 19:53:55 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/16 21:18:58 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static char	*ft_get_series_substring(const char *commandline, t_part **node)
 
 	commandseries = NULL;
 	secondnode = NULL;
-	secondnode = ft_get_last_seriestoken((*node)->next);
+	secondnode = ft_get_last_seriestoken((*node));
 	cleancase = ft_get_cleancase((*node)->token);
 	commandseries = ft_get_substr(commandline, secondnode, node, cleancase);
 	(*node) = secondnode;
@@ -81,7 +81,8 @@ char	*ft_extract_commandseries(
 	node = tokenlist;
 	while (node != NULL && commandseries == NULL)
 	{
-		if ((ft_is_tokenpair(node->token) == TRUE && node->next != NULL)
+		if ((ft_is_tokenpair(node->token) == TRUE
+				&& node->used == FALSE && node->next != NULL)
 			|| ((node->token == tk_cmd || node->token == tk_arg)
 				&& node->next != NULL
 				&&ft_is_tokenpair(node->next->token) == TRUE))

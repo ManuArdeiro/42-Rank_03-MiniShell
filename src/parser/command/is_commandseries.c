@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 17:08:56 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/16 13:29:41 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/16 17:45:07 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static t_bool	ft_is_validseries(t_part *node)
 
 	endnode = NULL;
 	result = FALSE;
-	if (ft_is_tokenpair(node->token) == TRUE)
+	if (ft_is_tokenpair(node->token) == TRUE && node->next != NULL)
 	{
 		endnode
 			= ft_get_tokennode(

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_subprocess.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:50:35 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/15 20:45:16 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/16 17:34:52 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ static void	ft_execute_givencommand(
 	pathvariables = ft_getenv("PATH", global->envlist);
 	if (ft_strlen(command->name) > 0)
 		command->name = ft_add_pathprefix(command->name, pathvariables);
+	if (access(command->name, X_OK) != 0)
+		printf("permission denied\n");
 	free(pathvariables);
 	if (execve(command->name, args, envp) < 0)
 	{

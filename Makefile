@@ -6,7 +6,7 @@
 #    By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/01 18:51:45 by jolopez-          #+#    #+#              #
-#    Updated: 2023/12/14 19:55:14 by yzaytoun         ###   ########.fr        #
+#    Updated: 2023/12/16 15:37:27 by yzaytoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,7 +54,7 @@ FILE			= filestreams.c create_file.c get_filemode.c is_redirection.c \
 PARSER			=  separators.c get_tokennode.c tokensplit.c get_nodetype.c \
 					parse_commandline.c $(COMMAND) $(FILE) isvalid_commandlist.c \
 					tokenpairs.c get_tokenpair.c tokenlist_contains.c split_subshell.c\
-					split_tokenlist.c valid_subshellnode.c skip_quotes.c
+					split_tokenlist.c valid_subshellnode.c skip_quotes.c validate_tokenlist.c
 					
 SUMMARIZER		= minisummary.c printtokens.c get_unique_tokens.c \
 					get_token_summary.c get_token_count.c clearsummary.c

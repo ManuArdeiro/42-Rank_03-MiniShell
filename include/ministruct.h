@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:10:53 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/14 19:20:54 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/16 13:19:16 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,8 @@ enum e_nodetype
 	n_pipeline,
 	n_command,
 	n_commandlist,
-	n_subshell
+	n_subshell,
+	n_empty
 };
 
 struct s_mininode

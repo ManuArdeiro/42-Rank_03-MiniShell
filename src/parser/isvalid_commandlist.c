@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 19:22:27 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/16 10:39:41 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/16 15:36:21 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,6 @@ static t_bool	ft_valid_commandseries(t_part *tokenlist)
 		}
 		node = node->next;
 	}
-	return (TRUE);
-}
-
-static t_bool	ft_validate_tokenlist(t_part *tokenlist)
-{
-	if (ft_is_tokenseparator(tokenlist->token) == TRUE
-		&& tokenlist->index == 1)
-		return (FALSE);
 	return (TRUE);
 }
 
@@ -78,13 +70,13 @@ static t_bool	ft_validate_summary(t_list *summary)
 	while (node != NULL)
 	{
 		nodesummary = (t_summarizer *)node->content;
-		if (nodesummary != NULL && ft_is_tokenpair(nodesummary->token) == TRUE)
+		if (ft_is_tokenpair(nodesummary->token) == TRUE
+			|| ft_is_subshellseparator(nodesummary->token) == TRUE)
 		{
 			if (ft_is_validtokenpair(summary, nodesummary) == FALSE)
 				return (FALSE);
 		}
-		else if (nodesummary != NULL
-			&& ft_is_logicalseparator(nodesummary->token) == TRUE)
+		else if (ft_is_logicalseparator(nodesummary->token) == TRUE)
 		{
 			if (nodesummary->count >= ft_get_tokencount(summary, tk_cmd))
 				return (FALSE);

@@ -1,29 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_file.c                                      :+:      :+:    :+:   */
+/*   clear_emptyvalues.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/23 19:44:00 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/16 20:54:05 by yzaytoun         ###   ########.fr       */
+/*   Created: 2023/12/16 21:38:32 by yzaytoun          #+#    #+#             */
+/*   Updated: 2023/12/16 21:45:15 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_file	*ft_create_file(const char *name, int std_stream, int mode)
+t_list	*ft_clear_emptyvalues(t_list *list)
 {
-	t_file	*newfile;
+	t_list	*cleanlist;
+	t_list	*node;
 
-	newfile = NULL;
-	if (name == NULL)
+	if (list == NULL)
 		return (NULL);
-	newfile = malloc(sizeof(t_file));
-	if (!newfile)
-		return (NULL);
-	newfile->name = ft_strclean_withspaces(name, CLEAN_QUOTES);
-	newfile->fd = std_stream;
-	newfile->mode = mode;
-	return (newfile);
+	cleanlist = NULL;
+	node = list;
+	while (node != NULL)
+	{
+		if (ft_strlen((char *)node->content) > 0)
+			ft_lstinsert(&cleanlist, ft_strdup((char *)node->content), BACK);
+		node = node->next;
+	}
+	ft_lstclear(&list, free);
+	list = NULL;
+	return (cleanlist);
 }

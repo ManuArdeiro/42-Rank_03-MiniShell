@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 16:44:36 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/16 10:06:06 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/16 21:46:28 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,28 @@ static void	ft_check_commandname(t_command *command)
 {
 	if (command == NULL)
 		return ;
-	if (command->name != NULL
-		&& ft_strequal(command->name, (char *)command->args->content) == FALSE)
+	if (command->name != NULL && command->args != NULL)
 	{
-		free(command->name);
-		command->name = ft_strdup((char *)command->args->content);
+		if (ft_strequal(command->name, (char *)command->args->content) == FALSE)
+		{
+			free(command->name);
+			command->name = ft_strdup((char *)command->args->content);
+		}
 	}
 	else if (command->name == NULL && command->args->content != NULL)
 		command->name = ft_strdup((char *)command->args->content);
 }
+
+static void	ft_check_variables(t_command *command, t_global *global)
+{
+	if (g_signals.sig_exit_status == 1)
+		global->laststatus = g_signals.exit_status;
+	g_signals.sig_exit_status = 0;
+	if (global->devmode == TRUE)
+		ft_printcommand(command);
+	ft_check_commandname(command);
+}
+
 
 int	ft_executecommand(t_command *command, t_global *global)
 {
@@ -33,14 +46,10 @@ int	ft_executecommand(t_command *command, t_global *global)
 	int		laststatus;
 
 	pidarray = NULL;
-	if (command == NULL || global == NULL || command->name == NULL)
+	if (command == NULL || global == NULL || command->name == NULL
+		|| ft_strlen((char *)command->args->content) == 0)
 		return (EXITED);
-	if (g_signals.sig_exit_status == 1)
-		global->laststatus = g_signals.exit_status;
-	g_signals.sig_exit_status = 0;
-	if (global->devmode == TRUE)
-		ft_printcommand(command);
-	ft_check_commandname(command);
+	ft_check_variables(command, global);
 	pidcount = ft_create_subprocess(command, &pidarray, global);
 	g_signals.pidarray = pidarray;
 	g_signals.pidcount = pidcount;

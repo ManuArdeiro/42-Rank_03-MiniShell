@@ -6,11 +6,25 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:50:35 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/16 17:53:07 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/12/17 13:07:05 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	ft_terminateprocess(
+	t_command *command, char **args, char **envp, t_bool option
+)
+{
+	ft_clear_strarray(envp);
+	ft_clear_strarray(args);
+	ft_print_commanderror(command->name, option);
+	ft_free_commandlist(&command);
+	if (option == PERMISSION_DENIED)
+		exit(126);
+	else
+		exit(127);
+}
 
 static void	ft_checkfor_stars(t_command *command)
 {
@@ -21,7 +35,7 @@ static void	ft_checkfor_stars(t_command *command)
 	starnode = ft_get_lstnode(command->args, "*");
 	if (starnode != NULL)
 	{
-		ft_print_commanderror((char *)starnode->content, TRUE);
+		ft_print_commanderror((char *)starnode->content, STAR);
 		ft_free_commandlist(&command);
 		exit(127);
 	}
@@ -41,14 +55,11 @@ static void	ft_execute_givencommand(
 		&& access(command->name, X_OK) != 0)
 		printf("permission denied\n");
 	free(pathvariables);
-	if (execve(command->name, args, envp) < 0)
-	{
-		ft_clear_strarray(envp);
-		ft_clear_strarray(args);
-		ft_print_commanderror(command->name, FALSE);
-		ft_free_commandlist(&command);
-		exit(127);
-	}
+	if (access(command->name, F_OK) == 0
+		&& access(command->name, X_OK) != 0)
+		ft_terminateprocess(command, args, envp, PERMISSION_DENIED);
+	else if (execve(command->name, args, envp) < 0)
+		ft_terminateprocess(command, args, envp, FALSE);
 }
 
 void	ft_execute_subprocess(
@@ -69,7 +80,8 @@ void	ft_execute_subprocess(
 		if (shelvl != NULL)
 			ft_lstinsert(&command->args, shelvl, BACK);
 	}
-	ft_checkfor_stars(command);
+	if (global->expand_startoken == TRUE)
+		ft_checkfor_stars(command);
 	args = ft_lstconvert_strarr(command->args);
 	ft_execute_givencommand(command, global, args);
 }

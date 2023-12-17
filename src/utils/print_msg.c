@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 18:53:59 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/12/14 19:27:05 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/16 20:21:44 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,23 @@ void	ft_printerror(const char *function, const char *string)
 	ft_putstr_fd("\n", STDERR_FILENO);
 }
 
-void	ft_print_commanderror(const char *commandname, t_bool has_star)
+void	ft_print_commanderror(const char *commandname, t_bool option)
 {
-	if (has_star == TRUE)
+	if (option == STAR)
+	{
 		ft_putstr_fd("MiniShell: no matches found: ", STDERR_FILENO);
+		ft_putstr_fd(commandname, STDERR_FILENO);
+	}
+	else if (option == PERMISSION_DENIED)
+	{
+		ft_putstr_fd("MiniShell: ", STDERR_FILENO);
+		ft_putstr_fd(commandname, STDERR_FILENO);
+		ft_putstr_fd(": Permission denied", STDERR_FILENO);
+	}
 	else
+	{
 		ft_putstr_fd("MiniShell: command not found: ", STDERR_FILENO);
-	ft_putstr_fd(commandname, STDERR_FILENO);
+		ft_putstr_fd(commandname, STDERR_FILENO);
+	}
 	ft_putstr_fd("\n", STDERR_FILENO);
 }

@@ -6,7 +6,7 @@
 #    By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/01 18:51:45 by jolopez-          #+#    #+#              #
-#    Updated: 2023/12/16 15:37:27 by yzaytoun         ###   ########.fr        #
+#    Updated: 2023/12/16 21:39:34 by yzaytoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,8 @@ LEXER			= tokenizer.c tokens.c token_tools_1.c token_tools_2.c \
 COMMAND			= extract_tokenstring.c get_commandlist.c lstconvert.c \
 					printcommand.c extract_filelist.c get_minicommand.c \
 					extract_arglist.c is_compoundcommand.c free_commandlist.c\
-					extract_commandseries.c is_commandseries.c get_last_seriestoken.c
+					extract_commandseries.c is_commandseries.c get_last_seriestoken.c\
+					is_command.c clear_emptyvalues.c
 				
 FILE			= filestreams.c create_file.c get_filemode.c is_redirection.c \
 					freefile.c append_filecontent.c delete_filenode.c closepipe.c\

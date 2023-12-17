@@ -6,25 +6,46 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 20:29:13 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/16 11:20:17 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/16 20:46:44 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_part	*ft_get_last_seriestoken(t_part *tokenlist, t_token token)
+static void	ft_check_endnode(t_part *node, t_part **endnode)
+{
+	t_part	*pointer;
+
+	pointer = NULL;
+	pointer = ft_get_tokennode(node->next, node->token, TRUE, FIRST);
+	if (pointer != NULL)
+	{
+		if (pointer->next != NULL && pointer->next->token == tk_space)
+			(*endnode) = pointer;
+		else if (pointer->next != NULL && pointer->next->next != NULL
+			&& pointer->next->next->token == tk_space)
+			(*endnode) = pointer->next;
+		else if (pointer->next == NULL)
+			(*endnode) = pointer;
+	}
+}
+
+t_part	*ft_get_last_seriestoken(t_part *tokenlist)
 {
 	t_part	*node;
+	t_part	*endnode;
 
 	if (tokenlist == NULL)
 		return (NULL);
 	node = tokenlist;
+	endnode = NULL;
 	while (node->next != NULL)
 	{
-		if (node->token == token
-			&& node->next != NULL && node->next->token == tk_space)
-			return (node);
+		if (ft_is_tokenpair(node->token) == TRUE)
+			ft_check_endnode(node, &endnode);
+		if (endnode != NULL)
+			break ;
 		node = node->next;
 	}
-	return (node);
+	return (endnode);
 }

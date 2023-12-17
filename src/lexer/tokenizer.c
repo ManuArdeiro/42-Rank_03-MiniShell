@@ -35,15 +35,16 @@ static void	ft_check_commandnode(
 	if (ft_is_tokenseparator(node->token) == TRUE)
 		*flag = 0;
 	else if (ft_is_redirection(node->token) == TRUE)
-		*flag = 1;
+		*flag = 2;
 	else if (prev_token == tk_arg && token_pin == tk_less)
 		node->token = tk_cmd;
-	else if (node->token == tk_less)
-		*flag = 1;
 	else if (node->token == tk_cmd && *flag == 0)
 		*flag = 1;
 	else if (node->token == tk_cmd && *flag == 1)
 		node->token = tk_arg;
+	else if (*flag == 2
+		&& (node->token == tk_cmd || node->token == tk_arg))
+		node->token = tk_file;
 }
 
 static void	ft_cmd_vs_arg(t_part *tokens)

@@ -56,6 +56,8 @@ void	ft_case_token_2(t_token token)
 		printf("%s\t", "tk_less");
 	else if (token == tk_dblless)
 		printf("%s\t", "tk_dblless");
+	else if (token == tk_file)
+		printf("%s\t", "tk_file");
 }
 
 void	ft_print_token(t_token token)

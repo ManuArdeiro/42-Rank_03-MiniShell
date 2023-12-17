@@ -90,8 +90,9 @@ enum e_token
 	tk_arg,
 	tk_equal,
 	tk_newline,
+	tk_file,
+	tk_space,
 	max_token,
-	tk_space
 };
 
 struct s_file	/*File desciptor and name*/

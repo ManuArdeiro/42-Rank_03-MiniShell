@@ -38,39 +38,37 @@ static int	ft_get_stdstream(t_bool std_stream)
 
 static void	ft_get_file(
 	t_list **filelist,
-	t_part *separatornode, int std_stream, t_global *global
+	t_part **node, int std_stream, t_global *global
 )
 {
+	t_part	*filenode;
 	char	*string;
 	t_file	*file;
 
 	string = NULL;
 	file = NULL;
-	if (separatornode == NULL)
-		return ;
-	string = ft_extract_tokenstring(global->line, separatornode->next);
+	filenode = ft_get_tokennode((*node)->next, tk_file, TRUE, FIRST);
+	string = ft_extract_tokenstring(global->line, filenode);
 	if (string != NULL)
 	{
 		string = ft_expand_dollartoken(string, global);
 		file = ft_create_file(
 				string,
 				ft_get_stdstream(std_stream),
-				ft_get_filemode(separatornode->token));
+				ft_get_filemode((*node)->token));
 		ft_lstinsert(filelist, (t_file *)file, BACK);
 		free(string);
+		(*node) = filenode;
 	}
 }
 
-static t_list	*ft_get_filelist(
+static void	ft_get_filelist(
+		t_list **filelist,
 		t_part *tokenlist, t_bool std_stream, t_global *global)
 {
 	t_part	*node;
-	t_list	*filelist;
-	t_part	*separatornode;
 
-	filelist = NULL;
 	node = tokenlist;
-	separatornode = NULL;
 	while (node != NULL && ft_is_tokenseparator(node->token) == FALSE)
 	{
 		if (ft_is_tokenpair(node->token) == TRUE
@@ -78,14 +76,10 @@ static t_list	*ft_get_filelist(
 				|| ft_tokenlist_contains(node, ft_is_redirection) == TRUE))
 			ft_skip_quotes(&node->next);
 		if (ft_check_filetype(node->token, std_stream) == TRUE)
-		{
-			separatornode
-				= ft_get_tokennode(tokenlist, node->token, TRUE, FIRST);
-			ft_get_file(&filelist, separatornode, std_stream, global);
-		}
-		node = node->next;
+			ft_get_file(filelist, &node, std_stream, global);
+		if (node != NULL)
+			node = node->next;
 	}
-	return (filelist);
 }
 
 t_list	*ft_extract_filelist(
@@ -96,7 +90,7 @@ t_list	*ft_extract_filelist(
 	filelist = NULL;
 	if (global == NULL || tokenlist == NULL)
 		return (NULL);
-	filelist = ft_get_filelist(tokenlist, std_stream, global);
+	ft_get_filelist(&filelist, tokenlist, std_stream, global);
 	if (filelist == NULL)
 		filelist = ft_default_filelist(ft_get_stdstream(std_stream));
 	return (filelist);

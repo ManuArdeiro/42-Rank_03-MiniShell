@@ -13,7 +13,7 @@
 #include "minishell.h"
 
 static void	ft_check_forseries(
-		t_part **node, t_part *prev_node, char **string, t_global *global)
+		t_part **node, char **string, t_global *global)
 {
 	if ((*node) == NULL)
 		return ;
@@ -27,9 +27,6 @@ static void	ft_check_forseries(
 			= ft_extract_commandseries(
 				global->line, (*node), node, global);
 	}
-	else if (prev_node != NULL && ft_is_tokenpair(prev_node->token) == TRUE)
-		(*string) = ft_extract_commandseries(
-				global->line, prev_node, node, global);
 }
 
 static void	ft_add_string_tolist(
@@ -46,27 +43,24 @@ static void	ft_add_string_tolist(
 		ft_lstinsert(stringlist, (char *)string, BACK);
 }
 
-static t_bool	ft_is_argument(t_part *prev_node, t_part *node)
+static t_bool	ft_is_argument(t_part *node)
 {
 	if (node == NULL)
 		return (FALSE);
 	if ((ft_is_tokenpair(node->token) == TRUE)
-		|| (node->token == tk_arg
-			&& prev_node != NULL
-			&& ft_is_redirection(prev_node->token) == FALSE)
+		|| (node->token == tk_arg)
 		|| (node->token == tk_mul))
 		return (TRUE);
 	return (FALSE);
 }
 
 static void	ft_get_arg(
-	t_list **stringlist,
-	t_part **node, t_part *prev_node, t_global *global)
+	t_list **stringlist, t_part **node, t_global *global)
 {
 	char	*string;
 
 	string = NULL;
-	ft_check_forseries(node, prev_node, &string, global);
+	ft_check_forseries(node, &string, global);
 	if (string == NULL)
 	{
 		global->expand_dollartoken = TRUE;
@@ -79,25 +73,19 @@ static void	ft_get_arg(
 t_list	*ft_extract_arglist(t_part *tokenlist, t_global *global)
 {
 	t_part	*node;
-	t_part	*prev_node;
 	t_list	*stringlist;
 
 	stringlist = NULL;
 	if (global == NULL || global->line == NULL || !tokenlist)
 		return (NULL);
 	node = tokenlist;
-	prev_node = tokenlist;
 	while (node != NULL && ft_is_tokenseparator(node->token) == FALSE)
 	{
 		if (ft_is_tokenpair(node->token) == TRUE
 			&& ft_is_commandseries(tokenlist) == TRUE)
 			ft_skip_quotes(&node->next);
-		else if (ft_is_argument(prev_node, node) == TRUE)
-			ft_get_arg(&stringlist, &node, prev_node, global);
-		if (node != NULL && prev_node != NULL
-			&& node->index > prev_node->index
-			&& ft_is_tokenpair(node->token) == FALSE)
-			prev_node = node;
+		else if (ft_is_argument(node) == TRUE)
+			ft_get_arg(&stringlist, &node, global);
 		if (node != NULL)
 			node = node->next;
 	}

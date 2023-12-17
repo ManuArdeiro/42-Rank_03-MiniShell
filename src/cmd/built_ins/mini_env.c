@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 18:38:09 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/11/25 10:44:34 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/12/16 18:14:26 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 int	ft_mini_env(t_list *envList)
 {
 	t_list	*node;
-	printf("mini env\n");
 
 	if (!envList)
 		return (0);

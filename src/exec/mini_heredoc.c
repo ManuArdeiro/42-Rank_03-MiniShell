@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_heredoc.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
+/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 18:28:55 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/08 15:08:51 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/12/17 19:04:24 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,21 @@ static void	ft_get_inputline(char **line, int *herepipe)
 }
 
 static void	ft_evaluate_line(
-		const char *cleanline, const char *delimiter, int *herepipe
+		char *cleanline,
+		const char *delimiter, char *line, int *herepipe
 )
 {
 	if (ft_strequal(cleanline, delimiter) == TRUE)
 	{
+		free(line);
+		free(cleanline);
 		ft_closepipe(&herepipe[0], &herepipe[1]);
 		exit(EXIT_SUCCESS);
 	}
 	else if (g_signals.sig_exit_status == 1)
 	{
+		free(line);
+		free(cleanline);
 		ft_closepipe(&herepipe[0], &herepipe[1]);
 		exit(EXIT_FAILURE);
 	}
@@ -52,7 +57,7 @@ void	ft_writetofile(const char *delimiter, int *herepipe)
 		ft_putstr_fd("heredoc> ", STDOUT_FILENO);
 		ft_get_inputline(&line, herepipe);
 		cleanline = ft_strtrim(line, "\n");
-		ft_evaluate_line(cleanline, delimiter, herepipe);
+		ft_evaluate_line(cleanline, delimiter, line, herepipe);
 		ft_putstr_fd(line, herepipe[1]);
 		free(line);
 		free(cleanline);

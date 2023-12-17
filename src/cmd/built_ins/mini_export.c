@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 18:43:48 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/12/10 13:01:56 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/12/16 18:09:03 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,10 +105,7 @@ static int	ft_mini_export_aux(t_list *envList, char **args, char *argument,
 	int *i)
 {
 	if (!ft_strncmp(argument, "=", 2))
-	{
-		ft_putendl_fd("export: bad assigment.", STDERR_FILENO);
-		return (EXIT_FAILURE);
-	}
+		return (ft_print_not_valid(args[*i]));
 	else if (ft_strchr(argument, '=') != NULL && argument[0] != '=')
 	{
 		if (ft_name_equal(envList, args[*i]) == 1)

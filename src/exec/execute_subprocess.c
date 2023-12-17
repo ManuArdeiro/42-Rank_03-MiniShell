@@ -6,11 +6,39 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:50:35 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/14 20:39:14 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/17 16:28:20 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static int	ft_is_directory(const char *path)
+{
+	struct stat	statbuf;
+	int			status;
+
+	status = FALSE;
+	if (path == NULL)
+		return (0);
+	if (stat(path, &statbuf) != 0)
+		return (0);
+   status = S_ISDIR(statbuf.st_mode);
+   return (status);
+}
+
+static void	ft_terminateprocess(
+	t_command *command, char **args, char **envp, t_bool option
+)
+{
+	ft_clear_strarray(envp);
+	ft_clear_strarray(args);
+	ft_print_commanderror(command->name, option);
+	ft_free_commandlist(&command);
+	if (option == PERMISSION_DENIED || option == IS_DIRECTORY)
+		exit(126);
+	else
+		exit(127);
+}
 
 static void	ft_checkfor_stars(t_command *command)
 {
@@ -21,7 +49,7 @@ static void	ft_checkfor_stars(t_command *command)
 	starnode = ft_get_lstnode(command->args, "*");
 	if (starnode != NULL)
 	{
-		ft_print_commanderror((char *)starnode->content, TRUE);
+		ft_print_commanderror((char *)starnode->content, STAR);
 		ft_free_commandlist(&command);
 		exit(127);
 	}
@@ -37,15 +65,17 @@ static void	ft_execute_givencommand(
 	pathvariables = ft_getenv("PATH", global->envlist);
 	if (ft_strlen(command->name) > 0)
 		command->name = ft_add_pathprefix(command->name, pathvariables);
+	if (access(command->name, F_OK) == 0
+		&& access(command->name, X_OK) != 0)
+		printf("permission denied\n");
 	free(pathvariables);
-	if (execve(command->name, args, envp) < 0)
-	{
-		ft_clear_strarray(envp);
-		ft_clear_strarray(args);
-		ft_print_commanderror(command->name, FALSE);
-		ft_free_commandlist(&command);
-		exit(127);
-	}
+	if (access(command->name, F_OK) == 0
+		&& access(command->name, X_OK) != 0)
+		ft_terminateprocess(command, args, envp, PERMISSION_DENIED);
+	else if (ft_is_directory(command->name) != FALSE)
+		ft_terminateprocess(command, args, envp, IS_DIRECTORY);
+	else if (execve(command->name, args, envp) < 0)
+		ft_terminateprocess(command, args, envp, FALSE);
 }
 
 void	ft_execute_subprocess(
@@ -66,7 +96,8 @@ void	ft_execute_subprocess(
 		if (shelvl != NULL)
 			ft_lstinsert(&command->args, shelvl, BACK);
 	}
-	ft_checkfor_stars(command);
+	if (global->expand_startoken == TRUE)
+		ft_checkfor_stars(command);
 	args = ft_lstconvert_strarr(command->args);
 	ft_execute_givencommand(command, global, args);
 }

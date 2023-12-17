@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:10:53 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/15 18:59:02 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/17 15:30:00 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ enum e_cleancase
 	CLEAN_QUOTES,
 	CLEAN_SINGLE_QUOTES,
 	CLEAN_DOUBLE_QUOTES,
+	CLEAN_EMPTY_QUOTES
 };
 
 enum e_bool
@@ -55,7 +56,10 @@ enum e_bool
 	FORK,
 	BUILTIN,
 	FIRST,
-	LAST
+	LAST,
+	PERMISSION_DENIED,
+	STAR,
+	IS_DIRECTORY
 };
 
 struct s_dict
@@ -128,7 +132,8 @@ enum e_nodetype
 	n_pipeline,
 	n_command,
 	n_commandlist,
-	n_subshell
+	n_subshell,
+	n_empty
 };
 
 struct s_mininode

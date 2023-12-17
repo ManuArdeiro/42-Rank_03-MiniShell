@@ -1,33 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_commandlist.c                                  :+:      :+:    :+:   */
+/*   clear_emptyvalues.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/30 12:35:44 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/16 12:54:39 by yzaytoun         ###   ########.fr       */
+/*   Created: 2023/12/16 21:38:32 by yzaytoun          #+#    #+#             */
+/*   Updated: 2023/12/17 13:30:58 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_part	*ft_get_commandlist(t_part *tokenlist, t_part *delimiter)
+t_list	*ft_clear_emptyvalues(t_list *list)
 {
-	t_part		*node;
-	t_part		*commandlist;
-	t_part		*tokencopy;
+	t_list	*cleanlist;
+	t_list	*node;
 
-	commandlist = NULL;
-	if (tokenlist == NULL)
+	if (list == NULL)
 		return (NULL);
-	node = tokenlist;
-	while (node != NULL && (node != delimiter
-		|| (delimiter != NULL && node->index != delimiter->index)))
+	cleanlist = NULL;
+	node = list;
+	while (node != NULL)
 	{
-		tokencopy = ft_copytoken(node);
-		ft_tokenlist_add(&commandlist, tokencopy);
+		if (ft_strlen((char *)node->content) > 0)
+			ft_lstinsert(&cleanlist, ft_strdup((char *)node->content), BACK);
 		node = node->next;
 	}
-	return (commandlist);
+	ft_lstclear(&list, free);
+	list = NULL;
+	return (cleanlist);
 }

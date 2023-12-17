@@ -6,61 +6,46 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 17:08:56 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/06 13:33:04 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/17 14:06:41 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static t_bool	ft_verify_series(t_part *node, t_part *endnode)
+static t_bool	ft_check_series(t_part *tokenlist)
 {
-	if (node != NULL)
+	t_bool	result;
+	t_part	*commandnode;
+	t_part	*quotenode;
+
+	result = TRUE;
+	commandnode = ft_get_tokennode(tokenlist, tk_cmd, FALSE, FIRST);
+	quotenode = ft_get_tokennode(tokenlist, tk_dblquot, FALSE, FIRST);
+	if (quotenode == NULL)
+		quotenode
+			= ft_get_tokennode(tokenlist, tk_sglquot, FALSE, FIRST);
+	if (commandnode != NULL && quotenode != NULL)
 	{
-		while (node != endnode)
-		{
-			if (node->token == tk_cmd)
-				return (TRUE);
-			node = node->next;
-		}
+		if (commandnode->index < quotenode->index
+			&& commandnode->next != NULL
+			&& commandnode->next->token == tk_space)
+			result = FALSE;
 	}
-	return (FALSE);
+	return (result);
 }
 
 t_bool	ft_is_commandseries(t_part *tokenlist)
 {
 	t_bool	result;
-	t_part	*node;
-	t_part	*endnode;
 
-	result = FALSE;
+	result = TRUE;
 	if (tokenlist != NULL)
 	{
-		node = tokenlist;
-		while (node != NULL)
-		{
-			if (ft_is_tokenpair(node->token) == TRUE)
-			{
-				endnode
-					= ft_get_tokennode(
-						node->next,
-						ft_get_tokenpair(node->token), FALSE, FIRST);
-				if (endnode != NULL)
-					result = ft_verify_series(node, endnode);
-			}
-			else if ((node->token == tk_cmd && node->next != NULL
-					&& ft_is_tokenpair(node->next->token) == TRUE))
-			{
-				endnode
-					= ft_get_tokennode(
-						node->next->next,
-						ft_get_tokenpair(node->next->token), FALSE, FIRST);
-				if (endnode != NULL)
-					result = ft_verify_series(node, endnode);
-			}
-			if (result == TRUE)
-				break ;
-			node = node->next;
-		}
+		if (ft_tokenlist_contains(tokenlist, ft_is_tokenpair) == TRUE
+			&& ft_tokenlist_contains(tokenlist, ft_is_command) == TRUE)
+			result = ft_check_series(tokenlist);
+		else
+			result = FALSE;
 	}
 	return (result);
 }

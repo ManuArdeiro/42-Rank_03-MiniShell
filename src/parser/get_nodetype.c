@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 15:23:19 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/26 20:39:32 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/16 13:33:29 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,12 @@ static t_nodetype	ft_find_listtype(t_list *token_summary)
 			return (n_pipeline);
 		else if (ft_evaluate_token(node, ft_is_semicolon) == TRUE)
 			return (n_commandlist);
+		else if (((t_summarizer *)node->content)->token == tk_cmd
+			&& ((t_summarizer *)node->content)->count == 1)
+			return (n_commandlist);
 		node = node->next;
 	}
-	return (n_command);
+	return (n_empty);
 }
 
 t_nodetype	ft_get_nodetype(t_part *tokenlist)

@@ -6,13 +6,13 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 19:26:49 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/12 19:09:01 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/17 16:29:54 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_validate_chr(int chr, int cleanoption)
+static int	ft_validate_chr(int chr, int cleanoption, int nextchr)
 {
 	if (cleanoption == 0
 		&& (ft_isalpha(chr) != 0 || chr == ' ' || chr == '|'))
@@ -24,6 +24,9 @@ static int	ft_validate_chr(int chr, int cleanoption)
 	else if (cleanoption == 3 && chr != '\'')
 		return (1);
 	else if (cleanoption == 4 && chr != '\"')
+		return (1);
+	else if (cleanoption == 5 && chr != '\''
+		&& nextchr != '\0' && nextchr != '\'')
 		return (1);
 	return (0);
 }
@@ -38,7 +41,7 @@ static void	ft_get_cleanstring(
 	count = 0;
 	while (string[i] != '\0')
 	{
-		if (ft_validate_chr(string[i], cleanoption) == 1)
+		if (ft_validate_chr(string[i], cleanoption, string[i + 1]) == 1)
 		{
 			(*cleanstring)[count] = string[i];
 			++count;
@@ -57,7 +60,7 @@ static int	ft_countalpha_withspace(const char *string, int cleanoption)
 	count = 0;
 	while (string[i] != '\0')
 	{
-		if (ft_validate_chr(string[i], cleanoption) == 1)
+		if (ft_validate_chr(string[i], cleanoption, string[i + 1]) == 1)
 			++count;
 		++i;
 	}

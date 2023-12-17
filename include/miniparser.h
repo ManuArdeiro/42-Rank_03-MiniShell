@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 20:07:17 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/11 18:48:24 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/17 14:33:54 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,19 @@ t_part		*ft_get_tokennode(t_part *tokenlist, t_token token,
 t_nodetype	ft_get_nodetype(t_part *tokenlist);
 t_bool		ft_isvalid_commandlist(t_part *tokenlist);
 t_bool		ft_is_tokenpair(t_token token);
+t_bool		ft_validate_tokenlist(t_part *tokenlist);
 t_token		ft_get_tokenpair(t_token token);
-t_minitree	*ft_split_subshell(t_part *tokenlist);
+t_minitree	*ft_split_subshell(t_part *tokenlist, t_global *global);
 void		ft_split_tokenlist(t_minitree **root, t_part *tokenlist);
 t_bool		ft_valid_subshellnode(t_part *tokenlist);
 void		ft_skip_quotes(t_part **token);
 t_bool		ft_tokenlist_contains(
 				t_part *tokenlist, t_bool (*function)(t_token token));
+t_bool		ft_contains_sub_tokenlist(
+				t_part *startnode, t_part *endnode, t_token token);
 
 //Command list
+t_bool		ft_is_command(t_token token);
 t_part		*ft_get_commandlist(t_part *tokenlist, t_part *delimiter);
 t_minitree	*ft_get_minicommand(t_part *tokenlist, t_global *global);
 void		ft_printcommand(t_command *command);
@@ -52,9 +56,11 @@ char		*ft_extract_tokenstring(const char *commandline, t_part *node);
 t_list		*ft_extract_arglist(t_part *tokenlist, t_global *global);
 void		ft_free_commandlist(t_command **command);
 char		*ft_extract_commandseries(
-				const char *commandline, t_part *tokenlist, t_global *global);
+				const char *commandline,
+				t_part *tokenlist, t_part **nextstart, t_global *global);
 t_bool		ft_is_commandseries(t_part *tokenlist);
 t_part		*ft_get_last_seriestoken(t_part *tokenlist);
+t_list		*ft_clear_emptyvalues(t_list *list);
 
 //File
 t_list		*ft_extract_filelist(
@@ -79,7 +85,6 @@ t_bool		ft_is_semicolon(t_token token);
 //Expansions
 t_list		*ft_expand_startoken(const char *fullpath);
 char		*ft_expand_dollartoken(const char *argument, t_global *global);
-char		**ft_split_dollartoken(const char *commandline, int dollarcount);
 
 //CONVERT FUNCTIONS
 char		**ft_lstconvert_strarr(t_list *list);

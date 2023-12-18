@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:05:20 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/10 14:59:27 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/12/18 21:17:48 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,22 @@ static char	*ft_get_previousdir(void)
 	return (previousdir);
 }
 
-static void	ft_save_directory(t_list *envlist, char *oldpwd)
+static int	ft_save_directory(t_list *envlist, char *oldpwd)
 {
 	char	*newpwd;
 
 	newpwd = NULL;
 	newpwd = getcwd(NULL, 0);
+	if (newpwd == NULL)
+	{
+		ft_putendl_fd(" No such file or directory", STDERR_FILENO);
+		return (EXIT_FAILURE);
+	}
 	ft_setenv(&envlist, "PWD", newpwd, OVERWRITE_VALUE);
 	ft_setenv(&envlist, "OLDPWD", oldpwd, OVERWRITE_VALUE);
 	if (newpwd != NULL)
 		free(newpwd);
+	return (EXIT_SUCCESS);
 }
 
 static int	ft_new_folder(t_list *envlist, char *dir)

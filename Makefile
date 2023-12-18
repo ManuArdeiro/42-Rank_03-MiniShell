@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+         #
+#    By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/01 18:51:45 by jolopez-          #+#    #+#              #
-#    Updated: 2023/12/17 14:35:54 by yzaytoun         ###   ########.fr        #
+#    Updated: 2023/12/18 20:35:23 by jolopez-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,10 +22,10 @@ vpath 			%.o	obj
 USER			= $(shell whoami)
 INCLUDE 		= -Iinclude/
 INC_LIB 		= -Iinclude/libft
-#READLINE_LIB	= -I/Users/$(USER)/.brew/opt/readline/include
-#INC_READLINE	= -L/Users/$(USER)/.brew/opt/readline/lib
-INC_READLINE	= -L/usr/local/opt/readline/lib
-READLINE_LIB	= -I/usr/local/opt/readline/include
+READLINE_LIB	= -I/Users/$(USER)/.brew/opt/readline/include
+INC_READLINE	= -L/Users/$(USER)/.brew/opt/readline/lib
+#INC_READLINE	= -L/usr/local/opt/readline/lib
+#READLINE_LIB	= -I/usr/local/opt/readline/include
 SANITIZER		= -g3 -fsanitize=address -g
 
 READLINE_FLAGS	= -lreadline -ltermcap
@@ -40,7 +40,7 @@ LEXER			= tokenizer.c tokens.c token_tools_1.c token_tools_2.c \
 					ft_copy_tokenlist.c ft_tokenlist_add.c print_tokens.c \
 					add_tkn.c free_tokenlist.c get_lasttoken.c reverse_tokenlist.c\
 					get_token_byindex.c avoid_quots.c ft_add_cmdtoken.c \
-					token_tools_3.c
+					del_last_token.c
 
 COMMAND			= extract_tokenstring.c get_commandlist.c lstconvert.c \
 					printcommand.c extract_filelist.c get_minicommand.c \

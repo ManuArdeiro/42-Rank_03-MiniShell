@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 17:51:52 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/12/12 20:04:13 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/18 20:33:57 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,10 @@ static void	ft_check_commandnode(
 		node->token = tk_arg;
 	else if (*flag == 2
 		&& (node->token == tk_cmd || node->token == tk_arg))
+	{
 		node->token = tk_file;
+		*flag = 0;
+	}
 }
 
 static void	ft_cmd_vs_arg(t_part *tokens)
@@ -70,6 +73,9 @@ static void	ft_cmd_vs_arg(t_part *tokens)
 		prev_token = node->token;
 		node = node->next;
 	}
+	if ((ft_last_tkn(tokens))->token == tk_space)
+		ft_del_last_tkn(tokens);
+	return ;
 }
 
 /*	This function converts a string passed as argument in a list of tokens,

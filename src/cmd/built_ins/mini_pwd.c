@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 17:03:19 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/12/18 21:24:13 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/12/19 17:33:24 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	ft_mini_pwd(void)
 	}
 	else
 	{
-		ft_putendl_fd(" No such file or directory any more", STDERR_FILENO);
+		ft_putendl_fd("No such file or directory any more", STDERR_FILENO);
 		return (EXIT_FAILURE);
 	}
 }

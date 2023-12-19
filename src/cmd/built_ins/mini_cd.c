@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:05:20 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/19 17:11:00 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/12/19 17:47:52 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,8 @@ static int	ft_save_directory(t_list *envlist, char *oldpwd)
 	newpwd = getcwd(NULL, 0);
 	if (newpwd == NULL)
 	{
-		ft_putstr_fd("No such file or directory.", STDERR_FILENO);
-		ft_putendl_fd("Coming back to root directory.", STDERR_FILENO);
+		ft_putendl_fd("No such file or directory", STDERR_FILENO);
 		return (EXIT_FAILURE);
-		ft_setenv(&envlist, "PWD", "/", OVERWRITE_VALUE);
-		ft_setenv(&envlist, "OLDPWD", "/", OVERWRITE_VALUE);
 	}
 	ft_setenv(&envlist, "PWD", newpwd, OVERWRITE_VALUE);
 	ft_setenv(&envlist, "OLDPWD", oldpwd, OVERWRITE_VALUE);
@@ -61,9 +58,16 @@ static int	ft_new_folder(t_list *envlist, char *dir)
 	if (dir == NULL)
 		return (EXIT_FAILURE);
 	oldpwd = getcwd(NULL, 0);
+	if (!oldpwd)
+	{
+		ft_putendl_fd("Error. Back to root directory.", STDERR_FILENO);
+		ft_setenv(&envlist, "PWD", "/", OVERWRITE_VALUE);
+		dir = "/";
+		return (chdir(dir));
+	}
 	if (chdir(dir) != 0)
 	{
-		ft_putendl_fd(" No such file or directory", STDERR_FILENO);
+		ft_putendl_fd("No such file or directory", STDERR_FILENO);
 		free (oldpwd);
 		return (EXIT_FAILURE);
 	}

@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 18:53:59 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/12/17 16:30:38 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/19 19:17:37 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,29 +59,10 @@ void	ft_printerror(const char *function, const char *string)
 	ft_putstr_fd("\n", STDERR_FILENO);
 }
 
-void	ft_print_commanderror(const char *commandname, t_bool option)
+void	ft_print_commanderror(const char *commandname, const char *errortype)
 {
-	if (option == STAR)
-	{
-		ft_putstr_fd("MiniShell: no matches found: ", STDERR_FILENO);
-		ft_putstr_fd(commandname, STDERR_FILENO);
-	}
-	else if (option == IS_DIRECTORY)
-	{
-		ft_putstr_fd("MiniShell: ", STDERR_FILENO);
-		ft_putstr_fd(commandname, STDERR_FILENO);
-		ft_putstr_fd(": is a directory", STDERR_FILENO);
-	}
-	else if (option == PERMISSION_DENIED)
-	{
-		ft_putstr_fd("MiniShell: ", STDERR_FILENO);
-		ft_putstr_fd(commandname, STDERR_FILENO);
-		ft_putstr_fd(": Permission denied", STDERR_FILENO);
-	}
-	else
-	{
-		ft_putstr_fd("MiniShell: command not found: ", STDERR_FILENO);
-		ft_putstr_fd(commandname, STDERR_FILENO);
-	}
+	ft_putstr_fd("MiniShell: ", STDERR_FILENO);
+	ft_putstr_fd(errortype, STDERR_FILENO);
+	ft_putstr_fd(commandname, STDERR_FILENO);
 	ft_putstr_fd("\n", STDERR_FILENO);
 }

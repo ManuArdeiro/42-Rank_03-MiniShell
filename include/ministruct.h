@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:10:53 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/17 19:37:40 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/19 20:01:53 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,14 @@
 
 # include "libft.h"
 # include "minitree.h"
+
+# define PERMISSION_DENIED 	" Permission denied : "
+# define STAR 				" no matches found : "
+# define IS_DIRECTORY		" is a directory : "
+# define NO_SUCH_FILE_OUT	"out"
+# define NO_SUCH_FILE_IN	"in"
+# define NO_SUCH_FILE		" no such file or directory : "
+# define COMMAND_NOT_FOUND	" command not found : "
 
 typedef struct s_global			t_global;
 typedef struct s_signals		t_signals;
@@ -56,10 +64,7 @@ enum e_bool
 	FORK,
 	BUILTIN,
 	FIRST,
-	LAST,
-	PERMISSION_DENIED,
-	STAR,
-	IS_DIRECTORY
+	LAST
 };
 
 struct s_dict

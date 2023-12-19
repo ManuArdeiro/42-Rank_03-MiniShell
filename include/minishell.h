@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:47:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/12/17 15:32:19 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/19 19:18:34 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int			ft_clearscreen(t_list *envlist);
 char		*ft_get_localpath(void);
 char		*ft_get_rootpath(const char *path);
 void		ft_free_string(void *content);
-void		ft_print_commanderror(const char *commandname, t_bool option);
+void		ft_print_commanderror(const char *commandname, const char *errortype);
 char		*ft_get_completeline(const char *commandline);
 
 //History

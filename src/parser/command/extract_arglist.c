@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 15:50:08 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/17 16:55:51 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/19 18:35:52 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ static void	ft_get_arg(
 	if (string == NULL)
 	{
 		global->expand_dollartoken = TRUE;
+		global->expand_startoken = TRUE;
 		string = ft_extract_tokenstring(global->line, (*node));
 	}
 	if (string)

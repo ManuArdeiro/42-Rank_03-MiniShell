@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:50:35 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/17 19:37:08 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/19 20:05:52 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,22 @@ static int	ft_is_directory(const char *path)
 }
 
 static void	ft_terminateprocess(
-	t_command *command, char **args, char **envp, t_bool option
+	t_command *command, char **args, char **envp, const char *errortype
 )
 {
 	ft_clear_strarray(envp);
 	ft_clear_strarray(args);
-	ft_print_commanderror(command->name, option);
+	if (ft_strequal(errortype, NO_SUCH_FILE_OUT) == TRUE)
+		ft_print_commanderror(
+			((t_file *)command->outfile->content)->name, NO_SUCH_FILE);
+	else if (ft_strequal(errortype, NO_SUCH_FILE_IN) == TRUE)
+		ft_print_commanderror(
+			((t_file *)command->infile->content)->name, NO_SUCH_FILE);
+	else
+		ft_print_commanderror(command->name, errortype);
 	ft_free_commandlist(&command);
-	if (option == PERMISSION_DENIED || option == IS_DIRECTORY)
+	if (ft_strequal(errortype, PERMISSION_DENIED) == TRUE
+		|| ft_strequal(errortype, IS_DIRECTORY) == TRUE)
 		exit(126);
 	else
 		exit(127);
@@ -65,9 +73,6 @@ static void	ft_execute_givencommand(
 	pathvariables = ft_getenv("PATH", global->envlist);
 	if (ft_strlen(command->name) > 0)
 		command->name = ft_add_pathprefix(command->name, pathvariables);
-	if (access(command->name, F_OK) == 0
-		&& access(command->name, X_OK) != 0)
-		printf("permission denied\n");
 	free(pathvariables);
 	if (access(command->name, F_OK) == 0
 		&& access(command->name, X_OK) != 0)
@@ -75,7 +80,7 @@ static void	ft_execute_givencommand(
 	else if (ft_is_directory(command->name) != FALSE)
 		ft_terminateprocess(command, args, envp, IS_DIRECTORY);
 	else if (execve(command->name, args, envp) < 0)
-		ft_terminateprocess(command, args, envp, FALSE);
+		ft_terminateprocess(command, args, envp, COMMAND_NOT_FOUND);
 }
 
 void	ft_execute_subprocess(
@@ -87,6 +92,10 @@ void	ft_execute_subprocess(
 	args = NULL;
 	shelvl = NULL;
 	ft_open_filestreams(&infile, &outfile);
+	if (infile->fd < 0)
+		ft_terminateprocess(command, NULL, NULL, NO_SUCH_FILE_IN);
+	if (outfile->fd < 0)
+		ft_terminateprocess(command, NULL, NULL, NO_SUCH_FILE_OUT);
 	ft_duplicate_descriptors(&infile->fd, &outfile->fd);
 	ft_closefile(&infile->fd);
 	ft_closefile(&outfile->fd);

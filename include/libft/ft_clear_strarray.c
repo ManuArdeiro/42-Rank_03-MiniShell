@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 19:19:59 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/11/09 16:08:40 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/19 19:46:25 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_clear_strarray(char **strarray)
 	int	count;
 
 	count = 0;
-	if (*strarray == NULL || !strarray)
+	if (!strarray || *strarray == NULL)
 		return ;
 	while (strarray[count])
 	{

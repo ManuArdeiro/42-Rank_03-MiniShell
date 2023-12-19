@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 15:36:46 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/16 15:55:14 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/19 18:51:26 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,16 @@
 
 static t_bool	ft_evaluate_subshell(t_part *endnode)
 {
-	if (endnode->next != NULL
-		&& (endnode->next->token != tk_space
-			|| ft_is_tokenseparator(endnode->next->token) == FALSE))
-		return (FALSE);
-	else if ((endnode->next != NULL && endnode->token == tk_space)
-		&& (endnode->next->next != NULL
-			&& ft_is_tokenseparator(endnode->next->next->token) == FALSE))
-		return (FALSE);
+	if (endnode->next != NULL)
+	{
+		if (endnode->next->token != tk_space
+			&& ft_is_tokenseparator(endnode->next->token) == FALSE)
+			return (FALSE);
+		else if (endnode->next->token == tk_space
+			&& endnode->next->next != NULL
+			&& ft_is_tokenseparator(endnode->next->next->token) == FALSE)
+			return (FALSE);
+	}
 	return (TRUE);
 }
 

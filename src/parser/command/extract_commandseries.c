@@ -6,28 +6,11 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 20:29:13 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/17 16:35:45 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/19 21:09:29 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static char	*ft_get_commandseries(const char *buffer, t_cleancase cleancase)
-{
-	//char	*commandseries;
-	char	*finalcommandseries;
-
-	finalcommandseries = NULL;
-	finalcommandseries = ft_strclean_withspaces(buffer, cleancase);
-	//if (cleancase == CLEAN_DOUBLE_QUOTES
-	//	&& ft_strcontains(commandseries, "\'\'") == TRUE)
-	//	finalcommandseries
-	//		= ft_strclean_withspaces(commandseries, CLEAN_EMPTY_QUOTES);
-	//else
-	//	finalcommandseries = ft_strdup(commandseries);
-	//free(commandseries);
-	return (finalcommandseries);
-}
 
 static t_cleancase	ft_get_cleancase(t_part *startnode, t_part *endnode)
 {
@@ -41,14 +24,12 @@ static t_cleancase	ft_get_cleancase(t_part *startnode, t_part *endnode)
 }
 
 static char	*ft_get_substr(
-	const char *commandline,
-	t_part *secondnode, t_part **node, t_cleancase cleancase
+	const char *commandline, t_part *secondnode, t_part **node
 )
 {
-	char	*commandseries;
 	char	*buffer;
 
-	commandseries = NULL;
+	buffer = NULL;
 	if (secondnode != NULL && secondnode->end > (*node)->start)
 	{
 		buffer
@@ -66,21 +47,50 @@ static char	*ft_get_substr(
 					(*node)->start,
 					((secondnode->end) - ((*node)->start) + 1));
 	}
-	commandseries = ft_get_commandseries(buffer, cleancase);
+	return (buffer);
+}
+
+static char	*ft_get_commandseries(
+	const char *commandline, t_part *seriesstart, t_part *seriesend)
+{
+	t_part		*node;
+	t_part		*sub_endnode;
+	char		*buffer;
+	char		*commandseries;
+	t_cleancase	cleancase;
+
+	node = seriesstart;
+	buffer = NULL;
+	cleancase = CLEAN_ALL;
+	commandseries = NULL;
+	while (node != NULL && node != seriesend)
+	{
+		if (ft_tokenlist_contains(node, ft_is_tokenpair) == TRUE)
+		{
+			sub_endnode = ft_get_tokennode(node->next, node->token, FALSE, TRUE);
+			cleancase = ft_get_cleancase(node, sub_endnode);
+			buffer = ft_strclean_withspaces(
+					ft_get_substr(
+							commandline, sub_endnode, &node), cleancase);
+			commandseries = ft_strjoin_get(commandseries, buffer);
+			node = sub_endnode;
+		}
+		if (node != NULL)
+			node = node->next;
+	}
 	return (commandseries);
 }
+
 
 static char	*ft_get_series_substring(const char *commandline, t_part **node)
 {
 	t_part		*secondnode;
 	char		*commandseries;
-	t_cleancase	cleancase;
 
 	commandseries = NULL;
 	secondnode = NULL;
 	secondnode = ft_get_last_seriestoken((*node));
-	cleancase = ft_get_cleancase((*node), secondnode);
-	commandseries = ft_get_substr(commandline, secondnode, node, cleancase);
+	commandseries = ft_get_commandseries(commandline, (*node), secondnode);
 	(*node) = secondnode;
 	return (commandseries);
 }

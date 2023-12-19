@@ -6,12 +6,11 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 23:35:31 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/12/08 15:08:58 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/12/19 19:35:38 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
 
 static char	*ft_get_newline2(t_global *global, int i, int cut)
 {
@@ -67,25 +66,24 @@ static int	ft_get_newline1(t_global *global, int i, int cut)
 
 static int	ft_avoid_sglquot(t_global *global)
 {
-	int		i;
-	int		cut;
+	int	i;
+	int	len;
+	int	simple;
 
 	i = 0;
+	simple = 0;
+	len = ft_strlen(global->line);
 	while (global->line[i] != '\0')
 	{
-		if (global->line[i] == '\'')
+		if (global->line[i] == '\"')
+			simple++;
+		else if (global->line[i] == '\'' && simple % 2 == 0)
 		{
-			cut = i;
-			i++;
-			while (global->line[i] == '\"')
-				i++;
-			if (global->line[i] == '\'')
-			{
-				if (ft_get_newline1(global, i, cut) == EXIT_SUCCESS)
+			if (global->line[i + 1] == '\'')
+				if (ft_get_newline1(global, i + 1, i) == EXIT_SUCCESS)
 					return (EXIT_FAILURE);
-			}
 		}
-		if (i < (int)ft_strlen(global->line))
+		if (i < len)
 			i++;
 	}
 	return (EXIT_SUCCESS);
@@ -97,25 +95,24 @@ static int	ft_avoid_sglquot(t_global *global)
 
 static int	ft_avoid_dblquot(t_global *global)
 {
-	int		i;
-	int		cut;
+	int	i;
+	int	len;
+	int	simple;
 
 	i = 0;
+	simple = 0;
+	len = ft_strlen(global->line);
 	while (global->line[i] != '\0')
 	{
-		if (global->line[i] == '\"')
+		if (global->line[i] == '\'')
+			simple++;
+		else if (global->line[i] == '\"' && simple % 2 == 0)
 		{
-			cut = i;
-			i++;
-			while (global->line[i] == '\'')
-				i++;
-			if (global->line[i] == '\"')
-			{
-				if (ft_get_newline1(global, i, cut) == EXIT_SUCCESS)
+			if (global->line[i + 1] == '\"')
+				if (ft_get_newline1(global, i + 1, i) == EXIT_SUCCESS)
 					return (EXIT_FAILURE);
-			}
 		}
-		if (i < (int)ft_strlen(global->line))
+		if (i < len)
 			i++;
 	}
 	return (EXIT_SUCCESS);

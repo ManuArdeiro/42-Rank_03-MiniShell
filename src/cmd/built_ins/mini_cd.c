@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:05:20 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/18 21:17:48 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/12/19 17:11:00 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,11 @@ static int	ft_save_directory(t_list *envlist, char *oldpwd)
 	newpwd = getcwd(NULL, 0);
 	if (newpwd == NULL)
 	{
-		ft_putendl_fd(" No such file or directory", STDERR_FILENO);
+		ft_putstr_fd("No such file or directory.", STDERR_FILENO);
+		ft_putendl_fd("Coming back to root directory.", STDERR_FILENO);
 		return (EXIT_FAILURE);
+		ft_setenv(&envlist, "PWD", "/", OVERWRITE_VALUE);
+		ft_setenv(&envlist, "OLDPWD", "/", OVERWRITE_VALUE);
 	}
 	ft_setenv(&envlist, "PWD", newpwd, OVERWRITE_VALUE);
 	ft_setenv(&envlist, "OLDPWD", oldpwd, OVERWRITE_VALUE);

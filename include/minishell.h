@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:47:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/12/19 19:18:34 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/20 20:42:34 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 # include <stdlib.h>
 # include <limits.h>
 # include <errno.h>
-#include <sys/types.h>
-#include <sys/stat.h>
+# include <sys/types.h>
+# include <sys/stat.h>
 # include <fcntl.h>
 # include <dirent.h>
 # include <readline/readline.h>
@@ -55,7 +55,6 @@ t_list		*ft_initenv(char **env, int shell_level);
 int			ft_delenv(t_list *envList, char *key);
 
 // Built-ins
-
 int			ft_builtins(char **args, t_list *envList, t_global *global);
 int			ft_print_not_found(char *arg);
 int			ft_print_not_valid(char *arg);
@@ -74,7 +73,8 @@ int			ft_clearscreen(t_list *envlist);
 char		*ft_get_localpath(void);
 char		*ft_get_rootpath(const char *path);
 void		ft_free_string(void *content);
-void		ft_print_commanderror(const char *commandname, const char *errortype);
+void		ft_print_commanderror(
+				const char *commandname, const char *errortype);
 char		*ft_get_completeline(const char *commandline);
 
 //History
@@ -88,7 +88,5 @@ int			ft_searchdict(t_list *list, const char *key);
 int			ft_modifydict(
 				t_list **envlist, const char *key, const char *newvalue);
 void		ft_add_to_dict(t_list **envlist, char *key, char *value);
-
-
 t_minitree	*ft_get_lasttreenode(t_minitree *root, t_bool direction);
 #endif

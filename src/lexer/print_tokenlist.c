@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_tokens.c                                     :+:      :+:    :+:   */
+/*   print_tokenlist.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/11 12:11:26 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/13 20:26:17 by yzaytoun         ###   ########.fr       */
+/*   Created: 2023/12/20 20:29:28 by yzaytoun          #+#    #+#             */
+/*   Updated: 2023/12/20 20:29:30 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	ft_print_tokenlist(t_part *tokenlist)
 	printf("-------------\n");
 	while (print)
 	{
-		//printf("token %d = %d\n", print->index, print->token);
 		printf("%d    |  ", count);
 		ft_print_token(print->token);
 		printf("\n");

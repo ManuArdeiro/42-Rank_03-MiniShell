@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 16:44:36 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/17 19:34:47 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/20 20:52:54 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ static void	ft_check_variables(t_command *command, t_global *global)
 		ft_printcommand(command);
 	ft_check_commandname(command);
 }
-
 
 int	ft_executecommand(t_command *command, t_global *global)
 {

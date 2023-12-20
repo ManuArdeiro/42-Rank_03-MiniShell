@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
+/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 20:35:24 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/10/16 20:15:51 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/12/20 20:45:07 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include<stdio.h>
+#include <stdio.h>
 
 static char	*ft_alloc_mem(char *str, char const *s,
 	unsigned int start, size_t len)

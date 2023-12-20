@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:50:35 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/19 20:27:09 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/20 20:31:37 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ static int	ft_is_directory(const char *path)
 		return (0);
 	if (stat(path, &statbuf) != 0)
 		return (0);
-   status = S_ISDIR(statbuf.st_mode);
-   return (status);
+	status = S_ISDIR(statbuf.st_mode);
+	return (status);
 }
 
 static void	ft_terminateprocess(
@@ -38,7 +38,7 @@ static void	ft_terminateprocess(
 	else if (ft_strequal(errortype, NO_SUCH_FILE_IN) == TRUE)
 		ft_print_commanderror(
 			((t_file *)command->infile->content)->name, NO_SUCH_FILE);
-	else 
+	else
 		ft_print_commanderror(command->name, errortype);
 	ft_free_commandlist(&command);
 	if (ft_strequal(errortype, PERMISSION_DENIED) == TRUE

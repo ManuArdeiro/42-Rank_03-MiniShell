@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 13:24:00 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/06 13:29:50 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/20 20:57:41 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_list	*ft_default_filelist(int std_stream)
 	t_file	*file;
 
 	newfilelist = NULL;
-	file = ft_create_file(ft_strdup("STD"), std_stream, 0);
+	file = ft_create_file("STD", std_stream, 0);
 	ft_lstinsert(&newfilelist, (t_file *)file, BACK);
 	return (newfilelist);
 }

@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 16:44:36 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/20 20:51:24 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/12/20 21:23:04 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ static void	ft_check_variables(t_command *command, t_global *global)
 		ft_printcommand(command);
 	ft_check_commandname(command);
 }
-
 
 int	ft_executecommand(t_command *command, t_global *global)
 {

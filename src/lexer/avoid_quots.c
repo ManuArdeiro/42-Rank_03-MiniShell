@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   avoid_quots.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
+/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 23:35:31 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/12/19 19:35:38 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/12/20 20:30:39 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ static int	ft_get_newline1(t_global *global, int i, int cut)
 	char	*newline;
 	char	*firstpart;
 	char	*secondpart;
-
 
 	if (i - cut == 1)
 	{
@@ -123,13 +122,10 @@ void	ft_avoid_quots(t_global *global)
 	int	status;
 
 	status = 1;
-	//printf("oldline = %s\n", global->line);
 	while (status)
 	{
 		status = 0;
 		status = status + ft_avoid_dblquot(global);
 		status = status + ft_avoid_sglquot(global);
 	}
-	//printf("newline = %s\n", global->line);
-	return ;
 }

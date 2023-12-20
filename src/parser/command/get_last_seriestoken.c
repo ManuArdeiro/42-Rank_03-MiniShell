@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 20:29:13 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/17 14:56:28 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/20 19:02:59 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,14 @@ static void	ft_check_endnode(t_part *node, t_part **endnode)
 	{
 		if ((pointer->next != NULL && pointer->next->token == tk_space)
 			|| pointer->next == NULL)
+		{
 			(*endnode) = pointer;
-		 else
+		}
+		else
+		{
 			(*endnode) = ft_get_tokennode(
 					pointer->next, tk_space, TRUE, FIRST);
+		}
 	}
 }
 

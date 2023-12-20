@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:55:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/12/20 19:55:55 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/12/20 21:23:00 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,10 +90,10 @@ static void	ft_init(
 }
 
 //For Debugging
-//static void	ft_panic(void)
-//{
-//	system("leaks minishell");
-//}
+static void	ft_panic(void)
+{
+	system("leaks minishell");
+}
 /*	Main function:
 	- Checks the number of arguments and prints help if they are not correct.
 	- Prints the welcome message.
@@ -108,7 +108,7 @@ int	main(int ac, char **av, char **env)
 	int			laststatus;
 	t_bool		devmode;
 
-	//atexit(ft_panic);
+	atexit(ft_panic);
 	laststatus = EXIT_SUCCESS;
 	devmode = FALSE;
 	shell_level = 0;
@@ -121,7 +121,7 @@ int	main(int ac, char **av, char **env)
 		else
 			ft_printhelp();
 	}
-	//ft_printwellcome();
+	ft_printwellcome();
 	ft_init(&global, env, shell_level, devmode);
 	ft_loop(global);
 	laststatus = global->laststatus;

@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 16:02:47 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/19 19:02:22 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/20 19:01:49 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	ft_printlist(t_list *list)
 	count = 0;
 	if (list == NULL)
 	{
-		printf("%s\n", (char *)NULL);
+		printf("%s\n", (char *) NULL);
 		return ;
 	}
 	node = list;
@@ -39,7 +39,6 @@ static void	ft_print_stringarray(t_list *list)
 {
 	int		count;
 	char	**strarray;
-
 
 	count = 0;
 	strarray = ft_lstconvert_strarr(list);

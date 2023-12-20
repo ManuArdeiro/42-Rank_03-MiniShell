@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
+/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 20:20:55 by jolopez-          #+#    #+#             */
-/*   Updated: 2022/04/15 16:46:19 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/12/20 20:43:15 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include<stdio.h>
+#include <stdio.h>
 
 void	*ft_calloc(size_t count, size_t size)
 {
@@ -36,16 +36,3 @@ void	*ft_calloc(size_t count, size_t size)
 	}
 	return (ptr);
 }
-
-/*int	main(void)
-{
-	size_t	count;
-	size_t	size;
-	char	*ptr;
-
-	count = 1860000000007407000;
-	size = 0;
-	ptr = ft_calloc(count, size);
-	printf("dirección = %p\nvalor = %s", &ptr, ptr);
-	return (0);
-}*/

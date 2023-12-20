@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 12:35:59 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/12 19:28:06 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/20 20:30:57 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ static char	*ft_expand_dollarchain(
 	ft_clear_strarray(stringarray);
 	return (expandedstring);
 }
-
 
 char	*ft_expand_dollartoken(const char *argument, t_global *global)
 {

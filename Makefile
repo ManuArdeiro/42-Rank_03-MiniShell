@@ -6,7 +6,7 @@
 #    By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/01 18:51:45 by jolopez-          #+#    #+#              #
-#    Updated: 2023/12/20 19:05:20 by jolopez-         ###   ########.fr        #
+#    Updated: 2023/12/20 21:22:47 by jolopez-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ UTILS			= print_msg.c mini_history.c get_path.c free_string.c \
 					mini_dictionary.c signals.c clearscreen.c get_completeline.c
 
 LEXER			= tokenizer.c tokens.c token_tools_1.c token_tools_2.c \
-					ft_copy_tokenlist.c ft_tokenlist_add.c print_tokens.c \
+					ft_copy_tokenlist.c ft_tokenlist_add.c print_tokenlist.c \
 					add_tkn.c free_tokenlist.c get_lasttoken.c reverse_tokenlist.c\
 					get_token_byindex.c avoid_quots.c ft_add_cmdtoken.c \
 					del_last_token.c
@@ -46,7 +46,7 @@ COMMAND			= extract_tokenstring.c get_commandlist.c lstconvert.c \
 					printcommand.c extract_filelist.c get_minicommand.c \
 					extract_arglist.c is_compoundcommand.c free_commandlist.c\
 					extract_commandseries.c is_commandseries.c get_last_seriestoken.c\
-					is_command.c clear_emptyvalues.c
+					is_command.c clear_emptyvalues.c get_commandseries.c
 				
 FILE			= filestreams.c create_file.c get_filemode.c is_redirection.c \
 					freefile.c append_filecontent.c delete_filenode.c closepipe.c\
@@ -80,7 +80,7 @@ OBJS			=	$(SRC:%.c=$(OBJ_DIR)/%.o)
 
 RM 				=	/bin/rm -rf
 CC 				= 	gcc
-CFLAGS 			= 	-Wall -Werror -Wextra $(INCLUDE) $(INC_LIB) $(READLINE_LIB) $(SANITIZER)
+CFLAGS 			= 	-Wall -Werror -Wextra $(INCLUDE) $(INC_LIB) $(READLINE_LIB) #$(SANITIZER)
 
 LIBFT			= 	include/libft/libft.a
 LIBFTDIR		= 	include/libft

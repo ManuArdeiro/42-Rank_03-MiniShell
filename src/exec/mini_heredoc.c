@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_heredoc.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 18:28:55 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/17 19:04:24 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/20 20:01:46 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void	ft_evaluate_line(
 		ft_closepipe(&herepipe[0], &herepipe[1]);
 		exit(EXIT_SUCCESS);
 	}
-	else if (g_signals.sig_exit_status == 1)
+	else if (exit_status == 1)
 	{
 		free(line);
 		free(cleanline);
@@ -53,7 +53,7 @@ void	ft_writetofile(const char *delimiter, int *herepipe)
 	cleanline = NULL;
 	while (line != NULL)
 	{
-		ft_signals();
+		ft_signals(NULL);
 		ft_putstr_fd("heredoc> ", STDOUT_FILENO);
 		ft_get_inputline(&line, herepipe);
 		cleanline = ft_strtrim(line, "\n");
@@ -75,7 +75,7 @@ void	ft_get_heredoc(t_file **file)
 	child = fork();
 	if (child == 0)
 	{
-		g_signals.in_heredoc = TRUE;
+		//in_heredoc = TRUE;
 		ft_writetofile((*file)->name, herepipe);
 	}
 	else if (child < 0)

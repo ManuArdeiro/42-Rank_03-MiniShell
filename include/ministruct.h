@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ministruct.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:10:53 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/19 20:01:53 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/20 20:43:39 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,16 +159,16 @@ struct s_global
 	t_bool		expand_dollartoken;
 	t_bool		devmode;
 	t_bool		expand_startoken;
+	int			pidcount;
+	pid_t		*pidarray;
 };
 
 struct s_signals
 {
 	int		exit_status;
 	int		sig_exit_status;
-	int		pidcount;
 	t_bool	in_heredoc;
 	t_bool	emptyline;
-	pid_t	*pidarray;
 };
 
 #endif		/*Mini struct header*/

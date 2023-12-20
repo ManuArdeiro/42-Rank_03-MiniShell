@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:47:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/12/19 19:18:34 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/20 19:55:47 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,10 @@
 
 // Global variable (for signals)
 
-t_signals	g_signals;
+int	exit_status;
 
 // Signals
-void		ft_signals(void);
+void		ft_signals(t_global *global);
 
 // File utils/print_msg.c
 void		ft_printhelp(void);

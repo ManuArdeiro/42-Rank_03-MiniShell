@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:55:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/12/19 19:28:12 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/12/20 19:55:55 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,10 @@ static void	ft_loop(t_global *global)
 	t_minitree	*parsetree;
 
 	history = NULL;
-	ft_signals();
+	ft_signals(global);
 	while (global->status != EXITED)
 	{
-		ft_signals();
+		ft_signals(global);
 		global->line = readline(MINI_PROMPT);
 		if (global->line != NULL)
 		{

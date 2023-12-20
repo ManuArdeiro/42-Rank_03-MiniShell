@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executecommand.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 16:44:36 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/17 19:34:47 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/20 20:51:24 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,8 @@ static void	ft_check_commandname(t_command *command)
 
 static void	ft_check_variables(t_command *command, t_global *global)
 {
-	if (g_signals.sig_exit_status == 1)
-		global->laststatus = g_signals.exit_status;
-	g_signals.sig_exit_status = 0;
+	if (exit_status == 1)
+		global->laststatus = exit_status;
 	if (global->devmode == TRUE)
 		ft_printcommand(command);
 	ft_check_commandname(command);
@@ -51,15 +50,14 @@ int	ft_executecommand(t_command *command, t_global *global)
 		return (EXITED);
 	ft_check_variables(command, global);
 	pidcount = ft_create_subprocess(command, &pidarray, global);
-	g_signals.pidarray = pidarray;
-	g_signals.pidcount = pidcount;
-	ft_signals();
+	global->pidarray = pidarray;
+	global->pidarray = &pidcount;
+	ft_signals(global);
 	laststatus = ft_wait_subprocess(command, pidarray, pidcount);
-	if (g_signals.sig_exit_status != 0)
-		laststatus = g_signals.exit_status;
+	if (exit_status != 0)
+		laststatus = exit_status;
 	global->laststatus = laststatus;
 	if (pidarray != NULL)
 		free(pidarray);
-	g_signals.pidarray = NULL;
 	return (laststatus);
 }

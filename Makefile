@@ -6,7 +6,7 @@
 #    By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/01 18:51:45 by jolopez-          #+#    #+#              #
-#    Updated: 2023/12/18 20:55:34 by jolopez-         ###   ########.fr        #
+#    Updated: 2023/12/20 19:05:20 by jolopez-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -97,7 +97,7 @@ $(NAME): 	$(BANNER) $(LIBFT) $(OBJS)
 			$(CC) $(CFLAGS) $(OBJS) $(INC_READLINE)\
 			 $(READLINE_FLAGS) $(LIBFT) -o $(NAME)
 			@echo "\n$(LIGHT_GRAY)---------- MiniShell Ready ------------\n"
-.SILENT:
+
 $(LIBFT):
 			echo "$(LIGHT_RED) Creating libft files... $(WHITE)"
 			$(MAKE) bonus -C $(LIBFTDIR)

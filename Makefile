@@ -86,6 +86,7 @@ LIBFT			= 	include/libft/libft.a
 LIBFTDIR		= 	include/libft
 OBJ_DIR			=	obj
 
+.SILENT:
 $(OBJ_DIR)/%.o : %.c
 	@mkdir -p $(@D)
 	$(COMPILE.c) $< -o $@

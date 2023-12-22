@@ -14,7 +14,6 @@
 
 static void	handle_sigint(int signum)
 {
-	printf("hola\n");
 	if (signum != SIGINT)
 		return ;
 	write(1, "\n", 1);
@@ -34,6 +33,7 @@ static void	handle_sigquit(int signum)
 	rl_replace_line("", 1);
 	rl_on_new_line();
 	exit_status = 131;
+	free(nbr)
 }
 
 

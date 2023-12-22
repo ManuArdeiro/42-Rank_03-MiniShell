@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 21:33:30 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/12/22 20:54:02 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/22 21:13:12 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,9 @@ void	ft_signals(t_global *global)
 	i = 0;
 	if (global->in_heredoc == TRUE)
 		signal(SIGINT, handle_sigint_exit);
-	else
+	else if (global->in_heredoc == FALSE)
 		signal(SIGINT, SIG_IGN);
+	//signal(SIGCHLD, handle_sigint);
 	if (global->pidarray != NULL)
 	{
 		signal(SIGQUIT, handle_sigquit);

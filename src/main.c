@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:55:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/12/22 20:48:38 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/22 21:14:22 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ static void	ft_loop(t_global *global)
 	while (global->status != EXITED)
 	{
 		ft_signals(global);
+		global->in_heredoc = O_HEREDOC;
 		global->line = readline(MINI_PROMPT);
 		if (global->line != NULL)
 		{

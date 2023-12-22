@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals copy.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
+/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 21:33:30 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/12/20 20:48:25 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/12/22 19:07:03 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static void	handle_sigquit(int signum)
 	g_signals.sig_exit_status = 1;
 }
 
-void	ft_signals(void)
+void	_ft_signals(void)
 {
 	g_signals.sig_exit_status = 0;
 	signal(SIGINT, handle_sigint);

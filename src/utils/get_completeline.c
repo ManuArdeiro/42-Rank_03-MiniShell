@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_completeline.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
+/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 16:08:48 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/20 20:00:51 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/12/22 19:06:35 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static char	*ft_completeline(const char *commandline, const char *prompt)
 		if (line != NULL)
 			buffer = ft_strjoin_get(buffer, line);
 		if (ft_loop_end(line, prompt) == TRUE
-			|| exit_status == 1)
+			|| g_exit_status == 1)
 			break ;
 		free(line);
 	}

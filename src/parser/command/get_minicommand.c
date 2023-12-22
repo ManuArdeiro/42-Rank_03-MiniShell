@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 11:05:21 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/20 20:58:02 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/22 17:13:14 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static t_command	*ft_create_newcommand(
 			ft_extract_filelist(tokenlist, OUTFILE, global)
 			);
 	if (newcommand != NULL)
-		ft_expand_filelist(&newcommand->infile);
+		ft_expand_filelist(&newcommand->infile, global);
 	return (newcommand);
 }
 

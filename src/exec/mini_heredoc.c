@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_heredoc.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
+/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 18:28:55 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/20 20:01:46 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/12/22 20:47:28 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,16 +35,10 @@ static void	ft_evaluate_line(
 		ft_closepipe(&herepipe[0], &herepipe[1]);
 		exit(EXIT_SUCCESS);
 	}
-	else if (exit_status == 1)
-	{
-		free(line);
-		free(cleanline);
-		ft_closepipe(&herepipe[0], &herepipe[1]);
-		exit(EXIT_FAILURE);
-	}
 }
 
-void	ft_writetofile(const char *delimiter, int *herepipe)
+void	ft_writetofile(
+		const char *delimiter, int *herepipe, t_global *global)
 {
 	char	*line;
 	char	*cleanline;
@@ -53,7 +47,7 @@ void	ft_writetofile(const char *delimiter, int *herepipe)
 	cleanline = NULL;
 	while (line != NULL)
 	{
-		ft_signals(NULL);
+		ft_signals(global);
 		ft_putstr_fd("heredoc> ", STDOUT_FILENO);
 		ft_get_inputline(&line, herepipe);
 		cleanline = ft_strtrim(line, "\n");
@@ -65,18 +59,20 @@ void	ft_writetofile(const char *delimiter, int *herepipe)
 	exit(EXIT_SUCCESS);
 }
 
-void	ft_get_heredoc(t_file **file)
+void	ft_get_heredoc(t_file **file, t_global *global)
 {
-	pid_t	child;
 	int		herepipe[2];
+	pid_t	child;
 
+	if (global == NULL)
+		return ;
 	if (pipe(herepipe) < 0)
 		ft_printerror(__func__, "Pipe");
 	child = fork();
 	if (child == 0)
 	{
-		//in_heredoc = TRUE;
-		ft_writetofile((*file)->name, herepipe);
+		global->in_heredoc = TRUE;
+		ft_writetofile((*file)->name, herepipe, global);
 	}
 	else if (child < 0)
 		ft_printerror(__func__, "Fork");

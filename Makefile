@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+         #
+#    By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/01 18:51:45 by jolopez-          #+#    #+#              #
-#    Updated: 2023/12/20 21:24:24 by jolopez-         ###   ########.fr        #
+#    Updated: 2023/12/22 17:24:33 by yzaytoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -80,7 +80,7 @@ OBJS			=	$(SRC:%.c=$(OBJ_DIR)/%.o)
 
 RM 				=	/bin/rm -rf
 CC 				= 	gcc
-CFLAGS 			= 	-Wall -Werror -Wextra $(INCLUDE) $(INC_LIB) $(READLINE_LIB) #$(SANITIZER)
+CFLAGS 			= 	-Wall -Werror -Wextra $(INCLUDE) $(INC_LIB) $(READLINE_LIB) $(SANITIZER)
 
 LIBFT			= 	include/libft/libft.a
 LIBFTDIR		= 	include/libft

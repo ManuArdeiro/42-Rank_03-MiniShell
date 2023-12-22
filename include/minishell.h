@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
+/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:47:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/12/20 21:24:28 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/12/22 19:15:13 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@
 
 // Global variable (for signals)
 
-int	exit_status;
+volatile sig_atomic_t	g_exit_status;
 
 // Signals
 void		ft_signals(t_global *global);

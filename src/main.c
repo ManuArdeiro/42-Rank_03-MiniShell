@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
+/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:55:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/12/20 21:24:31 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/12/22 20:48:38 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ static void	ft_loop(t_global *global)
 	t_minitree	*parsetree;
 
 	history = NULL;
-	ft_signals(global);
 	while (global->status != EXITED)
 	{
 		ft_signals(global);
@@ -90,10 +89,10 @@ static void	ft_init(
 }
 
 //For Debugging
-static void	ft_panic(void)
-{
-	system("leaks minishell");
-}
+//static void	ft_panic(void)
+//{
+	//	system("leaks minishell");
+//}
 /*	Main function:
 	- Checks the number of arguments and prints help if they are not correct.
 	- Prints the welcome message.
@@ -108,7 +107,7 @@ int	main(int ac, char **av, char **env)
 	int			laststatus;
 	t_bool		devmode;
 
-	atexit(ft_panic);
+//	atexit(ft_panic);
 	laststatus = EXIT_SUCCESS;
 	devmode = FALSE;
 	shell_level = 0;

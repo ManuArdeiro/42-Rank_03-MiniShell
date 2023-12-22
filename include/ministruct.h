@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ministruct.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
+/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:10:53 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/20 20:43:39 by jolopez-         ###   ########.fr       */
+/*   Updated: 2023/12/22 20:46:05 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@
 # define COMMAND_NOT_FOUND	" command not found : "
 
 typedef struct s_global			t_global;
-typedef struct s_signals		t_signals;
 typedef struct s_dict			t_dict;
 typedef struct s_command		t_command;
 typedef struct s_file			t_file;
@@ -36,6 +35,7 @@ typedef struct s_summarizer		t_summarizer;
 typedef struct s_part			t_part;
 typedef struct s_mininode		t_mininode;
 typedef enum e_cleancase		t_cleancase;
+typedef struct sigaction		t_sigaction;
 
 enum e_cleancase
 {
@@ -150,25 +150,18 @@ struct s_mininode
 
 struct s_global
 {
-	t_bool		status;
-	char		*line;
-	t_list		*envlist;
-	int			laststatus;
-	t_nodetype	lastnodetype;
-	int			shell_level;
-	t_bool		expand_dollartoken;
-	t_bool		devmode;
-	t_bool		expand_startoken;
-	int			pidcount;
-	pid_t		*pidarray;
-};
-
-struct s_signals
-{
-	int		exit_status;
-	int		sig_exit_status;
-	t_bool	in_heredoc;
-	t_bool	emptyline;
+	t_bool			status;
+	char			*line;
+	t_list			*envlist;
+	int				laststatus;
+	t_nodetype		lastnodetype;
+	int				shell_level;
+	t_bool			expand_dollartoken;
+	t_bool			devmode;
+	t_bool			expand_startoken;
+	int				pidcount;
+	pid_t			*pidarray;
+	t_bool			in_heredoc;
 };
 
 #endif		/*Mini struct header*/

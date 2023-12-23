@@ -6,13 +6,13 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 21:33:30 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/12/22 21:13:12 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/23 16:19:11 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	handle_sigint_exit(int signum)
+void	handle_sigint_exit(int signum)
 {
 	(void)signum;
 	write(1, "\n", 1);
@@ -20,7 +20,7 @@ static void	handle_sigint_exit(int signum)
 	exit(130);
 }
 
-static void	handle_sigint(int signum)
+void	handle_sigint(int signum)
 {
 	(void)signum;
 	write(1, "\n", 1);
@@ -30,7 +30,7 @@ static void	handle_sigint(int signum)
 	g_exit_status = 130;
 }
 
-static void	handle_sigquit(int signum)
+void	handle_sigquit(int signum)
 {
 	char	*nbr;
 
@@ -70,14 +70,4 @@ void	ft_signals(t_global *global)
 	if (global == NULL)
 		return ;
 	ft_switch_sigint(global);
-	if (global->pidarray != NULL)
-	{
-		if (signal(SIGQUIT, handle_sigquit) == SIG_ERR)
-			ft_printerror(__func__, "SigQuit");
-		while (i < global->pidcount)
-		{
-			kill(global->pidarray[i], SIGKILL);
-			i++;
-		}
-	}
 }

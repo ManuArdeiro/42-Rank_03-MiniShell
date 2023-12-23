@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:47:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/12/22 19:15:13 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/23 16:20:03 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,12 @@
 # include "termcap.h"
 
 // Global variable (for signals)
-
 volatile sig_atomic_t	g_exit_status;
 
-// Signals
+//Signal handlers
+void		handle_sigquit(int signum);
+void		handle_sigint(int signum);
+void		handle_sigint_exit(int signum);
 void		ft_signals(t_global *global);
 
 // File utils/print_msg.c

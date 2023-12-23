@@ -64,7 +64,8 @@ enum e_bool
 	FORK,
 	BUILTIN,
 	FIRST,
-	LAST
+	LAST,
+	HEREDOC_EXE
 };
 
 struct s_dict

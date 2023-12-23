@@ -15,25 +15,27 @@
 static void	handle_sigint_exit(int signum)
 {
 	(void)signum;
+	write(1, "\n", 1);
 	g_exit_status = 130;
-	exit(EXIT_FAILURE);
+	exit(130);
 }
 
-//static void	handle_sigint(int signum)
-//{
-//	(void)signum;
-//	write(1, "\n", 1);
-//	rl_replace_line("", 1);
-//	rl_on_new_line();
-//	rl_redisplay();
-//	g_exit_status = 130;
-//}
+static void	handle_sigint(int signum)
+{
+	(void)signum;
+	write(1, "\n", 1);
+	rl_replace_line("", 1);
+	rl_on_new_line();
+	rl_redisplay();
+	g_exit_status = 130;
+}
 
 static void	handle_sigquit(int signum)
 {
 	char	*nbr;
 
 	nbr = ft_itoa(signum);
+	printf("sigquwitesf\n");
 	ft_putstr_fd("Quit: ", STDERR_FILENO);
 	ft_putendl_fd(nbr, STDERR_FILENO);
 	rl_replace_line("", 1);
@@ -42,19 +44,36 @@ static void	handle_sigquit(int signum)
 	g_exit_status = 131;
 }
 
+static void	ft_switch_sigint(t_global *global)
+{
+	if (global->in_heredoc == TRUE)
+	{
+		if (signal(SIGINT, handle_sigint_exit) == SIG_ERR)
+			ft_printerror(__func__, "SigINT");
+	}
+	else if (global->in_heredoc == HEREDOC_EXE)
+	{
+		if (signal(SIGINT, SIG_IGN) == SIG_ERR)
+			ft_printerror(__func__, "SigINT");
+		global->in_heredoc = FALSE;
+	}
+	else if (global->in_heredoc == FALSE)
+		if (signal(SIGINT, handle_sigint) == SIG_ERR)
+			ft_printerror(__func__, "SigINT");
+}
+
 void	ft_signals(t_global *global)
 {
 	int	i;
 
 	i = 0;
-	if (global->in_heredoc == TRUE)
-		signal(SIGINT, handle_sigint_exit);
-	else if (global->in_heredoc == FALSE)
-		signal(SIGINT, SIG_IGN);
-	//signal(SIGCHLD, handle_sigint);
+	if (global == NULL)
+		return ;
+	ft_switch_sigint(global);
 	if (global->pidarray != NULL)
 	{
-		signal(SIGQUIT, handle_sigquit);
+		if (signal(SIGQUIT, handle_sigquit) == SIG_ERR)
+			ft_printerror(__func__, "SigQuit");
 		while (i < global->pidcount)
 		{
 			kill(global->pidarray[i], SIGKILL);

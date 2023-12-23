@@ -31,8 +31,14 @@ static void	ft_register_and_clean(
 		function and will pass it to the tokenizer to recognize the diffetent
 		tokens.
 	-	Then will call the parser.
-	-	
 	*/
+
+void	ft_resetvariables(t_global *global)
+{
+	global->pidarray = NULL;
+	global->pidcount = 0;
+	g_exit_status = EXIT_SUCCESS;
+}
 
 static void	ft_loop(t_global *global)
 {
@@ -40,10 +46,10 @@ static void	ft_loop(t_global *global)
 	t_minitree	*parsetree;
 
 	history = NULL;
+	ft_signals(global);
 	while (global->status != EXITED)
 	{
-		ft_signals(global);
-		global->in_heredoc = O_HEREDOC;
+		ft_resetvariables(global);
 		global->line = readline(MINI_PROMPT);
 		if (global->line != NULL)
 		{

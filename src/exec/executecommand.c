@@ -50,7 +50,7 @@ int	ft_executecommand(t_command *command, t_global *global)
 	ft_check_variables(command, global);
 	pidcount = ft_create_subprocess(command, &pidarray, global);
 	global->pidarray = pidarray;
-	global->pidarray = &pidcount;
+	global->pidcount = pidcount;
 	ft_signals(global);
 	laststatus = ft_wait_subprocess(command, pidarray, pidcount);
 	if (g_exit_status != 0)

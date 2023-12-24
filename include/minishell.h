@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Ardeiro <Ardeiro@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:47:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/12/17 15:32:19 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/24 15:28:10 by Ardeiro          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,10 @@
 
 // Global variable (for signals)
 
-t_signals	g_signals;
+int	exit_status;
 
 // Signals
-void		ft_signals(void);
+void		ft_signals(t_global *global);
 
 // File utils/print_msg.c
 void		ft_printhelp(void);
@@ -75,7 +75,7 @@ char		*ft_get_localpath(void);
 char		*ft_get_rootpath(const char *path);
 void		ft_free_string(void *content);
 void		ft_print_commanderror(const char *commandname, t_bool option);
-char		*ft_get_completeline(const char *commandline);
+char		*ft_get_completeline(const char *commandline, t_global *global);
 
 //History
 void		ft_write_command_history(t_list **history, t_global *global);

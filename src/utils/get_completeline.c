@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_completeline.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Ardeiro <Ardeiro@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 16:08:48 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/16 16:25:08 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/24 15:31:31 by Ardeiro          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ static t_bool	ft_loop_end(const char *line, const char *prompt)
 	return (FALSE);
 }
 
-static char	*ft_completeline(const char *commandline, const char *prompt)
+static char	*ft_completeline(const char *commandline, const char *prompt,
+	t_global *global)
 {
 	char	*line;
 	char	*buffer;
@@ -41,7 +42,7 @@ static char	*ft_completeline(const char *commandline, const char *prompt)
 		if (line != NULL)
 			buffer = ft_strjoin_get(buffer, line);
 		if (ft_loop_end(line, prompt) == TRUE
-			|| g_signals.sig_exit_status == 1)
+			|| global->sig_exit_status == 1)
 			break ;
 		free(line);
 	}
@@ -50,28 +51,28 @@ static char	*ft_completeline(const char *commandline, const char *prompt)
 	return (result);
 }
 
-static char	*ft_findsplitter(const char *commandline)
+static char	*ft_findsplitter(const char *commandline, t_global *global)
 {
 	char	*completeline;
 
 	completeline = NULL;
 	if (ft_endswith(commandline, "\\") == TRUE)
-		completeline = ft_completeline(commandline, BACKSLASH);
+		completeline = ft_completeline(commandline, BACKSLASH, global);
 	else if (ft_endswith(commandline, "|") == TRUE)
-		completeline = ft_completeline(commandline, PIPELINE);
+		completeline = ft_completeline(commandline, PIPELINE, global);
 	return (completeline);
 }
 
-char	*ft_get_completeline(const char *commandline)
+char	*ft_get_completeline(const char *commandline, t_global *global)
 {
 	char	*completeline;
 
 	completeline = NULL;
 	if (commandline == NULL)
 		return (NULL);
-	completeline = ft_findsplitter(commandline);
+	completeline = ft_findsplitter(commandline, global);
 	if (completeline && ft_endswith(completeline, "|") == TRUE)
-		completeline = ft_get_completeline(completeline);
+		completeline = ft_get_completeline(completeline, global);
 	if (completeline)
 		free((char *)commandline);
 	else

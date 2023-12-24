@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_heredoc.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Ardeiro <Ardeiro@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 18:28:55 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/17 19:04:24 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/24 19:08:23 by Ardeiro          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,13 @@ static void	ft_get_inputline(char **line, int *herepipe)
 	}
 }
 
-static void	ft_evaluate_line(
-		char *cleanline,
-		const char *delimiter, char *line, int *herepipe
-)
+static void	ft_evaluate_line(const char *delimiter, char *line,
+	int *herepipe, t_global *global)
 {
+	char	*cleanline;
+
+	cleanline = NULL;
+	cleanline = ft_strtrim(line, "\n");
 	if (ft_strequal(cleanline, delimiter) == TRUE)
 	{
 		free(line);
@@ -35,7 +37,7 @@ static void	ft_evaluate_line(
 		ft_closepipe(&herepipe[0], &herepipe[1]);
 		exit(EXIT_SUCCESS);
 	}
-	else if (g_signals.sig_exit_status == 1)
+	else if (global->sig_exit_status == 1)
 	{
 		free(line);
 		free(cleanline);
@@ -44,28 +46,24 @@ static void	ft_evaluate_line(
 	}
 }
 
-void	ft_writetofile(const char *delimiter, int *herepipe)
+void	ft_writetofile(const char *delimiter, int *herepipe, t_global *global)
 {
 	char	*line;
-	char	*cleanline;
 
 	line = "";
-	cleanline = NULL;
 	while (line != NULL)
 	{
-		ft_signals();
+		ft_signals(global);
 		ft_putstr_fd("heredoc> ", STDOUT_FILENO);
 		ft_get_inputline(&line, herepipe);
-		cleanline = ft_strtrim(line, "\n");
-		ft_evaluate_line(cleanline, delimiter, line, herepipe);
+		ft_evaluate_line(delimiter, line, herepipe, global);
 		ft_putstr_fd(line, herepipe[1]);
 		free(line);
-		free(cleanline);
 	}
 	exit(EXIT_SUCCESS);
 }
 
-void	ft_get_heredoc(t_file **file)
+void	ft_get_heredoc(t_file **file, t_global *global)
 {
 	pid_t	child;
 	int		herepipe[2];
@@ -75,8 +73,8 @@ void	ft_get_heredoc(t_file **file)
 	child = fork();
 	if (child == 0)
 	{
-		g_signals.in_heredoc = TRUE;
-		ft_writetofile((*file)->name, herepipe);
+		global->in_heredoc = TRUE;
+		ft_writetofile((*file)->name, herepipe, global);
 	}
 	else if (child < 0)
 		ft_printerror(__func__, "Fork");

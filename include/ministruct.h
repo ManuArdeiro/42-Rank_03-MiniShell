@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ministruct.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Ardeiro <Ardeiro@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:10:53 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/17 19:37:40 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/24 14:42:34 by Ardeiro          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include "minitree.h"
 
 typedef struct s_global			t_global;
-typedef struct s_signals		t_signals;
 typedef struct s_dict			t_dict;
 typedef struct s_command		t_command;
 typedef struct s_file			t_file;
@@ -154,16 +153,12 @@ struct s_global
 	t_bool		expand_dollartoken;
 	t_bool		devmode;
 	t_bool		expand_startoken;
-};
-
-struct s_signals
-{
-	int		exit_status;
-	int		sig_exit_status;
-	int		pidcount;
-	t_bool	in_heredoc;
-	t_bool	emptyline;
-	pid_t	*pidarray;
+	int			exit_status;
+	int			sig_exit_status;
+	int			pidcount;
+	t_bool		in_heredoc;
+	t_bool		emptyline;
+	pid_t		*pidarray;
 };
 
 #endif		/*Mini struct header*/

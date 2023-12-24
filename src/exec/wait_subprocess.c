@@ -15,11 +15,18 @@
 static void	ft_wait_process(pid_t *pid, int *laststatus, t_bool processtype)
 {
 	int	status;
+	pid_t	value_waitpid;
 
 	status = EXIT_SUCCESS;
 	if (processtype == FORK)
 	{
-		waitpid(*pid, &status, EXIT_SUCCESS);
+		value_waitpid = waitpid(*pid, &status, EXIT_SUCCESS);
+		printf("waitpid = %d\n", value_waitpid);
+		if (value_waitpid < 0)
+		{
+			if (kill(*pid, SIGKILL) < 0)
+				ft_printerror(__func__, "Kill function");
+		}
 		*laststatus = ft_evaluate_subprocess(status);
 	}
 	else if (processtype == BUILTIN)

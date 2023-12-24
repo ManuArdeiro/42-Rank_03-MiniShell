@@ -38,9 +38,9 @@ void	ft_resetvariables(t_global *global)
 	global->pidarray = NULL;
 	global->pidcount = 0;
 	g_exit_status = EXIT_SUCCESS;
-	global->signallist.__sigaction_u.__sa_handler = &ft_signal_handler;
+	global->signallist.sa_handler = &ft_signal_handler;
 	sigaction(SIGINT, &global->signallist, NULL);
-	global->signallist.__sigaction_u.__sa_handler = SIG_IGN;
+	global->signallist.sa_handler = SIG_IGN;
 	sigaction(SIGQUIT, &global->signallist, NULL);
 }
 

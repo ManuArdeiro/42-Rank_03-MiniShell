@@ -16,7 +16,6 @@ void	handle_sigint_exit(int signum)
 {
 	(void)signum;
 	write(1, "\n", 1);
-	write(1, "hola", 4);
 	g_exit_status = 130;
 	exit(130);
 }
@@ -46,6 +45,8 @@ void	ft_signal_handler(int signum)
 	}
 	else if (signum == SIGQUIT)
 		handle_sigquit(signum);
+	else if (signum == SIGHUP || signum == SIGTSTP || signum == SIGTERM)
+		exit(130);
 }
 
 
@@ -55,9 +56,12 @@ void	ft_initsignals(t_global *global)
 
 	if (global == NULL)
 		return ;
-	signallist.__sigaction_u.__sa_handler = &ft_signal_handler;
+	sigemptyset(&signallist.sa_mask);
+	signallist.sa_flags = 0;
+	signallist.sa_handler = &ft_signal_handler;
 	sigaction(SIGINT, &signallist, NULL);
-	signallist.__sigaction_u.__sa_handler = SIG_IGN;
+	signallist.sa_handler = SIG_IGN;
 	sigaction(SIGQUIT, &signallist, NULL);
+	sigaction(SIGCHLD, &signallist, NULL);
 	global->signallist = signallist;
 }

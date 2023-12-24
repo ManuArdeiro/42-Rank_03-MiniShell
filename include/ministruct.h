@@ -23,6 +23,8 @@
 # define NO_SUCH_FILE_IN	"in"
 # define NO_SUCH_FILE		" no such file or directory : "
 # define COMMAND_NOT_FOUND	" command not found : "
+# define sa_handler			__sigaction_u.__sa_handler
+# define sa_sigaction		__sigaction_u.__sa_sigaction
 
 typedef struct s_global			t_global;
 typedef struct s_dict			t_dict;

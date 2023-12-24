@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:50:44 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/23 16:17:04 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/24 18:47:01 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ static void	ft_fork_subprocess(
 	*pid = fork();
 	if (*pid == 0)
 	{
-		signal(SIGQUIT, handle_sigquit);
 		ft_execute_subprocess(command,
 			(t_file *)command->infile->content,
 			(t_file *)node->content,

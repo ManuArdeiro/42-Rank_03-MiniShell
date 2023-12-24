@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 19:28:06 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/22 20:33:45 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/24 18:14:32 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ static t_list	*ft_get_expandedfilelist(t_list *filelist, t_global *global)
 		file = (t_file *)node->content;
 		if (file != NULL && file->mode == O_HEREDOC)
 		{
-			global->in_heredoc = HEREDOC_EXE;
 			ft_get_heredoc(&file, global);
 			ft_lstinsert(&expandedlist, file, BACK);
 		}

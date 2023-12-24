@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:47:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/12/23 16:20:03 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/24 18:23:57 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ volatile sig_atomic_t	g_exit_status;
 void		handle_sigquit(int signum);
 void		handle_sigint(int signum);
 void		handle_sigint_exit(int signum);
-void		ft_signals(t_global *global);
+void		ft_signal_handler(int signum);
+void		ft_initsignals(t_global *global);
 
 // File utils/print_msg.c
 void		ft_printhelp(void);

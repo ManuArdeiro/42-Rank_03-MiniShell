@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 18:00:10 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/23 16:20:53 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/24 16:44:22 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void	ft_execute_builtin(
 
 	inputclone = 0;
 	outputclone = 0;
-	signal(SIGQUIT, handle_sigquit);
 	if (command == NULL)
 		return ;
 	args = ft_lstconvert_strarr(command->args);
@@ -42,5 +41,4 @@ void	ft_execute_builtin(
 	ft_clear_strarray(args);
 	ft_duplicate_descriptors(&inputclone, &outputclone);
 	args = NULL;
-	signal(SIGQUIT, SIG_IGN);
 }

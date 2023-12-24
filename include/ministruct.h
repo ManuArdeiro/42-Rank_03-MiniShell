@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:10:53 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/22 20:46:05 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/24 17:47:34 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,9 @@ enum e_bool
 	BUILTIN,
 	FIRST,
 	LAST,
-	HEREDOC_EXE
+	HEREDOC_EXE,
+	SIG_QUIT,
+	SIG_INT
 };
 
 struct s_dict
@@ -158,11 +160,11 @@ struct s_global
 	t_nodetype		lastnodetype;
 	int				shell_level;
 	t_bool			expand_dollartoken;
-	t_bool			devmode;
 	t_bool			expand_startoken;
+	t_bool			devmode;
 	int				pidcount;
 	pid_t			*pidarray;
-	t_bool			in_heredoc;
+	t_sigaction		signallist;
 };
 
 #endif		/*Mini struct header*/

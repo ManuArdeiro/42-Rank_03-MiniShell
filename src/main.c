@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:55:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/12/22 21:14:22 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/24 18:49:34 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,10 @@ void	ft_resetvariables(t_global *global)
 	global->pidarray = NULL;
 	global->pidcount = 0;
 	g_exit_status = EXIT_SUCCESS;
+	global->signallist.__sigaction_u.__sa_handler = &ft_signal_handler;
+	sigaction(SIGINT, &global->signallist, NULL);
+	global->signallist.__sigaction_u.__sa_handler = SIG_IGN;
+	sigaction(SIGQUIT, &global->signallist, NULL);
 }
 
 static void	ft_loop(t_global *global)
@@ -46,7 +50,7 @@ static void	ft_loop(t_global *global)
 	t_minitree	*parsetree;
 
 	history = NULL;
-	ft_signals(global);
+	ft_initsignals(global);
 	while (global->status != EXITED)
 	{
 		ft_resetvariables(global);

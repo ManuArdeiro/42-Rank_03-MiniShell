@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 21:33:30 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/12/23 16:19:11 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/24 18:49:27 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,9 @@ void	handle_sigint_exit(int signum)
 {
 	(void)signum;
 	write(1, "\n", 1);
+	write(1, "hola", 4);
 	g_exit_status = 130;
 	exit(130);
-}
-
-void	handle_sigint(int signum)
-{
-	(void)signum;
-	write(1, "\n", 1);
-	rl_replace_line("", 1);
-	rl_on_new_line();
-	rl_redisplay();
-	g_exit_status = 130;
 }
 
 void	handle_sigquit(int signum)
@@ -35,7 +26,6 @@ void	handle_sigquit(int signum)
 	char	*nbr;
 
 	nbr = ft_itoa(signum);
-	printf("sigquwitesf\n");
 	ft_putstr_fd("Quit: ", STDERR_FILENO);
 	ft_putendl_fd(nbr, STDERR_FILENO);
 	rl_replace_line("", 1);
@@ -44,30 +34,30 @@ void	handle_sigquit(int signum)
 	g_exit_status = 131;
 }
 
-static void	ft_switch_sigint(t_global *global)
+void	ft_signal_handler(int signum)
 {
-	if (global->in_heredoc == TRUE)
+	if (signum == SIGINT)
 	{
-		if (signal(SIGINT, handle_sigint_exit) == SIG_ERR)
-			ft_printerror(__func__, "SigINT");
+		write(1, "\n", 1);
+		rl_replace_line("", 1);
+		rl_on_new_line();
+		rl_redisplay();
+		g_exit_status = 130;
 	}
-	else if (global->in_heredoc == HEREDOC_EXE)
-	{
-		if (signal(SIGINT, SIG_IGN) == SIG_ERR)
-			ft_printerror(__func__, "SigINT");
-		global->in_heredoc = FALSE;
-	}
-	else if (global->in_heredoc == FALSE)
-		if (signal(SIGINT, handle_sigint) == SIG_ERR)
-			ft_printerror(__func__, "SigINT");
+	else if (signum == SIGQUIT)
+		handle_sigquit(signum);
 }
 
-void	ft_signals(t_global *global)
-{
-	int	i;
 
-	i = 0;
+void	ft_initsignals(t_global *global)
+{
+	t_sigaction	signallist;
+
 	if (global == NULL)
 		return ;
-	ft_switch_sigint(global);
+	signallist.__sigaction_u.__sa_handler = &ft_signal_handler;
+	sigaction(SIGINT, &signallist, NULL);
+	signallist.__sigaction_u.__sa_handler = SIG_IGN;
+	sigaction(SIGQUIT, &signallist, NULL);
+	global->signallist = signallist;
 }

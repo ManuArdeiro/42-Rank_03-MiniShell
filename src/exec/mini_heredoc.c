@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 18:28:55 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/23 16:07:08 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2023/12/24 18:40:55 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,17 @@ static void	ft_evaluate_line(
 }
 
 void	ft_writetofile(
-		const char *delimiter, int *herepipe, t_global *global)
+	const char *delimiter, int *herepipe, t_global *global)
 {
 	char	*line;
 	char	*cleanline;
 
 	line = "";
 	cleanline = NULL;
+	global->signallist.__sigaction_u.__sa_handler = &handle_sigint_exit;
+	sigaction(SIGINT, &global->signallist, NULL);
 	while (line != NULL)
 	{
-		ft_signals(global);
 		ft_putstr_fd("heredoc> ", STDOUT_FILENO);
 		ft_get_inputline(&line, herepipe);
 		cleanline = ft_strtrim(line, "\n");
@@ -64,16 +65,13 @@ void	ft_get_heredoc(t_file **file, t_global *global)
 	int		herepipe[2];
 	pid_t	child;
 
-	if (global == NULL)
-		return ;
 	if (pipe(herepipe) < 0)
 		ft_printerror(__func__, "Pipe");
 	child = fork();
+	global->signallist.__sigaction_u.__sa_handler = SIG_IGN;
+	sigaction(SIGINT, &global->signallist, NULL);
 	if (child == 0)
-	{
-		global->in_heredoc = TRUE;
 		ft_writetofile((*file)->name, herepipe, global);
-	}
 	else if (child < 0)
 		ft_printerror(__func__, "Fork");
 	else

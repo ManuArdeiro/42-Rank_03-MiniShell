@@ -20,6 +20,15 @@ void	handle_sigint_exit(int signum)
 	exit(130);
 }
 
+void	handle_sigint2(int signum)
+{
+	(void)signum;
+	write(1, "\n", 1);
+	rl_replace_line("", 1);
+	rl_on_new_line();
+	g_exit_status = 130;
+}
+
 void	handle_sigquit(int signum)
 {
 	char	*nbr;
@@ -53,15 +62,18 @@ void	ft_signal_handler(int signum)
 void	ft_initsignals(t_global *global)
 {
 	t_sigaction	signallist;
+	sigset_t	blockmask;
 
 	if (global == NULL)
 		return ;
-	sigemptyset(&signallist.sa_mask);
-	signallist.sa_flags = 0;
+	sigemptyset(&blockmask);
+	sigaddset(&blockmask, SIGINT);
+	sigaddset(&blockmask, SIGQUIT);
+	signallist.sa_mask = blockmask;
+	signallist.sa_flags = SA_RESTART;
 	signallist.sa_handler = &ft_signal_handler;
 	sigaction(SIGINT, &signallist, NULL);
-	signallist.sa_handler = SIG_IGN;
+	sigaction(SIGTERM, &signallist, NULL);
 	sigaction(SIGQUIT, &signallist, NULL);
-	sigaction(SIGCHLD, &signallist, NULL);
 	global->signallist = signallist;
 }

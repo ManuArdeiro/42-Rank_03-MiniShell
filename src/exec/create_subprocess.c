@@ -18,6 +18,8 @@ static void	ft_fork_subprocess(
 	*pid = fork();
 	if (*pid == 0)
 	{
+		global->signallist.sa_handler = &handle_sigint_exit;
+		sigaction(SIGINT, &global->signallist, NULL);
 		ft_execute_subprocess(command,
 			(t_file *)command->infile->content,
 			(t_file *)node->content,
@@ -37,6 +39,8 @@ static void	ft_initiate_subprocess(
 	if (command == NULL || *pid == NULL || global == NULL)
 		return ;
 	node = command->outfile;
+	global->signallist.sa_handler = &handle_sigint2;
+	sigaction(SIGINT, &global->signallist, NULL);
 	while (count < pidcount && node != NULL)
 	{
 		if (ft_isbuiltin(command->name) == TRUE)

@@ -21,10 +21,9 @@ static void	ft_wait_process(pid_t *pid, int *laststatus, t_bool processtype)
 	if (processtype == FORK)
 	{
 		value_waitpid = waitpid(*pid, &status, EXIT_SUCCESS);
-		printf("waitpid = %d\n", value_waitpid);
 		if (value_waitpid < 0)
 		{
-			if (kill(*pid, SIGKILL) < 0)
+			if (kill(*pid, SIGTERM) < 0)
 				ft_printerror(__func__, "Kill function");
 		}
 		*laststatus = ft_evaluate_subprocess(status);

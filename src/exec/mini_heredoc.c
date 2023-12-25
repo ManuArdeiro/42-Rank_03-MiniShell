@@ -45,7 +45,7 @@ void	ft_writetofile(
 
 	line = "";
 	cleanline = NULL;
-	global->signallist.__sigaction_u.__sa_handler = &handle_sigint_exit;
+	global->signallist.sa_handler = &handle_sigint_exit;
 	sigaction(SIGINT, &global->signallist, NULL);
 	while (line != NULL)
 	{
@@ -68,7 +68,7 @@ void	ft_get_heredoc(t_file **file, t_global *global)
 	if (pipe(herepipe) < 0)
 		ft_printerror(__func__, "Pipe");
 	child = fork();
-	global->signallist.__sigaction_u.__sa_handler = SIG_IGN;
+	global->signallist.sa_handler = SIG_IGN;
 	sigaction(SIGINT, &global->signallist, NULL);
 	if (child == 0)
 		ft_writetofile((*file)->name, herepipe, global);

@@ -41,7 +41,7 @@ volatile sig_atomic_t	g_exit_status;
 
 //Signal handlers
 void		handle_sigquit(int signum);
-void		handle_sigint(int signum);
+void		handle_sigint2(int signum);
 void		handle_sigint_exit(int signum);
 void		ft_signal_handler(int signum);
 void		ft_initsignals(t_global *global);

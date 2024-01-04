@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:50:44 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/24 18:47:01 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/04 18:54:26 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ static void	ft_initiate_subprocess(
 	node = command->outfile;
 	global->signallist.sa_handler = &handle_sigint2;
 	sigaction(SIGINT, &global->signallist, NULL);
+	global->signallist.sa_handler = &ft_signal_handler;
+	sigaction(SIGQUIT, &global->signallist, NULL);
 	while (count < pidcount && node != NULL)
 	{
 		if (ft_isbuiltin(command->name) == TRUE)

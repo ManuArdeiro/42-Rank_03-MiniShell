@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 19:12:20 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/20 19:52:42 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/04 19:43:28 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,7 @@ static char	*ft_get_substr(
 	{
 		buffer
 			= ft_substr(
-				commandline,
-				(*node)->start,
+				commandline, (*node)->start,
 				((secondnode->end) - ((*node)->start) + 1));
 	}
 	else if (secondnode == NULL)
@@ -60,6 +59,9 @@ static void	ft_add_subseries(
 	buffer = NULL;
 	cleancase = CLEAN_ALL;
 	sub_endnode = ft_get_tokennode((*node)->next, (*node)->token, FALSE, TRUE);
+	if (sub_endnode != NULL
+		&& sub_endnode->next != NULL && sub_endnode->next->token == tk_arg)
+		sub_endnode = ft_get_last_seriestoken(sub_endnode);
 	cleancase = ft_get_cleancase((*node), sub_endnode);
 	buffer
 		= ft_strclean_withspaces(

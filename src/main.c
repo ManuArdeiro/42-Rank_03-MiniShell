@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:55:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/12/24 18:49:34 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/04 18:39:03 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	ft_resetvariables(t_global *global)
 	g_exit_status = EXIT_SUCCESS;
 	global->signallist.sa_handler = &ft_signal_handler;
 	sigaction(SIGINT, &global->signallist, NULL);
+	global->signallist.sa_handler = SIG_IGN;
 	sigaction(SIGQUIT, &global->signallist, NULL);
 }
 

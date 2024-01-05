@@ -92,6 +92,7 @@ t_minitree	*ft_get_minicommand(t_part *tokenlist, t_global *global)
 	if (tokenlist == NULL || global == NULL)
 		return (NULL);
 	command = ft_newcommand(tokenlist, global);
+	system("Leaks minishell");
 	minicommand = ft_create_mininode((t_command *)command, n_command);
 	ft_treeinsert(&minitree, NULL, minicommand, NULL);
 	return (minitree);

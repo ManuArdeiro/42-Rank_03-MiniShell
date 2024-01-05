@@ -16,9 +16,9 @@ void	ft_free_tokenlist(t_part **tokenlist)
 {
 	t_part	*node;
 
-	if (tokenlist == NULL)
+	if (tokenlist == NULL || (*tokenlist) == NULL)
 		return ;
-	node = *tokenlist;
+	node = (*tokenlist);
 	while (node != NULL)
 	{
 		(*tokenlist) = node->next;

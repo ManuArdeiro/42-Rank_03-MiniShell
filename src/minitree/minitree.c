@@ -27,13 +27,19 @@ t_minitree	*ft_create_treenode(void *content)
 
 t_minitree	*ft_insertleft(t_minitree *root, void *content)
 {
-	root->leftchild = ft_create_treenode(content);
+	if (content == NULL)
+		root->leftchild = NULL;
+	else
+		root->leftchild = ft_create_treenode(content);
 	return (root->leftchild);
 }
 
 t_minitree	*ft_insertright(t_minitree *root, void *content)
 {
-	root->rightchild = ft_create_treenode(content);
+	if (content == NULL)
+		root->rightchild = NULL;
+	else
+		root->rightchild = ft_create_treenode(content);
 	return (root->rightchild);
 }
 
@@ -54,7 +60,12 @@ void	ft_destroytree(t_minitree **root, void (*free_function)(void *))
 void	ft_treeinsert(
 	t_minitree **root, void *leftcontent, void *rootcontent, void *rightcontent)
 {
-	(*root) = ft_create_treenode(rootcontent);
-	(*root)->leftchild = ft_insertleft(*root, leftcontent);
-	(*root)->rightchild = ft_insertright(*root, rightcontent);
+	if (rootcontent == NULL)
+		(*root) = NULL;
+	else
+	{
+		(*root) = ft_create_treenode(rootcontent);
+		(*root)->leftchild = ft_insertleft(*root, leftcontent);
+		(*root)->rightchild = ft_insertright(*root, rightcontent);
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 21:33:30 by jolopez-          #+#    #+#             */
-/*   Updated: 2024/01/04 18:53:08 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/05 19:25:57 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ void	ft_signal_handler(int signum)
 		exit(130);
 }
 
-
 void	ft_initsignals(t_global *global)
 {
 	t_sigaction	signallist;
@@ -71,9 +70,9 @@ void	ft_initsignals(t_global *global)
 	sigaddset(&blockmask, SIGQUIT);
 	signallist.sa_mask = blockmask;
 	signallist.sa_flags = SA_RESTART;
-	signallist.sa_handler = &ft_signal_handler;
+	signallist.__sigaction_u.__sa_handler = &ft_signal_handler;
 	sigaction(SIGINT, &signallist, NULL);
-	signallist.sa_handler = SIG_IGN;
+	signallist.__sigaction_u.__sa_handler = SIG_IGN;
 	sigaction(SIGQUIT, &signallist, NULL);
 	global->signallist = signallist;
 }

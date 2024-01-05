@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 19:12:20 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/04 19:43:28 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/05 19:56:58 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,18 +55,23 @@ static void	ft_add_subseries(
 	t_part		*sub_endnode;
 	t_cleancase	cleancase;
 	char		*buffer;
+	char		*substring;
 
 	buffer = NULL;
+	substring = NULL;
 	cleancase = CLEAN_ALL;
 	sub_endnode = ft_get_tokennode((*node)->next, (*node)->token, FALSE, TRUE);
 	if (sub_endnode != NULL
 		&& sub_endnode->next != NULL && sub_endnode->next->token == tk_arg)
 		sub_endnode = ft_get_last_seriestoken(sub_endnode);
 	cleancase = ft_get_cleancase((*node), sub_endnode);
-	buffer
-		= ft_strclean_withspaces(
-			ft_get_substr(commandline, sub_endnode, node), cleancase);
+	substring = ft_get_substr(commandline, sub_endnode, node);
+	buffer = ft_strclean_withspaces(substring, cleancase);
 	(*commandseries) = ft_strjoin_get((*commandseries), buffer);
+	if (substring != NULL)
+		free(substring);
+	if (buffer != NULL)
+		free(buffer);
 	(*node) = sub_endnode;
 }
 

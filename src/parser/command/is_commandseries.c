@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 17:08:56 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/17 14:06:41 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/05 17:36:51 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ t_bool	ft_is_commandseries(t_part *tokenlist)
 	result = TRUE;
 	if (tokenlist != NULL)
 	{
-		if (ft_tokenlist_contains(tokenlist, ft_is_tokenpair) == TRUE
+		if (tokenlist->token != tk_cmd
+			&& ft_tokenlist_contains(tokenlist, ft_is_tokenpair) == TRUE
 			&& ft_tokenlist_contains(tokenlist, ft_is_command) == TRUE)
 			result = ft_check_series(tokenlist);
 		else

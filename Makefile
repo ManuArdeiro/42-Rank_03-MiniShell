@@ -6,7 +6,7 @@
 #    By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/01 18:51:45 by jolopez-          #+#    #+#              #
-#    Updated: 2024/01/04 18:20:04 by yzaytoun         ###   ########.fr        #
+#    Updated: 2024/01/05 20:15:46 by yzaytoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,8 @@ READLINE_FLAGS	= -lreadline -ltermcap
 ENV				= ft_getenv.c ft_setenv.c ft_initenv.c ft_delenv.c
 
 UTILS			= print_msg.c mini_history.c get_path.c free_string.c \
-					mini_dictionary.c signals.c clearscreen.c get_completeline.c
+					mini_dictionary.c signals.c clearscreen.c get_completeline.c\
+					init_global.c
 
 LEXER			= tokenizer.c tokens.c token_tools_1.c token_tools_2.c \
 					ft_copy_tokenlist.c ft_tokenlist_add.c print_tokenlist.c \
@@ -46,7 +47,8 @@ COMMAND			= extract_tokenstring.c get_commandlist.c lstconvert.c \
 					printcommand.c extract_filelist.c get_minicommand.c \
 					extract_arglist.c is_compoundcommand.c free_commandlist.c\
 					extract_commandseries.c is_commandseries.c get_last_seriestoken.c\
-					is_command.c clear_emptyvalues.c get_commandseries.c
+					is_command.c clear_emptyvalues.c get_commandseries.c\
+					checkquotes.c
 				
 FILE			= filestreams.c create_file.c get_filemode.c is_redirection.c \
 					freefile.c append_filecontent.c delete_filenode.c closepipe.c\
@@ -80,7 +82,7 @@ OBJS			=	$(SRC:%.c=$(OBJ_DIR)/%.o)
 
 RM 				=	/bin/rm -rf
 CC 				= 	gcc
-CFLAGS 			= 	-Wall -Werror -Wextra $(INCLUDE) $(INC_LIB) $(READLINE_LIB) $(SANITIZER)
+CFLAGS 			= 	-Wall -Werror -Wextra $(INCLUDE) $(INC_LIB) $(READLINE_LIB) -g #$(SANITIZER)
 
 LIBFT			= 	include/libft/libft.a
 LIBFTDIR		= 	include/libft

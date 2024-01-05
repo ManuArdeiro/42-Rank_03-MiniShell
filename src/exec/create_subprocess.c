@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:50:44 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/04 18:54:26 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/05 19:24:26 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	ft_fork_subprocess(
 	*pid = fork();
 	if (*pid == 0)
 	{
-		global->signallist.sa_handler = &handle_sigint_exit;
+		global->signallist.__sigaction_u.__sa_handler = &handle_sigint_exit;
 		sigaction(SIGINT, &global->signallist, NULL);
 		ft_execute_subprocess(command,
 			(t_file *)command->infile->content,
@@ -39,9 +39,9 @@ static void	ft_initiate_subprocess(
 	if (command == NULL || *pid == NULL || global == NULL)
 		return ;
 	node = command->outfile;
-	global->signallist.sa_handler = &handle_sigint2;
+	global->signallist.__sigaction_u.__sa_handler = &handle_sigint2;
 	sigaction(SIGINT, &global->signallist, NULL);
-	global->signallist.sa_handler = &ft_signal_handler;
+	global->signallist.__sigaction_u.__sa_handler = &ft_signal_handler;
 	sigaction(SIGQUIT, &global->signallist, NULL);
 	while (count < pidcount && node != NULL)
 	{

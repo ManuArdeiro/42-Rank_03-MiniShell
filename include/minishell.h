@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:47:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2024/01/04 18:31:09 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/05 19:14:52 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,13 @@ void		handle_sigint_exit(int signum);
 void		ft_signal_handler(int signum);
 void		ft_initsignals(t_global *global);
 
-// File utils/print_msg.c
+// File utils
 void		ft_printhelp(void);
 void		ft_printwellcome(void);
 void		ft_printerror(const char *function, const char *string);
+void		ft_freeglobal(t_global **global);
+void		ft_initglobal(t_global **global, char **env,
+				int shell_level, t_bool devmode);
 
 // Environment
 void		ft_setenv(t_list **envlist, char *key, char *value, int overwrite);

@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 15:50:08 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/19 18:35:52 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/05 20:24:21 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ t_list	*ft_extract_arglist(t_part *tokenlist, t_global *global)
 	{
 		if (ft_is_tokenpair(node->token) == TRUE
 			&& ft_is_commandseries(tokenlist) == TRUE)
-			ft_skip_quotes(&node->next);
+			node = ft_skip_quotes(node->next);
 		else if (ft_is_argument(node) == TRUE)
 			ft_get_arg(&stringlist, &node, global);
 		if (node != NULL)

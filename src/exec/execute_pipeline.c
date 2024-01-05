@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 17:32:49 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/17 19:39:22 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/05 20:26:17 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,8 @@ int	ft_execute_pipeline(t_minitree *root, t_global *global)
 		ft_printerror(__func__, "Pipe");
 	ft_execute(root, pipeline, global, &pid);
 	ft_closepipe(&pipeline[0], &pipeline[1]);
-	if (waitpid(pid[0], &status, EXIT_SUCCESS) < 0)
-		ft_printerror(__func__, "Wait");
-	if (waitpid(pid[1], &status, EXIT_SUCCESS) < 0)
-		ft_printerror(__func__, "Wait");
+	waitpid(pid[0], &status, EXIT_SUCCESS);
+	waitpid(pid[1], &status, EXIT_SUCCESS);
 	if (pid != NULL)
 		free(pid);
 	return (status);

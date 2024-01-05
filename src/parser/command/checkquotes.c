@@ -1,24 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   wait_close_heredoc.c                               :+:      :+:    :+:   */
+/*   checkquotes.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/21 19:27:11 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/05 19:25:06 by yzaytoun         ###   ########.fr       */
+/*   Created: 2024/01/05 17:54:23 by yzaytoun          #+#    #+#             */
+/*   Updated: 2024/01/05 17:56:38 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_wait_close_heredoc(pid_t child, t_file *file, int *herepipe)
+void	ft_checkquotes(char **string)
 {
-	int		status;
+	char	*buffer;
 
-	status = EXIT_SUCCESS;
-	file->fd = dup(herepipe[0]);
-	ft_closepipe(&herepipe[0], &herepipe[1]);
-	waitpid(child, &status, EXIT_SUCCESS);
-	ft_evaluate_subprocess(status);
+	buffer = (*string);
+	if (ft_strchr(buffer, '\'') != NULL
+		|| ft_strchr(buffer, '\"') != NULL)
+	{
+		(*string) = ft_strclean_withspaces(buffer, CLEAN_ALL);
+		if (buffer != NULL)
+			free(buffer);
+	}
 }

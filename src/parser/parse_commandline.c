@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 12:24:07 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/18 20:13:15 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/05 20:54:29 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ static void	ft_parse_tokenlist(
 static void	ft_tokensplit_all(
 		t_minitree **root, t_part *tokenlist, t_global *global)
 {
+	if (ft_is_emptynode(*root) == FALSE)
+		ft_destroytree(root, ft_free_mininode);
 	if (ft_valid_subshellnode(tokenlist) == TRUE)
 		*root = ft_split_subshell(tokenlist, global);
 	else if (ft_tokenlist_contains(tokenlist, ft_is_tokenseparator) == TRUE)
@@ -29,24 +31,31 @@ static void	ft_tokensplit_all(
 static void	ft_parse_tokenlist(
 		t_minitree **root, t_part *tokenlist, t_global *global)
 {
+	t_part	*left_tokenlist;
+	t_part	*right_tokenlist;
+
+	left_tokenlist = NULL;
+	right_tokenlist = NULL;
 	if (tokenlist == NULL)
 		return ;
 	ft_tokensplit_all(root, tokenlist, global);
-	if (*root != NULL
-		&& ft_is_emptynode((*root)->leftchild) == FALSE)
+	if (*root != NULL && ft_is_emptynode((*root)->leftchild) == FALSE)
 	{
-		ft_parse_tokenlist(
-			&(*root)->leftchild,
-			((t_mininode *)((*root)->leftchild->content))->content,
-			global);
+		left_tokenlist
+			= ((t_mininode *)((*root)->leftchild->content))->content;
+		ft_parse_tokenlist(&(*root)->leftchild, left_tokenlist, global);
+		if (left_tokenlist != NULL)
+			ft_free_tokenlist(&left_tokenlist);
+		left_tokenlist = NULL;
 	}
-	if (*root != NULL
-		&& ft_is_emptynode((*root)->rightchild) == FALSE)
+	if (*root != NULL && ft_is_emptynode((*root)->rightchild) == FALSE)
 	{
-		ft_parse_tokenlist(
-			&(*root)->rightchild,
-			((t_mininode *)((*root)->rightchild->content))->content,
-			global);
+		right_tokenlist
+			= ((t_mininode *)((*root)->rightchild->content))->content;
+		ft_parse_tokenlist(&(*root)->rightchild, right_tokenlist, global);
+		if (right_tokenlist != NULL)
+			ft_free_tokenlist(&right_tokenlist);
+		right_tokenlist = NULL;
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 18:36:15 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/20 20:57:17 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/05 20:23:26 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ static void	ft_get_filelist(
 		if (ft_is_tokenpair(node->token) == TRUE
 			&& (ft_is_commandseries(tokenlist) == TRUE
 				|| ft_tokenlist_contains(node, ft_is_redirection) == TRUE))
-			ft_skip_quotes(&node->next);
+			node = ft_skip_quotes(node->next);
 		if (ft_check_filetype(node->token, std_stream) == TRUE)
 			ft_get_file(filelist, &node, std_stream, global);
 		if (node != NULL)

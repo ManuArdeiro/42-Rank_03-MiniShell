@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:50:22 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/24 18:26:41 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/05 19:06:45 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	ft_wait_process(pid_t *pid, int *laststatus, t_bool processtype)
 {
-	int	status;
+	int		status;
 	pid_t	value_waitpid;
 
 	status = EXIT_SUCCESS;

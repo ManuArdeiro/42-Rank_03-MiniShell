@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:55:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/12/24 18:49:34 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/05 20:43:23 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,9 @@ static void	ft_register_and_clean(
 void	ft_resetvariables(t_global *global)
 {
 	g_exit_status = EXIT_SUCCESS;
-	global->signallist.sa_handler = &ft_signal_handler;
+	global->signallist.__sigaction_u.__sa_handler = &ft_signal_handler;
 	sigaction(SIGINT, &global->signallist, NULL);
+	global->signallist.__sigaction_u.__sa_handler = SIG_IGN;
 	sigaction(SIGQUIT, &global->signallist, NULL);
 }
 
@@ -69,45 +70,12 @@ static void	ft_loop(t_global *global)
 	clear_history();
 }
 
-/*	This function first frees the list of environment strings then frees the
-	global structure allocated memory.	*/
-
-static void	ft_free(t_global **global)
-{
-	ft_lstclear(&((*global)->envlist), ft_cleardict);
-	free(*global);
-}
-
-/*	This function inits the glogal structure variable allocating memory 
-	with calloc. Then it creates the environment items list depending on
-	the environment passed as argument (or not) calling to ft_initenv()
-	function.	*/
-
-static void	ft_init(
-	t_global **global, char **env, int shell_level, t_bool devmode)
-{
-	*global = ft_calloc(sizeof(t_global), 1);
-	if (*global == NULL)
-		return ;
-	if (shell_level < 0)
-		shell_level = 0;
-	shell_level++;
-	(*global)->devmode = devmode;
-	(*global)->envlist = ft_initenv(env, shell_level);
-}
-
-//For Debugging
-//static void	ft_panic(void)
-//{
-	//	system("leaks minishell");
-//}
-/*	Main function:
+/*Main function:
 	- Checks the number of arguments and prints help if they are not correct.
 	- Prints the welcome message.
 	- Initializes the global variable.
 	- Starts the loop.
-	- Frees the global memory allocated.	*/
-
+	- Frees the global memory allocated.*/
 int	main(int ac, char **av, char **env)
 {
 	t_global	*global;
@@ -115,7 +83,6 @@ int	main(int ac, char **av, char **env)
 	int			laststatus;
 	t_bool		devmode;
 
-//	atexit(ft_panic);
 	laststatus = EXIT_SUCCESS;
 	devmode = FALSE;
 	shell_level = 0;
@@ -129,9 +96,9 @@ int	main(int ac, char **av, char **env)
 			ft_printhelp();
 	}
 	ft_printwellcome();
-	ft_init(&global, env, shell_level, devmode);
+	ft_initglobal(&global, env, shell_level, devmode);
 	ft_loop(global);
 	laststatus = global->laststatus;
-	ft_free(&global);
+	ft_freeglobal(&global);
 	return (laststatus);
 }

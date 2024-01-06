@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 20:07:17 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/22 20:33:21 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/05 20:21:53 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ t_token		ft_get_tokenpair(t_token token);
 t_minitree	*ft_split_subshell(t_part *tokenlist, t_global *global);
 void		ft_split_tokenlist(t_minitree **root, t_part *tokenlist);
 t_bool		ft_valid_subshellnode(t_part *tokenlist);
-void		ft_skip_quotes(t_part **token);
+t_part		*ft_skip_quotes(t_part *token);
 t_bool		ft_tokenlist_contains(
 				t_part *tokenlist, t_bool (*function)(t_token token));
 t_bool		ft_contains_sub_tokenlist(
@@ -64,6 +64,8 @@ t_list		*ft_clear_emptyvalues(t_list *list);
 char		*ft_get_commandseries(
 				const char *commandline,
 				t_part *seriesstart, t_part *seriesend);
+void		ft_checkquotes(char **string);
+
 //File
 t_list		*ft_extract_filelist(
 				t_part *tokenlist, t_bool filedirection, t_global *global);

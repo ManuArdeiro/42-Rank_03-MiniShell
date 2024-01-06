@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:10:53 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/24 17:47:34 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/05 19:23:33 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@
 # define NO_SUCH_FILE_IN	"in"
 # define NO_SUCH_FILE		" no such file or directory : "
 # define COMMAND_NOT_FOUND	" command not found : "
-# define sa_handler			__sigaction_u.__sa_handler
-# define sa_sigaction		__sigaction_u.__sa_sigaction
 
 typedef struct s_global			t_global;
 typedef struct s_dict			t_dict;

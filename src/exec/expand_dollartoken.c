@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 12:35:59 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/06 17:29:02 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/06 19:18:08 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,15 +54,21 @@ static char	*ft_get_stringvalue(
 static void	ft_expand_stringarray(
 		char ***stringarray, int laststatus, t_list *envlist)
 {
-	int	count;
+	int		count;
+	char	*buffer;
 
+	buffer = NULL;
 	if (*stringarray == NULL || envlist == NULL)
 		return ;
 	count = 0;
 	while ((*stringarray)[count] != NULL)
 	{
-		(*stringarray)[count]
-			= ft_get_stringvalue((*stringarray)[count], envlist, laststatus);
+		buffer = ft_get_stringvalue((*stringarray)[count], envlist, laststatus);
+		if (buffer != NULL)
+		{
+			free((*stringarray)[count]);
+			(*stringarray)[count] = buffer;
+		}
 		count++;
 	}
 }
@@ -86,6 +92,7 @@ static char	*ft_expand_dollarchain(
 	ft_strarr_add(&stringarray, stringstart, 1);
 	expandedstring = ft_concat_strarray(stringarray, FALSE);
 	ft_clear_strarray(stringarray);
+	free(stringstart);
 	return (expandedstring);
 }
 

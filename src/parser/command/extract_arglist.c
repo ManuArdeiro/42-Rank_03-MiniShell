@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 15:50:08 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/05 20:24:21 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/06 19:18:56 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@ static void	ft_check_forseries(
 		if ((*node)->token == tk_dblquot)
 			global->expand_startoken = FALSE;
 		(*string)
-			= ft_extract_commandseries(
-				global->line, (*node), node, global);
+			= ft_extract_commandseries(global->line, (*node), node, global);
 	}
 }
 
@@ -40,7 +39,7 @@ static void	ft_add_string_tolist(
 		ft_lstinsert(stringlist,
 			ft_expand_dollartoken(string, global), BACK);
 	else
-		ft_lstinsert(stringlist, (char *)string, BACK);
+		ft_lstinsert(stringlist, ft_strdup(string), BACK);
 }
 
 static t_bool	ft_is_argument(t_part *node)
@@ -69,6 +68,7 @@ static void	ft_get_arg(
 	}
 	if (string)
 		ft_add_string_tolist(stringlist, string, global);
+	free(string);
 }
 
 t_list	*ft_extract_arglist(t_part *tokenlist, t_global *global)

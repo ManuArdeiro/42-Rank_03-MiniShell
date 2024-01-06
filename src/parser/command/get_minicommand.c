@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 11:05:21 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/06 17:11:39 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/06 19:15:08 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,7 @@ static t_command	*ft_create_newcommand(
 
 	newcommand = NULL;
 	arglist = NULL;
-	//system("Leaks minishell");
 	arglist = ft_extract_arglist(tokenlist, global);
-	//system("Leaks minishell");
 	arglist = ft_clear_emptyvalues(arglist);
 	if ((commandname == NULL || ft_strlen(commandname) == 0)
 		&& (arglist != NULL && arglist->content != NULL))

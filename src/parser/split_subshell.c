@@ -21,7 +21,10 @@ static void	ft_get_treenode(
 		(*treenode)->leftchild->content = subshell_node;
 	}
 	else if ((*treenode) == NULL)
-		ft_split_tokenlist(&(*treenode), startnode->next);
+	{
+		ft_free_mininode(subshell_node);
+		(*treenode) = ft_split_tokenlist(startnode->next);
+	}
 }
 
 t_minitree	*ft_split_subshell(t_part *tokenlist, t_global *global)
@@ -41,8 +44,8 @@ t_minitree	*ft_split_subshell(t_part *tokenlist, t_global *global)
 	{
 		subshell_node
 			= ft_create_mininode(
-				ft_get_commandlist(startnode->next, endnode), n_subshell);
-		ft_split_tokenlist(&treenode, endnode->next);
+				ft_copy_tokenlist(startnode->next, endnode), n_subshell);
+		treenode = ft_split_tokenlist(endnode->next);
 		ft_get_treenode(&treenode, startnode, subshell_node);
 		if (treenode == NULL)
 			treenode = ft_get_minicommand(tokenlist, global);

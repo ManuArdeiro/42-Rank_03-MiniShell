@@ -6,13 +6,14 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:50:22 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/05 19:06:45 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/06 21:38:00 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	ft_wait_process(pid_t *pid, int *laststatus, t_bool processtype)
+static void	ft_wait_process(
+		pid_t *pid, int *laststatus, t_bool processtype, t_global *global)
 {
 	int		status;
 	pid_t	value_waitpid;
@@ -26,7 +27,7 @@ static void	ft_wait_process(pid_t *pid, int *laststatus, t_bool processtype)
 			if (kill(*pid, SIGTERM) < 0)
 				ft_printerror(__func__, "Kill function");
 		}
-		*laststatus = ft_evaluate_subprocess(status);
+		*laststatus = ft_evaluate_subprocess(status, global);
 	}
 	else if (processtype == BUILTIN)
 	{
@@ -35,7 +36,8 @@ static void	ft_wait_process(pid_t *pid, int *laststatus, t_bool processtype)
 	}
 }
 
-int	ft_wait_subprocess(t_command *command, pid_t *pid, int pidcount)
+int	ft_wait_subprocess(
+		t_command *command, pid_t *pid, int pidcount, t_global *global)
 {
 	int	count;
 	int	laststatus;
@@ -47,9 +49,9 @@ int	ft_wait_subprocess(t_command *command, pid_t *pid, int pidcount)
 	while (count < pidcount)
 	{
 		if (ft_isbuiltin(command->name) == TRUE)
-			ft_wait_process(&pid[count], &laststatus, BUILTIN);
+			ft_wait_process(&pid[count], &laststatus, BUILTIN, global);
 		else
-			ft_wait_process(&pid[count], &laststatus, FORK);
+			ft_wait_process(&pid[count], &laststatus, FORK, global);
 		++count;
 	}
 	return (laststatus);

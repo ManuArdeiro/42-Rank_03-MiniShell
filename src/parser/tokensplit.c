@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 11:52:43 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/05 20:39:11 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/06 20:32:19 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ static void	ft_split_default(
 	{
 		ft_fill_treenode(
 			treenode,
-			ft_get_commandlist(tokenlist, delimiter),
-			ft_get_commandlist(delimiter->next, NULL),
+			ft_copy_tokenlist(tokenlist, delimiter),
+			ft_copy_tokenlist(delimiter->next, NULL),
 			delimiter
 			);
 	}

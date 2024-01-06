@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 18:28:55 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/05 19:26:36 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/06 21:38:22 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	ft_writetofile(
 
 	line = "";
 	cleanline = NULL;
-	global->signallist.__sigaction_u.__sa_handler = &handle_sigint_exit;
+	global->signallist.sa_handler = &handle_sigint_exit;
 	sigaction(SIGINT, &global->signallist, NULL);
 	while (line != NULL)
 	{
@@ -68,12 +68,12 @@ void	ft_get_heredoc(t_file **file, t_global *global)
 	if (pipe(herepipe) < 0)
 		ft_printerror(__func__, "Pipe");
 	child = fork();
-	global->signallist.__sigaction_u.__sa_handler = SIG_IGN;
+	global->signallist.sa_handler = SIG_IGN;
 	sigaction(SIGINT, &global->signallist, NULL);
 	if (child == 0)
 		ft_writetofile((*file)->name, herepipe, global);
 	else if (child < 0)
 		ft_printerror(__func__, "Fork");
 	else
-		ft_wait_close_heredoc(child, *file, herepipe);
+		ft_wait_close_heredoc(child, *file, herepipe, global);
 }

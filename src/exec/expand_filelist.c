@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 19:28:06 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/24 18:14:32 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/06 21:05:35 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	ft_expand_filelist(t_list **filelist, t_global *global)
 	expandedlist = ft_get_expandedfilelist(*filelist, global);
 	if (ft_lstsize(expandedlist) > 1)
 	{
-		fullfile = ft_compress_filelist(expandedlist);
+		fullfile = ft_compress_filelist(expandedlist, global);
 		if (fullfile != NULL)
 			ft_lstinsert(filelist, fullfile, FRONT);
 	}

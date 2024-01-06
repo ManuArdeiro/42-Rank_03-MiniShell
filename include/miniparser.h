@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 20:07:17 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/05 20:21:53 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/06 21:05:19 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_bool		ft_is_tokenpair(t_token token);
 t_bool		ft_validate_tokenlist(t_part *tokenlist);
 t_token		ft_get_tokenpair(t_token token);
 t_minitree	*ft_split_subshell(t_part *tokenlist, t_global *global);
-void		ft_split_tokenlist(t_minitree **root, t_part *tokenlist);
+t_minitree	*ft_split_tokenlist(t_part *tokenlist);
 t_bool		ft_valid_subshellnode(t_part *tokenlist);
 t_part		*ft_skip_quotes(t_part *token);
 t_bool		ft_tokenlist_contains(
@@ -48,7 +48,7 @@ t_bool		ft_contains_sub_tokenlist(
 
 //Command list
 t_bool		ft_is_command(t_token token);
-t_part		*ft_get_commandlist(t_part *tokenlist, t_part *delimiter);
+t_part		*ft_copy_tokenlist(t_part *tokenlist, t_part *delimiter);
 t_minitree	*ft_get_minicommand(t_part *tokenlist, t_global *global);
 void		ft_printcommand(t_command *command);
 t_bool		ft_is_compoundcommand(t_nodetype nodetype);
@@ -73,7 +73,7 @@ t_file		*ft_create_file(const char *name, int std_stream, int mode);
 int			ft_get_filemode(t_token token);
 t_bool		ft_is_redirection(t_token token);
 void		ft_freefile(void *content);
-t_file		*ft_compress_filelist(t_list *filelist);
+t_file		*ft_compress_filelist(t_list *filelist, t_global *global);
 void		ft_delete_filenode(t_list **filelist, char *file_todelete);
 void		ft_clone_streams(int *inputclone, int *outputclone);
 void		ft_closepipe(int *input, int *output);

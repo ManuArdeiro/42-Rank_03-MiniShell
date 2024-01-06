@@ -6,13 +6,13 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 11:52:43 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/05 20:55:52 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/06 20:17:47 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_split_tokenlist(t_minitree **root, t_part *tokenlist)
+t_minitree	*ft_split_tokenlist(t_part *tokenlist)
 {
 	t_token		token;
 	t_minitree	*newnode;
@@ -25,13 +25,10 @@ void	ft_split_tokenlist(t_minitree **root, t_part *tokenlist)
 		{
 			newnode = ft_tokensplit(tokenlist, token);
 			if (newnode != NULL)
-			{
-				if (ft_is_emptynode(*root) == FALSE)
-					ft_destroytree(root, ft_free_mininode);
-				*root = newnode;
 				break ;
-			}
 		}
 		++token;
 	}
+	return (newnode);
 }
+#

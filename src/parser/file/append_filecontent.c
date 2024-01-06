@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 20:44:19 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/22 20:33:10 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/06 21:05:08 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	ft_write_to_pipe(t_file *file, int *filepipe)
 }
 
 static void	ft_read_and_append(
-		t_file **fullfile, t_list *filelist, int *filepipe)
+		t_file **fullfile, t_list *filelist, int *filepipe, t_global *global)
 {
 	t_list	*node;
 	pid_t	child;
@@ -55,10 +55,10 @@ static void	ft_read_and_append(
 	}
 	else if (child < 0)
 		ft_printerror(__func__, "Fork");
-	ft_wait_close_heredoc(child, *fullfile, filepipe);
+	ft_wait_close_heredoc(child, *fullfile, filepipe, global);
 }
 
-t_file	*ft_compress_filelist(t_list *filelist)
+t_file	*ft_compress_filelist(t_list *filelist, t_global *global)
 {
 	t_file	*fullfile;
 	int		filepipe[2];
@@ -71,6 +71,6 @@ t_file	*ft_compress_filelist(t_list *filelist)
 		return (NULL);
 	if (pipe(filepipe) < 0)
 		return (NULL);
-	ft_read_and_append(&fullfile, filelist, filepipe);
+	ft_read_and_append(&fullfile, filelist, filepipe, global);
 	return (fullfile);
 }

@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_commandlist.c                                  :+:      :+:    :+:   */
+/*   copy_tokenlist.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 12:35:44 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/20 19:03:34 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/06 19:38:32 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_part	*ft_get_commandlist(t_part *tokenlist, t_part *delimiter)
+t_part	*ft_copy_tokenlist(t_part *tokenlist, t_part *delimiter)
 {
 	t_part		*node;
 	t_part		*commandlist;

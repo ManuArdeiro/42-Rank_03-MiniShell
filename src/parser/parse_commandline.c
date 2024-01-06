@@ -6,67 +6,69 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 12:24:07 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/05 20:54:29 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/06 21:09:34 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	ft_parse_tokenlist(
-				t_minitree **root, t_part *tokenlist, t_global *global);
+t_minitree	*ft_parse_tokenlist(t_part *tokenlist, t_global *global);
 
-static void	ft_tokensplit_all(
-		t_minitree **root, t_part *tokenlist, t_global *global)
+t_minitree	*ft_evaluate_tokensplit(t_part *tokenlist, t_global *global)
 {
-	if (ft_is_emptynode(*root) == FALSE)
-		ft_destroytree(root, ft_free_mininode);
-	if (ft_valid_subshellnode(tokenlist) == TRUE)
-		*root = ft_split_subshell(tokenlist, global);
-	else if (ft_tokenlist_contains(tokenlist, ft_is_tokenseparator) == TRUE)
-		ft_split_tokenlist(root, tokenlist);
+	t_minitree	*root;
+
+	root = NULL;
+	if (ft_tokenlist_contains(tokenlist, ft_is_tokenseparator) == TRUE)
+		root = ft_split_tokenlist(tokenlist);
+	else if (ft_valid_subshellnode(tokenlist) == TRUE)
+		root = ft_split_subshell(tokenlist, global);
 	else
-		*root = ft_get_minicommand(tokenlist, global);
+		root = ft_get_minicommand(tokenlist, global);
+	return (root);
 }
 
-static void	ft_parse_tokenlist(
-		t_minitree **root, t_part *tokenlist, t_global *global)
+t_minitree	*replace_treenode(t_minitree *root, t_global *global)
 {
-	t_part	*left_tokenlist;
-	t_part	*right_tokenlist;
+	t_part		*tokenlist_copy;
+	t_minitree	*new_root;
 
-	left_tokenlist = NULL;
-	right_tokenlist = NULL;
+	new_root = NULL;
+	tokenlist_copy
+		= ft_copy_tokenlist(
+			(t_part *)((t_mininode *)root->content)->content, NULL);
+	ft_destroytree(&root, ft_free_mininode);
+	new_root = ft_parse_tokenlist(tokenlist_copy, global);
+	if (tokenlist_copy != NULL)
+		ft_free_tokenlist(&tokenlist_copy);
+	return (new_root);
+}
+
+t_minitree	*ft_parse_tokenlist(t_part *tokenlist, t_global *global)
+{
+	t_minitree	*minitree;
+
 	if (tokenlist == NULL)
-		return ;
-	ft_tokensplit_all(root, tokenlist, global);
-	if (*root != NULL && ft_is_emptynode((*root)->leftchild) == FALSE)
-	{
-		left_tokenlist
-			= ((t_mininode *)((*root)->leftchild->content))->content;
-		ft_parse_tokenlist(&(*root)->leftchild, left_tokenlist, global);
-		if (left_tokenlist != NULL)
-			ft_free_tokenlist(&left_tokenlist);
-		left_tokenlist = NULL;
-	}
-	if (*root != NULL && ft_is_emptynode((*root)->rightchild) == FALSE)
-	{
-		right_tokenlist
-			= ((t_mininode *)((*root)->rightchild->content))->content;
-		ft_parse_tokenlist(&(*root)->rightchild, right_tokenlist, global);
-		if (right_tokenlist != NULL)
-			ft_free_tokenlist(&right_tokenlist);
-		right_tokenlist = NULL;
-	}
+		return (NULL);
+	minitree = NULL;
+	minitree = ft_evaluate_tokensplit(tokenlist, global);
+	if (minitree != NULL && ft_is_emptynode(minitree->leftchild) == FALSE)
+		minitree->leftchild = replace_treenode(minitree->leftchild, global);
+	if (minitree != NULL && ft_is_emptynode(minitree->rightchild) == FALSE)
+		minitree->rightchild = replace_treenode(minitree->rightchild, global);
+	return (minitree);
 }
 
 static t_minitree	*ft_generate_parsetree(t_global *global, t_part *tokenlist)
 {
 	t_minitree	*parsetree;
 
-	if (tokenlist == NULL)
-		return (NULL);
 	parsetree = NULL;
-	ft_parse_tokenlist(&parsetree, tokenlist, global);
+	if (tokenlist != NULL)
+	{
+		parsetree = ft_parse_tokenlist(tokenlist, global);
+		//system("leaks minishell");
+	}
 	return (parsetree);
 }
 

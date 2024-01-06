@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+         #
+#    By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/01 18:51:45 by jolopez-          #+#    #+#              #
-#    Updated: 2023/12/23 15:40:14 by yzaytoun         ###   ########.fr        #
+#    Updated: 2024/01/06 13:33:00 by jolopez-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,10 +22,10 @@ vpath 			%.o	obj
 USER			= $(shell whoami)
 INCLUDE 		= -Iinclude/
 INC_LIB 		= -Iinclude/libft
-#READLINE_LIB	= -I/Users/$(USER)/.brew/opt/readline/include
-#INC_READLINE	= -L/Users/$(USER)/.brew/opt/readline/lib
-INC_READLINE	= -L/usr/local/opt/readline/lib
-READLINE_LIB	= -I/usr/local/opt/readline/include
+READLINE_LIB	= -I/Users/$(USER)/.brew/opt/readline/include
+INC_READLINE	= -L/Users/$(USER)/.brew/opt/readline/lib
+#INC_READLINE	= -L/usr/local/opt/readline/lib
+#READLINE_LIB	= -I/usr/local/opt/readline/include
 SANITIZER		= -g3 -fsanitize=address -g
 
 READLINE_FLAGS	= -lreadline -ltermcap

@@ -3,14 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 21:33:30 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/12/24 18:49:27 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/06 13:37:58 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+/*
+	SIGINT	= Ctrl-C
+	SIGQUIT	= Ctrl-4
+	
+*/
 
 void	handle_sigint_exit(int signum)
 {
@@ -64,12 +70,13 @@ void	ft_initsignals(t_global *global)
 	t_sigaction	signallist;
 	sigset_t	blockmask;
 
+	(void)blockmask;
 	if (global == NULL)
 		return ;
-	sigemptyset(&blockmask);
-	sigaddset(&blockmask, SIGINT);
-	sigaddset(&blockmask, SIGQUIT);
-	signallist.sa_mask = blockmask;
+	//sigemptyset(&blockmask);
+	//sigaddset(&blockmask, SIGINT);
+	//sigaddset(&blockmask, SIGQUIT);
+	signallist.sa_mask = 0;
 	signallist.sa_flags = SA_RESTART;
 	signallist.sa_handler = &ft_signal_handler;
 	sigaction(SIGINT, &signallist, NULL);

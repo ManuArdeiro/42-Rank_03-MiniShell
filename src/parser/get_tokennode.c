@@ -52,7 +52,9 @@ t_part	*ft_get_tokennode(
 	if (direction == LAST)
 	{
 		listcopy = ft_copy_tokenlist(tokenlist, NULL);
+		ft_print_tokenlist(listcopy);
 		ft_reverse_tokenlist(&listcopy);
+		ft_print_tokenlist(listcopy);
 		node
 			= ft_get_token_byindex(
 				tokenlist,

@@ -65,10 +65,7 @@ static t_minitree	*ft_generate_parsetree(t_global *global, t_part *tokenlist)
 
 	parsetree = NULL;
 	if (tokenlist != NULL)
-	{
 		parsetree = ft_parse_tokenlist(tokenlist, global);
-		//system("leaks minishell");
-	}
 	return (parsetree);
 }
 

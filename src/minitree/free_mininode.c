@@ -24,6 +24,7 @@ void	ft_free_mininode(void *content)
 	if (mininode->content != NULL)
 	{
 		if (ft_is_compoundcommand(mininode->type) == TRUE
+			|| mininode->type == n_pipeline
 			|| mininode->type == n_empty)
 		{
 			tokenlist = (t_part *)mininode->content;

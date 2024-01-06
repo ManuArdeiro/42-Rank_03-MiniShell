@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 11:05:21 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/05 20:57:42 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/06 17:11:39 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,9 @@ static t_command	*ft_create_newcommand(
 
 	newcommand = NULL;
 	arglist = NULL;
+	//system("Leaks minishell");
 	arglist = ft_extract_arglist(tokenlist, global);
+	//system("Leaks minishell");
 	arglist = ft_clear_emptyvalues(arglist);
 	if ((commandname == NULL || ft_strlen(commandname) == 0)
 		&& (arglist != NULL && arglist->content != NULL))
@@ -92,7 +94,6 @@ t_minitree	*ft_get_minicommand(t_part *tokenlist, t_global *global)
 	if (tokenlist == NULL || global == NULL)
 		return (NULL);
 	command = ft_newcommand(tokenlist, global);
-	system("Leaks minishell");
 	minicommand = ft_create_mininode((t_command *)command, n_command);
 	ft_treeinsert(&minitree, NULL, minicommand, NULL);
 	return (minitree);

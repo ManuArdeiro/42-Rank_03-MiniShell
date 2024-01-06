@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 16:44:36 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/05 20:00:27 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/06 17:36:43 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ static void	ft_check_commandname(t_command *command)
 
 static void	ft_check_variables(t_command *command, t_global *global)
 {
-	if (g_exit_status == 1)
-		global->laststatus = g_exit_status;
 	if (global->devmode == TRUE)
 		ft_printcommand(command);
 	ft_check_commandname(command);
@@ -44,15 +42,14 @@ int	ft_executecommand(t_command *command, t_global *global)
 	int		laststatus;
 
 	pidarray = NULL;
+	laststatus = EXIT_SUCCESS;
 	if (command == NULL || global == NULL || command->name == NULL
 		|| ft_strlen((char *)command->args->content) == 0)
 		return (EXITED);
 	ft_check_variables(command, global);
 	pidcount = ft_create_subprocess(command, &pidarray, global);
-	laststatus = ft_wait_subprocess(command, pidarray, pidcount);
-	if (g_exit_status != 0)
-		laststatus = g_exit_status;
-	global->laststatus = laststatus;
+	g_exit_status = ft_wait_subprocess(command, pidarray, pidcount);
+	laststatus = g_exit_status;
 	if (pidarray != NULL)
 		free(pidarray);
 	return (laststatus);

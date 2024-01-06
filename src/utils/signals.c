@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
+/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 21:33:30 by jolopez-          #+#    #+#             */
-/*   Updated: 2024/01/06 13:41:28 by jolopez-         ###   ########.fr       */
+/*   Updated: 2024/01/06 17:26:13 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void	handle_sigint_exit(int signum)
 {
 	(void)signum;
 	write(1, "\n", 1);
-	g_exit_status = 130;
-	exit(130);
+	g_exit_status = 1;
+	exit(1);
 }
 
 void	handle_sigint2(int signum)
@@ -32,7 +32,7 @@ void	handle_sigint2(int signum)
 	write(1, "\n", 1);
 	rl_replace_line("", 1);
 	rl_on_new_line();
-	g_exit_status = 130;
+	g_exit_status = 1;
 }
 
 void	handle_sigquit(int signum)
@@ -45,7 +45,7 @@ void	handle_sigquit(int signum)
 	rl_replace_line("", 1);
 	rl_on_new_line();
 	free(nbr);
-	g_exit_status = 131;
+	g_exit_status = 130;
 }
 
 void	ft_signal_handler(int signum)
@@ -56,7 +56,7 @@ void	ft_signal_handler(int signum)
 		rl_replace_line("", 1);
 		rl_on_new_line();
 		rl_redisplay();
-		g_exit_status = 130;
+		g_exit_status = 1;
 	}
 	else if (signum == SIGQUIT)
 		handle_sigquit(signum);
@@ -67,14 +67,9 @@ void	ft_signal_handler(int signum)
 void	ft_initsignals(t_global *global)
 {
 	t_sigaction	signallist;
-	sigset_t	blockmask;
 
-	(void)blockmask;
 	if (global == NULL)
 		return ;
-	//sigemptyset(&blockmask);
-	//sigaddset(&blockmask, SIGINT);
-	//sigaddset(&blockmask, SIGQUIT);
 	signallist.sa_mask = 0;
 	signallist.sa_flags = SA_RESTART;
 	signallist.__sigaction_u.__sa_handler = &ft_signal_handler;

@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 19:07:11 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/06 19:37:48 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/08 19:44:09 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,7 @@ t_part	*ft_get_tokennode(
 	if (direction == LAST)
 	{
 		listcopy = ft_copy_tokenlist(tokenlist, NULL);
-		ft_print_tokenlist(listcopy);
 		ft_reverse_tokenlist(&listcopy);
-		ft_print_tokenlist(listcopy);
 		node
 			= ft_get_token_byindex(
 				tokenlist,

@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 20:07:17 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/06 21:05:19 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/08 20:37:04 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,14 @@ t_token		ft_get_tokenpair(t_token token);
 t_minitree	*ft_split_subshell(t_part *tokenlist, t_global *global);
 t_minitree	*ft_split_tokenlist(t_part *tokenlist);
 t_bool		ft_valid_subshellnode(t_part *tokenlist);
-t_part		*ft_skip_quotes(t_part *token);
+t_part		*ft_skip_tokens(t_part *token, t_bool (*skipfunction)(t_token));
 t_bool		ft_tokenlist_contains(
 				t_part *tokenlist, t_bool (*function)(t_token token));
 t_bool		ft_contains_sub_tokenlist(
 				t_part *startnode, t_part *endnode, t_token token);
+t_part		*skip_get_tokennode(
+				t_part *tokenlist, t_token token_tofind, t_bool strict);
+t_bool		is_complete_subshell(t_part *tokenlist);
 
 //Command list
 t_bool		ft_is_command(t_token token);

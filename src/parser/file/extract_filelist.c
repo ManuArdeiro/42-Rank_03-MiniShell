@@ -75,10 +75,12 @@ static void	ft_get_filelist(
 			&& (ft_is_commandseries(tokenlist) == TRUE
 				|| ft_tokenlist_contains(node, ft_is_redirection) == TRUE))
 			node = ft_skip_tokens(node->next, ft_is_tokenpair);
-		if (ft_check_filetype(node->token, std_stream) == TRUE)
-			ft_get_file(filelist, &node, std_stream, global);
 		if (node != NULL)
+		{
+			if (ft_check_filetype(node->token, std_stream) == TRUE)
+				ft_get_file(filelist, &node, std_stream, global);
 			node = node->next;
+		}
 	}
 }
 

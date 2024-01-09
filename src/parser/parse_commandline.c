@@ -19,7 +19,8 @@ t_minitree	*ft_evaluate_tokensplit(t_part *tokenlist, t_global *global)
 	t_minitree	*root;
 
 	root = NULL;
-	if (is_complete_subshell(tokenlist) == FALSE
+	if (ft_is_commandseries(tokenlist) == FALSE 
+		&& is_complete_subshell(tokenlist) == FALSE
 		&& ft_tokenlist_contains(tokenlist, ft_is_tokenseparator) == TRUE)
 		root = ft_split_tokenlist(tokenlist);
 	else if (ft_valid_subshellnode(tokenlist) == TRUE)

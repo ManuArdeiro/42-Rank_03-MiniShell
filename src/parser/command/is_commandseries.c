@@ -19,6 +19,8 @@ static t_bool	ft_check_series(t_part *tokenlist)
 	t_part	*quotenode;
 
 	result = TRUE;
+	if (ft_tokenlist_contains(tokenlist, ft_is_tokenseparator) == FALSE)
+		return (FALSE);
 	commandnode = ft_get_tokennode(tokenlist, tk_cmd, FALSE, FIRST);
 	quotenode = ft_get_tokennode(tokenlist, tk_dblquot, FALSE, FIRST);
 	if (quotenode == NULL)
@@ -37,14 +39,24 @@ static t_bool	ft_check_series(t_part *tokenlist)
 t_bool	ft_is_commandseries(t_part *tokenlist)
 {
 	t_bool	result;
+	t_part	*sublist;
+	t_token	tokenpair;
 
 	result = TRUE;
+	sublist = NULL;
 	if (tokenlist != NULL)
 	{
 		if (tokenlist->token != tk_cmd
 			&& ft_tokenlist_contains(tokenlist, ft_is_tokenpair) == TRUE
 			&& ft_tokenlist_contains(tokenlist, ft_is_command) == TRUE)
-			result = ft_check_series(tokenlist);
+		{
+			tokenpair = ft_get_tokenpair(tokenlist->token);
+			sublist
+				= ft_copy_tokenlist(
+					tokenlist,
+					ft_get_tokennode(tokenlist->next, tokenpair, FALSE, FIRST));
+			result = ft_check_series(sublist);
+		}
 		else
 			result = FALSE;
 	}

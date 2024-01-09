@@ -46,7 +46,9 @@ static t_bool	ft_is_argument(t_part *node)
 {
 	if (node == NULL)
 		return (FALSE);
-	if ((ft_is_tokenpair(node->token) == TRUE)
+	if ((ft_is_tokenpair(node->token) == TRUE
+			&& ft_tokenlist_contains(node, ft_is_command) == FALSE
+			&& node->next != NULL && node->next->token != tk_space)
 		|| (node->token == tk_arg)
 		|| (node->token == tk_mul))
 		return (TRUE);
@@ -62,7 +64,7 @@ static void	ft_get_arg(
 	ft_check_forseries(node, &string, global);
 	if (string == NULL)
 	{
-		global->expand_dollartoken = TRUE;
+		global->expand_dollartoken = TRUE;   
 		global->expand_startoken = TRUE;
 		string = ft_extract_tokenstring(global->line, (*node));
 	}

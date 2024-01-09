@@ -125,12 +125,18 @@ int	ft_token_1(t_part *tokens, char *line, int *i)
 	}
 	else if (line[*i] == '\'')
 	{
-		ok = ft_add_tkn(tokens, tk_sglquot, *i, *i + 1);
+		if (line[*i + 1] != ' ')
+			ok = ft_add_tkn(tokens, tk_sglquot, *i, *i + 1);
+		else
+			ok = ft_add_tkn(tokens, tk_sglquot, *i, *i);
 		*i = *i + 1;
 	}
 	else if (line[*i] == '\"')
 	{
-		ok = ft_add_tkn(tokens, tk_dblquot, *i, *i + 1);
+		if (line[*i + 1] != ' ')
+			ok = ft_add_tkn(tokens, tk_dblquot, *i, *i + 1);
+		else
+			ok = ft_add_tkn(tokens, tk_dblquot, *i, *i);
 		*i = *i + 1;
 	}
 	else

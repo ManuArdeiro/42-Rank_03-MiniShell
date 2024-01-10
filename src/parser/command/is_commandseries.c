@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is_commandseries.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
+/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 17:08:56 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/10 20:56:53 by jolopez-         ###   ########.fr       */
+/*   Updated: 2024/01/10 21:13:25 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,27 +34,36 @@ static t_bool	ft_check_series(t_part *tokenlist)
 	return (result);
 }
 
-t_bool	ft_is_commandseries(t_part *tokenlist)
+static t_bool	ft_evaluate_subseries(t_part *node)
 {
-	t_bool	result;
 	t_part	*endnode;
 	t_part	*lastnode;
 
-	result = TRUE;
 	lastnode = NULL;
+	if (node == NULL)
+		return (FALSE);
+	endnode = ft_get_tokennode(node->next,
+			ft_get_tokenpair(node->token), FALSE, FIRST);
+	lastnode = ft_get_lasttoken(node);
+	if (endnode == lastnode
+		|| (lastnode != NULL && lastnode->next != NULL
+			&& endnode->index == lastnode->next->index))
+		return (TRUE);
+	return (FALSE);
+}
+
+t_bool	ft_is_commandseries(t_part *tokenlist)
+{
+	t_bool	result;
+
+	result = TRUE;
 	if (tokenlist != NULL)
 	{
 		if (tokenlist->token != tk_cmd
 			&& ft_tokenlist_contains(tokenlist, ft_is_tokenpair) == TRUE
 			&& ft_tokenlist_contains(tokenlist, ft_is_command) == TRUE)
 		{
-			endnode = ft_get_tokennode(
-					tokenlist->next,
-					ft_get_tokenpair(tokenlist->token), FALSE, FIRST);
-			lastnode = ft_get_lasttoken(tokenlist);
-			if (endnode == lastnode
-				|| (lastnode != NULL && lastnode->next != NULL
-					&& endnode->index == lastnode->next->index))
+			if (ft_evaluate_subseries(tokenlist) == TRUE)
 				result = ft_check_series(tokenlist);
 			else
 				result = FALSE;
@@ -64,3 +73,4 @@ t_bool	ft_is_commandseries(t_part *tokenlist)
 	}
 	return (result);
 }
+

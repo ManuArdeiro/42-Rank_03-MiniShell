@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 21:33:30 by jolopez-          #+#    #+#             */
-/*   Updated: 2024/01/06 21:12:33 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/10 18:25:56 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	handle_sigint2(int signum)
 	write(1, "\n", 1);
 	rl_replace_line("", 1);
 	rl_on_new_line();
-	g_exit_status = 1;
+	g_exit_status = 130;
 }
 
 void	handle_sigquit(int signum)
@@ -45,7 +45,7 @@ void	handle_sigquit(int signum)
 	rl_replace_line("", 1);
 	rl_on_new_line();
 	free(nbr);
-	g_exit_status = 130;
+	g_exit_status = 131;
 }
 
 void	ft_signal_handler(int signum)

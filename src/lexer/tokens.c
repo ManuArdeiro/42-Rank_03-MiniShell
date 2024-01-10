@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 18:12:50 by jolopez-          #+#    #+#             */
-/*   Updated: 2024/01/05 17:42:08 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/10 19:12:07 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,22 +123,8 @@ int	ft_token_1(t_part *tokens, char *line, int *i)
 		ok = ft_add_tkn(tokens, tk_rprnths, *i, *i + 1);
 		*i = *i + 1;
 	}
-	else if (line[*i] == '\'')
-	{
-		if (line[*i + 1] != ' ')
-			ok = ft_add_tkn(tokens, tk_sglquot, *i, *i + 1);
-		else
-			ok = ft_add_tkn(tokens, tk_sglquot, *i, *i);
-		*i = *i + 1;
-	}
-	else if (line[*i] == '\"')
-	{
-		if (line[*i + 1] != ' ')
-			ok = ft_add_tkn(tokens, tk_dblquot, *i, *i + 1);
-		else
-			ok = ft_add_tkn(tokens, tk_dblquot, *i, *i);
-		*i = *i + 1;
-	}
+	else if (line[*i] == '\'' || line[*i] == '\"')
+		ft_evaluatetoken(tokens, line, i, &ok);
 	else
 		ft_token_2(tokens, line, i, &ok);
 	return (ok);

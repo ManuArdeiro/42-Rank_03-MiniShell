@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+         #
+#    By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/01 18:51:45 by jolopez-          #+#    #+#              #
-#    Updated: 2024/01/10 17:17:39 by jolopez-         ###   ########.fr        #
+#    Updated: 2024/01/10 19:14:05 by yzaytoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,7 @@ LEXER			= tokenizer.c tokens.c token_tools_1.c token_tools_2.c \
 					ft_copy_tokenlist.c ft_tokenlist_add.c print_tokenlist.c \
 					add_tkn.c free_tokenlist.c get_lasttoken.c reverse_tokenlist.c\
 					get_token_byindex.c avoid_quots.c ft_add_cmdtoken.c \
-					del_last_token.c
+					del_last_token.c evaluate_token.c
 
 COMMAND			= extract_tokenstring.c copy_tokenlist.c lstconvert.c \
 					printcommand.c extract_filelist.c get_minicommand.c \

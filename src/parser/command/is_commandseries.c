@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 17:08:56 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/05 17:36:51 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/10 18:58:57 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ static t_bool	ft_check_series(t_part *tokenlist)
 	t_part	*quotenode;
 
 	result = TRUE;
-	if (ft_tokenlist_contains(tokenlist, ft_is_tokenseparator) == FALSE)
-		return (FALSE);
 	commandnode = ft_get_tokennode(tokenlist, tk_cmd, FALSE, FIRST);
 	quotenode = ft_get_tokennode(tokenlist, tk_dblquot, FALSE, FIRST);
 	if (quotenode == NULL)

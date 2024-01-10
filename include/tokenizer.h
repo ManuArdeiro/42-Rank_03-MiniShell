@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
+/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 11:18:23 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/18 20:33:12 by jolopez-         ###   ########.fr       */
+/*   Updated: 2024/01/10 19:14:47 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,5 @@ t_part		*ft_get_lasttoken(t_part *tokenlist);
 void		ft_reverse_tokenlist(t_part **tokenlist);
 t_part		*ft_get_token_byindex(t_part *tokenlist, t_part *token_tofind);
 void		ft_add_cmdtoken(const char *line, t_part *tokens, int *i);
+void		ft_evaluatetoken(t_part *tokens, char *line, int *i, int *ok);
 #endif

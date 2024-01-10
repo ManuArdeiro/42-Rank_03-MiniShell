@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 18:47:34 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/08 20:03:14 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/10 18:36:51 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ t_part	*skip_get_tokennode(
 	{
 		if (ft_is_subshellseparator(node->token) == TRUE)
 			node = ft_skip_tokens(node->next, ft_is_subshellseparator);
+		else if (ft_is_tokenpair(node->token) == TRUE)
+			node = ft_skip_tokens(node->next, ft_is_tokenpair);
 		if (node != NULL)
 		{
 			if (find_token(&node, token_tofind, strict) == TRUE)

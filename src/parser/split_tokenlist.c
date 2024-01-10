@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 11:52:43 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/08 18:44:19 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/10 19:07:19 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,3 @@ t_minitree	*ft_split_tokenlist(t_part *tokenlist)
 	}
 	return (newnode);
 }
-#

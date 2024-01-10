@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 18:11:58 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/06 21:04:20 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/10 19:16:14 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	ft_execute_builtin(
 int		ft_navigate_and_execute(t_minitree *root, t_global *global);
 void	ft_expand_filelist(t_list **filelist, t_global *global);
 void	ft_get_heredoc(t_file **file, t_global *global);
-void	ft_wait_close_heredoc(pid_t child, t_file *file, int *herepipe, t_global *global);
+void	ft_wait_close_heredoc(pid_t child, t_file *file,
+			int *herepipe, t_global *global);
 
 #endif

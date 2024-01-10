@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is_commandseries.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 17:08:56 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/10 18:58:57 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/10 20:56:53 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,23 +37,27 @@ static t_bool	ft_check_series(t_part *tokenlist)
 t_bool	ft_is_commandseries(t_part *tokenlist)
 {
 	t_bool	result;
-	t_part	*sublist;
-	t_token	tokenpair;
+	t_part	*endnode;
+	t_part	*lastnode;
 
 	result = TRUE;
-	sublist = NULL;
+	lastnode = NULL;
 	if (tokenlist != NULL)
 	{
 		if (tokenlist->token != tk_cmd
 			&& ft_tokenlist_contains(tokenlist, ft_is_tokenpair) == TRUE
 			&& ft_tokenlist_contains(tokenlist, ft_is_command) == TRUE)
 		{
-			tokenpair = ft_get_tokenpair(tokenlist->token);
-			sublist
-				= ft_copy_tokenlist(
-					tokenlist,
-					ft_get_tokennode(tokenlist->next, tokenpair, FALSE, FIRST));
-			result = ft_check_series(sublist);
+			endnode = ft_get_tokennode(
+					tokenlist->next,
+					ft_get_tokenpair(tokenlist->token), FALSE, FIRST);
+			lastnode = ft_get_lasttoken(tokenlist);
+			if (endnode == lastnode
+				|| (lastnode != NULL && lastnode->next != NULL
+					&& endnode->index == lastnode->next->index))
+				result = ft_check_series(tokenlist);
+			else
+				result = FALSE;
 		}
 		else
 			result = FALSE;

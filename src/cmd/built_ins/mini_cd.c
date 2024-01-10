@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:05:20 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/19 17:47:52 by jolopez-         ###   ########.fr       */
+/*   Updated: 2024/01/10 19:31:28 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,12 @@ static char	*ft_get_previousdir(void)
 	lastpos = ft_chrcount(localpath, '/');
 	previousdir = ft_strchr_pos(localpath, '/', lastpos);
 	previousdir = ft_cutstr(localpath, previousdir);
+	if (ft_strlen(previousdir) == 0)
+	{
+		if (previousdir != NULL)
+			free(previousdir);
+		previousdir = ft_strdup("/");
+	}
 	return (previousdir);
 }
 
@@ -83,9 +89,9 @@ static int	ft_return_newfolder(char *dir, t_list *envlist)
 {
 	if (dir == NULL)
 		return (EXIT_FAILURE);
-	if (ft_strncmp("-", dir, 1) == 0)
+	if (ft_strequal("-", dir) == TRUE)
 		return (ft_new_folder(envlist, ft_getenv("OLDPWD", envlist)));
-	else if (ft_strncmp("..", dir, 2) == 0)
+	else if (ft_strequal("..", dir) == TRUE)
 		return (ft_new_folder(envlist, ft_get_previousdir()));
 	else
 		return (ft_new_folder(envlist, dir));

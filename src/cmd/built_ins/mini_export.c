@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 18:43:48 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/12/16 18:09:03 by jolopez-         ###   ########.fr       */
+/*   Updated: 2024/01/10 19:41:07 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ static int	ft_name_equal(t_list *envList, char *argument)
 		return (EXIT_FAILURE);
 	if (ft_set_variable(argument, name, value) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	ft_setenv(&envList, name, value, ADD_VALUE);
+	ft_setenv(&envList, name, value, OVERWRITE_VALUE);
 	free (name);
 	free (value);
 	return (EXIT_SUCCESS);

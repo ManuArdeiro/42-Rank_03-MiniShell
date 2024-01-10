@@ -15,11 +15,18 @@
 t_part	*ft_get_lasttoken(t_part *tokenlist)
 {
 	t_part	*last;
+	t_part	*prev_node;
 
 	if (tokenlist == NULL)
 		return (NULL);
 	last = tokenlist;
+	prev_node = NULL;
 	while (last->next != NULL)
+	{
+		prev_node = last;
 		last = last->next;
+	}
+	if (last->token == tk_space)
+		return (prev_node);
 	return (last);
 }

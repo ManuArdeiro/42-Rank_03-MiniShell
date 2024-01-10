@@ -39,7 +39,7 @@ t_bool	is_complete_subshell(t_part *tokenlist)
 		return (FALSE);
 	startnode = tokenlist;
 	if (ft_is_tokenpair(startnode->token) == TRUE)
-		startnode = ft_skip_tokens(startnode, ft_is_tokenpair);
+		startnode = ft_skip_tokens(startnode->next, ft_is_tokenpair);
 	if (startnode != NULL)
 		return (ft_evaluate_subshell(startnode));
 	return (FALSE);

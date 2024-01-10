@@ -96,5 +96,4 @@ t_list	*ft_extract_filelist(
 	if (filelist == NULL)
 		filelist = ft_default_filelist(ft_get_stdstream(std_stream));
 	return (filelist);
-
 }

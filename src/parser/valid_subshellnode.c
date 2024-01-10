@@ -42,8 +42,10 @@ t_bool	ft_valid_subshellnode(t_part *tokenlist)
 	separatornode = NULL;
 	if (tokenlist == NULL)
 		return (FALSE);
+	if (is_complete_subshell(tokenlist) == FALSE)
+		return (FALSE);
 	separatornode = ft_get_next_separatornode(tokenlist);
-	subshell_node = skip_get_tokennode(tokenlist, tk_lprnths, FALSE);
+	subshell_node = ft_get_tokennode(tokenlist, tk_lprnths, FALSE, FIRST);
 	if ((subshell_node != NULL && separatornode == NULL)
 		|| (subshell_node != NULL && separatornode != NULL
 			&& subshell_node->index < separatornode->index))

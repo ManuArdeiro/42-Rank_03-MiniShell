@@ -12,21 +12,36 @@
 
 #include "minishell.h"
 
-void	ft_evaluatetoken(t_part *tokens, char *line, int *i, int *ok)
+static void	subadd_quotes(t_part *tokens, char *line, int *i, int *ok)
 {
 	if (line[*i] == '\'')
 	{
-		if (line[*i + 1] != ' ')
+		if (line[*i + 1] != ' '
+			&& ft_strchr("()\'\";*<>|&", line[*i + 1]) == NULL)
 			*ok = ft_add_tkn(tokens, tk_sglquot, *i, *i + 1);
 		else
 			*ok = ft_add_tkn(tokens, tk_sglquot, *i, *i);
 	}
 	else if (line[*i] == '\"')
 	{
-		if (line[*i + 1] != ' ')
+		if (line[*i + 1] != ' '
+			&& ft_strchr("()\'\";*<>|&", line[*i + 1]) == NULL)
 			*ok = ft_add_tkn(tokens, tk_dblquot, *i, *i + 1);
 		else
 			*ok = ft_add_tkn(tokens, tk_dblquot, *i, *i);
+	}
+}
+
+void	ft_evaluatetoken(t_part *tokens, char *line, int *i, int *ok)
+{
+	if (ok != (int *)0)
+		subadd_quotes(tokens, line, i, ok);
+	else
+	{
+		if (line[*i + 1] == ' ')
+			ft_add_tkn(tokens, tk_cmd, *i, *i);
+		else
+			ft_add_tkn(tokens, tk_cmd, *i, *i + 1);
 	}
 	*i = *i + 1;
 }

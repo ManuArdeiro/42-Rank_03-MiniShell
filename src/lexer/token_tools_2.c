@@ -90,13 +90,7 @@ static void	ft_get_tokens_2(char *line, t_part *tokens, int *i, int *start)
 {
 	if ((*start < 0 && ft_strchr("()\'\"*;<>|&", (int)line[*i + 1]))
 		|| (*start < 0 && ft_is_space(line, *i + 1)))
-	{
-		if (line[*i + 1] == ' ')
-			ft_add_tkn(tokens, tk_cmd, *i, *i);
-		else
-			ft_add_tkn(tokens, tk_cmd, *i, *i + 1);
-		*i = *i + 1;
-	}
+		ft_evaluatetoken(tokens, line, i, (int *)0);
 	else if (*start < 0)
 	{
 		*start = *i;

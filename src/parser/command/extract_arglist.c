@@ -44,9 +44,14 @@ static void	ft_add_string_tolist(
 
 static t_bool	ft_is_argument(t_part *node)
 {
+	t_part	*cmdnode;
+
 	if (node == NULL)
 		return (FALSE);
-	if ((ft_is_tokenpair(node->token) == TRUE)
+	cmdnode = ft_get_tokennode(node, tk_cmd, FALSE, FIRST);
+	if ((ft_is_tokenpair(node->token) == TRUE
+			&& ft_tokenlist_contains(node, ft_is_command) == TRUE
+			&& cmdnode != NULL && cmdnode->used == FALSE)
 		|| (node->token == tk_arg)
 		|| (node->token == tk_mul))
 		return (TRUE);

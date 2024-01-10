@@ -73,4 +73,3 @@ t_bool	ft_is_commandseries(t_part *tokenlist)
 	}
 	return (result);
 }
-

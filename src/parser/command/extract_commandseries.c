@@ -6,13 +6,14 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 20:29:13 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/05 19:34:36 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/11 20:37:33 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	*ft_get_series_substring(const char *commandline, t_part **node)
+static char	*ft_get_series_substring(
+		const char *commandline, t_part **node, t_global *global)
 {
 	t_part		*secondnode;
 	char		*commandseries;
@@ -20,7 +21,8 @@ static char	*ft_get_series_substring(const char *commandline, t_part **node)
 	commandseries = NULL;
 	secondnode = NULL;
 	secondnode = ft_get_last_seriestoken((*node));
-	commandseries = ft_get_commandseries(commandline, (*node), secondnode);
+	commandseries
+		= ft_get_commandseries(commandline, (*node), secondnode, global);
 	(*node) = secondnode;
 	return (commandseries);
 }
@@ -43,11 +45,7 @@ char	*ft_extract_commandseries(
 			|| ((node->token == tk_cmd || node->token == tk_arg)
 				&& node->next != NULL
 				&&ft_is_tokenpair(node->next->token) == TRUE))
-		{
-			if (node->token != tk_sglquot)
-				global->expand_dollartoken = TRUE;
-			commandseries = ft_get_series_substring(commandline, &node);
-		}
+			commandseries = ft_get_series_substring(commandline, &node, global);
 		if (node != NULL)
 			node = node->next;
 	}

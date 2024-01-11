@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 19:12:20 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/05 19:56:58 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/11 21:07:49 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ static char	*ft_get_substr(
 }
 
 static void	ft_add_subseries(
-	char **commandseries, t_part **node, const char *commandline)
+	char **commandseries,
+	t_part **node, const char *commandline, t_global *global)
 {
 	t_part		*sub_endnode;
 	t_cleancase	cleancase;
@@ -67,6 +68,8 @@ static void	ft_add_subseries(
 	cleancase = ft_get_cleancase((*node), sub_endnode);
 	substring = ft_get_substr(commandline, sub_endnode, node);
 	buffer = ft_strclean_withspaces(substring, cleancase);
+	if (global->expand_dollartoken == TRUE)
+		buffer = ft_expand_dollartoken(buffer, global);
 	(*commandseries) = ft_strjoin_get((*commandseries), buffer);
 	if (substring != NULL)
 		free(substring);
@@ -76,19 +79,24 @@ static void	ft_add_subseries(
 }
 
 char	*ft_get_commandseries(
-		const char *commandline, t_part *seriesstart, t_part *seriesend)
+		const char *commandline,
+		t_part *seriesstart, t_part *seriesend, t_global *global)
 {
 	t_part	*node;
 	char	*commandseries;
 
-	if (seriesstart == NULL)
+	if (seriesstart == NULL || global == NULL)
 		return (NULL);
 	node = seriesstart;
 	commandseries = NULL;
 	while (node != NULL && node != seriesend)
 	{
 		if (ft_tokenlist_contains(node, ft_is_tokenpair) == TRUE)
-			ft_add_subseries(&commandseries, &node, commandline);
+		{
+			if (node->token != tk_sglquot)
+				global->expand_dollartoken = TRUE;
+			ft_add_subseries(&commandseries, &node, commandline, global);
+		}
 		if (node != NULL && node != seriesend)
 			node = node->next;
 	}

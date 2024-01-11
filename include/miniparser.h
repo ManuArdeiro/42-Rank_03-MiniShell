@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 20:07:17 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/08 20:37:04 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/11 20:30:16 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ t_part		*ft_get_last_seriestoken(t_part *tokenlist);
 t_list		*ft_clear_emptyvalues(t_list *list);
 char		*ft_get_commandseries(
 				const char *commandline,
-				t_part *seriesstart, t_part *seriesend);
+				t_part *seriesstart, t_part *seriesend, t_global *global);
 void		ft_checkquotes(char **string);
 
 //File

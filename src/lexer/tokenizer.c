@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 17:51:52 by jolopez-          #+#    #+#             */
-/*   Updated: 2024/01/05 20:29:28 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/11 20:09:21 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ t_part	*ft_tokenizer(t_global *global, int *tk_count)
 {
 	t_part	*tokens;
 
-	ft_avoid_quots(global);
+	//ft_avoid_quots(global);
 	tokens = ft_create_tkn_list();
 	if (!tokens)
 		return (tokens);

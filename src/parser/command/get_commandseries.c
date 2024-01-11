@@ -14,10 +14,10 @@
 
 static t_cleancase	ft_get_cleancase(t_part *startnode, t_part *endnode)
 {
-	if (startnode->token == tk_sglquot
+	if ((startnode->token == tk_sglquot || startnode->token == tk_arg)
 		&& ft_contains_sub_tokenlist(startnode, endnode, tk_dblquot) == TRUE)
 		return (CLEAN_SINGLE_QUOTES);
-	else if (startnode->token == tk_dblquot
+	else if ((startnode->token == tk_dblquot ||startnode->token == tk_arg)
 		&& ft_contains_sub_tokenlist(startnode, endnode, tk_sglquot) == TRUE)
 		return (CLEAN_DOUBLE_QUOTES);
 	return (CLEAN_QUOTES);
@@ -75,7 +75,10 @@ static void	ft_add_subseries(
 		free(substring);
 	if (buffer != NULL)
 		free(buffer);
-	(*node) = sub_endnode;
+	if (sub_endnode != NULL && ft_is_tokenpair(sub_endnode->token) == FALSE)
+		(*node) = sub_endnode->next;
+	else
+		(*node) = sub_endnode;
 }
 
 char	*ft_get_commandseries(
@@ -93,7 +96,8 @@ char	*ft_get_commandseries(
 	{
 		if (ft_tokenlist_contains(node, ft_is_tokenpair) == TRUE)
 		{
-			if (node->token != tk_sglquot)
+			if (node->token != tk_sglquot
+				|| (node->next != NULL && node->next->token != tk_sglquot))
 				global->expand_dollartoken = TRUE;
 			ft_add_subseries(&commandseries, &node, commandline, global);
 		}

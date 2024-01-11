@@ -68,13 +68,11 @@ static t_command	*ft_newcommand(t_part *tokenlist, t_global *global)
 		commandname = ft_extract_tokenstring(global->line, commandnode);
 		ft_checkquotes(&commandname);
 		global->expand_dollartoken = TRUE;
+		commandname = ft_expand_dollartoken(commandname, global);
 	}
 	else
 		commandname
-			= ft_extract_commandseries(
-				global->line, tokenlist, NULL, global);
-	if (global->expand_dollartoken == TRUE)
-		commandname = ft_expand_dollartoken(commandname, global);
+			= ft_extract_commandseries(global->line, tokenlist, NULL, global);
 	newcommand
 		= ft_create_newcommand(commandname, tokenlist, global);
 	global->expand_dollartoken = FALSE;

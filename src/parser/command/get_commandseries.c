@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_commandseries.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 19:12:20 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/12 20:13:59 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/12 20:41:22 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,7 @@ static char	*ft_get_substr(
 	buffer = NULL;
 	if (secondnode != NULL && secondnode->end > (*node)->start)
 	{
-		buffer
-			= ft_substr(
-				commandline, (*node)->start,
+		buffer = ft_substr(commandline, (*node)->start,
 				((secondnode->end) - ((*node)->start) + 1));
 	}
 	else if (secondnode == NULL)
@@ -63,8 +61,7 @@ static void	ft_get_lastsubnode(
 	(*cleancase) = ft_get_cleancase(node, (*subnode), global);
 }
 
-static void	ft_add_subseries(
-	char **commandseries,
+static void	ft_add_subseries(char **commandseries,
 	t_part **node, const char *commandline, t_global *global)
 {
 	t_part		*sub_endnode;
@@ -72,7 +69,6 @@ static void	ft_add_subseries(
 	char		*buffer;
 	char		*substring;
 
-	buffer = NULL;
 	substring = NULL;
 	cleancase = CLEAN_ALL;
 	ft_get_lastsubnode(*node, &sub_endnode, &cleancase, global);

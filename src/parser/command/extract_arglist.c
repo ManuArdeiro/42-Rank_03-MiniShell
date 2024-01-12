@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 15:50:08 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/12 17:23:30 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/12 21:01:37 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,20 @@ static void	ft_add_string_tolist(
 		ft_lstinsert(stringlist, ft_strdup(string), BACK);
 }
 
+static char	*ft_get_argstring(t_part **node, t_global *global)
+{
+	char	*string;
+
+	string = NULL;
+	global->expand_dollartoken = TRUE;
+	global->expand_startoken = TRUE;
+	string = ft_extract_tokenstring(global->line, *node);
+	if ((*node)->token == tk_arg
+		&& (*node)->next != NULL && (*node)->next->token == tk_mul)
+		(*node) = (*node)->next;
+	return (string);
+}
+
 static void	ft_get_arg(
 	t_list **stringlist, t_part **node, t_part *prevnode, t_global *global)
 {
@@ -33,16 +47,15 @@ static void	ft_get_arg(
 
 	string = NULL;
 	if (ft_isvalid_series((*node), prevnode) == TRUE)
+	{
 		string
 			= ft_extract_commandseries(global->line, (*node), node, global);
+		global->expand_startoken = FALSE;
+	}
 	if (string == NULL)
 	{
 		if (((*node)->token == tk_arg) || ((*node)->token == tk_mul))
-		{
-			global->expand_dollartoken = TRUE;
-			global->expand_startoken = TRUE;
-			string = ft_extract_tokenstring(global->line, (*node));
-		}
+			string = ft_get_argstring(node, global);
 	}
 	if (string != NULL)
 	{

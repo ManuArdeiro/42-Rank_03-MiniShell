@@ -91,7 +91,6 @@ t_part	*ft_tokenizer(t_global *global, int *tk_count)
 {
 	t_part	*tokens;
 
-	//ft_avoid_quots(global);
 	tokens = ft_create_tkn_list();
 	if (!tokens)
 		return (tokens);

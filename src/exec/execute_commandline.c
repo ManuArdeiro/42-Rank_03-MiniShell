@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 12:40:08 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/10 19:15:34 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/12 19:23:20 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,11 @@ int	ft_navigate_and_execute(t_minitree *root, t_global *global)
 		return (EXITED);
 	nodetype = ((t_mininode *)root->content)->type;
 	if (nodetype == n_command)
+	{
 		laststatus
 			= ft_executecommand(
 				(t_command *)((t_mininode *)root->content)->content, global);
+	}
 	else if (ft_is_compoundcommand(nodetype) == TRUE
 		|| nodetype == n_pipeline)
 		ft_evaluate_relation(root, global, &laststatus, nodetype);
@@ -65,4 +67,5 @@ void	ft_execute_commandline(t_minitree *root, t_global *global)
 	if (global->devmode == TRUE)
 		ft_printtree(root);
 	g_exit_status = ft_navigate_and_execute(root, global);
+	global->laststatus = g_exit_status;
 }

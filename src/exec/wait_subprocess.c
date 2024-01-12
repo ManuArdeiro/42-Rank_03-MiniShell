@@ -6,13 +6,13 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:50:22 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/06 21:38:00 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/12 19:27:39 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	ft_wait_process(
+void	ft_wait_process(
 		pid_t *pid, int *laststatus, t_bool processtype, t_global *global)
 {
 	int		status;

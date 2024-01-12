@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 18:11:58 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/10 19:16:14 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/12 19:28:01 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,6 @@ void	ft_get_heredoc(t_file **file, t_global *global);
 void	ft_wait_close_heredoc(pid_t child, t_file *file,
 			int *herepipe, t_global *global);
 
+void	ft_wait_process(pid_t *pid, int *laststatus,
+			t_bool processtype, t_global *global);
 #endif

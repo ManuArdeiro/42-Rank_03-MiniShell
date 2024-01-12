@@ -12,34 +12,21 @@
 
 #include "minishell.h"
 
-static char	*ft_get_series_substring(
-		const char *commandline, t_part **node, t_global *global)
-{
-	t_part		*secondnode;
-	char		*commandseries;
-
-	commandseries = NULL;
-	secondnode = NULL;
-	secondnode = ft_get_last_seriestoken((*node));
-	commandseries
-		= ft_get_commandseries(commandline, (*node), secondnode, global);
-	(*node) = secondnode;
-	return (commandseries);
-}
-
 char	*ft_extract_commandseries(
 	const char *commandline,
 	t_part *tokenlist, t_part **nextstart, t_global *global)
 {
-	t_part	*node;
+	t_part	*secondnode;
 	char	*commandseries;
 
 	commandseries = NULL;
+	secondnode = NULL;
 	if (commandline == NULL || tokenlist == NULL || global == NULL)
 		return (NULL);
-	node = tokenlist;
-	commandseries = ft_get_series_substring(commandline, &node, global);
+	secondnode = ft_get_last_seriestoken(tokenlist);
+	commandseries
+		= ft_get_commandseries(commandline, tokenlist, secondnode, global);
 	if (nextstart != NULL)
-		(*nextstart) = node;
+		(*nextstart) = secondnode;
 	return (commandseries);
 }

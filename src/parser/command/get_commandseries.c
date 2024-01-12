@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 19:12:20 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/12 20:39:41 by jolopez-         ###   ########.fr       */
+/*   Updated: 2024/01/12 20:41:22 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,6 @@ static char	*ft_get_substr(
 					((secondnode->end) - ((*node)->start) + 1));
 	}
 	return (buffer);
-}
-
-static void	ft_get_lastsubnode(
-		t_part *node,
-		t_part **subnode, t_cleancase *cleancase, t_global *global)
-{
-	(*subnode) = ft_get_last_seriestoken(node);
-	(*cleancase) = ft_get_cleancase(node, (*subnode), global);
 }
 
 static void	ft_get_lastsubnode(

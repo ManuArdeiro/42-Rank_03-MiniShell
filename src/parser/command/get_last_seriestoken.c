@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 20:29:13 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/20 19:02:59 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/12 19:06:54 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,12 @@ static void	ft_check_endnode(t_part *node, t_part **endnode)
 	t_part	*pointer;
 
 	pointer = NULL;
-	pointer = ft_get_tokennode(node->next, node->token, TRUE, FIRST);
+	if (ft_is_tokenpair(node->token) == FALSE && node->next != NULL)
+		pointer
+			= ft_get_tokennode(
+					node->next->next, node->next->token, FALSE, FIRST);
+	else
+		pointer = ft_get_tokennode(node->next, node->token, FALSE, FIRST);
 	if (pointer != NULL)
 	{
 		if ((pointer->next != NULL && pointer->next->token == tk_space)
@@ -28,7 +33,7 @@ static void	ft_check_endnode(t_part *node, t_part **endnode)
 		else
 		{
 			(*endnode) = ft_get_tokennode(
-					pointer->next, tk_space, TRUE, FIRST);
+					pointer->next, tk_space, FALSE, FIRST);
 		}
 	}
 }
@@ -44,7 +49,7 @@ t_part	*ft_get_last_seriestoken(t_part *tokenlist)
 	endnode = NULL;
 	while (node->next != NULL)
 	{
-		if (ft_is_tokenpair(node->token) == TRUE)
+		if (node->token != tk_space)
 		{
 			ft_check_endnode(node, &endnode);
 			break ;

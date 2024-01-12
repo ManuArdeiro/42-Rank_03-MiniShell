@@ -6,20 +6,24 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 19:12:20 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/12 18:29:49 by jolopez-         ###   ########.fr       */
+/*   Updated: 2024/01/12 19:41:00 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static t_cleancase	ft_get_cleancase(t_part *startnode, t_part *endnode)
+static t_cleancase	ft_get_cleancase(
+		t_part *startnode, t_part *endnode, t_global *global)
 {
 	if ((startnode->token == tk_sglquot || startnode->token == tk_arg)
 		&& ft_contains_sub_tokenlist(startnode, endnode, tk_dblquot) == TRUE)
 		return (CLEAN_SINGLE_QUOTES);
 	else if ((startnode->token == tk_dblquot || startnode->token == tk_arg)
 		&& ft_contains_sub_tokenlist(startnode, endnode, tk_sglquot) == TRUE)
+	{
+		global->expand_dollartoken = TRUE;
 		return (CLEAN_DOUBLE_QUOTES);
+	}
 	return (CLEAN_QUOTES);
 }
 
@@ -47,6 +51,22 @@ static char	*ft_get_substr(
 	return (buffer);
 }
 
+static void	ft_get_lastsubnode(
+		t_part *node,
+		t_part **subnode, t_cleancase *cleancase, t_global *global)
+{
+	(*subnode) = ft_get_last_seriestoken(node);
+	(*cleancase) = ft_get_cleancase(node, (*subnode), global);
+}
+
+static void	ft_get_lastsubnode(
+		t_part *node,
+		t_part **subnode, t_cleancase *cleancase, t_global *global)
+{
+	(*subnode) = ft_get_last_seriestoken(node);
+	(*cleancase) = ft_get_cleancase(node, (*subnode), global);
+}
+
 static void	ft_add_subseries(char **commandseries,
 	t_part **node, const char *commandline, t_global *global)
 {
@@ -57,11 +77,7 @@ static void	ft_add_subseries(char **commandseries,
 
 	substring = NULL;
 	cleancase = CLEAN_ALL;
-	sub_endnode = ft_get_tokennode((*node)->next, (*node)->token, FALSE, TRUE);
-	if (sub_endnode != NULL
-		&& sub_endnode->next != NULL && sub_endnode->next->token == tk_arg)
-		sub_endnode = ft_get_last_seriestoken(sub_endnode);
-	cleancase = ft_get_cleancase((*node), sub_endnode);
+	ft_get_lastsubnode(*node, &sub_endnode, &cleancase, global);
 	substring = ft_get_substr(commandline, sub_endnode, node);
 	buffer = ft_strclean_withspaces(substring, cleancase);
 	if (global->expand_dollartoken == TRUE)
@@ -71,10 +87,7 @@ static void	ft_add_subseries(char **commandseries,
 		free(substring);
 	if (buffer != NULL)
 		free(buffer);
-	if (sub_endnode != NULL && ft_is_tokenpair(sub_endnode->token) == FALSE)
-		(*node) = sub_endnode->next;
-	else
-		(*node) = sub_endnode;
+	(*node) = sub_endnode;
 }
 
 char	*ft_get_commandseries(
@@ -90,13 +103,7 @@ char	*ft_get_commandseries(
 	commandseries = NULL;
 	while (node != NULL && node != seriesend)
 	{
-		if (ft_tokenlist_contains(node, ft_is_tokenpair) == TRUE)
-		{
-			if (node->token != tk_sglquot
-				|| (node->next != NULL && node->next->token != tk_sglquot))
-				global->expand_dollartoken = TRUE;
-			ft_add_subseries(&commandseries, &node, commandline, global);
-		}
+		ft_add_subseries(&commandseries, &node, commandline, global);
 		if (node != NULL && node != seriesend)
 			node = node->next;
 	}

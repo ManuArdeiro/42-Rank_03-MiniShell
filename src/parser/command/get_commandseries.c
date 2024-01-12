@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 19:12:20 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/12 18:26:12 by jolopez-         ###   ########.fr       */
+/*   Updated: 2024/01/12 18:29:49 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ static void	ft_add_subseries(char **commandseries,
 	char		*buffer;
 	char		*substring;
 
-	buffer = NULL;
 	substring = NULL;
 	cleancase = CLEAN_ALL;
 	sub_endnode = ft_get_tokennode((*node)->next, (*node)->token, FALSE, TRUE);

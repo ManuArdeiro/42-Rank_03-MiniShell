@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_commandseries.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 19:12:20 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/11 21:07:49 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/12 18:26:12 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static t_cleancase	ft_get_cleancase(t_part *startnode, t_part *endnode)
 	if ((startnode->token == tk_sglquot || startnode->token == tk_arg)
 		&& ft_contains_sub_tokenlist(startnode, endnode, tk_dblquot) == TRUE)
 		return (CLEAN_SINGLE_QUOTES);
-	else if ((startnode->token == tk_dblquot ||startnode->token == tk_arg)
+	else if ((startnode->token == tk_dblquot || startnode->token == tk_arg)
 		&& ft_contains_sub_tokenlist(startnode, endnode, tk_sglquot) == TRUE)
 		return (CLEAN_DOUBLE_QUOTES);
 	return (CLEAN_QUOTES);
@@ -32,9 +32,7 @@ static char	*ft_get_substr(
 	buffer = NULL;
 	if (secondnode != NULL && secondnode->end > (*node)->start)
 	{
-		buffer
-			= ft_substr(
-				commandline, (*node)->start,
+		buffer = ft_substr(commandline, (*node)->start,
 				((secondnode->end) - ((*node)->start) + 1));
 	}
 	else if (secondnode == NULL)
@@ -49,8 +47,7 @@ static char	*ft_get_substr(
 	return (buffer);
 }
 
-static void	ft_add_subseries(
-	char **commandseries,
+static void	ft_add_subseries(char **commandseries,
 	t_part **node, const char *commandline, t_global *global)
 {
 	t_part		*sub_endnode;

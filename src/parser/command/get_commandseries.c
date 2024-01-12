@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 19:12:20 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/12 18:59:36 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/12 20:13:59 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ static t_cleancase	ft_get_cleancase(
 		global->expand_dollartoken = TRUE;
 		return (CLEAN_DOUBLE_QUOTES);
 	}
+	else if (startnode->token == tk_dblquot)
+		global->expand_dollartoken = TRUE;
 	return (CLEAN_QUOTES);
 }
 

@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 12:40:08 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/12 19:23:20 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/13 14:26:07 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ static void	ft_evaluate_relation(
 	if (nodetype == n_and || nodetype == n_commandlist)
 	{
 		firststatus = ft_navigate_and_execute(root->leftchild, global);
-		secondstatus = ft_navigate_and_execute(root->rightchild, global);
+		if (firststatus == EXIT_SUCCESS)
+			secondstatus = ft_navigate_and_execute(root->rightchild, global);
 		if ((firststatus + secondstatus) == EXIT_FAILURE
 			|| (firststatus + secondstatus) == EXIT_SUCCESS)
 			*laststatus = EXIT_SUCCESS;

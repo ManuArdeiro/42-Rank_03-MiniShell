@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
+/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:55:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2024/01/10 20:03:06 by jolopez-         ###   ########.fr       */
+/*   Updated: 2024/01/13 11:51:02 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ int	main(int ac, char **av, char **env)
 	}
 	ft_printwellcome();
 	ft_initglobal(&global, env, shell_level, devmode);
+	ft_set_terminal();
 	ft_loop(global);
 	laststatus = global->laststatus;
 	ft_freeglobal(&global);

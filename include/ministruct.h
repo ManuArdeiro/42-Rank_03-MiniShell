@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:10:53 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/05 19:23:33 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/13 11:37:01 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "libft.h"
 # include "minitree.h"
+# include <termios.h>
 
 # define PERMISSION_DENIED 	" Permission denied : "
 # define STAR 				" no matches found : "
@@ -36,6 +37,7 @@ typedef struct s_part			t_part;
 typedef struct s_mininode		t_mininode;
 typedef enum e_cleancase		t_cleancase;
 typedef struct sigaction		t_sigaction;
+typedef struct termios			t_termios;
 
 enum e_cleancase
 {

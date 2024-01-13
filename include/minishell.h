@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:47:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2024/01/06 17:30:44 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/13 11:49:46 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void		ft_printerror(const char *function, const char *string);
 void		ft_freeglobal(t_global **global);
 void		ft_initglobal(t_global **global, char **env,
 				int shell_level, t_bool devmode);
+void		ft_set_terminal(void);
 
 // Environment
 void		ft_setenv(t_list **envlist, char *key, char *value, int overwrite);

@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 18:28:55 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/06 21:38:22 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/15 20:36:45 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,13 @@ void	ft_writetofile(
 		ft_putstr_fd("heredoc> ", STDOUT_FILENO);
 		ft_get_inputline(&line, herepipe);
 		cleanline = ft_strtrim(line, "\n");
+		printf("line = %s\n", cleanline);
+		if (ft_strrchr(cleanline, '$') != NULL)
+		{
+			printf("hola\n");
+			cleanline = ft_expand_dollartoken(cleanline, global);
+			printf("line = %s\n", cleanline);
+		}
 		ft_evaluate_line(cleanline, delimiter, line, herepipe);
 		ft_putstr_fd(line, herepipe[1]);
 		free(line);

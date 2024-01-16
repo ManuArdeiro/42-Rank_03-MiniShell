@@ -12,6 +12,21 @@
 
 #include "minishell.h"
 
+static void	ft_handle_shelvl(t_global *global)
+{
+	char	*shelvl;
+
+	shelvl = ft_getenv("SHLVL", global->envlist);
+	global->shell_level = ft_atoi(shelvl);
+	if (shelvl != NULL)
+	{
+		free(shelvl);
+		shelvl = ft_itoa(global->shell_level + 1);
+		ft_setenv(&global->envlist, "SHLVL", shelvl, OVERWRITE_VALUE);
+	}
+	
+}
+
 static int	ft_is_directory(const char *path)
 {
 	struct stat	statbuf;
@@ -69,7 +84,7 @@ static void	ft_execute_givencommand(
 	char	**envp;
 	char	*pathvariables;
 
-	envp = ft_lstconvert_strarr(global->envlist);
+	envp = ft_lstconvert_strarr(global->envlist, ENV);
 	pathvariables = ft_getenv("PATH", global->envlist);
 	if (ft_strlen(command->name) > 0)
 		command->name = ft_add_pathprefix(command->name, pathvariables);
@@ -87,10 +102,8 @@ void	ft_execute_subprocess(
 		t_command *command, t_file *infile, t_file *outfile, t_global *global)
 {
 	char	**args;
-	char	*shelvl;
 
 	args = NULL;
-	shelvl = NULL;
 	ft_open_filestreams(&infile, &outfile);
 	if (infile->fd < 0)
 		ft_terminateprocess(command, NULL, NULL, NO_SUCH_FILE_IN);
@@ -99,14 +112,9 @@ void	ft_execute_subprocess(
 	ft_duplicate_descriptors(&infile->fd, &outfile->fd);
 	ft_closefile(&infile->fd);
 	ft_closefile(&outfile->fd);
-	if (ft_strequal(command->name, "./minishell") == TRUE)
-	{
-		shelvl = ft_getenv("SHLVL", global->envlist);
-		if (shelvl != NULL)
-			ft_lstinsert(&command->args, shelvl, BACK);
-	}
+	ft_handle_shelvl(global);
 	if (global->expand_startoken == TRUE)
 		ft_checkfor_stars(command);
-	args = ft_lstconvert_strarr(command->args);
+	args = ft_lstconvert_strarr(command->args, 0);
 	ft_execute_givencommand(command, global, args);
 }

@@ -76,7 +76,8 @@ static t_bool	ft_validate_summary(t_list *summary)
 			if (ft_is_validtokenpair(summary, nodesummary) == FALSE)
 				return (FALSE);
 		}
-		else if (ft_is_tokenseparator(nodesummary->token) == TRUE)
+		else if (ft_is_tokenseparator(nodesummary->token) == TRUE
+			&& nodesummary->token != tk_semi)
 		{
 			if (nodesummary->count >= ft_get_tokencount(summary, tk_cmd))
 				return (FALSE);

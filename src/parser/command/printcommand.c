@@ -41,7 +41,7 @@ static void	ft_print_stringarray(t_list *list)
 	char	**strarray;
 
 	count = 0;
-	strarray = ft_lstconvert_strarr(list);
+	strarray = ft_lstconvert_strarr(list, 0);
 	if (strarray == NULL)
 	{
 		printf("%s\n", (char *) NULL);

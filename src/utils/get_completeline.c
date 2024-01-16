@@ -41,7 +41,7 @@ static char	*ft_completeline(const char *commandline, const char *prompt)
 		if (line != NULL)
 			buffer = ft_strjoin_get(buffer, line);
 		if (ft_loop_end(line, prompt) == TRUE
-			|| g_exit_status == 1)
+			|| g_exit_status != EXIT_SUCCESS)
 			break ;
 		free(line);
 	}

@@ -95,5 +95,5 @@ t_list		*ft_expand_startoken(const char *fullpath);
 char		*ft_expand_dollartoken(const char *argument, t_global *global);
 
 //CONVERT FUNCTIONS
-char		**ft_lstconvert_strarr(t_list *list);
+char		**ft_lstconvert_strarr(t_list *list, t_bool type);
 #endif		/*Mini Parser*/

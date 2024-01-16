@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-static t_bool	ft_check_series(t_part *tokenlist)
+t_bool	ft_is_commandseries(t_part *tokenlist)
 {
 	t_bool	result;
 	t_part	*commandnode;
@@ -20,11 +20,12 @@ static t_bool	ft_check_series(t_part *tokenlist)
 
 	result = FALSE;
 	commandnode = ft_get_tokennode(tokenlist, tk_cmd, FALSE, FIRST);
-	quotenode = ft_get_tokennode(tokenlist, tk_dblquot, FALSE, FIRST);
+	quotenode = ft_get_tokennode(tokenlist->next, tk_dblquot, FALSE, FIRST);
 	if (quotenode == NULL)
 		quotenode
 			= ft_get_tokennode(tokenlist, tk_sglquot, FALSE, FIRST);
-	if (quotenode != NULL)
+	if (quotenode != NULL
+		&& quotenode->next != NULL && quotenode->next->token != tk_space)
 		quotenode = ft_get_last_seriestoken(quotenode->next);
 	if (commandnode != NULL && quotenode != NULL)
 	{
@@ -33,15 +34,5 @@ static t_bool	ft_check_series(t_part *tokenlist)
 			|| commandnode->index == quotenode->index + 1)
 			result = TRUE;
 	}
-	return (result);
-}
-
-t_bool	ft_is_commandseries(t_part *tokenlist)
-{
-	t_bool	result;
-
-	result = FALSE;
-	if (tokenlist != NULL)
-		result = ft_check_series(tokenlist);
 	return (result);
 }

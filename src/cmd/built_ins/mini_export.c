@@ -21,9 +21,11 @@ static int	ft_check_name(const char *name)
 	int	i;
 
 	i = 0;
+	if (ft_isdigit(name[i]) == TRUE)
+		return (EXIT_FAILURE);
 	while (name[i] != '\0')
 	{
-		if (ft_isalpha(name[i]) != TRUE)
+		if (ft_isalnum(name[i]) != TRUE && name[i] != '_')
 			return (EXIT_FAILURE);
 		i++;
 	}
@@ -44,14 +46,14 @@ static int	ft_set_variable(char *arg, char *name, char *value)
 	k = 0;
 	while ((char)arg[j] != '=')
 	{
-		if (!ft_isalnum(arg[j]))
+		if (ft_isalnum(arg[j]) != TRUE && arg[j] != '_')
 			return (EXIT_FAILURE);
 		name[j] = arg[j];
 		j++;
 	}
 	name[j] = '\0';
 	if (ft_check_name(name) == EXIT_FAILURE)
-		return (ft_print_not_valid(arg));
+		return (EXIT_FAILURE);
 	j++;
 	while (arg[j])
 	{

@@ -12,6 +12,32 @@
 
 #include "minishell.h"
 
+static t_bool	check_flags(char *argument)
+{
+	int		i;
+	t_bool	result;
+
+	i = 0;
+	result = FALSE;
+	if (argument == NULL)
+		return (FALSE);
+	if (argument[i] == '-')
+	{
+		++i;
+		while (argument[i] != '\0')
+		{
+			if (argument[i] == 'n')
+				result = TRUE;
+			else
+				result = FALSE;
+			if (result == FALSE)
+				break ;
+			++i;
+		}
+	}	
+	return (result);
+}
+
 /*	This function check the first argument:
 	-	If it is "-n" then all the arguments will be written (separated by
 		spaces) to the standard	output but "\n" won't be written at the end 
@@ -29,18 +55,16 @@ int	ft_mini_echo(char **args)
 	n_option = FALSE;
 	while (args[i])
 	{
-		if (ft_strncmp(args[i], "-n", 3) == 0)
+		if (check_flags(args[i]) == TRUE)
 		{
 			n_option = TRUE;
 			i++;
 		}
-		while (args[i])
-		{
+		if (args[i] != NULL)
 			ft_putstr_fd(args[i], STDOUT_FILENO);
-			if (args[i + 1] && args[i][0] != '\0')
-				write(1, " ", 1);
-			i++;
-		}
+		if (args[i + 1] && args[i][0] != '\0')
+			write(1, " ", 1);
+		i++;
 	}
 	if (n_option == FALSE)
 		write(1, "\n", 1);

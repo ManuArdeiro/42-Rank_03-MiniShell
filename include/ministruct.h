@@ -67,9 +67,7 @@ enum e_bool
 	BUILTIN,
 	FIRST,
 	LAST,
-	HEREDOC_EXE,
-	SIG_QUIT,
-	SIG_INT
+	ENV
 };
 
 struct s_dict

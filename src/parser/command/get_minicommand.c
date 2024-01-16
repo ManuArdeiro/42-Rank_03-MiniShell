@@ -59,6 +59,7 @@ static t_command	*ft_newcommand(t_part *tokenlist, t_global *global)
 	char		*commandname;
 
 	newcommand = NULL;
+
 	if (ft_is_commandseries(tokenlist) == FALSE)
 	{
 		commandnode = ft_get_tokennode(tokenlist, tk_cmd, TRUE, FIRST);

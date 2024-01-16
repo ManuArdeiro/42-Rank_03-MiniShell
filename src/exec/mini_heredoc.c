@@ -54,11 +54,7 @@ void	ft_writetofile(
 		cleanline = ft_strtrim(line, "\n");
 		printf("line = %s\n", cleanline);
 		if (ft_strrchr(cleanline, '$') != NULL)
-		{
-			printf("hola\n");
 			cleanline = ft_expand_dollartoken(cleanline, global);
-			printf("line = %s\n", cleanline);
-		}
 		ft_evaluate_line(cleanline, delimiter, line, herepipe);
 		ft_putstr_fd(line, herepipe[1]);
 		free(line);

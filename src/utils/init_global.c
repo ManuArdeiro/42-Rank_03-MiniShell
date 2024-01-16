@@ -37,4 +37,10 @@ void	ft_initglobal(
 	shell_level++;
 	(*global)->devmode = devmode;
 	(*global)->envlist = ft_initenv(env, shell_level);
+	char **envp = ft_lstconvert_strarr((*global)->envlist, ENV);
+	while (*envp != NULL)
+	{
+		printf("%s\n", *envp);
+		++envp;
+	}
 }

@@ -31,7 +31,7 @@ void	ft_execute_builtin(
 	outputclone = 0;
 	if (command == NULL)
 		return ;
-	args = ft_lstconvert_strarr(command->args);
+	args = ft_lstconvert_strarr(command->args, 0);
 	ft_clone_streams(&inputclone, &outputclone);
 	ft_redirect_streams(
 		(t_file *)command->infile->content,

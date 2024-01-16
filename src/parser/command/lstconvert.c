@@ -12,19 +12,36 @@
 
 #include "minishell.h"
 
-char	**ft_lstconvert_strarr(t_list *list)
+static char	*ft_dict_to_str(t_dict *dict)
+{
+	(void)dict;
+	//
+	char	*string;
+	string = NULL;
+	return (string);
+}
+
+static char	**ft_empty_strarr(void)
+{
+	char	**stringarray;
+
+	stringarray = malloc(sizeof(char *) * 2);
+	if (stringarray == NULL)
+		return (NULL);
+	stringarray[0] = "";
+	stringarray[1] = NULL;
+	return (stringarray);
+}
+
+char	**ft_lstconvert_strarr(t_list *list, t_bool type)
 {
 	char	**stringarray;
 	t_list	*node;
+	char	*string;
 	int		i;
 
 	if (list == NULL)
-	{
-		stringarray = malloc(sizeof(char *) * 2);
-		stringarray[0] = "";
-		stringarray[1] = NULL;
-		return (stringarray);
-	}
+		return (ft_empty_strarr());
 	node = list;
 	stringarray = malloc(sizeof(char *) * (ft_lstsize(list) + 1));
 	if (!stringarray)
@@ -32,56 +49,15 @@ char	**ft_lstconvert_strarr(t_list *list)
 	i = 0;
 	while (node != NULL)
 	{
-		stringarray[i] = ft_strdup((char *)node->content);
+		if (type == ENV)
+			string = ft_dict_to_str((t_dict *)node->content);
+		else
+			string = (char *)node->content;
+		if (string != NULL)
+			stringarray[i] = ft_strdup(string);
 		node = node->next;
 		++i;
 	}
 	stringarray[i] = NULL;
 	return (stringarray);
 }
-/*
-static t_file	*ft_create_filearray(size_t size, int std_stream)
-{
-	t_file	*filearray;
-
-	filearray = NULL;
-	filearray = malloc(sizeof(t_file) * (size + 1));
-	if (!filearray)
-		return (NULL);
-	else if (filearray)
-	{
-		filearray[size].name = NULL;
-		filearray[size].fd = std_stream;
-		filearray[size].mode = 0;
-	}
-	return (filearray);
-}
-
-t_file	*ft_lstconvert_filearr(t_list *list, int std_stream, int mode)
-{
-	t_file	*filearray;
-	t_list	*node;
-	int		i;
-
-	if (list == NULL)
-	{
-		filearray = ft_create_filearray(0, std_stream);
-		return (filearray);
-	}
-	node = list;
-	filearray = ft_create_filearray(ft_lstsize(list), std_stream);
-	if (filearray)
-	{
-		i = 0;
-		while (node != NULL)
-		{
-			filearray[i].name = ft_strdup((char *)node->content);
-			filearray[i].fd = std_stream;
-			filearray[i].mode = mode;
-			node = node->next;
-			++i;
-		}
-	}
-	return (filearray);
-}
-*/

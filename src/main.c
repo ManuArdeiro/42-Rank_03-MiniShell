@@ -54,7 +54,7 @@ static void	ft_loop(t_global *global)
 		global->line = readline(MINI_PROMPT);
 		if (global->line != NULL)
 		{
-			global->line = ft_get_completeline(global->line);
+			global->line = ft_get_completeline(global->line, global);
 			if (ft_strequal("exit", global->line) == TRUE)
 				global->status = EXITED;
 			parsetree = ft_parse_commandline(global);

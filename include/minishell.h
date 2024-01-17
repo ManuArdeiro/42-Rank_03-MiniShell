@@ -81,7 +81,7 @@ char		*ft_get_rootpath(const char *path);
 void		ft_free_string(void *content);
 void		ft_print_commanderror(
 				const char *commandname, const char *errortype);
-char		*ft_get_completeline(const char *commandline);
+char		*ft_get_completeline(const char *commandline, t_global *global);
 
 //History
 void		ft_write_command_history(t_list **history, t_global *global);

@@ -70,9 +70,9 @@ void	ft_get_heredoc(t_file **file, t_global *global)
 
 	if (pipe(herepipe) < 0)
 		ft_printerror(__func__, "Pipe");
-	child = fork();
 	global->signallist.sa_handler = SIG_IGN;
 	sigaction(SIGINT, &global->signallist, NULL);
+	child = fork();
 	if (child == 0)
 		ft_writetofile((*file)->name, herepipe, global);
 	else if (child < 0)

@@ -15,14 +15,15 @@
 static t_bool	ft_loop_end(const char *line, const char *prompt)
 {
 	if ((ft_strequal(prompt, PIPELINE) == TRUE
-			&& ft_strlen(line) > 0 && line[0] != '\n')
+			&& ft_strlen(line) > 0 && line[0] != '\n' && line[0] != '|')
 		|| (ft_strequal(prompt, BACKSLASH) == TRUE
 			&& line != NULL && line[0] != '\\'))
 		return (TRUE);
 	return (FALSE);
 }
 
-static char	*ft_completeline(const char *commandline, const char *prompt)
+static char	*ft_completeline(
+		const char *commandline, const char *prompt, int pip[2])
 {
 	char	*line;
 	char	*buffer;
@@ -38,7 +39,13 @@ static char	*ft_completeline(const char *commandline, const char *prompt)
 	{
 		ft_putstr_fd(prompt, STDOUT_FILENO);
 		line = get_next_line(STDIN_FILENO);
-		if (line != NULL)
+		if (line == NULL)
+		{
+			ft_closepipe(&pip[0], &pip[1]);
+			ft_printerror(__func__, "Get next line");
+			exit(EXIT_FAILURE);
+		}
+		else
 			buffer = ft_strjoin_get(buffer, line);
 		if (ft_loop_end(line, prompt) == TRUE)
 			break ;
@@ -49,34 +56,75 @@ static char	*ft_completeline(const char *commandline, const char *prompt)
 	return (result);
 }
 
-static char	*ft_findsplitter(const char *commandline)
+static void	ft_runchild(
+		const char *commandline, t_global *global, int pip[2])
 {
 	char	*completeline;
 
 	completeline = NULL;
+	global->signallist.sa_handler = &handle_sigint_exit;
+	sigaction(SIGINT, &global->signallist, NULL);
 	if (ft_endswith(commandline, "\\") == TRUE)
-		completeline = ft_completeline(commandline, BACKSLASH);
+		completeline = ft_completeline(commandline, BACKSLASH, pip);
 	else if (ft_endswith(commandline, "|") == TRUE)
-		completeline = ft_completeline(commandline, PIPELINE);
-	return (completeline);
+		completeline = ft_completeline(commandline, PIPELINE, pip);
+	if (completeline)
+	{
+		free((char *)commandline);
+		ft_putstr_fd(completeline, pip[1]);
+		printf("completeline = %s\n", completeline);
+		free(completeline);
+	}
+	else
+		ft_putstr_fd(commandline, pip[1]);
+	ft_closepipe(&pip[0], &pip[1]);
+	exit(EXIT_SUCCESS);
 }
 
-char	*ft_get_completeline(const char *commandline)
+static char	*ft_extract_line(int pip)
+{
+	char	*line;
+	char	*buffer;
+
+	line = "";
+	buffer = ft_strdup("");
+	while (line != NULL)
+	{
+		line = get_next_line(pip);
+		if (line != NULL)
+		{
+			ft_strjoin_get(buffer, line);
+			free(line);
+		}
+	}
+	return (buffer);
+}
+
+char	*ft_get_completeline(const char *commandline, t_global *global)
 {
 	char	*completeline;
+	int		pip[2];
+	pid_t	pid;
+	int		fd;
 
 	completeline = NULL;
 	if (commandline == NULL)
 		return (NULL);
 	if (ft_countalpha(commandline) <= 1 && commandline[0] != '\\')
 		return ((char *)commandline);
-	completeline = ft_findsplitter(commandline);
-	if (completeline && ft_endswith(completeline, "|") == TRUE)
-		completeline = ft_get_completeline(completeline);
-	if (completeline)
-		free((char *)commandline);
-	else
-		return ((char *)commandline);
+	if (pipe(pip) < 0)
+		ft_printerror(__func__, "pipe");
+	global->signallist.sa_handler = SIG_IGN;
+	sigaction(SIGINT, &global->signallist, NULL);
+	pid = fork();
+	if (pid == 0)
+		ft_runchild(commandline, global, pip);
+	else if (pid < 0)
+		ft_printerror(__func__, "fork");
+	fd = dup(pip[0]);
+	ft_closepipe(&pip[0], &pip[1]);
+	ft_wait_process(&pid, &global->laststatus, FORK, global);
+	completeline = ft_extract_line(fd);
+	close(fd);
 	return (completeline);
 }
-

@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 15:51:54 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/23 19:41:17 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/17 18:34:20 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,12 @@
 
 static char	*ft_dict_to_str(t_dict *dict)
 {
-	(void)dict;
-	//
 	char	*string;
+	char	*buffer;
+
 	string = NULL;
+	buffer = ft_strjoin(dict->key, "=");
+	string = ft_strjoin_get(buffer, dict->value);
 	return (string);
 }
 
@@ -52,9 +54,9 @@ char	**ft_lstconvert_strarr(t_list *list, t_bool type)
 		if (type == ENV)
 			string = ft_dict_to_str((t_dict *)node->content);
 		else
-			string = (char *)node->content;
+			string = ft_strdup((char *)node->content);
 		if (string != NULL)
-			stringarray[i] = ft_strdup(string);
+			stringarray[i] = string;
 		node = node->next;
 		++i;
 	}

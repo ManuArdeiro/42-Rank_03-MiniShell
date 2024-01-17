@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 18:11:58 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/12 19:28:01 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/17 19:11:50 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,9 @@ void	ft_wait_close_heredoc(pid_t child, t_file *file,
 
 void	ft_wait_process(pid_t *pid, int *laststatus,
 			t_bool processtype, t_global *global);
+
+void	ft_handle_shelvl(t_global **global);
+int		ft_is_directory(const char *path);
+void	ft_terminateprocess(t_command *command, char **args,
+			char **envp, const char *errortype);
 #endif

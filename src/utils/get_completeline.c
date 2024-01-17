@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 16:08:48 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/22 19:06:35 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/17 19:53:18 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static t_bool	ft_loop_end(const char *line, const char *prompt)
 	if ((ft_strequal(prompt, PIPELINE) == TRUE
 			&& ft_strlen(line) > 0 && line[0] != '\n')
 		|| (ft_strequal(prompt, BACKSLASH) == TRUE
-			&& line != NULL))
+			&& line != NULL && line[0] != '\\'))
 		return (TRUE);
 	return (FALSE);
 }
@@ -40,8 +40,7 @@ static char	*ft_completeline(const char *commandline, const char *prompt)
 		line = get_next_line(STDIN_FILENO);
 		if (line != NULL)
 			buffer = ft_strjoin_get(buffer, line);
-		if (ft_loop_end(line, prompt) == TRUE
-			|| g_exit_status != EXIT_SUCCESS)
+		if (ft_loop_end(line, prompt) == TRUE)
 			break ;
 		free(line);
 	}
@@ -69,6 +68,8 @@ char	*ft_get_completeline(const char *commandline)
 	completeline = NULL;
 	if (commandline == NULL)
 		return (NULL);
+	if (ft_countalpha(commandline) <= 1 && commandline[0] != '\\')
+		return ((char *)commandline);
 	completeline = ft_findsplitter(commandline);
 	if (completeline && ft_endswith(completeline, "|") == TRUE)
 		completeline = ft_get_completeline(completeline);
@@ -78,3 +79,4 @@ char	*ft_get_completeline(const char *commandline)
 		return ((char *)commandline);
 	return (completeline);
 }
+

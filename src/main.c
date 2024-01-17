@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:55:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2024/01/13 11:51:02 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/17 19:01:14 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,24 +78,20 @@ static void	ft_loop(t_global *global)
 int	main(int ac, char **av, char **env)
 {
 	t_global	*global;
-	int			shell_level;
 	int			laststatus;
 	t_bool		devmode;
 
 	laststatus = EXIT_SUCCESS;
 	devmode = FALSE;
-	shell_level = 0;
 	if (ac >= 2)
 	{
-		if (ft_isdigit(av[1][0]) == TRUE)
-			shell_level = ft_atoi(av[1]);
-		else if (ft_strequal(av[1], "--Dev") == TRUE)
+		if (ft_strequal(av[1], "--Dev") == TRUE)
 			devmode = TRUE;
 		else
 			ft_printhelp();
 	}
 	ft_printwellcome();
-	ft_initglobal(&global, env, shell_level, devmode);
+	ft_initglobal(&global, env, devmode);
 	ft_set_terminal();
 	ft_loop(global);
 	laststatus = global->laststatus;

@@ -72,7 +72,6 @@ static void	ft_runchild(
 	{
 		free((char *)commandline);
 		ft_putstr_fd(completeline, pip[1]);
-		printf("completeline = %s\n", completeline);
 		free(completeline);
 	}
 	else
@@ -110,7 +109,9 @@ char	*ft_get_completeline(const char *commandline, t_global *global)
 	completeline = NULL;
 	if (commandline == NULL)
 		return (NULL);
-	if (ft_countalpha(commandline) <= 1 && commandline[0] != '\\')
+	if ((ft_countalpha(commandline) <= 1 && commandline[0] != '\\')
+		|| (ft_endswith(commandline, "\\") == FALSE
+			&& ft_endswith(commandline, "|") == FALSE))
 		return ((char *)commandline);
 	if (pipe(pip) < 0)
 		ft_printerror(__func__, "pipe");
@@ -123,8 +124,8 @@ char	*ft_get_completeline(const char *commandline, t_global *global)
 		ft_printerror(__func__, "fork");
 	fd = dup(pip[0]);
 	ft_closepipe(&pip[0], &pip[1]);
-	ft_wait_process(&pid, &global->laststatus, FORK, global);
 	completeline = ft_extract_line(fd);
+	ft_wait_process(&pid, &global->laststatus, FORK, global);
 	close(fd);
 	return (completeline);
 }

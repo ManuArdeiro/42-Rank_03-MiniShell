@@ -124,8 +124,8 @@ char	*ft_get_completeline(const char *commandline, t_global *global)
 		ft_printerror(__func__, "fork");
 	fd = dup(pip[0]);
 	ft_closepipe(&pip[0], &pip[1]);
-	completeline = ft_extract_line(fd);
 	ft_wait_process(&pid, &global->laststatus, FORK, global);
+	completeline = ft_extract_line(fd);
 	close(fd);
 	return (completeline);
 }

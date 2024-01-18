@@ -52,7 +52,6 @@ void	ft_writetofile(
 		ft_putstr_fd("heredoc> ", STDOUT_FILENO);
 		ft_get_inputline(&line, herepipe);
 		cleanline = ft_strtrim(line, "\n");
-		printf("line = %s\n", cleanline);
 		if (ft_strrchr(cleanline, '$') != NULL)
 			cleanline = ft_expand_dollartoken(cleanline, global);
 		ft_evaluate_line(cleanline, delimiter, line, herepipe);

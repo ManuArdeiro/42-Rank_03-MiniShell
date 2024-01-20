@@ -87,7 +87,9 @@ t_minitree	*ft_get_minicommand(t_part *tokenlist, t_global *global)
 	minicommand = NULL;
 	if (tokenlist == NULL || global == NULL)
 		return (NULL);
+	ft_print_tokenlist(tokenlist);
 	command = ft_newcommand(tokenlist, global);
+	ft_printcommand(command);
 	minicommand = ft_create_mininode((t_command *)command, n_command);
 	ft_treeinsert(&minitree, NULL, minicommand, NULL);
 	return (minitree);

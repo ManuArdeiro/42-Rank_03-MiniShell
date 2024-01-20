@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_validseries.c                                   :+:      :+:    :+:   */
+/*   set_tokenlist.c	                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/12 16:42:31 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/12 20:58:08 by yzaytoun         ###   ########.fr       */
+/*   Created: 2023/10/25 17:50:35 by yzaytoun          #+#    #+#             */
+/*   Updated: 2024/01/17 19:14:36 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_bool	ft_isvalid_series(t_part *node)
+void	ft_set_tokenlist(t_part **tokenlist, t_part *delimiter, t_bool newstate)
 {
-	if (node == NULL)
-		return (FALSE);
-	if (node->token != tk_space && node->next != NULL
-		&& ft_is_tokenpair(node->next->token) == TRUE)
-		return (TRUE);
-	else if (node->token == tk_mul
-		&& node->next != NULL && node->next->token != tk_space)
-		return (TRUE);
-	else
-		if ((ft_is_tokenpair(node->token) == TRUE))
-			return (TRUE);
-	return (FALSE);
+	t_part	*node;
+
+	if (tokenlist == NULL || *tokenlist == NULL)
+		return ;
+	node = *tokenlist;
+	while (node != delimiter)
+	{
+		node->used = newstate;
+		node = node->next;
+	}
+	if (delimiter != NULL)
+		delimiter->used = TRUE;
 }

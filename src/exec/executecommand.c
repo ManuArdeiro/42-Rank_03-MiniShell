@@ -24,7 +24,8 @@ static void	ft_check_commandname(t_command *command)
 			command->name = ft_strdup((char *)command->args->content);
 		}
 	}
-	else if (command->name == NULL && command->args->content != NULL)
+	else if (command->name == NULL
+		&& command->args != NULL && command->args->content != NULL)
 		command->name = ft_strdup((char *)command->args->content);
 }
 

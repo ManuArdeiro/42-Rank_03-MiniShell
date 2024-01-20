@@ -27,15 +27,14 @@ static t_command	*ft_createcommand(
 	return (command);
 }
 
-static t_command	*ft_create_newcommand(
-	char *commandname, t_part *tokenlist, t_global *global
-)
+static t_command	*ft_newcommand(t_part *tokenlist, t_global *global)
 {
 	t_command	*newcommand;
 	t_list		*arglist;
+	char		*commandname;
 
-	newcommand = NULL;
 	arglist = NULL;
+	commandname = ft_extractseries(tokenlist, global);
 	arglist = ft_extract_arglist(tokenlist, global);
 	arglist = ft_clear_emptyvalues(arglist);
 	if (commandname != NULL)
@@ -49,30 +48,6 @@ static t_command	*ft_create_newcommand(
 			);
 	if (newcommand != NULL)
 		ft_expand_filelist(&newcommand->infile, global);
-	return (newcommand);
-}
-
-static t_command	*ft_newcommand(t_part *tokenlist, t_global *global)
-{
-	t_command	*newcommand;
-	t_part		*commandnode;
-	char		*commandname;
-
-	newcommand = NULL;
-
-	if (ft_is_commandseries(tokenlist) == FALSE)
-	{
-		commandnode = ft_get_tokennode(tokenlist, tk_cmd, TRUE, FIRST);
-		commandname = ft_extract_tokenstring(global->line, commandnode);
-		ft_checkquotes(&commandname);
-		global->expand_dollartoken = TRUE;
-		commandname = ft_expand_dollartoken(commandname, global);
-	}
-	else
-		commandname
-			= ft_extract_commandseries(global->line, tokenlist, NULL, global);
-	newcommand
-		= ft_create_newcommand(commandname, tokenlist, global);
 	global->expand_dollartoken = FALSE;
 	return (newcommand);
 }

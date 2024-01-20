@@ -46,9 +46,10 @@ LEXER			= tokenizer.c tokens.c token_tools_1.c token_tools_2.c \
 COMMAND			= extract_tokenstring.c copy_tokenlist.c lstconvert.c \
 					printcommand.c extract_filelist.c get_minicommand.c \
 					extract_arglist.c is_compoundcommand.c free_commandlist.c\
-					extract_commandseries.c is_commandseries.c get_last_seriestoken.c\
-					is_command.c clear_emptyvalues.c get_commandseries.c\
-					checkquotes.c is_validseries.c
+					is_command.c clear_emptyvalues.c \
+					get_commandseries.c get_last_seriestoken.c\
+					checkquotes.c is_validseries.c set_tokenlist.c \
+					extractseries.c
 				
 FILE			= filestreams.c create_file.c get_filemode.c is_redirection.c \
 					freefile.c append_filecontent.c delete_filenode.c closepipe.c\

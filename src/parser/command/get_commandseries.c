@@ -57,7 +57,7 @@ static void	ft_get_lastsubnode(
 		t_part *node,
 		t_part **subnode, t_cleancase *cleancase, t_global *global)
 {
-	(*subnode) = ft_get_last_seriestoken(node);
+	(*subnode) = ft_get_tokennode(node->next, node->token, FALSE, FIRST);
 	(*cleancase) = ft_get_cleancase(node, (*subnode), global);
 }
 

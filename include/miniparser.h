@@ -58,17 +58,15 @@ t_bool		ft_is_compoundcommand(t_nodetype nodetype);
 char		*ft_extract_tokenstring(const char *commandline, t_part *node);
 t_list		*ft_extract_arglist(t_part *tokenlist, t_global *global);
 void		ft_free_commandlist(t_command **command);
-char		*ft_extract_commandseries(
-				const char *commandline,
-				t_part *tokenlist, t_part **nextstart, t_global *global);
-t_bool		ft_is_commandseries(t_part *tokenlist);
-t_part		*ft_get_last_seriestoken(t_part *tokenlist);
 t_list		*ft_clear_emptyvalues(t_list *list);
 char		*ft_get_commandseries(
 				const char *commandline,
 				t_part *seriesstart, t_part *seriesend, t_global *global);
 void		ft_checkquotes(char **string);
-t_bool		ft_isvalid_series(t_part *node, t_part *prevnode);
+t_bool		ft_isvalid_series(t_part *node);
+void		ft_set_tokenlist(t_part **tokenlist, t_part *delimiter, t_bool newstate);
+char		*ft_extractseries(t_part *, t_global *);
+t_part		*ft_get_last_seriestoken(t_part *tokenlist);
 
 //File
 t_list		*ft_extract_filelist(

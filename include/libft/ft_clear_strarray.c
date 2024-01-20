@@ -21,7 +21,7 @@ void	ft_clear_strarray(char **strarray)
 		return ;
 	while (strarray[count])
 	{
-		if (strarray[count])
+		if (strarray[count] != NULL && strarray[count][0] != '\0')
 			free(strarray[count]);
 		++count;
 	}

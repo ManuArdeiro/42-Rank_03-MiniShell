@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_exit.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 01:42:21 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/12/20 20:33:22 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/18 19:42:42 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ static t_bool	ft_is_number(char *str)
 
 int	ft_mini_exit(t_global *global, char **args)
 {
-	ft_putendl_fd("exit", STDOUT_FILENO);
 	if (ft_arg_nbr(args) > 2)
 	{
 		ft_putendl_fd("exit: too many arguments", STDERR_FILENO);
@@ -81,6 +80,7 @@ int	ft_mini_exit(t_global *global, char **args)
 		else
 			global->laststatus = ft_atoi(args[1]);
 	}
+	ft_putendl_fd("exit", STDOUT_FILENO);
 	global->status = EXITED;
 	return (global->laststatus);
 }

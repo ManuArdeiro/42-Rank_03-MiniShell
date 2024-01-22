@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:05:20 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/10 19:31:28 by jolopez-         ###   ########.fr       */
+/*   Updated: 2024/01/18 20:17:31 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,8 @@ static int	ft_return_newfolder(char *dir, t_list *envlist)
 		return (EXIT_FAILURE);
 	if (ft_strequal("-", dir) == TRUE)
 		return (ft_new_folder(envlist, ft_getenv("OLDPWD", envlist)));
+	else if (ft_strequal("~", dir) == TRUE)
+		return (ft_new_folder(envlist, ft_getenv("HOME", envlist)));
 	else if (ft_strequal("..", dir) == TRUE)
 		return (ft_new_folder(envlist, ft_get_previousdir()));
 	else

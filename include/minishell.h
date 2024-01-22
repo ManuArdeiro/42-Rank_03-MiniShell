@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:47:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2024/01/17 19:03:21 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/22 18:16:30 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,8 @@ void		ft_free_string(void *content);
 void		ft_print_commanderror(
 				const char *commandname, const char *errortype);
 char		*ft_get_completeline(const char *commandline, t_global *global);
+char		*ft_completeline(
+				const char *commandline, const char *prompt, int pip[2]);
 
 //History
 void		ft_write_command_history(t_list **history, t_global *global);

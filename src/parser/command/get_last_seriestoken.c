@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   miniparser.h                                       :+:      :+:    :+:   */
+/*   get_last_seriestoken.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 20:07:17 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/12 16:56:39 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/22 19:19:37 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	ft_check_endnode(t_part *node, t_part **endnode)
+static void	ft_mark_endnode(t_part *node, t_part **endnode)
 {
 	t_part	*pointer;
 
@@ -43,6 +43,6 @@ t_part	*ft_get_last_seriestoken(t_part *tokenlist)
 	if (tokenlist == NULL)
 		return (NULL);
 	endnode = NULL;
-	ft_check_endnode(tokenlist, &endnode);
+	ft_mark_endnode(tokenlist, &endnode);
 	return (endnode);
 }

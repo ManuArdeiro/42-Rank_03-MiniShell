@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 20:07:17 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/12 16:56:39 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/22 19:52:09 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,12 @@ char		*ft_get_commandseries(
 				t_part *seriesstart, t_part *seriesend, t_global *global);
 void		ft_checkquotes(char **string);
 t_bool		ft_isvalid_series(t_part *node);
-void		ft_set_tokenlist(t_part **tokenlist, t_part *delimiter, t_bool newstate);
-char		*ft_extractseries(t_part *, t_global *);
+void		ft_set_tokenlist(
+				t_part **tokenlist, t_part *delimiter, t_bool newstate);
+char		*ft_extractseries(t_part *tokenlist, t_global *global);
 t_part		*ft_get_last_seriestoken(t_part *tokenlist);
+t_part		*ft_get_startnode(t_part *tokenlist);
+t_bool		ft_is_emptyquotes(t_part *startnode, t_part *endnode);
 
 //File
 t_list		*ft_extract_filelist(

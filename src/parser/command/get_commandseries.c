@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_commandseries.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
+/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 19:12:20 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/12 20:41:22 by jolopez-         ###   ########.fr       */
+/*   Updated: 2024/01/22 20:12:06 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,17 @@ static void	ft_get_lastsubnode(
 		t_part *node,
 		t_part **subnode, t_cleancase *cleancase, t_global *global)
 {
-	(*subnode) = ft_get_tokennode(node->next, node->token, FALSE, FIRST);
+	if (ft_is_tokenpair(node->token) == TRUE)
+	{
+		(*subnode) = ft_get_tokennode(node->next, node->token, FALSE, FIRST);
+		if (node->token != tk_sglquot)
+			global->expand_dollartoken = TRUE;
+	}
+	else
+	{
+		(*subnode) = node;
+		global->expand_dollartoken = TRUE;
+	}
 	(*cleancase) = ft_get_cleancase(node, (*subnode), global);
 }
 
@@ -72,6 +82,11 @@ static void	ft_add_subseries(char **commandseries,
 	substring = NULL;
 	cleancase = CLEAN_ALL;
 	ft_get_lastsubnode(*node, &sub_endnode, &cleancase, global);
+	if (ft_is_emptyquotes(*node, sub_endnode) == TRUE)
+	{
+		(*node) = sub_endnode;
+		return ;
+	}
 	substring = ft_get_substr(commandline, sub_endnode, node);
 	buffer = ft_strclean_withspaces(substring, cleancase);
 	if (global->expand_dollartoken == TRUE)

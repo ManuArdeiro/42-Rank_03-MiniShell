@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 11:05:21 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/15 20:31:27 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/22 18:29:50 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ t_minitree	*ft_get_minicommand(t_part *tokenlist, t_global *global)
 	minicommand = NULL;
 	if (tokenlist == NULL || global == NULL)
 		return (NULL);
-	ft_print_tokenlist(tokenlist);
 	command = ft_newcommand(tokenlist, global);
 	ft_printcommand(command);
 	minicommand = ft_create_mininode((t_command *)command, n_command);

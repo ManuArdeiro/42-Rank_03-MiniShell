@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_minicommand.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 11:05:21 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/22 18:29:50 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/22 20:28:02 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ t_minitree	*ft_get_minicommand(t_part *tokenlist, t_global *global)
 	if (tokenlist == NULL || global == NULL)
 		return (NULL);
 	command = ft_newcommand(tokenlist, global);
-	ft_printcommand(command);
 	minicommand = ft_create_mininode((t_command *)command, n_command);
 	ft_treeinsert(&minitree, NULL, minicommand, NULL);
 	return (minitree);

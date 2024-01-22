@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 18:12:50 by jolopez-          #+#    #+#             */
-/*   Updated: 2024/01/10 20:01:03 by jolopez-         ###   ########.fr       */
+/*   Updated: 2024/01/22 20:05:51 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,17 @@ static void	ft_token_5(t_part *tokens, char *line, int *i, int *ok)
 {
 	if (line[*i] == '$' && line[*i + 1] == '!' )
 	{
-		*ok = ft_add_tkn(tokens, tk_doll_exc, *i, *i + 2);
+		*ok = ft_add_tkn(tokens, tk_doll_exc, *i, *i + 1);
 		*i = *i + 2;
 	}
 	else if (line[*i] == '\n')
 	{
-		*ok = ft_add_tkn(tokens, tk_newline, *i, *i + 1);
+		*ok = ft_add_tkn(tokens, tk_newline, *i, *i);
 		*i = *i + 1;
 	}
 	else if (line[*i] == '=')
 	{
-		*ok = ft_add_tkn(tokens, tk_equal, *i, *i + 1);
+		*ok = ft_add_tkn(tokens, tk_equal, *i, *i);
 		*i = *i + 1;
 	}
 }
@@ -35,22 +35,22 @@ static void	ft_token_4(t_part *tokens, char *line, int *i, int *ok)
 {
 	if (line[*i] == '|' && line[*i + 1] != '|')
 	{
-		*ok = ft_add_tkn(tokens, tk_pipe, *i, *i + 2);
+		*ok = ft_add_tkn(tokens, tk_pipe, *i, *i);
 		*i = *i + 1;
 	}
 	else if (line[*i] == '&' && line[*i + 1] == '&')
 	{
-		*ok = ft_add_tkn(tokens, tk_and, *i, *i + 2);
+		*ok = ft_add_tkn(tokens, tk_and, *i, *i + 1);
 		*i = *i + 2;
 	}
 	else if (line[*i] == '&' && line[*i + 1] != '&' && line[*i + 1] != '!')
 	{
-		*ok = ft_add_tkn(tokens, tk_ampersand, *i, *i + 2);
-		*i = *i + 2;
+		*ok = ft_add_tkn(tokens, tk_ampersand, *i, *i + 1);
+		*i = *i + 1;
 	}
 	else if (line[*i] == '$' && line[*i + 1] != '!' )
 	{
-		*ok = ft_add_tkn(tokens, tk_dollar, *i, *i + 2);
+		*ok = ft_add_tkn(tokens, tk_dollar, *i, *i);
 		*i = *i + 1;
 	}
 	else
@@ -61,22 +61,22 @@ static void	ft_token_3(t_part *tokens, char *line, int *i, int *ok)
 {
 	if (line[*i] == '<' && line[*i + 1] == '<')
 	{
-		*ok = ft_add_tkn(tokens, tk_dblless, *i, *i + 2);
+		*ok = ft_add_tkn(tokens, tk_dblless, *i, *i + 1);
 		*i = *i + 2;
 	}
 	else if (line[*i] == '>' && line[*i + 1] != '>')
 	{
-		*ok = ft_add_tkn(tokens, tk_grt, *i, *i + 1);
+		*ok = ft_add_tkn(tokens, tk_grt, *i, *i);
 		*i = *i + 1;
 	}
 	else if (line[*i] == '>' && line[*i + 1] == '>')
 	{
-		*ok = ft_add_tkn(tokens, tk_dblgrt, *i, *i + 2);
+		*ok = ft_add_tkn(tokens, tk_dblgrt, *i, *i + 1);
 		*i = *i + 2;
 	}
 	else if (line[*i] == '|' && line[*i + 1] == '|')
 	{
-		*ok = ft_add_tkn(tokens, tk_or, *i, *i + 2);
+		*ok = ft_add_tkn(tokens, tk_or, *i, *i + 1);
 		*i = *i + 2;
 	}
 	else
@@ -87,17 +87,17 @@ static void	ft_token_2(t_part *tokens, char *line, int *i, int *ok)
 {
 	if (line[*i] == '*')
 	{
-		*ok = ft_add_tkn(tokens, tk_mul, *i, *i + 1);
+		*ok = ft_add_tkn(tokens, tk_mul, *i, *i);
 		*i = *i + 1;
 	}
 	else if (line[*i] == ';')
 	{
-		*ok = ft_add_tkn(tokens, tk_semi, *i, *i + 1);
+		*ok = ft_add_tkn(tokens, tk_semi, *i, *i);
 		*i = *i + 1;
 	}
 	else if (line[*i] == '<' && line[*i + 1] != '<')
 	{
-		*ok = ft_add_tkn(tokens, tk_less, *i, *i + 1);
+		*ok = ft_add_tkn(tokens, tk_less, *i, *i);
 		*i = *i + 1;
 	}
 	else
@@ -113,14 +113,15 @@ int	ft_token_1(t_part *tokens, char *line, int *i)
 {
 	int	ok;
 
+	ok = 0;
 	if (line[*i] == '(')
 	{
-		ok = ft_add_tkn(tokens, tk_lprnths, *i, *i + 1);
+		ok = ft_add_tkn(tokens, tk_lprnths, *i, *i);
 		*i = *i + 1;
 	}
 	else if (line[*i] == ')')
 	{
-		ok = ft_add_tkn(tokens, tk_rprnths, *i, *i + 1);
+		ok = ft_add_tkn(tokens, tk_rprnths, *i, *i);
 		*i = *i + 1;
 	}
 	else if (line[*i] == '\'' || line[*i] == '\"')

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   evaluate_token.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 19:10:00 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/15 20:12:41 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/22 19:50:10 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,16 @@ static void	subadd_quotes(t_part *tokens, char *line, int *i, int *ok)
 void	ft_evaluatetoken(t_part *tokens, char *line, int *i, int *ok)
 {
 	if (ok != (int *)0)
+	{
+		printf("OK != 0!!!\n");
 		subadd_quotes(tokens, line, i, ok);
+	}
 	else
 	{
 		if (line[*i + 1] == ' ')
 			ft_add_tkn(tokens, tk_cmd, *i, *i);
 		else
-			ft_add_tkn(tokens, tk_cmd, *i, *i + 1);
+			ft_add_tkn(tokens, tk_cmd, *i, *i);
 	}
 	*i = *i + 1;
 }

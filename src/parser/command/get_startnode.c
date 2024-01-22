@@ -1,29 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_validseries.c                                   :+:      :+:    :+:   */
+/*   get_startnode.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/12 16:42:31 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/12 20:58:08 by yzaytoun         ###   ########.fr       */
+/*   Created: 2024/01/22 19:21:19 by yzaytoun          #+#    #+#             */
+/*   Updated: 2024/01/22 19:33:30 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_bool	ft_isvalid_series(t_part *node)
+t_part	*ft_get_startnode(t_part *tokenlist)
 {
-	if (node == NULL)
-		return (FALSE);
-	if (node->token != tk_space && node->next != NULL
-		&& ft_is_tokenpair(node->next->token) == TRUE)
-		return (TRUE);
-	else if (node->token == tk_mul
-		&& node->next != NULL && node->next->token != tk_space)
-		return (TRUE);
-	else
-		if ((ft_is_tokenpair(node->token) == TRUE))
-			return (TRUE);
-	return (FALSE);
+	t_part	*startnode;
+
+	if (tokenlist == NULL)
+		return (NULL);
+	startnode = tokenlist;
+	while (startnode != NULL && startnode->used == TRUE)
+		startnode = startnode->next;
+	return (startnode);
 }

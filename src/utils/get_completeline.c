@@ -6,55 +6,11 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 16:08:48 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/17 19:53:18 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/22 18:19:31 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static t_bool	ft_loop_end(const char *line, const char *prompt)
-{
-	if ((ft_strequal(prompt, PIPELINE) == TRUE
-			&& ft_strlen(line) > 0 && line[0] != '\n' && line[0] != '|')
-		|| (ft_strequal(prompt, BACKSLASH) == TRUE
-			&& line != NULL && line[0] != '\\'))
-		return (TRUE);
-	return (FALSE);
-}
-
-static char	*ft_completeline(
-		const char *commandline, const char *prompt, int pip[2])
-{
-	char	*line;
-	char	*buffer;
-	char	*result;
-
-	buffer = NULL;
-	result = NULL;
-	line = "";
-	if (commandline == NULL || prompt == NULL)
-		return (NULL);
-	buffer = ft_strdup(commandline);
-	while (line != NULL)
-	{
-		ft_putstr_fd(prompt, STDOUT_FILENO);
-		line = get_next_line(STDIN_FILENO);
-		if (line == NULL)
-		{
-			ft_closepipe(&pip[0], &pip[1]);
-			ft_printerror(__func__, "Get next line");
-			exit(EXIT_FAILURE);
-		}
-		else
-			buffer = ft_strjoin_get(buffer, line);
-		if (ft_loop_end(line, prompt) == TRUE)
-			break ;
-		free(line);
-	}
-	result = ft_strclean_withspaces(buffer, CLEAN_ALL_LEAVE_PIPE);
-	free(buffer);
-	return (result);
-}
 
 static void	ft_runchild(
 		const char *commandline, t_global *global, int pip[2])
@@ -80,22 +36,47 @@ static void	ft_runchild(
 	exit(EXIT_SUCCESS);
 }
 
-static char	*ft_extract_line(int pip)
+static void	ft_manage_fd(int *fd, int *pip, t_global *global, t_bool flag)
+{
+	if (flag == COPY)
+	{
+		*fd = dup(pip[0]);
+		ft_closepipe(&pip[0], &pip[1]);
+		g_exit_status = global->laststatus;
+	}
+	else if (flag == CLOSE)
+	{
+		if (*fd >= 0)
+			close(*fd);
+	}
+
+}
+
+static char	*ft_extract_line(int *pip, pid_t pid, t_global *global)
 {
 	char	*line;
 	char	*buffer;
+	int		fd;
 
+	ft_manage_fd(&fd, pip, global, COPY);
+	ft_wait_process(&pid, &global->laststatus, FORK, global);
 	line = "";
-	buffer = ft_strdup("");
+	buffer = NULL;
 	while (line != NULL)
 	{
-		line = get_next_line(pip);
+		line = get_next_line(fd);
 		if (line != NULL)
 		{
-			ft_strjoin_get(buffer, line);
+			buffer = ft_strjoin_get(buffer, line);
 			free(line);
 		}
 	}
+	if (g_exit_status != EXIT_SUCCESS)
+	{
+		free(buffer);
+		return (ft_strdup(""));
+	}
+	ft_manage_fd(&fd, pip, global, CLOSE);
 	return (buffer);
 }
 
@@ -104,7 +85,6 @@ char	*ft_get_completeline(const char *commandline, t_global *global)
 	char	*completeline;
 	int		pip[2];
 	pid_t	pid;
-	int		fd;
 
 	completeline = NULL;
 	if (commandline == NULL)
@@ -122,10 +102,9 @@ char	*ft_get_completeline(const char *commandline, t_global *global)
 		ft_runchild(commandline, global, pip);
 	else if (pid < 0)
 		ft_printerror(__func__, "fork");
-	fd = dup(pip[0]);
-	ft_closepipe(&pip[0], &pip[1]);
-	completeline = ft_extract_line(fd);
-	ft_wait_process(&pid, &global->laststatus, FORK, global);
-	close(fd);
+	else
+		completeline = ft_extract_line(pip, pid, global);
+	if (completeline == NULL)
+		return ((char *)commandline);
 	return (completeline);
 }

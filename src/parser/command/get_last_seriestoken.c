@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/16 20:29:13 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/12 19:37:41 by yzaytoun         ###   ########.fr       */
+/*   Created: 2023/09/22 20:07:17 by yzaytoun          #+#    #+#             */
+/*   Updated: 2024/01/22 19:19:37 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	ft_check_endnode(t_part *node, t_part **endnode)
+static void	ft_mark_endnode(t_part *node, t_part **endnode)
 {
 	t_part	*pointer;
 
@@ -38,21 +38,11 @@ static void	ft_check_endnode(t_part *node, t_part **endnode)
 
 t_part	*ft_get_last_seriestoken(t_part *tokenlist)
 {
-	t_part	*node;
 	t_part	*endnode;
 
 	if (tokenlist == NULL)
 		return (NULL);
-	node = tokenlist;
 	endnode = NULL;
-	while (node->next != NULL)
-	{
-		if (node->token != tk_space)
-		{
-			ft_check_endnode(node, &endnode);
-			break ;
-		}
-		node = node->next;
-	}
+	ft_mark_endnode(tokenlist, &endnode);
 	return (endnode);
 }

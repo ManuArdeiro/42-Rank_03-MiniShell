@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 18:28:55 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/18 19:47:23 by jolopez-         ###   ########.fr       */
+/*   Updated: 2024/01/22 20:20:01 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ void	ft_writetofile(
 		ft_putstr_fd("heredoc> ", STDOUT_FILENO);
 		ft_get_inputline(&line, herepipe);
 		cleanline = ft_strtrim(line, "\n");
-		//printf("line = %s\n", cleanline);
 		if (ft_strrchr(cleanline, '$') != NULL)
 			cleanline = ft_expand_dollartoken(cleanline, global);
 		ft_evaluate_line(cleanline, delimiter, line, herepipe);

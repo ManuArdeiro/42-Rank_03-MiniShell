@@ -6,7 +6,7 @@
 #    By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/01 18:51:45 by jolopez-          #+#    #+#              #
-#    Updated: 2024/01/18 19:33:03 by jolopez-         ###   ########.fr        #
+#    Updated: 2024/01/22 20:19:44 by jolopez-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ ENV				= ft_getenv.c ft_setenv.c ft_initenv.c ft_delenv.c
 
 UTILS			= print_msg.c mini_history.c get_path.c free_string.c \
 					mini_dictionary.c signals.c clearscreen.c get_completeline.c\
-					init_global.c set_terminal.c
+					init_global.c set_terminal.c completeline.c
 
 LEXER			= tokenizer.c tokens.c token_tools_1.c token_tools_2.c \
 					ft_copy_tokenlist.c ft_tokenlist_add.c print_tokenlist.c \
@@ -46,9 +46,10 @@ LEXER			= tokenizer.c tokens.c token_tools_1.c token_tools_2.c \
 COMMAND			= extract_tokenstring.c copy_tokenlist.c lstconvert.c \
 					printcommand.c extract_filelist.c get_minicommand.c \
 					extract_arglist.c is_compoundcommand.c free_commandlist.c\
-					extract_commandseries.c is_commandseries.c get_last_seriestoken.c\
-					is_command.c clear_emptyvalues.c get_commandseries.c\
-					checkquotes.c is_validseries.c
+					is_command.c clear_emptyvalues.c \
+					get_commandseries.c get_last_seriestoken.c\
+					checkquotes.c is_validseries.c set_tokenlist.c \
+					extractseries.c get_startnode.c is_emptyquotes.c
 				
 FILE			= filestreams.c create_file.c get_filemode.c is_redirection.c \
 					freefile.c append_filecontent.c delete_filenode.c closepipe.c\

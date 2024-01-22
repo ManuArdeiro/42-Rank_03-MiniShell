@@ -12,6 +12,21 @@
 
 #include "minishell.h"
 
+t_bool	ft_isdefault_file(t_file *file)
+{
+	if (file == NULL)
+		return (FALSE);
+	return (ft_strequal(file->name, "STD"));
+}
+
+t_bool	ft_isemptycommand(t_command *command)
+{
+	if (command->name == NULL
+		&& ft_isdefault_file((t_file *)command->infile->content) == FALSE)
+		return (TRUE);
+	return (FALSE);
+}
+
 static void	ft_checkfor_stars(t_command *command)
 {
 	t_list	*starnode;
@@ -58,6 +73,8 @@ void	ft_execute_subprocess(
 		ft_terminateprocess(command, NULL, NULL, NO_SUCH_FILE_IN);
 	if (outfile->fd < 0)
 		ft_terminateprocess(command, NULL, NULL, NO_SUCH_FILE_OUT);
+	if (ft_isemptycommand(command) == TRUE)
+		ft_terminateprocess(command, NULL, NULL, NO_SUCH_FILE_IN);
 	ft_duplicate_descriptors(&infile->fd, &outfile->fd);
 	ft_closefile(&infile->fd);
 	ft_closefile(&outfile->fd);

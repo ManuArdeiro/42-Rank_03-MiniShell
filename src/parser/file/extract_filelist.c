@@ -71,10 +71,6 @@ static void	ft_get_filelist(
 	node = tokenlist;
 	while (node != NULL && ft_is_tokenseparator(node->token) == FALSE)
 	{
-		if (ft_is_tokenpair(node->token) == TRUE
-			&& (ft_is_commandseries(tokenlist) == TRUE
-				|| ft_tokenlist_contains(node, ft_is_redirection) == TRUE))
-			node = ft_skip_tokens(node->next, ft_is_tokenpair);
 		if (node != NULL)
 		{
 			if (ft_check_filetype(node->token, std_stream) == TRUE)

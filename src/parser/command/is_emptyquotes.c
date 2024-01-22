@@ -1,29 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_validseries.c                                   :+:      :+:    :+:   */
+/*   is_emptyquotes.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/12 16:42:31 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/12 20:58:08 by yzaytoun         ###   ########.fr       */
+/*   Created: 2024/01/22 19:48:06 by yzaytoun          #+#    #+#             */
+/*   Updated: 2024/01/22 19:51:04 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_bool	ft_isvalid_series(t_part *node)
+t_bool	ft_is_emptyquotes(t_part *startnode, t_part *endnode)
 {
-	if (node == NULL)
+	if (endnode == NULL)
 		return (FALSE);
-	if (node->token != tk_space && node->next != NULL
-		&& ft_is_tokenpair(node->next->token) == TRUE)
+	if (ft_is_tokenpair(endnode->token) == TRUE
+		&& ft_is_tokenpair(startnode->token) == TRUE
+		&& endnode->index == startnode->index + 1)
 		return (TRUE);
-	else if (node->token == tk_mul
-		&& node->next != NULL && node->next->token != tk_space)
-		return (TRUE);
-	else
-		if ((ft_is_tokenpair(node->token) == TRUE))
-			return (TRUE);
 	return (FALSE);
 }

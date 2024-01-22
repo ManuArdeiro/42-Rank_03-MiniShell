@@ -24,7 +24,8 @@ static void	ft_check_commandname(t_command *command)
 			command->name = ft_strdup((char *)command->args->content);
 		}
 	}
-	else if (command->name == NULL && command->args->content != NULL)
+	else if (command->name == NULL
+		&& command->args != NULL && command->args->content != NULL)
 		command->name = ft_strdup((char *)command->args->content);
 }
 
@@ -43,8 +44,7 @@ int	ft_executecommand(t_command *command, t_global *global)
 
 	pidarray = NULL;
 	laststatus = EXIT_SUCCESS;
-	if (command == NULL || global == NULL || command->name == NULL
-		|| ft_strlen((char *)command->args->content) == 0)
+	if (command == NULL || global == NULL)
 		return (EXIT_FAILURE);
 	ft_check_variables(command, global);
 	pidcount = ft_create_subprocess(command, &pidarray, global);

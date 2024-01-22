@@ -6,15 +6,17 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 15:36:46 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/19 18:51:26 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/22 19:43:34 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static t_bool	ft_evaluate_subshell(t_part *endnode)
+static t_bool	ft_evaluate_subshell(t_part *node, t_part *endnode)
 {
-	if (endnode->next != NULL)
+	if (node->index == endnode->index - 1)
+		return (FALSE);
+	else if (endnode->next != NULL)
 	{
 		if (endnode->next->token != tk_space
 			&& ft_is_tokenseparator(endnode->next->token) == FALSE)
@@ -43,7 +45,7 @@ static t_bool	ft_validate_subshell(t_part *tokenlist)
 			endnode = ft_get_tokennode(node->next,
 					ft_get_tokenpair(node->token), FALSE, FIRST);
 			if (endnode != NULL)
-				result = ft_evaluate_subshell(endnode);
+				result = ft_evaluate_subshell(node, endnode);
 			else
 				result = FALSE;
 			node = endnode;

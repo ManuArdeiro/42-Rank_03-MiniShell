@@ -41,15 +41,14 @@ static char	*ft_get_argstring(t_part **node, t_global *global)
 }
 
 static void	ft_get_arg(
-	t_list **stringlist, t_part **node, t_part *prevnode, t_global *global)
+	t_list **stringlist, t_part **node, t_global *global)
 {
 	char	*string;
 
 	string = NULL;
-	if (ft_isvalid_series((*node), prevnode) == TRUE)
+	if (ft_isvalid_series((*node)) == TRUE)
 	{
-		string
-			= ft_extract_commandseries(global->line, (*node), node, global);
+		string = ft_extractseries((*node), global);
 		global->expand_startoken = FALSE;
 	}
 	if (string == NULL)
@@ -68,25 +67,19 @@ t_list	*ft_extract_arglist(t_part *tokenlist, t_global *global)
 {
 	t_part	*node;
 	t_list	*stringlist;
-	t_part	*prevnode;
 
 	stringlist = NULL;
 	if (global == NULL || global->line == NULL || !tokenlist)
 		return (NULL);
 	node = tokenlist;
-	prevnode = NULL;
 	while (node != NULL && ft_is_tokenseparator(node->token) == FALSE)
 	{
-		if (ft_is_tokenpair(node->token) == TRUE
-			&& ft_is_commandseries(tokenlist) == TRUE)
-			node = ft_skip_tokens(node->next, ft_is_tokenpair);
-		ft_get_arg(&stringlist, &node, prevnode, global);
-		if (node != NULL)
+		if (node->used == FALSE)
 		{
-			if (node->token != tk_space)
-				prevnode = node;
-			node = node->next;
+			ft_get_arg(&stringlist, &node, global);
 		}
+		if (node != NULL)
+			node = node->next;
 	}
 	return (stringlist);
 }

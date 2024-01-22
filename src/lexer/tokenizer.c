@@ -46,7 +46,7 @@ static void	ft_check_commandnode(
 		&& (node->token == tk_cmd || node->token == tk_arg))
 	{
 		node->token = tk_file;
-		*flag = 1;
+		*flag = 0;
 	}
 }
 

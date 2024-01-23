@@ -45,7 +45,8 @@ static t_part	*ft_skip_redirection(t_part *tokenlist)
 }
 
 static char	*ft_get_tokenstring(
-		t_part *startnode, t_part *endnode, t_global *global)
+		t_part *startnode
+		,t_part *endnode, t_part *subtk_list, t_global *global)
 {
 	char	*commandname;
 	t_part	*cmdnode;
@@ -53,7 +54,7 @@ static char	*ft_get_tokenstring(
 	cmdnode = NULL;
 	commandname = NULL;
 	ft_set_tokenlist(&startnode, endnode, TRUE);
-	if (ft_tokenlist_contains(startnode, ft_is_tokenpair) == TRUE)
+	if (ft_tokenlist_contains(subtk_list, ft_is_tokenpair) == TRUE)
 		commandname
 			= ft_get_commandseries(
 				global->line, startnode, endnode, global);
@@ -72,16 +73,19 @@ char	*ft_extractseries(t_part *tokenlist, t_global *global)
 	char	*commandname;
 	t_part	*startnode;
 	t_part	*endnode;
+	t_part	*sub_tklist;
 
 	if (tokenlist == NULL || global == NULL)
 		return (NULL);
 	commandname = NULL;
+	sub_tklist = NULL;
 	startnode = ft_get_startnode(tokenlist);
 	if (startnode != NULL && startnode->used == FALSE
 		&& ft_is_redirection(startnode->token) == TRUE
 		&& startnode->next != NULL)
 		startnode = ft_skip_redirection(tokenlist);
 	endnode = ft_get_last_seriestoken(startnode);
-	commandname = ft_get_tokenstring(startnode, endnode, global);
+	sub_tklist = ft_copy_tokenlist(startnode, endnode);
+	commandname = ft_get_tokenstring(startnode, endnode, sub_tklist, global);
 	return (commandname);
 }

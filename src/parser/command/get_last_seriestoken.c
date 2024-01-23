@@ -17,14 +17,12 @@ static void	ft_mark_endnode(t_part *node, t_part **endnode)
 	t_part	*pointer;
 
 	pointer = NULL;
-	if (ft_is_tokenpair(node->token) == FALSE && node->next != NULL)
+	if (ft_is_tokenpair(node->token) == TRUE && node->next != NULL)
 	{
-		pointer
-			= ft_get_tokennode(
-				node->next->next, node->next->token, FALSE, FIRST);
+		pointer = ft_get_tokennode(node->next, node->token, FALSE, FIRST);
 	}
 	else
-		pointer = ft_get_tokennode(node->next, node->token, FALSE, FIRST);
+		pointer = ft_get_tokennode(node, node->token, FALSE, FIRST);
 	if (pointer != NULL)
 	{
 		if ((pointer->next != NULL && pointer->next->token == tk_space)

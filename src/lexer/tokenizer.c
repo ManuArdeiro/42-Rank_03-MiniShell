@@ -96,11 +96,11 @@ t_part	*ft_tokenizer(t_global *global, int *tk_count)
 		return (tokens);
 	*tk_count = ft_count_tokens(global->line);
 	ft_get_tokens(global->line, tokens);
-	while (tokens)
-	{
-		printf("index = %d	start = %d	end = %d	tk= %u \n", tokens->index, tokens->start, tokens->end, tokens->token);
-		tokens = tokens->next;
-	}
+	//while (tokens)
+	//{
+	//	printf("index = %d	start = %d	end = %d	tk= %u \n", tokens->index, tokens->start, tokens->end, tokens->token);
+	//	tokens = tokens->next;
+	//}
 	ft_cmd_vs_arg(tokens);
 	return (tokens);
 }

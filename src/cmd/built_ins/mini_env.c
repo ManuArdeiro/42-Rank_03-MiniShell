@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 18:38:09 by jolopez-          #+#    #+#             */
-/*   Updated: 2024/01/24 18:43:31 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/24 18:55:22 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,12 @@ int	ft_mini_env(t_list *envList, char **args)
 
 	if (!envList)
 		return (EXIT_FAILURE);
-	if (args != NULL && args[0])
+	if (ft_strarraylen(args) > 1)
+	{
+		ft_putstr_fd("env: ", STDERR_FILENO);
+		ft_printerror(NULL, "No argument needed");
+		return (EXIT_FAILURE);
+	}
 	node = envList;
 	while (node)
 	{

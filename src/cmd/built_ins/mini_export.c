@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_export.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
+/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 18:43:48 by jolopez-          #+#    #+#             */
-/*   Updated: 2024/01/22 20:23:40 by jolopez-         ###   ########.fr       */
+/*   Updated: 2024/01/24 18:51:55 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,7 @@ int	ft_mini_export(t_list *envList, char **args)
 	i = 0;
 	result = 0;
 	if (!args || !args[1])
-		ft_mini_env(envList);
+		ft_mini_env(envList, args);
 	while (args[++i])
 	{
 		result += ft_mini_export_aux(envList, args, args[i], &i);

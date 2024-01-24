@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:10:53 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/22 18:09:16 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/24 19:17:33 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,6 +167,7 @@ struct s_global
 	int				pidcount;
 	pid_t			*pidarray;
 	t_sigaction		signallist;
+	t_bool			subshell;
 };
 
 #endif		/*Mini struct header*/

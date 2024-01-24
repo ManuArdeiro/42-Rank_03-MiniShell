@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 19:53:03 by jolopez-          #+#    #+#             */
-/*   Updated: 2024/01/24 18:40:36 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/24 18:52:44 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	ft_builtins(char **args, t_list *envlist, t_global *global)
 	else if (ft_strequal(args[0], "echo") == TRUE)
 		return (ft_mini_echo(args));
 	else if (ft_strequal(args[0], "env") == TRUE)
-		return (ft_mini_env(envlist), args);
+		return (ft_mini_env(envlist, args));
 	else if (ft_strequal(args[0], "exit") == TRUE)
 		return (ft_mini_exit(global, args));
 	else if (ft_strequal(args[0], "export") == TRUE)

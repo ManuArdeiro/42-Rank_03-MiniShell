@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 12:40:08 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/13 14:26:07 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/24 20:01:38 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ static void	ft_evaluate_relation(
 	}
 	else if (nodetype == n_pipeline)
 		*laststatus = ft_execute_pipeline(root, global);
+	else if (nodetype == n_subshell)
+		*laststatus = ft_execute_subshell(root, global);
 }
 
 int	ft_navigate_and_execute(t_minitree *root, t_global *global)

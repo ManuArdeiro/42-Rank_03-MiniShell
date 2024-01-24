@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 18:11:58 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/17 19:11:50 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/24 20:29:06 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int		ft_executecommand(t_command *command, t_global *global);
 int		ft_execute_pipeline(t_minitree *root, t_global *global);
 char	*ft_add_pathprefix(char *commandname, char *pathvariables);
 t_list	*ft_get_lstnode(t_list *lst, const char *string_tofind);
+
 //Builtins
 t_bool	ft_isbuiltin(char *commandname);
 int		ft_wait_subprocess(
@@ -48,4 +49,6 @@ void	ft_handle_shelvl(t_global **global);
 int		ft_is_directory(const char *path);
 void	ft_terminateprocess(t_command *command, char **args,
 			char **envp, const char *errortype);
+int		ft_execute_subshell(t_minitree *root, t_global *global);
+
 #endif

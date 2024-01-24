@@ -22,6 +22,8 @@ static void	ft_get_treenode(
 	}
 	else if ((*treenode) == NULL)
 		(*treenode) = ft_split_tokenlist(startnode);
+	if ((*treenode) == NULL)
+		ft_treeinsert(treenode, NULL, subshell_node, NULL);
 }
 
 t_minitree	*ft_split_subshell(t_part *tokenlist, t_global *global)

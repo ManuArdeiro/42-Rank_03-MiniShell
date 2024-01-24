@@ -21,7 +21,7 @@ static void	ft_get_treenode(
 		(*treenode)->leftchild->content = subshell_node;
 	}
 	else if ((*treenode) == NULL)
-		(*treenode) = ft_split_tokenlist(subshell_node);
+		(*treenode) = ft_split_tokenlist(startnode);
 }
 
 t_minitree	*ft_split_subshell(t_part *tokenlist, t_global *global)

@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 18:38:09 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/12/20 20:32:55 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/24 18:43:31 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,13 @@
 
 /*	This function prints all the key/values stored in the envList list.	*/
 
-int	ft_mini_env(t_list *envList)
+int	ft_mini_env(t_list *envList, char **args)
 {
 	t_list	*node;
 
 	if (!envList)
-		return (0);
+		return (EXIT_FAILURE);
+	if (args != NULL && args[0])
 	node = envList;
 	while (node)
 	{

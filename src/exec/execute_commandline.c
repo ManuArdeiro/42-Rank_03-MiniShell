@@ -38,7 +38,7 @@ static void	ft_evaluate_relation(
 	}
 	else if (nodetype == n_pipeline)
 		*laststatus = ft_execute_pipeline(root, global);
-	else if (nodetype == n_subshell)
+	else if (nodetype == n_subshellcommand)
 		*laststatus = ft_execute_subshell(root, global);
 }
 

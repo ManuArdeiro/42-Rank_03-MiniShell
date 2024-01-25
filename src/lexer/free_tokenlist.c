@@ -15,14 +15,16 @@
 void	ft_free_tokenlist(t_part **tokenlist)
 {
 	t_part	*node;
+	t_part	*nextnode;
 
 	if (tokenlist == NULL || (*tokenlist) == NULL)
 		return ;
 	node = (*tokenlist);
+	nextnode = NULL;
 	while (node != NULL)
 	{
-		(*tokenlist) = node->next;
+		nextnode = node->next;
 		free(node);
-		node = (*tokenlist);
+		node = nextnode;
 	}
 }

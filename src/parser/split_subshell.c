@@ -13,7 +13,8 @@
 #include "minishell.h"
 
 static void	ft_get_treenode(
-		t_minitree **treenode, t_part *startnode, t_mininode *subshell_node)
+		t_minitree **treenode,
+		t_part *startnode, t_mininode *subshell_node, t_global *global)
 {
 	if ((*treenode) != NULL)
 	{
@@ -23,7 +24,11 @@ static void	ft_get_treenode(
 	else if ((*treenode) == NULL)
 		(*treenode) = ft_split_tokenlist(startnode);
 	if ((*treenode) == NULL)
-		ft_treeinsert(treenode, NULL, subshell_node, NULL);
+	{
+		(*treenode) = ft_get_minicommand(startnode, global);
+		if ((*treenode) != NULL)
+			((t_mininode *)(*treenode)->content)->type = n_subshellcommand;
+	}	
 }
 
 t_minitree	*ft_split_subshell(t_part *tokenlist, t_global *global)
@@ -45,9 +50,7 @@ t_minitree	*ft_split_subshell(t_part *tokenlist, t_global *global)
 			= ft_create_mininode(
 				ft_copy_tokenlist(startnode->next, endnode), n_subshell);
 		treenode = ft_split_tokenlist(endnode->next);
-		ft_get_treenode(&treenode, startnode, subshell_node);
-		if (treenode == NULL)
-			treenode = ft_get_minicommand(tokenlist, global);
+		ft_get_treenode(&treenode, startnode, subshell_node, global);
 	}
 	return (treenode);
 }

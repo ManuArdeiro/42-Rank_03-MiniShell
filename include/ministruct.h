@@ -144,7 +144,8 @@ enum e_nodetype
 	n_command,
 	n_commandlist,
 	n_subshell,
-	n_empty
+	n_empty,
+	n_subshellcommand
 };
 
 struct s_mininode

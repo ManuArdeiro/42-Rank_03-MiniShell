@@ -30,7 +30,8 @@ void	ft_free_mininode(void *content)
 			tokenlist = (t_part *)mininode->content;
 			ft_free_tokenlist(&tokenlist);
 		}
-		else if (mininode->type == n_command)
+		else if (mininode->type == n_command
+			|| mininode->type == n_subshellcommand)
 		{
 			command = (t_command *)mininode->content;
 			ft_free_commandlist(&command);

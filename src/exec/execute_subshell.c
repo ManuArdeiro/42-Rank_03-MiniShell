@@ -18,7 +18,8 @@ static void	ft_execute_child(
 	int	status;
 
 	status = EXIT_SUCCESS;
-	status = ft_navigate_and_execute(root, global);
+	status = ft_executecommand(
+		(t_command *)((t_mininode *)root->content)->content ,global);
 	exit (status);
 }
 

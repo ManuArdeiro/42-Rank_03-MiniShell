@@ -40,7 +40,7 @@ static char	*ft_get_stringvalue(
 	stringprefix = ft_cutstr(variable_name, limiter);
 	if (variable_name == NULL || variable_name[0] == '\0')
 		return (NULL);
-	if (*variable_name == '?')
+	else if (*variable_name == '?')
 		value = ft_strjoin_get(ft_itoa(laststatus), variable_name + 1);
 	else if (limiter != NULL)
 		value = ft_strjoin_get(ft_getenv(stringprefix, envlist), limiter);
@@ -78,21 +78,18 @@ static char	*ft_expand_dollarchain(
 {
 	char	*expandedstring;
 	char	**stringarray;
-	char	*delimiter;
-	char	*stringstart;
+	t_list	*list;
 
 	expandedstring = NULL;
 	stringarray = NULL;
+	list = NULL;
 	if (fullstring == NULL || envlist == NULL)
 		return (NULL);
-	delimiter = ft_strchr(fullstring, '$');
-	stringstart = ft_cutstr(fullstring, delimiter);
-	stringarray = ft_split(delimiter, '$');
+	list = ft_get_stringlist(fullstring);
+	stringarray = ft_lstconvert_strarr(list, 0);
 	ft_expand_stringarray(&stringarray, laststatus, envlist);
-	ft_strarr_add(&stringarray, stringstart, 1);
 	expandedstring = ft_concat_strarray(stringarray, FALSE);
 	ft_clear_strarray(stringarray);
-	free(stringstart);
 	return (expandedstring);
 }
 

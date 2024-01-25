@@ -58,7 +58,7 @@ int	ft_navigate_and_execute(t_minitree *root, t_global *global)
 				(t_command *)((t_mininode *)root->content)->content, global);
 	}
 	else if (ft_is_compoundcommand(nodetype) == TRUE
-		|| nodetype == n_pipeline)
+		|| nodetype == n_pipeline || nodetype == n_subshellcommand)
 		ft_evaluate_relation(root, global, &laststatus, nodetype);
 	return (laststatus);
 }

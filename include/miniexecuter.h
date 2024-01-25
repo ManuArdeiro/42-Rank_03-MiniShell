@@ -51,4 +51,6 @@ void	ft_terminateprocess(t_command *command, char **args,
 			char **envp, const char *errortype);
 int		ft_execute_subshell(t_minitree *root, t_global *global);
 
+t_list	*ft_get_stringlist(const char *fullstring);
+
 #endif

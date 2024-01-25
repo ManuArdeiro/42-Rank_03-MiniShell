@@ -1,0 +1,61 @@
+#include "minishell.h"
+
+static int	ft_get_stringend(char *string)
+{
+	int	i;
+
+	i = 0;
+	if (string == NULL)
+		return (0);
+	while (string[i] != '\0' && string[i] != '$')
+		i++;
+	return (i);
+}
+
+static void	ft_add_tolist(t_list **list, char *delimiter)
+{
+	int	start;
+	int	end;
+	int	len;	
+
+	start = 0;
+	end = 0;
+	len = ft_strlen(delimiter);
+	while (delimiter[start] != '\0')
+	{
+		if (delimiter[start] == '$')
+		{
+			if (ft_isalnum(delimiter[start + 1]) == TRUE)
+				start++;
+			end = ft_get_stringend((delimiter + start));
+			if (end == 0)
+				end = start;
+			ft_lstinsert(list,
+				ft_substr(delimiter, start, end - start + 1), BACK);
+			start = end;
+		}
+		if (start < len)
+			start++;
+	}
+}
+
+t_list	*ft_get_stringlist(const char *fullstring)
+{
+	t_list	*list;
+	char	*delimiter;
+	char	*stringstart;
+
+	list = NULL;
+	stringstart = NULL;
+	if (fullstring == NULL)
+		return (NULL);
+	delimiter = ft_strchr(fullstring, '$');
+	if (delimiter != NULL)
+	{
+		stringstart = ft_cutstr(fullstring, delimiter);
+		if (stringstart != NULL)
+			ft_lstinsert(&list, stringstart, FRONT);
+		ft_add_tolist(&list, delimiter);
+	}
+	return (list);
+}

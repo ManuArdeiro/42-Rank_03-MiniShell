@@ -48,6 +48,8 @@ static char	*ft_get_stringvalue(
 		value = ft_getenv(variable_name, envlist);
 	if (stringprefix != NULL)
 		free(stringprefix);
+	if (value == NULL)
+		value = ft_strdup("");
 	return (value);
 }
 

@@ -81,7 +81,6 @@ t_minitree	*ft_parse_commandline(t_global *global)
 	if (global == NULL || (global != NULL && global->line == NULL))
 		return (NULL);
 	tokenlist = ft_tokenizer(global, &token_count);
-	ft_print_tokenlist(tokenlist);
 	if (global->devmode == TRUE)
 		ft_print_tokenlist(tokenlist);
 	if (ft_isvalid_commandlist(tokenlist) == TRUE)

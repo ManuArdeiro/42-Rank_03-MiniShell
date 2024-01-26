@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_subshell.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 20:02:14 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/24 20:30:54 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/26 18:46:20 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	ft_execute_child(
 
 	status = EXIT_SUCCESS;
 	status = ft_executecommand(
-		(t_command *)((t_mininode *)root->content)->content ,global);
+			(t_command *)((t_mininode *)root->content)->content, global);
 	exit (status);
 }
 

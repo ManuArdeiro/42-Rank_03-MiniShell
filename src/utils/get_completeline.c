@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_completeline.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 16:08:48 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/22 18:19:31 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/26 18:52:19 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ static void	ft_manage_fd(int *fd, int *pip, t_global *global, t_bool flag)
 		if (*fd >= 0)
 			close(*fd);
 	}
-
 }
 
 static char	*ft_extract_line(int *pip, pid_t pid, t_global *global)

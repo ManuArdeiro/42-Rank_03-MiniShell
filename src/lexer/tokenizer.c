@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 17:51:52 by jolopez-          #+#    #+#             */
-/*   Updated: 2024/01/22 20:55:03 by jolopez-         ###   ########.fr       */
+/*   Updated: 2024/01/26 18:48:09 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,11 +96,6 @@ t_part	*ft_tokenizer(t_global *global, int *tk_count)
 		return (tokens);
 	*tk_count = ft_count_tokens(global->line);
 	ft_get_tokens(global->line, tokens);
-	//while (tokens)
-	//{
-	//	printf("index = %d	start = %d	end = %d	tk= %u \n", tokens->index, tokens->start, tokens->end, tokens->token);
-	//	tokens = tokens->next;
-	//}
 	ft_cmd_vs_arg(tokens);
 	return (tokens);
 }

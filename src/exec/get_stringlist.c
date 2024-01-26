@@ -1,14 +1,28 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_stringlist.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/26 16:20:31 by yzaytoun          #+#    #+#             */
+/*   Updated: 2024/01/26 16:47:28 by yzaytoun         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-static int	ft_get_stringend(char *string)
+static int	ft_get_stringend(char *string, int start)
 {
 	int	i;
 
-	i = 0;
+	i = start;
 	if (string == NULL)
 		return (0);
 	while (string[i] != '\0' && string[i] != '$')
 		i++;
+	if (string[i] == '$' && ft_isalnum(string[i + 1]) == TRUE)
+		i--;
 	return (i);
 }
 
@@ -27,9 +41,7 @@ static void	ft_add_tolist(t_list **list, char *delimiter)
 		{
 			if (ft_isalnum(delimiter[start + 1]) == TRUE)
 				start++;
-			end = ft_get_stringend((delimiter + start));
-			if (end == 0)
-				end = start;
+			end = ft_get_stringend(delimiter, start);
 			ft_lstinsert(list,
 				ft_substr(delimiter, start, end - start + 1), BACK);
 			start = end;
@@ -53,7 +65,7 @@ t_list	*ft_get_stringlist(const char *fullstring)
 	if (delimiter != NULL)
 	{
 		stringstart = ft_cutstr(fullstring, delimiter);
-		if (stringstart != NULL)
+		if (stringstart != NULL && stringstart[0] != '\0')
 			ft_lstinsert(&list, stringstart, FRONT);
 		ft_add_tolist(&list, delimiter);
 	}

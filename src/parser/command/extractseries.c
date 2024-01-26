@@ -45,8 +45,8 @@ static t_part	*ft_skip_redirection(t_part *tokenlist)
 }
 
 static char	*ft_get_tokenstring(
-		t_part *startnode
-		,t_part *endnode, t_part *subtk_list, t_global *global)
+		t_part *startnode,
+		t_part *endnode, t_part *subtk_list, t_global *global)
 {
 	char	*commandname;
 	t_part	*cmdnode;

@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 16:20:31 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/26 18:23:50 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/26 18:52:55 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	ft_add_tolist(t_list **list, char *delimiter)
 {
 	int	start;
 	int	end;
-	int	len;	
+	int	len;
 
 	start = 0;
 	end = 0;

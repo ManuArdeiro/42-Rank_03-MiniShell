@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 19:12:20 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/26 16:56:01 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/26 19:03:41 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static char	*ft_get_substr(
 	char	*buffer;
 
 	buffer = NULL;
-	if (secondnode != NULL && secondnode->end > (*node)->start)
+	if (secondnode != NULL && secondnode->end >= (*node)->start)
 	{
 		buffer = ft_substr(commandline, (*node)->start,
 				((secondnode->end) - ((*node)->start) + 1));
@@ -61,7 +61,10 @@ static void	ft_get_lastsubnode(
 	{
 		(*subnode) = ft_get_tokennode(node->next, node->token, FALSE, FIRST);
 		if (node->token != tk_sglquot)
+		{
 			global->expand_dollartoken = TRUE;
+			global->expand_startoken = TRUE;
+		}
 	}
 	else
 	{
@@ -116,6 +119,7 @@ char	*ft_get_commandseries(
 		if (node != NULL && node != seriesend)
 			node = node->next;
 		global->expand_dollartoken = FALSE;
+		global->expand_startoken = FALSE;
 	}
 	return (commandseries);
 }

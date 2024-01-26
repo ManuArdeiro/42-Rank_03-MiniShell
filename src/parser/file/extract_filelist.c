@@ -47,6 +47,7 @@ static void	ft_get_file(
 
 	string = NULL;
 	file = NULL;
+	
 	filenode = ft_get_tokennode((*node)->next, tk_file, TRUE, FIRST);
 	string = ft_extract_tokenstring(global->line, filenode);
 	if (string != NULL)
@@ -62,33 +63,24 @@ static void	ft_get_file(
 	}
 }
 
-static void	ft_get_filelist(
-		t_list **filelist,
-		t_part *tokenlist, t_bool std_stream, t_global *global)
-{
-	t_part	*node;
-
-	node = tokenlist;
-	while (node != NULL && ft_is_tokenseparator(node->token) == FALSE)
-	{
-		if (node != NULL)
-		{
-			if (ft_check_filetype(node->token, std_stream) == TRUE)
-				ft_get_file(filelist, &node, std_stream, global);
-			node = node->next;
-		}
-	}
-}
-
+// FIXME - cannot handle "<<" case
+// Cannot handle series case
 t_list	*ft_extract_filelist(
 		t_part *tokenlist, t_bool std_stream, t_global *global)
 {
 	t_list	*filelist;
+	t_part	*node;
 
 	filelist = NULL;
 	if (global == NULL || tokenlist == NULL)
 		return (NULL);
-	ft_get_filelist(&filelist, tokenlist, std_stream, global);
+	node = tokenlist;
+	while (node != NULL && ft_is_tokenseparator(node->token) == FALSE)
+	{
+		if (ft_check_filetype(node->token, std_stream) == TRUE)
+			ft_get_file(filelist, &node, std_stream, global);
+		node = node->next;
+	}
 	if (filelist == NULL)
 		filelist = ft_default_filelist(ft_get_stdstream(std_stream));
 	return (filelist);

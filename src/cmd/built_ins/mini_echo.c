@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_echo.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 13:36:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/12/20 20:34:24 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/26 18:44:01 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static t_bool	check_flags(char *argument)
 				break ;
 			++i;
 		}
-	}	
+	}
 	return (result);
 }
 

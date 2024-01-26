@@ -28,7 +28,7 @@ static void	ft_get_treenode(
 		(*treenode) = ft_get_minicommand(startnode, global);
 		if ((*treenode) != NULL)
 			((t_mininode *)(*treenode)->content)->type = n_subshellcommand;
-	}	
+	}
 }
 
 t_minitree	*ft_split_subshell(t_part *tokenlist, t_global *global)

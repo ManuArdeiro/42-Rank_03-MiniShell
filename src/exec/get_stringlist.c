@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_stringlist.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 16:20:31 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/26 16:47:28 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/26 18:47:42 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ static void	ft_add_tolist(t_list **list, char *delimiter)
 	{
 		if (delimiter[start] == '$')
 		{
-			if (ft_isalnum(delimiter[start + 1]) == TRUE)
+			if (ft_isalnum(delimiter[start + 1]) == TRUE
+				|| delimiter[start + 1] == '?')
 				start++;
 			end = ft_get_stringend(delimiter, start);
 			ft_lstinsert(list,

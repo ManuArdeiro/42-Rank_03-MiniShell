@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:50:35 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/17 19:14:36 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/26 19:50:14 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ t_bool	ft_isdefault_file(t_file *file)
 t_bool	ft_isemptycommand(t_command *command)
 {
 	if (command->name == NULL
+		&& ((t_file *)command->infile->content)->mode != O_HEREDOC
 		&& ft_isdefault_file((t_file *)command->infile->content) == FALSE)
 		return (TRUE);
 	return (FALSE);
@@ -75,6 +76,8 @@ void	ft_execute_subprocess(
 		ft_terminateprocess(command, NULL, NULL, NO_SUCH_FILE_OUT);
 	if (ft_isemptycommand(command) == TRUE)
 		ft_terminateprocess(command, NULL, NULL, NO_SUCH_FILE_IN);
+	else if (command->name == NULL)
+		ft_terminateprocess(command, NULL, NULL, NULL);
 	ft_duplicate_descriptors(&infile->fd, &outfile->fd);
 	ft_closefile(&infile->fd);
 	ft_closefile(&outfile->fd);

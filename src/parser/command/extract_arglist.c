@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 15:50:08 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/12 21:01:37 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/26 19:57:45 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,13 +71,11 @@ t_list	*ft_extract_arglist(t_part *tokenlist, t_global *global)
 	stringlist = NULL;
 	if (global == NULL || global->line == NULL || !tokenlist)
 		return (NULL);
-	node = tokenlist;
+	node = ft_skip_redirection(tokenlist);
 	while (node != NULL && ft_is_tokenseparator(node->token) == FALSE)
 	{
 		if (node->used == FALSE)
-		{
 			ft_get_arg(&stringlist, &node, global);
-		}
 		if (node != NULL)
 			node = node->next;
 	}

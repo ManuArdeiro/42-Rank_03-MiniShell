@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 19:22:27 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/26 19:30:11 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/26 19:46:24 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,11 +100,11 @@ t_bool	ft_isvalid_commandlist(t_part *tokenlist)
 	if (ft_validate_tokenlist(tokenlist) == TRUE
 		&& ft_validate_summary(summary) == TRUE)
 		result = TRUE;
-	if (result == TRUE)
+	if (result == TRUE
+		&& ft_tokenlist_contains(tokenlist, ft_is_tokenpair) == TRUE)
 	{
 		result = FALSE;
-		if (ft_tokenlist_contains(tokenlist, ft_is_tokenpair) == TRUE
-			&& ft_valid_commandseries(tokenlist) == TRUE)
+		if (ft_valid_commandseries(tokenlist) == TRUE)
 			result = TRUE;
 	}
 	ft_lstclear(&summary, ft_clearsummary);

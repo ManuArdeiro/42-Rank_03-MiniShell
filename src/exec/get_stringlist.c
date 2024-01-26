@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 16:20:31 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/26 19:33:14 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/26 20:06:40 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,9 @@ static void	ft_add_tolist(t_list **list, char *delimiter)
 		if (delimiter[start] == '$')
 		{
 			if (ft_isalnum(delimiter[start + 1]) == TRUE
-				|| delimiter[start + 1] == '?')
+				|| delimiter[start + 1] == '?'
+				|| delimiter[start + 1] == '\''
+				|| delimiter[start + 1] == '\"')
 				start++;
 			end = ft_get_stringend(delimiter, start);
 			ft_lstinsert(list,

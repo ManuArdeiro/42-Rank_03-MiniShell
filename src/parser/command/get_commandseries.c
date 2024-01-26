@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 19:12:20 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/26 19:03:41 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/26 20:28:48 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,24 +54,32 @@ static char	*ft_get_substr(
 }
 
 static void	ft_get_lastsubnode(
-		t_part *node,
+		t_part **node,
 		t_part **subnode, t_cleancase *cleancase, t_global *global)
 {
-	if (ft_is_tokenpair(node->token) == TRUE)
+	if (ft_is_tokenpair((*node)->token) == TRUE)
 	{
-		(*subnode) = ft_get_tokennode(node->next, node->token, FALSE, FIRST);
-		if (node->token != tk_sglquot)
+		(*subnode) = ft_get_tokennode(
+				(*node)->next, (*node)->token, FALSE, FIRST);
+		if ((*node)->token != tk_sglquot)
 		{
 			global->expand_dollartoken = TRUE;
 			global->expand_startoken = TRUE;
 		}
 	}
+	else if ((*node)->token == tk_dollar && (*node)->next != NULL
+		&& ft_is_tokenpair((*node)->next->token) == TRUE)
+	{
+		(*subnode) = ft_get_tokennode(
+				(*node)->next->next, (*node)->next->token, FALSE, FIRST);
+		(*node) = (*node)->next;
+	}
 	else
 	{
-		(*subnode) = node;
+		(*subnode) = (*node);
 		global->expand_dollartoken = TRUE;
 	}
-	(*cleancase) = ft_get_cleancase(node, (*subnode), global);
+	(*cleancase) = ft_get_cleancase((*node), (*subnode), global);
 }
 
 static void	ft_add_subseries(char **commandseries,
@@ -84,7 +92,7 @@ static void	ft_add_subseries(char **commandseries,
 
 	substring = NULL;
 	cleancase = CLEAN_ALL;
-	ft_get_lastsubnode(*node, &sub_endnode, &cleancase, global);
+	ft_get_lastsubnode(node, &sub_endnode, &cleancase, global);
 	if (ft_is_emptyquotes(*node, sub_endnode) == TRUE)
 	{
 		(*node) = sub_endnode;

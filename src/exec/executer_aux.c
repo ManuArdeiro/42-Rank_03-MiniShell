@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executer_aux.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
+/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 18:57:23 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/26 18:46:51 by jolopez-         ###   ########.fr       */
+/*   Updated: 2024/01/26 19:43:05 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	ft_terminateprocess(
 	else if (ft_strequal(errortype, NO_SUCH_FILE_IN) == TRUE)
 		ft_print_commanderror(
 			((t_file *)command->infile->content)->name, NO_SUCH_FILE);
-	else
+	else if (errortype != NULL)
 		ft_print_commanderror(command->name, errortype);
 	ft_free_commandlist(&command);
 	if (ft_strequal(errortype, PERMISSION_DENIED) == TRUE

@@ -6,7 +6,7 @@
 #    By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/01 18:51:45 by jolopez-          #+#    #+#              #
-#    Updated: 2024/01/26 16:18:28 by yzaytoun         ###   ########.fr        #
+#    Updated: 2024/01/26 20:07:15 by yzaytoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,8 @@ COMMAND			= extract_tokenstring.c copy_tokenlist.c lstconvert.c \
 					is_command.c clear_emptyvalues.c \
 					get_commandseries.c get_last_seriestoken.c\
 					checkquotes.c is_validseries.c set_tokenlist.c \
-					extractseries.c get_startnode.c is_emptyquotes.c
+					extractseries.c get_startnode.c is_emptyquotes.c\
+					skip_redirection.c
 				
 FILE			= filestreams.c create_file.c get_filemode.c is_redirection.c \
 					freefile.c append_filecontent.c delete_filenode.c closepipe.c\

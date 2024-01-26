@@ -12,38 +12,6 @@
 
 #include "minishell.h"
 
-static t_bool	ft_isfile(t_token token)
-{
-	if (token == tk_file)
-		return (TRUE);
-	return (FALSE);
-}
-
-static t_part	*ft_skip_redirection(t_part *tokenlist)
-{
-	t_part	*node;
-
-	if (tokenlist == NULL)
-		return (NULL);
-	node = tokenlist;
-	while (node != NULL)
-	{
-		if (ft_is_tokenpair(node->token) == TRUE
-			|| ft_is_command(node->token) == TRUE
-			|| ft_is_tokenseparator(node->token) == TRUE)
-			break ;
-		node = node->next;
-	}
-	if (ft_is_tokenpair(node->token) == TRUE
-		&& ft_tokenlist_contains(node, ft_isfile) == TRUE)
-	{
-		node = ft_get_last_seriestoken(node);
-		if (node != NULL)
-			node = node->next;
-	}
-	return (node);
-}
-
 static char	*ft_get_tokenstring(
 		t_part *startnode,
 		t_part *endnode, t_part *subtk_list, t_global *global)

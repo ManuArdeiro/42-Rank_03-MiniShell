@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 20:07:17 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/26 19:56:25 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/27 20:06:06 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,9 @@ void		ft_delete_filenode(t_list **filelist, char *file_todelete);
 void		ft_clone_streams(int *inputclone, int *outputclone);
 void		ft_closepipe(int *input, int *output);
 t_list		*ft_default_filelist(int std_stream);
+char		*ft_extract_dollarstring(
+				const char *commandline, t_part *tokenlist);
+t_bool		ft_is_dollar(t_token token);
 
 //Separators
 t_bool		ft_is_tokenseparator(t_token token);

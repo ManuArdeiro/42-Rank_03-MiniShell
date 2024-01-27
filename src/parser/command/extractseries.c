@@ -26,6 +26,11 @@ static char	*ft_get_tokenstring(
 		commandname
 			= ft_get_commandseries(
 				global->line, startnode, endnode, global);
+	else if (startnode != NULL && ft_is_dollar(startnode->token) == TRUE)
+	{
+		commandname = ft_extract_dollarstring(global->line, startnode);
+		commandname = ft_expand_dollartoken(commandname, global);
+	}
 	else
 	{
 		cmdnode = ft_get_tokennode(startnode, tk_cmd, FALSE, FIRST);

@@ -6,7 +6,7 @@
 #    By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/01 18:51:45 by jolopez-          #+#    #+#              #
-#    Updated: 2024/01/27 19:18:57 by yzaytoun         ###   ########.fr        #
+#    Updated: 2024/01/27 20:05:26 by yzaytoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,11 +50,11 @@ COMMAND			= extract_tokenstring.c copy_tokenlist.c lstconvert.c \
 					get_commandseries.c get_last_seriestoken.c\
 					checkquotes.c is_validseries.c set_tokenlist.c \
 					extractseries.c get_startnode.c is_emptyquotes.c\
-					skip_redirection.c
+					skip_redirection.c extract_dollarstring.c 
 				
 FILE			= filestreams.c create_file.c get_filemode.c is_redirection.c \
 					freefile.c append_filecontent.c delete_filenode.c closepipe.c\
-					default_filelist.c
+					default_filelist.c is_dollar.c
 
 PARSER			=  separators.c get_tokennode.c tokensplit.c get_nodetype.c \
 					parse_commandline.c $(COMMAND) $(FILE) isvalid_commandlist.c \

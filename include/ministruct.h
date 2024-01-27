@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ministruct.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
+/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:10:53 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/27 17:45:31 by jolopez-         ###   ########.fr       */
+/*   Updated: 2024/01/27 19:19:02 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,6 +169,7 @@ struct s_global
 	pid_t			*pidarray;
 	t_sigaction		signallist;
 	t_bool			subshell;
+	t_bool			fileflag;
 };
 
 #endif		/*Mini struct header*/

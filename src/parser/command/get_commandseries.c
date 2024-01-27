@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 19:12:20 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/26 20:28:48 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/27 19:11:19 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ static void	ft_get_lastsubnode(
 }
 
 static void	ft_add_subseries(char **commandseries,
-	t_part **node, const char *commandline, t_global *global)
+		t_part **node, const char *commandline, t_global *global)
 {
 	t_part		*sub_endnode;
 	t_cleancase	cleancase;
@@ -92,6 +92,7 @@ static void	ft_add_subseries(char **commandseries,
 
 	substring = NULL;
 	cleancase = CLEAN_ALL;
+	buffer = NULL;
 	ft_get_lastsubnode(node, &sub_endnode, &cleancase, global);
 	if (ft_is_emptyquotes(*node, sub_endnode) == TRUE)
 	{
@@ -100,7 +101,7 @@ static void	ft_add_subseries(char **commandseries,
 	}
 	substring = ft_get_substr(commandline, sub_endnode, node);
 	buffer = ft_strclean_withspaces(substring, cleancase);
-	if (global->expand_dollartoken == TRUE)
+	if (global->expand_dollartoken == TRUE && global->fileflag == FALSE)
 		buffer = ft_expand_dollartoken(buffer, global);
 	(*commandseries) = ft_strjoin_get((*commandseries), buffer);
 	if (substring != NULL)

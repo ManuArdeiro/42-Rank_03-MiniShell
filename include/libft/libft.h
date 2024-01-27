@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 16:48:34 by jolopez-          #+#    #+#             */
-/*   Updated: 2023/12/14 20:38:34 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/27 18:58:05 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ void			ft_lstinsert(t_list **list, void *content, t_location location);
 t_list			*ft_lstcopy(t_list *list, t_list *limit);
 int				ft_chrcount(const char *string, int c);
 int				ft_strequal(const char *str1, const char *str2);
+int				ft_strequal_cs(const char *str1, const char *str2);
 char			*ft_strstrip(const char *string);
 char			*ft_cutstr(const char *str, const char *strlimit);
 int				ft_startswith(const char *string, const char *prefix);

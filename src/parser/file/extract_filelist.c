@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   extract_filelist.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
+/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 18:36:15 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/10 19:56:46 by jolopez-         ###   ########.fr       */
+/*   Updated: 2024/01/27 19:14:57 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,35 +36,55 @@ static int	ft_get_stdstream(t_bool std_stream)
 	return (std_stream);
 }
 
+static char	*ft_get_filestring(
+		t_part **node, t_global *global, t_part **filenode, int file_mode)
+{
+	char	*string;
+
+	string = NULL;
+	if ((*node)->next != NULL
+		&& (((*node)->next->token == tk_space
+				&& ft_is_tokenpair((*node)->next->next->token))
+			|| ft_is_tokenpair((*node)->next->token) == TRUE))
+	{
+		if (file_mode == O_HEREDOC)
+			global->fileflag = TRUE;
+		string = ft_extractseries((*node)->next->next, global);
+		global->fileflag = FALSE;
+	}
+	else
+	{
+		*filenode = ft_get_tokennode((*node)->next, tk_file, TRUE, FIRST);
+		string = ft_extract_tokenstring(global->line, *filenode);
+		if (file_mode != O_HEREDOC)
+			string = ft_expand_dollartoken(string, global);
+	}
+	return (string);
+}
+
 static void	ft_get_file(
 	t_list **filelist,
 	t_part **node, int std_stream, t_global *global
 )
 {
-	t_part	*filenode;
 	char	*string;
 	t_file	*file;
+	t_part	*filenode;
+	int		file_mode;
 
 	string = NULL;
-	file = NULL;
-	
-	filenode = ft_get_tokennode((*node)->next, tk_file, TRUE, FIRST);
-	string = ft_extract_tokenstring(global->line, filenode);
+	filenode = NULL;
+	file_mode = ft_get_filemode((*node)->token);
+	string = ft_get_filestring(node, global, &filenode, file_mode);
 	if (string != NULL)
 	{
-		string = ft_expand_dollartoken(string, global);
-		file = ft_create_file(
-				string,
-				ft_get_stdstream(std_stream),
-				ft_get_filemode((*node)->token));
+		file = ft_create_file(string, ft_get_stdstream(std_stream), file_mode);
 		ft_lstinsert(filelist, (t_file *)file, BACK);
 		free(string);
 		(*node) = filenode;
 	}
 }
 
-// FIXME - cannot handle "<<" case
-// Cannot handle series case
 t_list	*ft_extract_filelist(
 		t_part *tokenlist, t_bool std_stream, t_global *global)
 {
@@ -77,9 +97,13 @@ t_list	*ft_extract_filelist(
 	node = tokenlist;
 	while (node != NULL && ft_is_tokenseparator(node->token) == FALSE)
 	{
-		if (ft_check_filetype(node->token, std_stream) == TRUE)
-			ft_get_file(filelist, &node, std_stream, global);
-		node = node->next;
+		if (ft_is_tokenpair(node->token) == TRUE)
+			node = ft_skip_tokens(node->next, ft_is_tokenpair);
+		if (node != NULL && node->used != TRUE
+			&& ft_check_filetype(node->token, std_stream) == TRUE)
+			ft_get_file(&filelist, &node, std_stream, global);
+		if (node != NULL)
+			node = node->next;
 	}
 	if (filelist == NULL)
 		filelist = ft_default_filelist(ft_get_stdstream(std_stream));

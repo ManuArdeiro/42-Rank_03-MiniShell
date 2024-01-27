@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_heredoc.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
+/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 18:28:55 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/22 20:20:01 by jolopez-         ###   ########.fr       */
+/*   Updated: 2024/01/27 19:09:12 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	ft_evaluate_line(
 		const char *delimiter, char *line, int *herepipe
 )
 {
-	if (ft_strequal(cleanline, delimiter) == TRUE)
+	if (ft_strequal_cs(cleanline, delimiter) == TRUE)
 	{
 		free(line);
 		free(cleanline);
@@ -52,9 +52,6 @@ void	ft_writetofile(
 		ft_putstr_fd("heredoc> ", STDOUT_FILENO);
 		ft_get_inputline(&line, herepipe);
 		cleanline = ft_strtrim(line, "\n");
-		printf("cleanline = %s\n", cleanline);
-		//if (ft_strrchr(cleanline, '$') != NULL)
-		//	cleanline = ft_expand_dollartoken(cleanline, global);
 		ft_evaluate_line(cleanline, delimiter, line, herepipe);
 		ft_putstr_fd(line, herepipe[1]);
 		free(line);

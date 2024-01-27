@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 20:23:08 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/12/08 18:10:06 by jolopez-         ###   ########.fr       */
+/*   Updated: 2024/01/27 17:47:53 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ void	ft_case_token(t_token token)
 		printf("%s\t", "tk_or");
 	else if (token == tk_and)
 		printf("%s\t", "tk_and");
-	else if (token == tk_doll_exc)
-		printf("%s\t", "tk_doll_exc");
+	else if (token == tk_doll_int)
+		printf("%s\t", "tk_doll_int");
 	else if (token == tk_dollar)
 		printf("%s\t", "tk_dollar");
 	else if (token == tk_ampersand)

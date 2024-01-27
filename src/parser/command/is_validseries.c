@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is_validseries.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 16:42:31 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/12 20:58:08 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/27 17:37:27 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@ t_bool	ft_isvalid_series(t_part *node)
 		&& ft_is_tokenpair(node->next->token) == TRUE)
 		return (TRUE);
 	else if (node->token == tk_mul
+		&& node->next != NULL && node->next->token != tk_space)
+		return (TRUE);
+	else if (node->token == tk_dollar
 		&& node->next != NULL && node->next->token != tk_space)
 		return (TRUE);
 	else

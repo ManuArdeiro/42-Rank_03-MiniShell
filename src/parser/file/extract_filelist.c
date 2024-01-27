@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 18:36:15 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/10 19:56:46 by jolopez-         ###   ########.fr       */
+/*   Updated: 2024/01/27 17:50:42 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ static void	ft_get_file(
 
 	string = NULL;
 	file = NULL;
-	
 	filenode = ft_get_tokennode((*node)->next, tk_file, TRUE, FIRST);
 	string = ft_extract_tokenstring(global->line, filenode);
 	if (string != NULL)
@@ -78,7 +77,7 @@ t_list	*ft_extract_filelist(
 	while (node != NULL && ft_is_tokenseparator(node->token) == FALSE)
 	{
 		if (ft_check_filetype(node->token, std_stream) == TRUE)
-			ft_get_file(filelist, &node, std_stream, global);
+			ft_get_file(&filelist, &node, std_stream, global);
 		node = node->next;
 	}
 	if (filelist == NULL)

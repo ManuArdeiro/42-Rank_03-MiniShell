@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ministruct.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:10:53 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/26 19:42:01 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/27 17:45:31 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ enum e_token
 	tk_grt,
 	tk_dblgrt,
 	tk_ampersand,
-	tk_doll_exc,
+	tk_doll_int,
 	tk_dollar,
 	tk_cmd,
 	tk_arg,

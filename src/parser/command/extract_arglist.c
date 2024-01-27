@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   extract_arglist.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 15:50:08 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/26 19:57:45 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/27 17:48:55 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ static void	ft_get_arg(
 	}
 	if (string == NULL)
 	{
-		if (((*node)->token == tk_arg) || ((*node)->token == tk_mul))
+		if (((*node)->token == tk_arg) || ((*node)->token == tk_mul)
+			|| ((*node)->token == tk_doll_int))
 			string = ft_get_argstring(node, global);
 	}
 	if (string != NULL)
@@ -74,7 +75,7 @@ t_list	*ft_extract_arglist(t_part *tokenlist, t_global *global)
 	node = ft_skip_redirection(tokenlist);
 	while (node != NULL && ft_is_tokenseparator(node->token) == FALSE)
 	{
-		if (node->used == FALSE)
+		if (node->used == FALSE && node->token != tk_space)
 			ft_get_arg(&stringlist, &node, global);
 		if (node != NULL)
 			node = node->next;

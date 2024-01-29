@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 20:07:17 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/29 18:25:00 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/29 20:01:02 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ t_bool		ft_is_semicolon(t_token token);
 //Expansions
 t_list		*ft_expand_startoken(const char *fullpath);
 char		*ft_expand_dollartoken(const char *argument, t_global *global);
+char		*ft_get_starstring(t_part **tokenlist, t_global *global);
 
 //CONVERT FUNCTIONS
 char		**ft_lstconvert_strarr(t_list *list, t_bool type);

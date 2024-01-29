@@ -6,11 +6,12 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 18:05:17 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/06 18:52:01 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/29 20:40:17 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+//add suffix expansion
 
 static void	ft_filter_path(
 	const char *path,

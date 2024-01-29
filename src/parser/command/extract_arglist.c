@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 15:50:08 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/29 18:25:00 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/29 20:26:39 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,7 @@ static char	*ft_get_argstring(t_part **node, t_global *global)
 
 	string = NULL;
 	global->expand_dollartoken = TRUE;
-	global->expand_startoken = TRUE;
 	string = ft_extract_tokenstring(global->line, *node);
-	if ((*node)->token == tk_arg
-		&& (*node)->next != NULL && (*node)->next->token == tk_mul)
-		(*node) = (*node)->next;
 	return (string);
 }
 
@@ -47,17 +43,14 @@ static void	ft_get_arg(
 
 	string = NULL;
 	if (ft_token_case(*node) == CASE_1)
-	{
 		string = ft_extractseries((*node), global);
-		global->expand_startoken = FALSE;
-	}
-	if (string == NULL)
-	{
-		if (ft_token_case(*node) == CASE_2)
-			string = ft_get_argstring(node, global);
-	}
+	else if (ft_token_case(*node) == CASE_4)
+		string = ft_get_starstring(node, global);
+	if (string == NULL && ft_token_case(*node) == CASE_2)
+		string = ft_get_argstring(node, global);
 	if (string != NULL)
 	{
+		global->expand_startoken = TRUE;
 		ft_add_string_tolist(stringlist, string, global);
 		free(string);
 	}

@@ -6,13 +6,13 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 19:21:19 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/22 19:33:30 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/29 18:25:17 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_part	*ft_get_startnode(t_part *tokenlist)
+t_part	*ft_fastforward(t_part *tokenlist)
 {
 	t_part	*startnode;
 

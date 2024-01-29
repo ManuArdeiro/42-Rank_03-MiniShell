@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:10:53 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/27 19:19:02 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/29 18:09:02 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,11 @@ enum e_bool
 	LAST,
 	ENV,
 	COPY,
-	CLOSE
+	CLOSE,
+	CASE_1,
+	CASE_2,
+	CASE_3,
+	CASE_4
 };
 
 struct s_dict

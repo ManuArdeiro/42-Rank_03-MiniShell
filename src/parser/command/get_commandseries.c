@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 19:12:20 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/27 19:11:19 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/29 18:39:43 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,8 @@ static void	ft_add_subseries(char **commandseries,
 	cleancase = CLEAN_ALL;
 	buffer = NULL;
 	ft_get_lastsubnode(node, &sub_endnode, &cleancase, global);
-	if (ft_is_emptyquotes(*node, sub_endnode) == TRUE)
+	if (ft_is_emptyquotes(*node, sub_endnode) == TRUE
+		&& sub_endnode != NULL && sub_endnode->next != NULL)
 	{
 		(*node) = sub_endnode;
 		return ;

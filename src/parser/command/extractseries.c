@@ -52,7 +52,7 @@ char	*ft_extractseries(t_part *tokenlist, t_global *global)
 		return (NULL);
 	commandname = NULL;
 	sub_tklist = NULL;
-	startnode = ft_get_startnode(tokenlist);
+	startnode = ft_fastforward(tokenlist);
 	if (startnode != NULL && startnode->used == FALSE
 		&& ft_is_redirection(startnode->token) == TRUE
 		&& startnode->next != NULL)

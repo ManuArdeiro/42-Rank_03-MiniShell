@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 15:50:08 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/27 19:19:06 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/29 18:25:00 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,14 @@ static void	ft_get_arg(
 	char	*string;
 
 	string = NULL;
-	if (ft_isvalid_series((*node)) == TRUE)
+	if (ft_token_case(*node) == CASE_1)
 	{
 		string = ft_extractseries((*node), global);
 		global->expand_startoken = FALSE;
 	}
 	if (string == NULL)
 	{
-		if (((*node)->token == tk_arg) || ((*node)->token == tk_mul)
-			|| ((*node)->token == tk_doll_int))
+		if (ft_token_case(*node) == CASE_2)
 			string = ft_get_argstring(node, global);
 	}
 	if (string != NULL)
@@ -73,6 +72,7 @@ t_list	*ft_extract_arglist(t_part *tokenlist, t_global *global)
 	if (global == NULL || global->line == NULL || !tokenlist)
 		return (NULL);
 	node = ft_skip_redirection(tokenlist);
+	node = ft_fastforward(node);
 	while (node != NULL && ft_is_tokenseparator(node->token) == FALSE)
 	{
 		if (node->used == FALSE && node->token != tk_space)

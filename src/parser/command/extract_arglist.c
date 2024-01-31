@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 15:50:08 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/31 18:49:51 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/31 20:29:08 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,28 @@
 static void	ft_add_string_tolist(
 		t_list **stringlist, const char *string, t_global *global)
 {
+	t_list	*expandedlist;
+	t_list	*node;
+
+	expandedlist = NULL;
 	if (global->expand_startoken == TRUE
 		&& ft_strchr(string, '*') != NULL)
-		ft_lstadd_back(stringlist, ft_expand_startoken(string));
+	{
+		expandedlist = ft_expand_startoken(string);
+		node = expandedlist;
+		while (node != NULL)
+		{
+			ft_lstinsert(stringlist, node->content, BACK);
+			node = node->next;
+		}
+	}
 	else if (global->expand_dollartoken == TRUE
 		&& ft_strchr(string, '$') != NULL)
 		ft_lstinsert(stringlist,
 			ft_expand_dollartoken(string, global), BACK);
 	else
 		ft_lstinsert(stringlist, ft_strdup(string), BACK);
+	system("leaks minishell");
 }
 
 static char	*ft_get_argstring(t_part **node, t_global *global)

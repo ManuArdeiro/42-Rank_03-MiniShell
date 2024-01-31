@@ -6,62 +6,77 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 18:05:17 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/31 18:25:05 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/31 20:22:36 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-//add suffix expansion
 
-static void	ft_filter_path(
-	const char *path,
-	t_list **fileslist, struct dirent *dirent, char *fileprefix)
+static char	*ft_get_filename(const char *path, const char *d_name)
 {
-	if (fileprefix != NULL
-		&& *fileprefix != '\0'
-		&& *fileprefix != ' ')
+	char	*filename;
+
+	filename = NULL;
+	if (ft_strequal(path, ".") == TRUE)
+		filename = ft_strdup(d_name);
+	else
+		filename = ft_strjoin(path, d_name);
+	return (filename);
+}
+
+static char	*ft_get_dirfile(
+	const char *path,
+	struct dirent *dirent, char *fileprefix, t_bool stringpart)
+{
+	char	*filename;
+
+	filename = NULL;
+	if (fileprefix != NULL && *fileprefix != '\0' && *fileprefix != ' ')
 	{
-		if (ft_startswith(dirent->d_name, fileprefix) == TRUE)
+		if (stringpart == LAST)
 		{
-			if (ft_strequal(path, ".") == TRUE)
-				ft_lstinsert(
-					fileslist, ft_strdup((char *)dirent->d_name), BACK);
-			else
-				ft_lstinsert(fileslist,
-					ft_strjoin(path, (char *)dirent->d_name), BACK);
+			if (ft_startswith(dirent->d_name, fileprefix) == TRUE)
+				filename = ft_get_filename(path, dirent->d_name);
+		}
+		else if (stringpart == FIRST)
+		{
+			if (ft_endswith(dirent->d_name, fileprefix) == TRUE)
+				filename = ft_get_filename(path, dirent->d_name);
 		}
 	}
 	else if (*(dirent->d_name) != '.')
-	{
-		if (ft_strequal(path, ".") == TRUE)
-			ft_lstinsert(
-				fileslist, ft_strdup((char *)dirent->d_name), BACK);
-		else
-			ft_lstinsert(fileslist,
-				ft_strjoin(path, (char *)dirent->d_name), BACK);
-	}
+		filename = ft_get_filename(path, dirent->d_name);
+	return (filename);
 }
 
 static void	ft_add_dirfiles(
 		t_list **fileslist, DIR *directory, char *path, char *pathsuffix)
 {
 	struct dirent	*dirent;
-	int				pathlen;
 	char			*fileprefix;
+	t_bool			stringpart;
+	char			*dirfile;
 
+	dirfile = NULL;
+	if (ft_startswith(pathsuffix, "*") == TRUE)
+		stringpart = FIRST;
+	else
+		stringpart = LAST;
 	fileprefix = ft_strstrip(pathsuffix);
-	pathlen = ft_strlen(path);
-	if (pathlen > 1)
+	if (ft_strlen(path) > 1)
 		path = ft_strjoin_get(path, "/");
 	if (directory != NULL)
 	{
 		dirent = readdir(directory);
 		while (dirent != NULL)
 		{
-			ft_filter_path(path, fileslist, dirent, fileprefix);
+			dirfile = ft_get_dirfile(path, dirent, fileprefix, stringpart);
+			if (dirfile != NULL)
+				ft_lstinsert(fileslist, dirfile, BACK);
 			dirent = readdir(directory);
 		}
 	}
+	free(fileprefix);
 }
 
 static char	*ft_get_dirpath(const char *fullpath, char **pathsuffix)
@@ -79,6 +94,8 @@ static char	*ft_get_dirpath(const char *fullpath, char **pathsuffix)
 		pathlimit = ft_strchr_pos(fullpath, '/', lastpos);
 		path = ft_cutstr(fullpath, pathlimit);
 		*pathsuffix = ft_strrchr(fullpath, '/');
+		if (*pathsuffix != NULL)
+			(*pathsuffix)++;
 	}
 	else
 		path = ft_strdup(".");
@@ -106,6 +123,5 @@ t_list	*ft_expand_startoken(const char *fullpath)
 		free(dirpath);
 	if (fileslist == NULL)
 		ft_lstinsert(&fileslist, ft_strdup(fullpath), BACK);
-	system("leaks minishell");
 	return (fileslist);
 }

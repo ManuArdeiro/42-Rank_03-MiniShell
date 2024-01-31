@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:02:42 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/31 19:13:14 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/31 19:15:32 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_bool	ft_token_case(t_part *head)
 		&& ((ft_is_dollar(next->token) == TRUE)
 			|| (ft_is_dollar(head->token) == TRUE)))
 		return (CASE_3);
-	else if (next != NULL && (head->token == tk_arg && next->token == tk_mul)
+	else if ((next != NULL && head->token == tk_arg && next->token == tk_mul)
 		|| (head->token == tk_mul))
 		return (CASE_4);
 	return (FALSE);

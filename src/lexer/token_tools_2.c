@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_tools_2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 18:30:15 by jolopez-          #+#    #+#             */
-/*   Updated: 2024/01/26 20:24:01 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/31 18:58:13 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,6 @@ static void	ft_get_tokens_2(char *line, t_part *tokens, int *i, int *start)
 	else if (*start >= 0 && (ft_strchr("()\'\";*<>|&", line[*i + 1])
 			|| ft_is_space(line, *i + 1) || line[*i +1] == '\n'))
 	{
-		if (line[*i + 1] == '*')
-			(*i)++;
 		ft_add_tkn(tokens, tk_cmd, *start, *i);
 		*start = -1;
 		*i = *i + 1;

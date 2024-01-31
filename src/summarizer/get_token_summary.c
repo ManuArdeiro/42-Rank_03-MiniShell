@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 20:16:23 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/13 13:19:50 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/31 19:10:19 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ static t_summarizer	*ft_count_token(t_part *tokenlist, t_token token)
 	{
 		if (part->token == token)
 			summarizer->count++;
-		part = part->next;
+		if (part != NULL)
+			part = part->next;
 	}
 	summarizer->token = token;
 	return (summarizer);
@@ -35,7 +36,7 @@ static t_summarizer	*ft_count_token(t_part *tokenlist, t_token token)
 
 static void	ft_add_to_summary(t_list **summary, t_summarizer *summarizer)
 {
-	t_list			*new;
+	t_list	*new;
 
 	if (summarizer != NULL)
 	{

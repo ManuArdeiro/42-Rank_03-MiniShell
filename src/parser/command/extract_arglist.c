@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 15:50:08 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/29 20:26:39 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/31 18:49:51 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,11 @@ static void	ft_get_arg(
 		string = ft_extractseries((*node), global);
 	else if (ft_token_case(*node) == CASE_4)
 		string = ft_get_starstring(node, global);
+	else if (ft_token_case(*node) == CASE_3)
+	{
+		global->expand_dollartoken = TRUE;
+		string = ft_extract_dollarstring(global->line, *node);
+	}
 	if (string == NULL && ft_token_case(*node) == CASE_2)
 		string = ft_get_argstring(node, global);
 	if (string != NULL)

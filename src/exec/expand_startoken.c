@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 18:05:17 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/29 20:40:17 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/31 18:25:05 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,6 @@ static char	*ft_get_dirpath(const char *fullpath, char **pathsuffix)
 	}
 	else
 		path = ft_strdup(".");
-	if (ft_strrchr(fullpath, '/') == NULL)
-		*pathsuffix = ft_strdup(fullpath);
 	return (path);
 }
 
@@ -104,11 +102,10 @@ t_list	*ft_expand_startoken(const char *fullpath)
 	if (dirpath != NULL)
 		directory = opendir(dirpath);
 	ft_add_dirfiles(&fileslist, directory, dirpath, pathsuffix);
-	if (ft_strequal(dirpath, ".") == TRUE)
+	if (dirpath != NULL)
 		free(dirpath);
-	if (pathsuffix != NULL)
-		free(pathsuffix);
 	if (fileslist == NULL)
 		ft_lstinsert(&fileslist, ft_strdup(fullpath), BACK);
+	system("leaks minishell");
 	return (fileslist);
 }

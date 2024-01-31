@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 15:36:46 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/26 19:28:03 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/31 18:41:24 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_bool	ft_validate_tokenlist(t_part *tokenlist)
 {
-	int		result;
+	t_bool	result;
 	t_part	*lastnode;
 
 	result = TRUE;

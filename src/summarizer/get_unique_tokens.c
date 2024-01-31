@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 18:36:48 by yzaytoun          #+#    #+#             */
-/*   Updated: 2023/10/13 17:09:38 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/31 19:07:31 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ t_list	*ft_get_unique_tokens(t_part *tokenlist)
 	part = tokenlist;
 	while (part != NULL)
 	{
+		if (ft_is_tokenpair(part->token) == TRUE)
+			part = ft_skip_tokens(part->next, ft_is_tokenpair);
 		if (ft_token_in_list(list, part->token) == FALSE)
 		{
 			if (part->token != 0)

@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:02:42 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/29 20:28:50 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/01/31 19:13:14 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_bool	ft_token_case(t_part *head)
 		return (FALSE);
 	next = head->next;
 	if (next != NULL
-		&& ((next->token == tk_space && ft_is_tokenpair(next->next->token))
+		&& (ft_is_tokenpair(head->token)
 			|| (ft_is_tokenpair(next->token) == TRUE)))
 		return (CASE_1);
 	else if ((head->token == tk_arg
@@ -32,14 +32,11 @@ t_bool	ft_token_case(t_part *head)
 		&& ((next != NULL && next->token == tk_space) || next == NULL))
 		return (CASE_2);
 	else if (next != NULL
-		&& ((next->token == tk_space
-				&& ft_is_dollar(next->next->token) == TRUE)
-			|| (ft_is_dollar(next->token) == TRUE)))
+		&& ((ft_is_dollar(next->token) == TRUE)
+			|| (ft_is_dollar(head->token) == TRUE)))
 		return (CASE_3);
-	else if (next != NULL
-		&& ((next->token == tk_space
-				&& next->next->token == tk_mul) || (head->token == tk_mul)
-			|| (head->token == tk_arg && next->token == tk_mul)))
+	else if (next != NULL && (head->token == tk_arg && next->token == tk_mul)
+		|| (head->token == tk_mul))
 		return (CASE_4);
 	return (FALSE);
 }

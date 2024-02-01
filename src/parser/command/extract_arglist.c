@@ -29,6 +29,7 @@ static void	ft_add_string_tolist(
 			ft_lstinsert(stringlist, node->content, BACK);
 			node = node->next;
 		}
+		ft_lstclear_nodes(&expandedlist);
 	}
 	else if (global->expand_dollartoken == TRUE
 		&& ft_strchr(string, '$') != NULL)

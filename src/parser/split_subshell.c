@@ -22,7 +22,11 @@ static void	ft_get_treenode(
 		(*treenode)->leftchild->content = subshell_node;
 	}
 	else if ((*treenode) == NULL)
+	{
 		(*treenode) = ft_split_tokenlist(startnode->next);
+		if ((*treenode) != NULL)
+			ft_free_mininode(subshell_node);
+	}
 	if ((*treenode) == NULL)
 	{
 		(*treenode) = ft_get_minicommand(startnode, global);

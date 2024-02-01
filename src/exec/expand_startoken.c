@@ -58,6 +58,7 @@ static void	ft_add_dirfiles(
 	char			*dirfile;
 
 	dirfile = NULL;
+	dirent = NULL;
 	if (ft_startswith(pathsuffix, "*") == TRUE)
 		stringpart = FIRST;
 	else
@@ -119,9 +120,9 @@ t_list	*ft_expand_startoken(const char *fullpath)
 	if (dirpath != NULL)
 		directory = opendir(dirpath);
 	ft_add_dirfiles(&fileslist, directory, dirpath, pathsuffix);
-	if (dirpath != NULL)
-		free(dirpath);
 	if (fileslist == NULL)
 		ft_lstinsert(&fileslist, ft_strdup(fullpath), BACK);
+	free(dirpath);
+	closedir(directory);
 	return (fileslist);
 }

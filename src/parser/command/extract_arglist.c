@@ -36,7 +36,6 @@ static void	ft_add_string_tolist(
 			ft_expand_dollartoken(string, global), BACK);
 	else
 		ft_lstinsert(stringlist, ft_strdup(string), BACK);
-	system("leaks minishell");
 }
 
 static char	*ft_get_argstring(t_part **node, t_global *global)

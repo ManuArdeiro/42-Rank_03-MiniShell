@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 16:20:31 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/26 20:06:40 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/02 16:34:44 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ t_list	*ft_get_stringlist(const char *fullstring)
 		stringstart = ft_cutstr(fullstring, delimiter);
 		if (stringstart != NULL && stringstart[0] != '\0')
 			ft_lstinsert(&list, stringstart, FRONT);
+		else
+			free(stringstart);
 		ft_add_tolist(&list, delimiter);
 	}
 	return (list);

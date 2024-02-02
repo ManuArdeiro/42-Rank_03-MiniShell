@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 20:07:17 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/29 20:01:02 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/02 18:54:29 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ t_list		*ft_extract_arglist(t_part *tokenlist, t_global *global);
 void		ft_free_commandlist(t_command **command);
 t_list		*ft_clear_emptyvalues(t_list *list);
 char		*ft_get_commandseries(
-				const char *commandline,
 				t_part *seriesstart, t_part *seriesend, t_global *global);
 void		ft_checkquotes(char **string);
 t_bool		ft_isvalid_series(t_part *node);
@@ -71,6 +70,7 @@ t_part		*ft_get_last_seriestoken(t_part *tokenlist);
 t_part		*ft_fastforward(t_part *tokenlist);
 t_bool		ft_is_emptyquotes(t_part *startnode, t_part *endnode);
 t_bool		ft_token_case(t_part *head);
+t_bool		ft_get_stringpart(const char *pathsuffix);
 
 //File
 t_part		*ft_skip_redirection(t_part *tokenlist);
@@ -100,6 +100,9 @@ t_bool		ft_is_semicolon(t_token token);
 t_list		*ft_expand_startoken(const char *fullpath);
 char		*ft_expand_dollartoken(const char *argument, t_global *global);
 char		*ft_get_starstring(t_part **tokenlist, t_global *global);
+char		*ft_expandstring(t_global *global, t_part *startnode,
+				t_part *endnode, t_cleancase cleancase);
+t_bool		ft_emptystring(const char *string);
 
 //CONVERT FUNCTIONS
 char		**ft_lstconvert_strarr(t_list *list, t_bool type);

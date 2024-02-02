@@ -24,8 +24,7 @@ static char	*ft_get_tokenstring(
 	ft_set_tokenlist(&startnode, endnode, TRUE);
 	if (ft_tokenlist_contains(subtk_list, ft_is_tokenpair) == TRUE)
 		commandname
-			= ft_get_commandseries(
-				global->line, startnode, endnode, global);
+			= ft_get_commandseries(startnode, endnode, global);
 	else if (startnode != NULL && ft_is_dollar(startnode->token) == TRUE)
 	{
 		commandname = ft_extract_dollarstring(global->line, startnode);

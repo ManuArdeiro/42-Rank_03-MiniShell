@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 18:05:17 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/31 20:22:36 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/02 16:29:55 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,15 +54,9 @@ static void	ft_add_dirfiles(
 {
 	struct dirent	*dirent;
 	char			*fileprefix;
-	t_bool			stringpart;
 	char			*dirfile;
 
 	dirfile = NULL;
-	dirent = NULL;
-	if (ft_startswith(pathsuffix, "*") == TRUE)
-		stringpart = FIRST;
-	else
-		stringpart = LAST;
 	fileprefix = ft_strstrip(pathsuffix);
 	if (ft_strlen(path) > 1)
 		path = ft_strjoin_get(path, "/");
@@ -71,7 +65,9 @@ static void	ft_add_dirfiles(
 		dirent = readdir(directory);
 		while (dirent != NULL)
 		{
-			dirfile = ft_get_dirfile(path, dirent, fileprefix, stringpart);
+			dirfile
+				= ft_get_dirfile(path, dirent,
+					fileprefix, ft_get_stringpart(pathsuffix));
 			if (dirfile != NULL)
 				ft_lstinsert(fileslist, dirfile, BACK);
 			dirent = readdir(directory);
@@ -120,9 +116,10 @@ t_list	*ft_expand_startoken(const char *fullpath)
 	if (dirpath != NULL)
 		directory = opendir(dirpath);
 	ft_add_dirfiles(&fileslist, directory, dirpath, pathsuffix);
+	if (dirpath != NULL)
+		free(dirpath);
 	if (fileslist == NULL)
 		ft_lstinsert(&fileslist, ft_strdup(fullpath), BACK);
-	free(dirpath);
 	closedir(directory);
 	return (fileslist);
 }

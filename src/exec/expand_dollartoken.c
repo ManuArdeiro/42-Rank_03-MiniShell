@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 12:35:59 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/22 19:59:40 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/02 18:28:56 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static char	*ft_get_stringvalue(
 }
 
 static void	ft_expand_stringarray(
-		char ***stringarray, int laststatus, t_list *envlist)
+		char **stringarray, int laststatus, t_list *envlist)
 {
 	int		count;
 	char	*buffer;
@@ -63,13 +63,13 @@ static void	ft_expand_stringarray(
 	if (*stringarray == NULL || envlist == NULL)
 		return ;
 	count = 0;
-	while ((*stringarray)[count] != NULL)
+	while (stringarray[count] != NULL)
 	{
-		buffer = ft_get_stringvalue((*stringarray)[count], envlist, laststatus);
+		buffer = ft_get_stringvalue(stringarray[count], envlist, laststatus);
 		if (buffer != NULL)
 		{
-			free((*stringarray)[count]);
-			(*stringarray)[count] = buffer;
+			free(stringarray[count]);
+			stringarray[count] = buffer;
 		}
 		count++;
 	}
@@ -89,9 +89,10 @@ static char	*ft_expand_dollarchain(
 		return (NULL);
 	list = ft_get_stringlist(fullstring);
 	stringarray = ft_lstconvert_strarr(list, 0);
-	ft_expand_stringarray(&stringarray, laststatus, envlist);
+	ft_expand_stringarray(stringarray, laststatus, envlist);
 	expandedstring = ft_concat_strarray(stringarray, FALSE);
 	ft_clear_strarray(stringarray);
+	ft_lstclear(&list, ft_free_string);
 	return (expandedstring);
 }
 
@@ -106,10 +107,14 @@ char	*ft_expand_dollartoken(const char *argument, t_global *global)
 		return (NULL);
 	dollarcount = ft_chrcount(argument, '$');
 	if (dollarcount >= 1)
-		value = ft_expand_dollarchain(argument, g_exit_status, global->envlist);
+	{
+		value
+			= ft_expand_dollarchain(
+				argument, g_exit_status, global->envlist);
+		if (value == NULL)
+			value = ft_strdup("");
+	}
 	else
 		return ((char *)argument);
-	if (value == NULL)
-		value = ft_strdup("");
 	return (value);
 }

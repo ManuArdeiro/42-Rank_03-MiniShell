@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 19:12:20 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/29 18:39:43 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/02 18:55:29 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,30 +27,6 @@ static t_cleancase	ft_get_cleancase(
 	else if (startnode->token == tk_dblquot)
 		global->expand_dollartoken = TRUE;
 	return (CLEAN_QUOTES);
-}
-
-static char	*ft_get_substr(
-	const char *commandline, t_part *secondnode, t_part **node
-)
-{
-	char	*buffer;
-
-	buffer = NULL;
-	if (secondnode != NULL && secondnode->end >= (*node)->start)
-	{
-		buffer = ft_substr(commandline, (*node)->start,
-				((secondnode->end) - ((*node)->start) + 1));
-	}
-	else if (secondnode == NULL)
-	{
-		secondnode = ft_get_lasttoken((*node));
-		if (secondnode != NULL)
-			buffer
-				= ft_substr(commandline,
-					(*node)->start,
-					((secondnode->end) - ((*node)->start) + 1));
-	}
-	return (buffer);
 }
 
 static void	ft_get_lastsubnode(
@@ -83,16 +59,13 @@ static void	ft_get_lastsubnode(
 }
 
 static void	ft_add_subseries(char **commandseries,
-		t_part **node, const char *commandline, t_global *global)
+		t_part **node, t_global *global)
 {
 	t_part		*sub_endnode;
 	t_cleancase	cleancase;
-	char		*buffer;
-	char		*substring;
+	char		*expandedstring;
 
-	substring = NULL;
 	cleancase = CLEAN_ALL;
-	buffer = NULL;
 	ft_get_lastsubnode(node, &sub_endnode, &cleancase, global);
 	if (ft_is_emptyquotes(*node, sub_endnode) == TRUE
 		&& sub_endnode != NULL && sub_endnode->next != NULL)
@@ -100,20 +73,14 @@ static void	ft_add_subseries(char **commandseries,
 		(*node) = sub_endnode;
 		return ;
 	}
-	substring = ft_get_substr(commandline, sub_endnode, node);
-	buffer = ft_strclean_withspaces(substring, cleancase);
-	if (global->expand_dollartoken == TRUE && global->fileflag == FALSE)
-		buffer = ft_expand_dollartoken(buffer, global);
-	(*commandseries) = ft_strjoin_get((*commandseries), buffer);
-	if (substring != NULL)
-		free(substring);
-	if (buffer != NULL)
-		free(buffer);
+	expandedstring = ft_expandstring(global, (*node), sub_endnode, cleancase);
+	(*commandseries) = ft_strjoin_get((*commandseries), expandedstring);
+	if (ft_emptystring(expandedstring) == FALSE)
+		free(expandedstring);
 	(*node) = sub_endnode;
 }
 
 char	*ft_get_commandseries(
-		const char *commandline,
 		t_part *seriesstart, t_part *seriesend, t_global *global)
 {
 	t_part	*node;
@@ -125,7 +92,7 @@ char	*ft_get_commandseries(
 	commandseries = NULL;
 	while (node != NULL && node != seriesend)
 	{
-		ft_add_subseries(&commandseries, &node, commandline, global);
+		ft_add_subseries(&commandseries, &node, global);
 		if (node != NULL && node != seriesend)
 			node = node->next;
 		global->expand_dollartoken = FALSE;

@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:10:53 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/02/03 18:03:04 by jolopez-         ###   ########.fr       */
+/*   Updated: 2024/02/03 18:56:54 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # define NO_SUCH_FILE_IN	"in"
 # define NO_SUCH_FILE		" no such file or directory : "
 # define COMMAND_NOT_FOUND	" command not found : "
+# define MINISTD			"STD"
 
 typedef struct s_global			t_global;
 typedef struct s_dict			t_dict;

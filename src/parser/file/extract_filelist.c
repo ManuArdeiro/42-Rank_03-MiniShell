@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 18:36:15 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/29 18:23:00 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/03 16:56:11 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static char	*ft_get_filestring(
 	{
 		if (file_mode == O_HEREDOC)
 			global->fileflag = TRUE;
-		string = ft_extractseries((*node)->next->next, global);
+		string = ft_extractseries((*node), global);
 		global->fileflag = FALSE;
 	}
 	else if (ft_token_case(*node) == CASE_2)
@@ -57,7 +57,7 @@ static char	*ft_get_filestring(
 	}
 	else
 	{
-		*filenode = ft_get_tokennode((*node)->next, tk_file, TRUE, FIRST);
+		*filenode = ft_get_tokennode((*node), tk_file, TRUE, FIRST);
 		string = ft_extract_tokenstring(global->line, *filenode);
 		if (file_mode != O_HEREDOC)
 			string = ft_expand_dollartoken(string, global);
@@ -78,6 +78,10 @@ static void	ft_get_file(
 	string = NULL;
 	filenode = NULL;
 	file_mode = ft_get_filemode((*node)->token);
+	if ((*node)->next != NULL && (*node)->next->token != tk_space)
+		(*node) = (*node)->next;
+	else if ((*node)->next != NULL && (*node)->next->token == tk_space)
+		(*node) = (*node)->next->next;
 	string = ft_get_filestring(node, global, &filenode, file_mode);
 	if (string != NULL)
 	{

@@ -6,7 +6,7 @@
 #    By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/01 18:51:45 by jolopez-          #+#    #+#              #
-#    Updated: 2024/02/03 12:39:01 by yzaytoun         ###   ########.fr        #
+#    Updated: 2024/02/03 17:00:51 by yzaytoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,7 +62,7 @@ PARSER			=  separators.c get_tokennode.c tokensplit.c get_nodetype.c \
 					tokenpairs.c get_tokenpair.c tokenlist_contains.c split_subshell.c\
 					split_tokenlist.c valid_subshellnode.c skip_tokens.c validate_tokenlist.c\
 					contains_sub_tokenlist.c skip_get_tokennode.c is_complete_subshell.c\
-					expandstring.c emptystring.c
+					expandstring.c emptystring.c skip_quotes.c
 					
 SUMMARIZER		= minisummary.c printtokens.c get_unique_tokens.c \
 					get_token_summary.c get_token_count.c clearsummary.c
@@ -79,7 +79,7 @@ EXEC			= executecommand.c execute_commandline.c \
 				expand_startoken.c expand_dollartoken.c execute_builtin.c \
 				mini_heredoc.c expand_filelist.c execute_pipeline.c wait_close_heredoc.c \
 				get_lstnode.c executer_aux.c execute_subshell.c get_stringlist.c\
-				get_directorylist.c
+				get_directorylist.c check_filepermissions.c
 
 SRC 			= $(ENV) $(UTILS) $(SUMMARIZER) $(LEXER) \
 					$(CMD) $(PARSER) $(TREE) $(EXEC)  main.c
@@ -88,7 +88,7 @@ OBJS			=	$(SRC:%.c=$(OBJ_DIR)/%.o)
 
 RM 				=	/bin/rm -rf
 CC 				= 	gcc
-CFLAGS 			= 	-Wall -Werror -Wextra $(INCLUDE) $(INC_LIB) $(READLINE_LIB) -g #$(SANITIZER)
+CFLAGS 			= 	-Wall -Werror -Wextra $(INCLUDE) $(INC_LIB) $(READLINE_LIB) -g $(SANITIZER)
 
 LIBFT			= 	include/libft/libft.a
 LIBFTDIR		= 	include/libft

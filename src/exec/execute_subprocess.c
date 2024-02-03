@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:50:35 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/26 19:50:14 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/03 14:27:11 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void	ft_execute_subprocess(
 
 	args = NULL;
 	ft_open_filestreams(&infile, &outfile);
+	ft_printcommand(command);
 	if (infile->fd < 0)
 		ft_terminateprocess(command, NULL, NULL, NO_SUCH_FILE_IN);
 	if (outfile->fd < 0)

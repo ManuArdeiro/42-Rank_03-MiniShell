@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 20:23:08 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/27 17:47:53 by jolopez-         ###   ########.fr       */
+/*   Updated: 2024/02/03 18:07:02 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,10 @@ void	ft_case_token(t_token token)
 		printf("%s\t", "tk_ampersand");
 	else if (token == tk_space)
 		printf("%s\t", "tk_space");
+	else if (token == tk_slash_sglquot)
+		printf("%s\t", "tk_slash_sglquot");
+	else if (token == tk_slash_dblquot)
+		printf("%s\t", "tk_slash_dblquot");
 }
 
 void	ft_case_token_2(t_token token)

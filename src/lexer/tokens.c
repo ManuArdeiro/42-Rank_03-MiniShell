@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 18:12:50 by jolopez-          #+#    #+#             */
-/*   Updated: 2024/01/27 17:46:03 by jolopez-         ###   ########.fr       */
+/*   Updated: 2024/02/03 18:04:19 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,11 @@ static void	ft_token_5(t_part *tokens, char *line, int *i, int *ok)
 	{
 		*ok = ft_add_tkn(tokens, tk_equal, *i, *i);
 		*i = *i + 1;
+	}
+	else if (line[*i] == '\\' && line[*i + 1] != '\"')
+	{
+		*ok = ft_add_tkn(tokens, tk_slash_dblquot, *i, *i + 1);
+		*i = *i + 2;
 	}
 }
 
@@ -99,6 +104,11 @@ static void	ft_token_2(t_part *tokens, char *line, int *i, int *ok)
 	{
 		*ok = ft_add_tkn(tokens, tk_less, *i, *i);
 		*i = *i + 1;
+	}
+	else if (line[*i] == '\\' && line[*i + 1] != '\'')
+	{
+		*ok = ft_add_tkn(tokens, tk_slash_sglquot, *i, *i + 1);
+		*i = *i + 2;
 	}
 	else
 		ft_token_3(tokens, line, i, ok);

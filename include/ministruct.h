@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:10:53 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/02/03 14:21:27 by jolopez-         ###   ########.fr       */
+/*   Updated: 2024/02/03 18:03:04 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,8 @@ enum e_token
 	tk_newline,
 	tk_file,
 	tk_space,
+	tk_slash_sglquot,
+	tk_slash_dblquot,
 	max_token,
 };
 

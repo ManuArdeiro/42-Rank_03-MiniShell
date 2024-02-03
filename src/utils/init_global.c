@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 19:10:05 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/17 19:10:45 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/03 13:07:03 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,16 @@ void	ft_handle_shelvl(t_global **global)
 	char	*shelvl;
 
 	shelvl = ft_getenv("SHLVL", (*global)->envlist);
-	(*global)->shell_level = ft_atoi(shelvl);
 	if (shelvl != NULL)
 	{
+		(*global)->shell_level = ft_atoi(shelvl);
 		free(shelvl);
 		shelvl = ft_itoa((*global)->shell_level + 1);
 		ft_setenv(&(*global)->envlist, "SHLVL", shelvl, OVERWRITE_VALUE);
 		free(shelvl);
 	}
+	else
+		ft_setenv(&(*global)->envlist, "SHLVL", "1", ADD_VALUE);
 }
 
 /*	This function first frees the list of environment strings then frees the

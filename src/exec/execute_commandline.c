@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 12:40:08 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/24 20:01:38 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/03 17:59:03 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	ft_navigate_and_execute(t_minitree *root, t_global *global)
 	t_nodetype	nodetype;
 	int			laststatus;
 
-	laststatus = EXIT_SUCCESS;
+	laststatus = EXIT_FAILURE;
 	if (root == NULL || root->content == NULL)
 		return (EXITED);
 	nodetype = ((t_mininode *)root->content)->type;

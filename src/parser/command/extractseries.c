@@ -57,7 +57,10 @@ char	*ft_extractseries(t_part *tokenlist, t_global *global)
 		&& startnode->next != NULL)
 		startnode = ft_skip_redirection(tokenlist);
 	endnode = ft_get_last_seriestoken(startnode);
-	sub_tklist = ft_copy_tokenlist(startnode, endnode);
+	if (endnode != NULL)
+		sub_tklist = ft_copy_tokenlist(startnode, endnode->next);
+	else
+		sub_tklist = ft_copy_tokenlist(startnode, endnode);
 	commandname = ft_get_tokenstring(startnode, endnode, sub_tklist, global);
 	ft_free_tokenlist(&sub_tklist);
 	return (commandname);

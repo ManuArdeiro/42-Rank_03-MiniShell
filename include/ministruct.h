@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ministruct.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:10:53 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/29 18:09:02 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/03 14:21:27 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,6 +161,7 @@ struct s_mininode
 struct s_global
 {
 	t_bool			status;
+	t_bool			pipeline;
 	char			*line;
 	t_list			*envlist;
 	int				laststatus;

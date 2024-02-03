@@ -61,7 +61,6 @@ static char	*ft_get_stringseries(
 		stringseries
 			= ft_get_tokenstring(startnode, endnode, sub_tklist, global);
 	}
-
 	ft_free_tokenlist(&sub_tklist);
 	return (stringseries);
 }

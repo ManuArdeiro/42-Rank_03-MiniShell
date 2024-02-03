@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:55:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2024/01/22 20:44:12 by jolopez-         ###   ########.fr       */
+/*   Updated: 2024/02/03 16:54:39 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ static void	ft_loop(t_global *global)
 				global->status = EXITED;
 			parsetree = ft_parse_commandline(global);
 			ft_execute_commandline(parsetree, global);
+			global->pipeline = FALSE;
 			ft_register_and_clean(&history, &global, &parsetree);
 		}
 		else

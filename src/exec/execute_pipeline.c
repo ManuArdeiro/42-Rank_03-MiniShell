@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_pipeline.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 17:32:49 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/29 18:45:17 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/03 17:26:15 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,11 @@ static void	ft_execute_leftchild(
 	int	status;
 
 	status = EXIT_SUCCESS;
+	if (global->pipeline == FALSE)
+		global->signallist.__sigaction_u.__sa_handler = &ft_signal_handler;
+	else
+		global->signallist.__sigaction_u.__sa_handler = SIG_IGN;
+	sigaction(SIGINT, &global->signallist, NULL);
 	if (dup2(pipeline[1], STDOUT_FILENO) < 0)
 		ft_printerror(__func__, "DUP2");
 	ft_closepipe(&pipeline[0], &pipeline[1]);
@@ -31,6 +36,11 @@ static void	ft_execute_rightchild(
 	int	status;
 
 	status = EXIT_SUCCESS;
+	if (global->pipeline == FALSE)
+		global->signallist.__sigaction_u.__sa_handler = &ft_signal_handler;
+	else
+		global->signallist.__sigaction_u.__sa_handler = SIG_IGN;
+	sigaction(SIGINT, &global->signallist, NULL);
 	if (dup2(pipeline[0], STDIN_FILENO) < 0)
 		ft_printerror(__func__, "DUP2");
 	ft_closepipe(&pipeline[0], &pipeline[1]);
@@ -67,6 +77,12 @@ int	ft_execute_pipeline(t_minitree *root, t_global *global)
 		return (EXIT_FAILURE);
 	if (pipe(pipeline) < 0)
 		ft_printerror(__func__, "Pipe");
+	global->pipeline = TRUE;
+	if (global->pipeline == FALSE)
+		global->signallist.__sigaction_u.__sa_handler = &ft_signal_handler;
+	else
+		global->signallist.__sigaction_u.__sa_handler = SIG_IGN;
+	sigaction(SIGINT, &global->signallist, NULL);
 	ft_execute(root, pipeline, global, &pid);
 	ft_closepipe(&pipeline[0], &pipeline[1]);
 	ft_wait_process(&pid[0], &status, FORK, global);

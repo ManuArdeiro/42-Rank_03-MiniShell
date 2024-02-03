@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 20:07:17 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/02/02 18:54:29 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/03 16:50:45 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ t_part		*ft_fastforward(t_part *tokenlist);
 t_bool		ft_is_emptyquotes(t_part *startnode, t_part *endnode);
 t_bool		ft_token_case(t_part *head);
 t_bool		ft_get_stringpart(const char *pathsuffix);
+t_part		*ft_skip_quotes(t_part *tokenlist, t_token token);
 
 //File
 t_part		*ft_skip_redirection(t_part *tokenlist);

@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 18:36:48 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/02/02 18:10:39 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/03 16:51:07 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ t_list	*ft_get_unique_tokens(t_part *tokenlist)
 	while (part != NULL)
 	{
 		if (ft_is_tokenpair(part->token) == TRUE)
-			part = ft_skip_tokens(part->next, ft_is_tokenpair);
+			part = ft_skip_quotes(part->next, part->token);
 		if (part != NULL)
 		{
 			if (ft_token_in_list(list, part->token) == FALSE)
@@ -48,8 +48,9 @@ t_list	*ft_get_unique_tokens(t_part *tokenlist)
 				if (part->token != 0)
 					ft_lstinsert(&list, (void *)part->token, BACK);
 			}
-			part = part->next;
 		}
+		if (part != NULL)
+			part = part->next;
 	}
 	return (list);
 }

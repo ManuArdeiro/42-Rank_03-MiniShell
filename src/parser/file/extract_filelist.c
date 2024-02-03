@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 18:36:15 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/02/03 14:39:38 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/03 16:56:11 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static char	*ft_get_filestring(
 	}
 	else
 	{
-		*filenode = ft_get_tokennode((*node)->next, tk_file, TRUE, FIRST);
+		*filenode = ft_get_tokennode((*node), tk_file, TRUE, FIRST);
 		string = ft_extract_tokenstring(global->line, *filenode);
 		if (file_mode != O_HEREDOC)
 			string = ft_expand_dollartoken(string, global);

@@ -1,20 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   emptystring.c                                      :+:      :+:    :+:   */
+/*   skip_quotes.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/02 18:53:20 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/02/03 17:17:23 by yzaytoun         ###   ########.fr       */
+/*   Created: 2024/02/03 16:47:22 by yzaytoun          #+#    #+#             */
+/*   Updated: 2024/02/03 16:50:15 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_bool	ft_emptystring(const char *string)
+t_part	*ft_skip_quotes(t_part *tokenlist, t_token token)
 {
-	if (string == NULL || string[0] == '\0')
-		return (TRUE);
-	return (FALSE);
+	t_part	*node;
+
+	if (tokenlist == NULL)
+		return (NULL);
+	node = tokenlist;
+	while (node != NULL && node->token != token)
+		node = node->next;
+	return (node);
 }

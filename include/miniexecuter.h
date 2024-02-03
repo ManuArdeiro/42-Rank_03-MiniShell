@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 18:11:58 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/02/03 12:35:46 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/03 17:39:57 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,6 @@ t_list	*ft_get_stringlist(const char *fullstring);
 t_list	*ft_get_directorylist(
 			char *path, char *fileprefix, t_bool stringpart, DIR *directory);
 
+void	ft_check_filepermissions(
+			t_file *infile, t_file *outfile, const char *errorstr);
 #endif

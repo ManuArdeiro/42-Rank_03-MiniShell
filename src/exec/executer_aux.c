@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 18:57:23 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/27 19:27:47 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/03 17:41:44 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,11 @@ void	ft_terminateprocess(
 {
 	ft_clear_strarray(envp);
 	ft_clear_strarray(args);
-	if (ft_strequal(errortype, NO_SUCH_FILE_OUT) == TRUE)
-		ft_print_commanderror(
-			((t_file *)command->outfile->content)->name, NO_SUCH_FILE);
-	else if (ft_strequal(errortype, NO_SUCH_FILE_IN) == TRUE)
-		ft_print_commanderror(
-			((t_file *)command->infile->content)->name, NO_SUCH_FILE);
+	if (ft_strcontains(errortype, "in") == TRUE
+		|| ft_strcontains(errortype, "out") == TRUE)
+		ft_check_filepermissions(
+			(t_file *)(command->infile->content),
+			(t_file *)(command->outfile->content), errortype);
 	else if (errortype != NULL)
 		ft_print_commanderror(command->name, errortype);
 	ft_free_commandlist(&command);

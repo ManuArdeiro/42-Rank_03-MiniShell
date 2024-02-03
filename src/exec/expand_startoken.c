@@ -6,74 +6,50 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 18:05:17 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/02/02 16:29:55 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/03 12:58:56 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	*ft_get_filename(const char *path, const char *d_name)
+static void	ft_get_pathattributes(
+	const char *fullpath,
+	char **fileprefix, t_bool *stringpart, char *pathsuffix)
 {
-	char	*filename;
-
-	filename = NULL;
-	if (ft_strequal(path, ".") == TRUE)
-		filename = ft_strdup(d_name);
+	if (pathsuffix == NULL)
+	{
+		(*fileprefix) = ft_strstrip(fullpath);
+		(*stringpart) = ft_get_stringpart(fullpath);
+	}
 	else
-		filename = ft_strjoin(path, d_name);
-	return (filename);
-}
-
-static char	*ft_get_dirfile(
-	const char *path,
-	struct dirent *dirent, char *fileprefix, t_bool stringpart)
-{
-	char	*filename;
-
-	filename = NULL;
-	if (fileprefix != NULL && *fileprefix != '\0' && *fileprefix != ' ')
 	{
-		if (stringpart == LAST)
-		{
-			if (ft_startswith(dirent->d_name, fileprefix) == TRUE)
-				filename = ft_get_filename(path, dirent->d_name);
-		}
-		else if (stringpart == FIRST)
-		{
-			if (ft_endswith(dirent->d_name, fileprefix) == TRUE)
-				filename = ft_get_filename(path, dirent->d_name);
-		}
+		(*fileprefix) = ft_strstrip(pathsuffix);
+		(*stringpart) = ft_get_stringpart(pathsuffix);
 	}
-	else if (*(dirent->d_name) != '.')
-		filename = ft_get_filename(path, dirent->d_name);
-	return (filename);
 }
 
-static void	ft_add_dirfiles(
-		t_list **fileslist, DIR *directory, char *path, char *pathsuffix)
+static t_list	*ft_get_dirfiles(
+		DIR *directory, char *path, char *pathsuffix, const char *fullpath)
 {
-	struct dirent	*dirent;
-	char			*fileprefix;
-	char			*dirfile;
+	char	*fileprefix;
+	t_list	*fileslist;
+	t_bool	stringpart;
+	char	*newpath;
 
-	dirfile = NULL;
-	fileprefix = ft_strstrip(pathsuffix);
+	fileslist = NULL;
+	newpath = NULL;
+	fileprefix = NULL;
+	stringpart = FALSE;
+	ft_get_pathattributes(fullpath, &fileprefix, &stringpart, pathsuffix);
 	if (ft_strlen(path) > 1)
-		path = ft_strjoin_get(path, "/");
-	if (directory != NULL)
-	{
-		dirent = readdir(directory);
-		while (dirent != NULL)
-		{
-			dirfile
-				= ft_get_dirfile(path, dirent,
-					fileprefix, ft_get_stringpart(pathsuffix));
-			if (dirfile != NULL)
-				ft_lstinsert(fileslist, dirfile, BACK);
-			dirent = readdir(directory);
-		}
-	}
+		newpath = ft_strjoin(path, "/");
+	else
+		newpath = ft_strdup(path);
+	fileslist
+		= ft_get_directorylist(newpath, fileprefix, stringpart, directory);
 	free(fileprefix);
+	free(newpath);
+	return (fileslist);
 }
 
 static char	*ft_get_dirpath(const char *fullpath, char **pathsuffix)
@@ -115,7 +91,7 @@ t_list	*ft_expand_startoken(const char *fullpath)
 	dirpath = ft_get_dirpath(fullpath, &pathsuffix);
 	if (dirpath != NULL)
 		directory = opendir(dirpath);
-	ft_add_dirfiles(&fileslist, directory, dirpath, pathsuffix);
+	fileslist = ft_get_dirfiles(directory, dirpath, pathsuffix, fullpath);
 	if (dirpath != NULL)
 		free(dirpath);
 	if (fileslist == NULL)

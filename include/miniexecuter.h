@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 18:11:58 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/24 20:29:06 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/03 12:35:46 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,7 @@ void	ft_terminateprocess(t_command *command, char **args,
 int		ft_execute_subshell(t_minitree *root, t_global *global);
 
 t_list	*ft_get_stringlist(const char *fullstring);
+t_list	*ft_get_directorylist(
+			char *path, char *fileprefix, t_bool stringpart, DIR *directory);
 
 #endif

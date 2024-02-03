@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 19:10:00 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/22 20:46:56 by jolopez-         ###   ########.fr       */
+/*   Updated: 2024/02/03 17:55:09 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	subadd_quotes(t_part *tokens, char *line, int *i, int *ok)
 	if (line[*i] == '\'')
 	{
 		if (line[*i + 1] != ' '
-			&& ft_strchr("()\'\";*<>|&", line[*i + 1]) == NULL)
+			&& ft_strchr("\\()\'\";*<>|&", line[*i + 1]) == NULL)
 			*ok = ft_add_tkn(tokens, tk_sglquot, *i, *i);
 		else
 			*ok = ft_add_tkn(tokens, tk_sglquot, *i, *i);
@@ -25,7 +25,7 @@ static void	subadd_quotes(t_part *tokens, char *line, int *i, int *ok)
 	else if (line[*i] == '\"')
 	{
 		if (line[*i + 1] != ' '
-			&& ft_strchr("()\'\";*<>|&", line[*i + 1]) == NULL)
+			&& ft_strchr("\\()\'\";*<>|&", line[*i + 1]) == NULL)
 			*ok = ft_add_tkn(tokens, tk_dblquot, *i, *i);
 		else
 			*ok = ft_add_tkn(tokens, tk_dblquot, *i, *i);

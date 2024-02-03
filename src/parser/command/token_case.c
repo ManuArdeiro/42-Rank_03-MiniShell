@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:02:42 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/02/03 14:32:41 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/03 18:19:45 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,9 @@ t_bool	ft_token_case(t_part *head)
 	next = head->next;
 	if (next != NULL
 		&& (ft_is_tokenpair(head->token) == TRUE
-			|| (ft_is_tokenpair(next->token) == TRUE)))
+			|| (ft_is_tokenpair(next->token) == TRUE)
+			|| head->token == tk_slash_dblquot
+			|| head->token == tk_slash_sglquot))
 		return (CASE_1);
 	else if ((head->token == tk_arg
 			|| head->token == tk_doll_int)

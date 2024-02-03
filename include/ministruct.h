@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:10:53 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/02/03 17:08:00 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/03 18:16:53 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,8 @@ enum e_token
 	tk_newline,
 	tk_file,
 	tk_space,
+	tk_slash_sglquot,
+	tk_slash_dblquot,
 	max_token,
 };
 
@@ -162,6 +164,7 @@ struct s_mininode
 struct s_global
 {
 	t_bool			status;
+	t_bool			pipeline;
 	char			*line;
 	t_list			*envlist;
 	int				laststatus;

@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 18:30:15 by jolopez-          #+#    #+#             */
-/*   Updated: 2024/01/31 18:58:13 by jolopez-         ###   ########.fr       */
+/*   Updated: 2024/02/03 17:57:53 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	ft_check_dbltoken(char *line, int *i, int *flag, int *tokens)
 		*tokens = *tokens + 1;
 		*flag = *flag + 1;
 	}
-	else if (ft_strncmp("&!", str, 2) == 0 || ft_strncmp("&&", str, 2) == 0)
+	else if (ft_strncmp("$?", str, 2) == 0 || ft_strncmp("&&", str, 2) == 0)
 	{
 		*i = *i + 2;
 		*tokens = *tokens + 1;
@@ -134,7 +134,7 @@ void	ft_get_tokens(char *line, t_part *tokens)
 			if (ft_last_tkn(tokens)->token != tk_space)
 				ft_add_tkn(tokens, tk_space, i - 1, i - 1);
 		}
-		else if (ft_strchr("()\"\'*;<>|&$", line[i]))
+		else if (ft_strchr("\\()\"\'*;<>|&$", line[i]))
 		{
 			ft_token_1(tokens, line, &i);
 			start = -1;

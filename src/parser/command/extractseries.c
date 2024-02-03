@@ -22,7 +22,9 @@ static char	*ft_get_tokenstring(
 	cmdnode = NULL;
 	commandname = NULL;
 	ft_set_tokenlist(&startnode, endnode, TRUE);
-	if (ft_tokenlist_contains(subtk_list, ft_is_tokenpair) == TRUE)
+	if (ft_tokenlist_contains(subtk_list, ft_is_tokenpair) == TRUE
+		|| subtk_list->token == tk_slash_sglquot
+		||subtk_list->token == tk_slash_dblquot)
 		commandname
 			= ft_get_commandseries(startnode, endnode, global);
 	else if (startnode != NULL && ft_is_dollar(startnode->token) == TRUE)
@@ -61,7 +63,6 @@ static char	*ft_get_stringseries(
 		stringseries
 			= ft_get_tokenstring(startnode, endnode, sub_tklist, global);
 	}
-
 	ft_free_tokenlist(&sub_tklist);
 	return (stringseries);
 }

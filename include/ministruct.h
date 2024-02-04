@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:10:53 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/02/04 13:56:03 by jolopez-         ###   ########.fr       */
+/*   Updated: 2024/02/04 14:17:04 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,6 +179,7 @@ struct s_global
 	t_bool			subshell;
 	t_bool			fileflag;
 	t_bool			stringstart;
+	t_bool			heredoc_quotes;
 };
 
 #endif		/*Mini struct header*/

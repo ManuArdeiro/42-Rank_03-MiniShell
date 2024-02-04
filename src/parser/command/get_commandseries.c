@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 19:12:20 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/02/04 12:23:10 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/04 14:12:27 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,9 @@ static t_cleancase	ft_get_cleancase(
 {
 	if ((startnode->token == tk_sglquot || startnode->token == tk_arg)
 		&& ft_contains_sub_tokenlist(startnode, endnode, tk_dblquot) == TRUE)
+	{
 		return (CLEAN_SINGLE_QUOTES);
+	}
 	else if ((startnode->token == tk_dblquot || startnode->token == tk_arg)
 		&& ft_contains_sub_tokenlist(startnode, endnode, tk_sglquot) == TRUE)
 	{
@@ -65,6 +67,7 @@ static void	ft_get_lastsubnode(
 			global->expand_dollartoken = TRUE;
 			global->expand_startoken = TRUE;
 		}
+		global->heredoc_quotes = TRUE;
 	}
 	else
 		ft_check_tokencase(node, subnode, global);

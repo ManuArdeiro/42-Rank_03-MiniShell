@@ -20,7 +20,6 @@ static char	*ft_get_tokenstring(
 	t_part	*cmdnode;
 
 	cmdnode = NULL;
-
 	commandname = NULL;
 	ft_set_tokenlist(&startnode, endnode, TRUE);
 	if (ft_tokenlist_contains(subtk_list, ft_is_tokenpair) == TRUE

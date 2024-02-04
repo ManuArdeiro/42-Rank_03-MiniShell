@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 11:05:21 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/31 20:18:10 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/04 19:48:31 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ static t_command	*ft_newcommand(t_part *tokenlist, t_global *global)
 	arglist = NULL;
 	commandname = ft_extractseries(tokenlist, global);
 	arglist = ft_extract_arglist(tokenlist, global);
-	arglist = ft_clear_emptyvalues(arglist);
 	if (commandname != NULL)
 		ft_lstinsert(&arglist, commandname, FRONT);
 	newcommand

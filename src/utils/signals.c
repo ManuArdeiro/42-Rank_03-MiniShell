@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 21:33:30 by jolopez-          #+#    #+#             */
-/*   Updated: 2024/02/03 16:16:52 by jolopez-         ###   ########.fr       */
+/*   Updated: 2024/02/04 14:46:56 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 void	handle_sigint_exit(int signum)
 {
 	(void)signum;
-	write(1, "1\n", 2);
+	write(1, "\n", 2);
 	g_exit_status = 1;
 	exit(130);
 }
@@ -29,7 +29,7 @@ void	handle_sigint_exit(int signum)
 void	handle_sigint2(int signum)
 {
 	(void)signum;
-	write(1, "2\n", 2);
+	write(1, "\n", 2);
 	rl_replace_line("", 1);
 	rl_on_new_line();
 	g_exit_status = 130;
@@ -52,7 +52,7 @@ void	ft_signal_handler(int signum)
 {
 	if (signum == SIGINT)
 	{
-		write(1, "3\n", 2);
+		write(1, "\n", 2);
 		rl_replace_line("", 1);
 		rl_on_new_line();
 		rl_redisplay();

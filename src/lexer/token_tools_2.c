@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 18:30:15 by jolopez-          #+#    #+#             */
-/*   Updated: 2024/02/03 17:57:53 by jolopez-         ###   ########.fr       */
+/*   Updated: 2024/02/04 13:54:41 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int	ft_count_tokens(char *line)
 
 static void	ft_get_tokens_2(char *line, t_part *tokens, int *i, int *start)
 {
-	if ((*start < 0 && ft_strchr("()\'\"*;<>|&", (int)line[*i + 1]))
+	if ((*start < 0 && ft_strchr("()\'\"*;<>|&$", (int)line[*i + 1]))
 		|| (*start < 0 && ft_is_space(line, *i + 1)))
 		ft_evaluatetoken(tokens, line, i, (int *)0);
 	else if (*start < 0)
@@ -98,14 +98,14 @@ static void	ft_get_tokens_2(char *line, t_part *tokens, int *i, int *start)
 		if (line[*i] == '\0')
 			ft_add_tkn(tokens, tk_cmd, *start, *i);
 	}
-	else if (*start >= 0 && (ft_strchr("()\'\";*<>|&", line[*i + 1])
+	else if (*start >= 0 && (ft_strchr("()\'\";*<>|&$", line[*i + 1])
 			|| ft_is_space(line, *i + 1) || line[*i +1] == '\n'))
 	{
 		ft_add_tkn(tokens, tk_cmd, *start, *i);
 		*start = -1;
 		*i = *i + 1;
 	}
-	else if (*start >= 0 && !ft_strchr("()\'\"*;<>|&", line[*i + 1])
+	else if (*start >= 0 && !ft_strchr("()\'\"*;<>|&$", line[*i + 1])
 		&& !ft_is_space(line, *i + 1))
 		*i = *i + 1;
 }

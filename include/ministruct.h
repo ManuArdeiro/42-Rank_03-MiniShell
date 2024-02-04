@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:10:53 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/02/03 18:16:53 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/04 11:26:17 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,6 +178,7 @@ struct s_global
 	t_sigaction		signallist;
 	t_bool			subshell;
 	t_bool			fileflag;
+	t_bool			stringstart;
 };
 
 #endif		/*Mini struct header*/

@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 19:28:06 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/06 21:05:35 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/04 18:12:28 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ static t_list	*ft_get_expandedfilelist(t_list *filelist, t_global *global)
 			ft_get_heredoc(&file, global);
 			ft_lstinsert(&expandedlist, file, BACK);
 		}
+		else
+			ft_lstinsert(&expandedlist, file, BACK);
 		node = node->next;
 	}
 	return (expandedlist);

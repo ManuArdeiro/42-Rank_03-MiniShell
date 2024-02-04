@@ -69,6 +69,22 @@ static char	*ft_get_stringseries(
 	return (stringseries);
 }
 
+static t_bool	ft_is_redirection_list(t_part *head)
+{
+	t_part	*next;
+
+	if (head == NULL)
+		return (FALSE);
+	next = head->next;
+	if (next != NULL && head->used == FALSE
+		&& ft_is_redirection(head->token) == TRUE)
+		return (TRUE);
+	else if (head->token == tk_space
+		&& ft_is_redirection(next->token) == TRUE)
+		return (TRUE);
+	return (FALSE);
+}
+
 char	*ft_extractseries(t_part *tokenlist, t_global *global)
 {
 	char	*strseries;
@@ -79,9 +95,7 @@ char	*ft_extractseries(t_part *tokenlist, t_global *global)
 		return (NULL);
 	strseries = NULL;
 	startnode = ft_fastforward(tokenlist);
-	if (startnode != NULL && startnode->used == FALSE
-		&& ft_is_redirection(startnode->token) == TRUE
-		&& startnode->next != NULL)
+	if (ft_is_redirection_list(startnode) == TRUE)
 		startnode = ft_skip_redirection(tokenlist);
 	endnode = ft_get_last_seriestoken(startnode);
 	strseries = ft_get_stringseries(startnode, endnode, global);

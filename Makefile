@@ -6,7 +6,7 @@
 #    By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/01 18:51:45 by jolopez-          #+#    #+#              #
-#    Updated: 2024/02/03 17:00:51 by yzaytoun         ###   ########.fr        #
+#    Updated: 2024/02/04 11:34:29 by yzaytoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,7 +51,8 @@ COMMAND			= extract_tokenstring.c copy_tokenlist.c lstconvert.c \
 					checkquotes.c is_validseries.c set_tokenlist.c \
 					extractseries.c fastforward.c is_emptyquotes.c\
 					skip_redirection.c extract_dollarstring.c \
-					token_case.c get_starstring.c get_stringpart.c
+					token_case.c get_starstring.c get_stringpart.c\
+					is_backslash_token.c
 				
 FILE			= filestreams.c create_file.c get_filemode.c is_redirection.c \
 					freefile.c append_filecontent.c delete_filenode.c closepipe.c\

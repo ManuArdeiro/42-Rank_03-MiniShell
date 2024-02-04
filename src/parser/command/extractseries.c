@@ -23,11 +23,12 @@ static char	*ft_get_tokenstring(
 
 	commandname = NULL;
 	ft_set_tokenlist(&startnode, endnode, TRUE);
+	if (subtk_list == NULL)
+		return (NULL);
 	if (ft_tokenlist_contains(subtk_list, ft_is_tokenpair) == TRUE
 		|| ft_is_backslash_token(subtk_list->token) == TRUE
 		|| ft_token_case(subtk_list) == CASE_1)
-		commandname
-			= ft_get_commandseries(startnode, endnode, global);
+		commandname = ft_get_commandseries(startnode, endnode, global);
 	else if (startnode != NULL && ft_is_dollar(startnode->token) == TRUE)
 	{
 		commandname = ft_extract_dollarstring(global->line, startnode);

@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 18:28:55 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/27 19:09:12 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/04 14:12:46 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ void	ft_writetofile(
 	char	*cleanline;
 
 	line = "";
+	if (global->heredoc_quotes == TRUE)
+		global->expand_dollartoken = FALSE;
 	cleanline = NULL;
 	global->signallist.sa_handler = &handle_sigint_exit;
 	sigaction(SIGINT, &global->signallist, NULL);
@@ -52,6 +54,10 @@ void	ft_writetofile(
 		ft_putstr_fd("heredoc> ", STDOUT_FILENO);
 		ft_get_inputline(&line, herepipe);
 		cleanline = ft_strtrim(line, "\n");
+		if (ft_strequal_cs(cleanline, delimiter) == FALSE
+			&& ft_strchr(cleanline, '$') != NULL
+			&& global->expand_dollartoken == TRUE)
+			line = ft_expand_dollartoken(line, global);
 		ft_evaluate_line(cleanline, delimiter, line, herepipe);
 		ft_putstr_fd(line, herepipe[1]);
 		free(line);
@@ -67,6 +73,7 @@ void	ft_get_heredoc(t_file **file, t_global *global)
 
 	if (pipe(herepipe) < 0)
 		ft_printerror(__func__, "Pipe");
+	global->expand_dollartoken = TRUE;
 	global->signallist.sa_handler = SIG_IGN;
 	sigaction(SIGINT, &global->signallist, NULL);
 	child = fork();
@@ -76,4 +83,5 @@ void	ft_get_heredoc(t_file **file, t_global *global)
 		ft_printerror(__func__, "Fork");
 	else
 		ft_wait_close_heredoc(child, *file, herepipe, global);
+	global->heredoc_quotes = FALSE;
 }

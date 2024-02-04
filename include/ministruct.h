@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:10:53 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/02/03 18:56:54 by jolopez-         ###   ########.fr       */
+/*   Updated: 2024/02/04 13:56:03 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,6 +178,7 @@ struct s_global
 	t_sigaction		signallist;
 	t_bool			subshell;
 	t_bool			fileflag;
+	t_bool			stringstart;
 };
 
 #endif		/*Mini struct header*/

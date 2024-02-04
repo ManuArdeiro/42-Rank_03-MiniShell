@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 12:35:59 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/02/02 18:28:56 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/04 11:29:01 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,18 +54,22 @@ static char	*ft_get_stringvalue(
 }
 
 static void	ft_expand_stringarray(
-		char **stringarray, int laststatus, t_list *envlist)
+		char **stringarray, int laststatus, t_global *global)
 {
 	int		count;
 	char	*buffer;
 
 	buffer = NULL;
-	if (*stringarray == NULL || envlist == NULL)
+	if (*stringarray == NULL || global->envlist == NULL)
 		return ;
-	count = 0;
+	if (global->stringstart == TRUE)
+		count = 1;
+	else
+		count = 0;
 	while (stringarray[count] != NULL)
 	{
-		buffer = ft_get_stringvalue(stringarray[count], envlist, laststatus);
+		buffer = ft_get_stringvalue(
+				stringarray[count], global->envlist, laststatus);
 		if (buffer != NULL)
 		{
 			free(stringarray[count]);
@@ -76,7 +80,7 @@ static void	ft_expand_stringarray(
 }
 
 static char	*ft_expand_dollarchain(
-		const char *fullstring, int laststatus, t_list *envlist)
+	const char *fullstring, int laststatus, t_global *global)
 {
 	char	*expandedstring;
 	char	**stringarray;
@@ -85,11 +89,11 @@ static char	*ft_expand_dollarchain(
 	expandedstring = NULL;
 	stringarray = NULL;
 	list = NULL;
-	if (fullstring == NULL || envlist == NULL)
+	if (fullstring == NULL || global->envlist == NULL)
 		return (NULL);
-	list = ft_get_stringlist(fullstring);
+	list = ft_get_stringlist(fullstring, global);
 	stringarray = ft_lstconvert_strarr(list, 0);
-	ft_expand_stringarray(stringarray, laststatus, envlist);
+	ft_expand_stringarray(stringarray, laststatus, global);
 	expandedstring = ft_concat_strarray(stringarray, FALSE);
 	ft_clear_strarray(stringarray);
 	ft_lstclear(&list, ft_free_string);
@@ -110,7 +114,7 @@ char	*ft_expand_dollartoken(const char *argument, t_global *global)
 	{
 		value
 			= ft_expand_dollarchain(
-				argument, g_exit_status, global->envlist);
+				argument, g_exit_status, global);
 		if (value == NULL)
 			value = ft_strdup("");
 	}

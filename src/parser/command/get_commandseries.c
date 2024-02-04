@@ -6,11 +6,34 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 19:12:20 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/02/03 11:31:29 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/04 12:23:10 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	ft_check_tokencase(
+		t_part **node, t_part **subnode, t_global *global)
+{
+	if ((*node)->token == tk_dollar && (*node)->next != NULL
+		&& ft_is_tokenpair((*node)->next->token) == TRUE)
+	{
+		(*subnode) = ft_get_tokennode(
+				(*node)->next->next, (*node)->next->token, FALSE, FIRST);
+		(*node) = (*node)->next;
+	}
+	else if ((*node)->token == tk_dollar && (*node)->next != NULL
+		&& (*node)->next->token != tk_space)
+	{
+		(*subnode) = (*node)->next;
+		global->expand_dollartoken = TRUE;
+	}
+	else
+	{
+		(*subnode) = (*node);
+		global->expand_dollartoken = TRUE;
+	}
+}
 
 static t_cleancase	ft_get_cleancase(
 		t_part *startnode, t_part *endnode, t_global *global)
@@ -43,18 +66,8 @@ static void	ft_get_lastsubnode(
 			global->expand_startoken = TRUE;
 		}
 	}
-	else if ((*node)->token == tk_dollar && (*node)->next != NULL
-		&& ft_is_tokenpair((*node)->next->token) == TRUE)
-	{
-		(*subnode) = ft_get_tokennode(
-				(*node)->next->next, (*node)->next->token, FALSE, FIRST);
-		(*node) = (*node)->next;
-	}
 	else
-	{
-		(*subnode) = (*node);
-		global->expand_dollartoken = TRUE;
-	}
+		ft_check_tokencase(node, subnode, global);
 	(*cleancase) = ft_get_cleancase((*node), (*subnode), global);
 }
 

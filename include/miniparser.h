@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 20:07:17 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/02/03 18:10:54 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/04 11:34:55 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ t_bool		ft_token_case(t_part *head);
 t_bool		ft_get_stringpart(const char *pathsuffix);
 t_part		*ft_skip_quotes(t_part *tokenlist, t_token token);
 t_part		*ft_copy_tokenlist_ex(t_part *tokenlist, t_part *delimiter);
+t_bool		ft_is_backslash_token(t_token token);
 
 //File
 t_part		*ft_skip_redirection(t_part *tokenlist);

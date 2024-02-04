@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 19:26:49 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/11 20:26:00 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/03 19:18:41 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,17 @@ static int	ft_validate_chr(int chr, int cleanoption, int nextchr)
 	if (cleanoption == 0
 		&& (ft_isalpha(chr) != 0 || chr == ' ' || chr == '|'))
 		return (1);
-	else if (cleanoption == 1 && (ft_isalpha(chr) != 0 || chr == ' '))
+	else if (cleanoption == 1
+		&& (ft_isalpha(chr) != 0 || chr == ' '))
 		return (1);
-	else if (cleanoption == 2 && (chr != '\'' && chr != '\"'))
+	else if (cleanoption == 2
+		&& ((chr != '\'' && chr != '\"')))
 		return (1);
-	else if (cleanoption == 3 && chr != '\'')
+	else if (cleanoption == 3
+		&& (chr != '\''))
 		return (1);
-	else if (cleanoption == 4 && chr != '\"')
+	else if (cleanoption == 4
+		&& (chr != '\"'))
 		return (1);
 	else if (cleanoption == 5 && chr != '\''
 		&& nextchr != '\0' && nextchr != '\'')

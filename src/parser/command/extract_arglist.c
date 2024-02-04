@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 15:50:08 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/02/03 16:21:15 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/04 11:54:19 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ t_list	*ft_extract_arglist(t_part *tokenlist, t_global *global)
 		if (node->used == FALSE && ft_is_redirection(node->token) == TRUE)
 			node = ft_skip_redirection(node);
 		if (node != NULL
-			&&node->used == FALSE && node->token != tk_space)
+			&& node->used == FALSE && node->token != tk_space)
 			ft_get_arg(&stringlist, &node, global);
 		if (node != NULL)
 			node = node->next;

@@ -6,11 +6,19 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:02:42 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/02/04 11:37:05 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/04 12:07:38 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static t_bool	ft_is_tokenseries(t_part *head, t_part *next)
+{
+	if (head->token != tk_space && next->token != tk_space
+		&& next->next != NULL && next->next->token != tk_space)
+		return (TRUE);
+	return (FALSE);
+}
 
 //CASE_1 = tokenpair
 //CASE_2 = tk_arg , tk_mul, tk_dol_int
@@ -26,7 +34,7 @@ t_bool	ft_token_case(t_part *head)
 	if (next != NULL && (ft_is_tokenpair(head->token) == TRUE
 			|| (ft_is_tokenpair(next->token) == TRUE)
 			|| (ft_is_backslash_token(head->token) == TRUE)
-			|| (head->token == tk_arg && next->token != tk_space)))
+			|| ft_is_tokenseries(head, next) == TRUE))
 		return (CASE_1);
 	else if ((head->token == tk_arg
 			|| head->token == tk_doll_int)

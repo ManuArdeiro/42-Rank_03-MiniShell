@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 19:12:20 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/02/03 18:58:13 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/04 12:18:02 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,12 @@ static void	ft_get_lastsubnode(
 		(*subnode) = ft_get_tokennode(
 				(*node)->next->next, (*node)->next->token, FALSE, FIRST);
 		(*node) = (*node)->next;
+	}
+	else if ((*node)->token == tk_dollar && (*node)->next != NULL
+		&& (*node)->next->token != tk_space)
+	{
+		(*subnode) = (*node)->next;
+		global->expand_dollartoken = TRUE;
 	}
 	else
 	{

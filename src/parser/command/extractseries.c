@@ -20,12 +20,12 @@ static char	*ft_get_tokenstring(
 	t_part	*cmdnode;
 
 	cmdnode = NULL;
+
 	commandname = NULL;
 	ft_set_tokenlist(&startnode, endnode, TRUE);
 	if (ft_tokenlist_contains(subtk_list, ft_is_tokenpair) == TRUE
 		|| ft_is_backslash_token(subtk_list->token) == TRUE
-		|| (subtk_list->token == tk_arg
-			&& subtk_list->next != NULL && subtk_list->next->token != tk_space))
+		|| ft_token_case(subtk_list) == CASE_1)
 		commandname
 			= ft_get_commandseries(startnode, endnode, global);
 	else if (startnode != NULL && ft_is_dollar(startnode->token) == TRUE)

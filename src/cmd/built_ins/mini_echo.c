@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_echo.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
+/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 13:36:53 by jolopez-          #+#    #+#             */
-/*   Updated: 2024/01/26 18:44:01 by jolopez-         ###   ########.fr       */
+/*   Updated: 2024/02/04 19:33:15 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,23 +50,31 @@ int	ft_mini_echo(char **args)
 {
 	int		i;
 	t_bool	n_option;
+	int		arrlen;
 
 	i = 1;
 	n_option = FALSE;
-	while (args[i])
+	if (args == NULL)
+		return (EXIT_FAILURE);
+	arrlen = ft_strarraylen(args);
+	if (arrlen > 1)
 	{
-		if (check_flags(args[i]) == TRUE)
+		while (args[i])
 		{
-			n_option = TRUE;
-			i++;
+			if (check_flags(args[i]) == TRUE)
+			{
+				n_option = TRUE;
+				i++;
+			}
+			if (args[i] != NULL)
+				ft_putstr_fd(args[i], STDOUT_FILENO);
+			//if (args[i + 1] && args[i][0] != '\0')
+			//	write(1, " ", 1);
+			if (i < arrlen)
+				i++;
 		}
-		if (args[i] != NULL)
-			ft_putstr_fd(args[i], STDOUT_FILENO);
-		if (args[i + 1] && args[i][0] != '\0')
-			write(1, " ", 1);
-		i++;
+		if (n_option == FALSE)
+			write(1, "\n", 1);
 	}
-	if (n_option == FALSE)
-		write(1, "\n", 1);
 	return (EXIT_SUCCESS);
 }

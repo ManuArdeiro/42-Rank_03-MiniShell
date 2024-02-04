@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 18:05:17 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/02/03 12:58:56 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/04 20:01:41 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ t_list	*ft_expand_startoken(const char *fullpath)
 		free(dirpath);
 	if (fileslist == NULL)
 		ft_lstinsert(&fileslist, ft_strdup(fullpath), BACK);
-	closedir(directory);
+	if (directory != NULL)
+		closedir(directory);
 	return (fileslist);
 }

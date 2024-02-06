@@ -95,6 +95,8 @@ static int	ft_return_newfolder(char *dir, t_list *envlist)
 		return (ft_new_folder(envlist, ft_getenv("HOME", envlist)));
 	else if (ft_strequal("..", dir) == TRUE)
 		return (ft_new_folder(envlist, ft_get_previousdir()));
+	else if (ft_startswith(dir, "~") == TRUE)
+		return (ft_new_folder(envlist, ft_strjoin_get(ft_getenv("HOME", envlist), dir + 1)));
 	else
 		return (ft_new_folder(envlist, dir));
 }
@@ -131,5 +133,4 @@ int	ft_mini_cd(char **arg, t_list *envlist)
 	}
 	dir = ft_strdup(arg[1]);
 	return (ft_return_newfolder(dir, envlist));
-	return (EXIT_SUCCESS);
 }

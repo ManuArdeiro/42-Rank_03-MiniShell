@@ -59,17 +59,15 @@ int	ft_mini_echo(char **args)
 	arrlen = ft_strarraylen(args);
 	if (arrlen > 1)
 	{
-		while (args[i])
+		while (args[i] != NULL)
 		{
 			if (check_flags(args[i]) == TRUE)
 			{
 				n_option = TRUE;
 				i++;
 			}
-			if (args[i] != NULL)
+			if (ft_strequal(args[i], "-n") == FALSE)
 				ft_putstr_fd(args[i], STDOUT_FILENO);
-			//if (args[i + 1] && args[i][0] != '\0')
-			//	write(1, " ", 1);
 			if (i < arrlen)
 				i++;
 		}

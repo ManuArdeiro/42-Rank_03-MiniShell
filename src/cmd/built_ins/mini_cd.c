@@ -35,6 +35,7 @@ static char	*ft_get_previousdir(void)
 			free(previousdir);
 		previousdir = ft_strdup("/");
 	}
+	free(localpath);
 	return (previousdir);
 }
 
@@ -81,24 +82,29 @@ static int	ft_new_folder(t_list *envlist, char *dir)
 		ft_save_directory(envlist, oldpwd);
 	if (oldpwd != NULL)
 		free(oldpwd);
-	free(dir);
 	return (EXIT_SUCCESS);
 }
 
 static int	ft_return_newfolder(char *dir, t_list *envlist)
 {
+	char	*newpath;
+	int		status;
+
+	status = EXIT_FAILURE;
+	newpath = NULL;
 	if (dir == NULL)
 		return (EXIT_FAILURE);
 	if (ft_strequal("-", dir) == TRUE)
-		return (ft_new_folder(envlist, ft_getenv("OLDPWD", envlist)));
+		newpath = ft_getenv("OLDPWD", envlist);
 	else if (ft_strequal("~", dir) == TRUE)
-		return (ft_new_folder(envlist, ft_getenv("HOME", envlist)));
+		newpath = ft_getenv("HOME", envlist);
 	else if (ft_strequal("..", dir) == TRUE)
-		return (ft_new_folder(envlist, ft_get_previousdir()));
+		newpath = ft_get_previousdir();
 	else if (ft_startswith(dir, "~") == TRUE)
-		return (ft_new_folder(envlist, ft_strjoin_get(ft_getenv("HOME", envlist), dir + 1)));
-	else
-		return (ft_new_folder(envlist, dir));
+		newpath = ft_strjoin_get(ft_getenv("HOME", envlist), dir + 1);
+	status = ft_new_folder(envlist, newpath);
+	free(newpath);
+	return (status);
 }
 
 /*	This function tries to apply the "cd" commands follwing the next rules:
@@ -115,7 +121,9 @@ static int	ft_return_newfolder(char *dir, t_list *envlist)
 int	ft_mini_cd(char **arg, t_list *envlist)
 {
 	char	*dir;
+	int		status;
 
+	status = EXIT_FAILURE;
 	if (ft_arg_nbr(arg) > 3)
 	{
 		ft_print_screen("cd: Too many arguments.");
@@ -132,5 +140,7 @@ int	ft_mini_cd(char **arg, t_list *envlist)
 		return (ft_new_folder(envlist, dir));
 	}
 	dir = ft_strdup(arg[1]);
-	return (ft_return_newfolder(dir, envlist));
+	status = ft_return_newfolder(dir, envlist);
+	free(dir);
+	return (status);
 }

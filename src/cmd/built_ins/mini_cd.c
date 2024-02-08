@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_cd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
+/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:05:20 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/18 20:17:31 by jolopez-         ###   ########.fr       */
+/*   Updated: 2024/02/08 18:34:03 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,8 @@ static int	ft_return_newfolder(char *dir, t_list *envlist)
 		newpath = ft_get_previousdir();
 	else if (ft_startswith(dir, "~") == TRUE)
 		newpath = ft_strjoin_get(ft_getenv("HOME", envlist), dir + 1);
+	else
+		newpath = ft_strdup(dir);
 	status = ft_new_folder(envlist, newpath);
 	free(newpath);
 	return (status);

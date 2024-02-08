@@ -6,11 +6,26 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 19:28:06 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/02/04 18:12:28 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/08 18:27:37 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static t_file	*ft_copyfile(t_file *file)
+{
+	t_file	*newfile;
+
+	if (file == NULL)
+		return (NULL);
+	newfile = malloc(sizeof(t_file));
+	if (newfile == NULL)
+		return (NULL);
+	newfile->name = ft_strdup(file->name);
+	newfile->fd = dup(file->fd);
+	newfile->mode = file->mode;
+	return (newfile);
+}
 
 static t_list	*ft_get_expandedfilelist(t_list *filelist, t_global *global)
 {
@@ -30,7 +45,7 @@ static t_list	*ft_get_expandedfilelist(t_list *filelist, t_global *global)
 			ft_lstinsert(&expandedlist, file, BACK);
 		}
 		else
-			ft_lstinsert(&expandedlist, file, BACK);
+			ft_lstinsert(&expandedlist, ft_copyfile(file), BACK);
 		node = node->next;
 	}
 	return (expandedlist);
@@ -52,4 +67,6 @@ void	ft_expand_filelist(t_list **filelist, t_global *global)
 		if (fullfile != NULL)
 			ft_lstinsert(filelist, fullfile, FRONT);
 	}
+	if (expandedlist != NULL)
+		ft_lstclear(&expandedlist, ft_freefile);
 }

@@ -1,0 +1,7 @@
+Makefile
+include
+minishell
+obj
+out
+out2
+src

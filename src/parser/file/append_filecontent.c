@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 20:44:19 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/01/06 21:05:08 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/08 18:30:50 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ t_file	*ft_compress_filelist(t_list *filelist, t_global *global)
 	fullfile = NULL;
 	if (filelist == NULL)
 		return (NULL);
-	fullfile = ft_create_file(ft_strdup("fullfile"), INFILE, O_HEREDOC);
+	fullfile = ft_create_file("fullfile", INFILE, O_HEREDOC);
 	if (fullfile == NULL)
 		return (NULL);
 	if (pipe(filepipe) < 0)

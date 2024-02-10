@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 18:05:17 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/02/04 20:01:41 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/10 12:44:55 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,25 @@ static void	ft_get_pathattributes(
 	const char *fullpath,
 	char **fileprefix, t_bool *stringpart, char *pathsuffix)
 {
+	char	*buffer;
+
+	buffer = NULL;
 	if (pathsuffix == NULL)
 	{
-		(*fileprefix) = ft_strstrip(fullpath);
+		buffer = ft_strdup(fullpath);
 		(*stringpart) = ft_get_stringpart(fullpath);
 	}
 	else
 	{
-		(*fileprefix) = ft_strstrip(pathsuffix);
+		buffer = ft_strdup(pathsuffix);
 		(*stringpart) = ft_get_stringpart(pathsuffix);
 	}
+	if (ft_endswith(buffer, "*") == TRUE)
+		(*fileprefix) = ft_strtrim(buffer, "*");
+	else if (buffer != NULL && ft_startswith(buffer, "*") == TRUE)
+		(*fileprefix) = ft_strdup(buffer + 1);
+	if (buffer != NULL)
+		free(buffer);
 }
 
 static t_list	*ft_get_dirfiles(

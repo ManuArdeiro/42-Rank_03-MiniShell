@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_filelist.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 19:28:06 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/02/08 18:27:37 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/10 14:02:11 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static t_list	*ft_get_expandedfilelist(t_list *filelist, t_global *global)
 		if (file != NULL && file->mode == O_HEREDOC)
 		{
 			ft_get_heredoc(&file, global);
-			ft_lstinsert(&expandedlist, file, BACK);
+			ft_lstinsert(&expandedlist, ft_copyfile(file), BACK);
 		}
 		else
 			ft_lstinsert(&expandedlist, ft_copyfile(file), BACK);

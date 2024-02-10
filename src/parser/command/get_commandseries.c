@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_commandseries.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 19:12:20 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/02/04 14:12:27 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/10 15:09:27 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,7 @@ static void	ft_get_lastsubnode(
 		(*subnode) = ft_get_tokennode(
 				(*node)->next, (*node)->token, FALSE, FIRST);
 		if ((*node)->token != tk_sglquot)
-		{
 			global->expand_dollartoken = TRUE;
-			global->expand_startoken = TRUE;
-		}
 		global->heredoc_quotes = TRUE;
 	}
 	else
@@ -112,7 +109,6 @@ char	*ft_get_commandseries(
 		if (node != NULL && node != seriesend)
 			node = node->next;
 		global->expand_dollartoken = FALSE;
-		global->expand_startoken = FALSE;
 	}
 	return (commandseries);
 }

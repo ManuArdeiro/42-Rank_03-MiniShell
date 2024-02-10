@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:02:42 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/02/04 13:23:54 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/10 15:42:24 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,21 +33,22 @@ t_bool	ft_token_case(t_part *head)
 	if (head == NULL)
 		return (FALSE);
 	next = head->next;
-	if (next != NULL && (ft_is_tokenpair(head->token) == TRUE
-			|| (ft_is_tokenpair(next->token) == TRUE)
-			|| (ft_is_backslash_token(head->token) == TRUE)
-			|| ft_is_tokenseries(head, next) == TRUE))
-		return (CASE_1);
-	else if ((head->token == tk_arg
+	if ((head->token == tk_arg
 			|| head->token == tk_doll_int)
 		&& ((next != NULL && next->token == tk_space) || next == NULL))
 		return (CASE_2);
 	else if (next != NULL
-		&& ((ft_is_dollar(next->token) == TRUE)
+		&& ((ft_is_dollar(next->token) == TRUE
+				&& ft_is_tokenpair(head->token) == FALSE)
 			|| (ft_is_dollar(head->token) == TRUE)))
 		return (CASE_3);
 	else if ((next != NULL && head->token == tk_arg && next->token == tk_mul)
 		|| (head->token == tk_mul))
 		return (CASE_4);
+	else if (next != NULL && (ft_is_tokenpair(head->token) == TRUE
+			|| (ft_is_tokenpair(next->token) == TRUE)
+			|| (ft_is_backslash_token(head->token) == TRUE)
+			|| ft_is_tokenseries(head, next) == TRUE))
+		return (CASE_1);
 	return (FALSE);
 }

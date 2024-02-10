@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   extract_arglist.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 15:50:08 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/02/04 18:38:52 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/10 15:09:57 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,20 +55,25 @@ static void	ft_get_arg(
 	char	*string;
 
 	string = NULL;
-	if (ft_token_case(*node) == CASE_1)
-		string = ft_extractseries((*node), global);
-	else if (ft_token_case(*node) == CASE_4)
+	if (ft_token_case(*node) == CASE_4)
+	{
+		global->expand_startoken = TRUE;
 		string = ft_get_starstring(node, global);
+	}
 	else if (ft_token_case(*node) == CASE_3)
 	{
 		global->expand_dollartoken = TRUE;
 		string = ft_extract_dollarstring(global->line, *node);
 	}
+	else if (ft_token_case(*node) == CASE_1)
+		string = ft_extractseries((*node), global);
 	if (string == NULL && ft_token_case(*node) == CASE_2)
-		string = ft_get_argstring(node, global);
-	if (string != NULL)
 	{
 		global->expand_startoken = TRUE;
+		string = ft_get_argstring(node, global);
+	}
+	if (string != NULL)
+	{
 		ft_add_string_tolist(stringlist, string, global);
 		free(string);
 	}
@@ -90,6 +95,8 @@ t_list	*ft_extract_arglist(t_part *tokenlist, t_global *global)
 		if (node != NULL
 			&& node->used == FALSE && node->token != tk_space)
 			ft_get_arg(&stringlist, &node, global);
+		global->expand_dollartoken = FALSE;
+		global->expand_startoken = FALSE;
 		if (node != NULL)
 			node = node->next;
 	}

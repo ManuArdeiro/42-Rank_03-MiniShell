@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_exit.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
+/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 01:42:21 by jolopez-          #+#    #+#             */
-/*   Updated: 2024/01/18 19:42:42 by jolopez-         ###   ########.fr       */
+/*   Updated: 2024/02/10 16:54:40 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int	ft_mini_exit(t_global *global, char **args)
 		if (!ft_is_number(args[1]))
 		{
 			ft_putendl_fd("exit: numeric argument required", STDERR_FILENO);
-			return (255);
+			global->laststatus = 255;
 		}
 		else
 			global->laststatus = ft_atoi(args[1]);

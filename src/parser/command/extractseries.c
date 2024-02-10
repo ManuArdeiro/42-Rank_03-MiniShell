@@ -78,7 +78,7 @@ static t_bool	ft_is_redirection_list(t_part *head)
 	if (next != NULL && head->used == FALSE
 		&& ft_is_redirection(head->token) == TRUE)
 		return (TRUE);
-	else if (head->token == tk_space
+	else if (head->token == tk_space && next != NULL
 		&& ft_is_redirection(next->token) == TRUE)
 		return (TRUE);
 	return (FALSE);

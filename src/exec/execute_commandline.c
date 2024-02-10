@@ -6,30 +6,35 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 12:40:08 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/02/03 17:59:03 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/10 17:01:19 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	ft_evaluate_relation(
-		t_minitree *root,
-		t_global *global, int *laststatus, t_nodetype nodetype)
+static void	ft_execute_and(t_minitree *root, t_global *global, int *laststatus)
 {
 	int	firststatus;
 	int	secondstatus;
 
 	firststatus = EXIT_SUCCESS;
 	secondstatus = EXIT_SUCCESS;
-	if (nodetype == n_and || nodetype == n_commandlist)
+	firststatus = ft_navigate_and_execute(root->leftchild, global);
+	if (firststatus == EXIT_SUCCESS)
 	{
-		firststatus = ft_navigate_and_execute(root->leftchild, global);
-		if (firststatus == EXIT_SUCCESS)
-			secondstatus = ft_navigate_and_execute(root->rightchild, global);
-		if ((firststatus + secondstatus) == EXIT_FAILURE
-			|| (firststatus + secondstatus) == EXIT_SUCCESS)
-			*laststatus = EXIT_SUCCESS;
+		secondstatus = ft_navigate_and_execute(root->rightchild, global);
+		*laststatus = secondstatus;
 	}
+	else
+		*laststatus = firststatus;
+}
+
+static void	ft_evaluate_relation(
+		t_minitree *root,
+		t_global *global, int *laststatus, t_nodetype nodetype)
+{
+	if (nodetype == n_and || nodetype == n_commandlist)
+		ft_execute_and(root, global, laststatus);
 	else if (nodetype == n_or)
 	{
 		*laststatus = ft_navigate_and_execute(root->leftchild, global);

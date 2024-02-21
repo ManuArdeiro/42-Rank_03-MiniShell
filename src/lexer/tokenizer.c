@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
+/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 17:51:52 by jolopez-          #+#    #+#             */
-/*   Updated: 2024/01/26 18:48:09 by jolopez-         ###   ########.fr       */
+/*   Updated: 2024/02/21 18:53:38 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,14 @@ static void	ft_cmd_vs_arg(t_part *tokens)
 			if (ft_is_tokenpin(node) == TRUE)
 				token_pin = node->token;
 		}
-		ft_check_commandnode(node, prev_token, &flag, token_pin);
-		prev_token = node->token;
-		node = node->next;
+		else if (ft_is_tokenpair(node->token) == TRUE)
+			node = ft_skip_quotes(node->next, node->token);
+		if (node != NULL)
+		{
+			ft_check_commandnode(node, prev_token, &flag, token_pin);
+			prev_token = node->token;
+			node = node->next;
+		}
 	}
 	if ((ft_last_tkn(tokens))->token == tk_space)
 		ft_del_last_tkn(tokens);

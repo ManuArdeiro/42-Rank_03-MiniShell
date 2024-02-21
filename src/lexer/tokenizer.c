@@ -6,7 +6,7 @@
 /*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 17:51:52 by jolopez-          #+#    #+#             */
-/*   Updated: 2024/02/21 20:27:34 by jolopez-         ###   ########.fr       */
+/*   Updated: 2024/02/21 21:02:28 by jolopez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,38 +50,41 @@ static void	ft_check_commandnode(
 	}
 }
 
-static void	ft_cmd_vs_arg_aux(t_part *node, t_token token_pin)
+static void	ft_cmd_vs_arg_aux(t_part *node)
 {
 	int		flag;
 	t_token	prev_token;
+	t_token	token_pin;
 
+	token_pin = 0;
 	flag = 0;
-	if (node->token == tk_less)
+	while (node)
 	{
-		if (ft_is_tokenpin(node) == TRUE)
-			token_pin = node->token;
+		if (node->token == tk_less)
+		{
+			if (ft_is_tokenpin(node) == TRUE)
+				token_pin = node->token;
+		}
+		else if (ft_is_tokenpair(node->token) == TRUE)
+			node = ft_skip_quotes(node->next, node->token);
+		if (node != NULL)
+		{
+			ft_check_commandnode(node, prev_token, &flag, token_pin);
+			prev_token = node->token;
+			node = node->next;
+		}
 	}
-	else if (ft_is_tokenpair(node->token) == TRUE)
-		node = ft_skip_quotes(node->next, node->token);
-	if (node != NULL)
-	{
-		ft_check_commandnode(node, prev_token, &flag, token_pin);
-		prev_token = node->token;
-		node = node->next;
-	}
+	return ;
 }
 
 static void	ft_cmd_vs_arg(t_part *tokens)
 {
 	t_part	*node;
-	t_token	token_pin;
 
-	token_pin = 0;
 	if (tokens == NULL)
 		return ;
 	node = tokens;
-	while (node)
-		ft_cmd_vs_arg_aux(node, token_pin);
+	ft_cmd_vs_arg_aux(node);
 	if ((ft_last_tkn(tokens))->token == tk_space)
 		ft_del_last_tkn(tokens);
 	return ;

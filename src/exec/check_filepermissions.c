@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 17:00:24 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/02/04 18:51:12 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/21 19:43:11 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	ft_check_filepermissions(
 	else if (infile != NULL && ft_strequal(errorstr, NO_SUCH_FILE_IN) == TRUE)
 	{
 		if (ft_strequal(infile->name, MINISTD) == FALSE
+			&& access(infile->name, F_OK) == 0
 			&& access(infile->name, R_OK) != 0)
 			ft_print_commanderror(infile->name, PERMISSION_DENIED);
 		else

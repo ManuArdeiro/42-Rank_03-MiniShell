@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+         #
+#    By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/01 18:51:45 by jolopez-          #+#    #+#              #
-#    Updated: 2024/02/04 14:27:44 by jolopez-         ###   ########.fr        #
+#    Updated: 2024/02/21 20:18:06 by yzaytoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,7 +63,7 @@ PARSER			=  separators.c get_tokennode.c tokensplit.c get_nodetype.c \
 					tokenpairs.c get_tokenpair.c tokenlist_contains.c split_subshell.c\
 					split_tokenlist.c valid_subshellnode.c skip_tokens.c validate_tokenlist.c\
 					contains_sub_tokenlist.c skip_get_tokennode.c is_complete_subshell.c\
-					expandstring.c emptystring.c skip_quotes.c
+					expandstring.c emptystring.c skip_quotes.c expand_tilde.c
 					
 SUMMARIZER		= minisummary.c printtokens.c get_unique_tokens.c \
 					get_token_summary.c get_token_count.c clearsummary.c

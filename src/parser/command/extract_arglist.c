@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 15:50:08 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/02/21 19:38:21 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/21 20:20:44 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,20 @@ static void	ft_add_string_tolist(
 		ft_lstinsert(stringlist, ft_strdup(string), BACK);
 }
 
+static void	ft_evaluate_string(
+	char *string, t_list **stringlist, t_global *global
+)
+{
+	if (string != NULL)
+	{
+		if (ft_startswith(string, "~") == TRUE
+			&& global->expand_tilde == TRUE)
+			string = ft_expandtilde(string, global->envlist);
+		ft_add_string_tolist(stringlist, string, global);
+		free(string);
+	}
+}
+
 static char	*ft_get_argstring(t_part **node, t_global *global)
 {
 	char	*string;
@@ -66,17 +80,16 @@ static void	ft_get_arg(
 		string = ft_extract_dollarstring(global->line, *node);
 	}
 	else if (ft_token_case(*node) == CASE_1)
+	{
+		global->expand_tilde = FALSE;
 		string = ft_extractseries((*node), global);
+	}
 	if (string == NULL && ft_token_case(*node) == CASE_2)
 	{
 		global->expand_startoken = TRUE;
 		string = ft_get_argstring(node, global);
 	}
-	if (string != NULL)
-	{
-		ft_add_string_tolist(stringlist, string, global);
-		free(string);
-	}
+	ft_evaluate_string(string, stringlist, global);
 }
 
 t_list	*ft_extract_arglist(t_part *tokenlist, t_global *global)

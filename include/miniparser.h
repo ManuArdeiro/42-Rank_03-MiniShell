@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 20:07:17 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/02/21 19:31:42 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/21 20:21:08 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ t_list		*ft_default_filelist(int std_stream);
 char		*ft_extract_dollarstring(
 				const char *commandline, t_part *tokenlist);
 t_bool		ft_is_dollar(t_token token);
+char		*ft_expandtilde(char *string, t_list *envlist);
 
 //Separators
 t_bool		ft_is_tokenseparator(t_token token);

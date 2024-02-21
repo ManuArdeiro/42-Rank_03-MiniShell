@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ministruct.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
+/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 19:10:53 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/02/04 14:17:04 by jolopez-         ###   ########.fr       */
+/*   Updated: 2024/02/21 20:02:50 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,6 +172,7 @@ struct s_global
 	int				shell_level;
 	t_bool			expand_dollartoken;
 	t_bool			expand_startoken;
+	t_bool			expand_tilde;
 	t_bool			devmode;
 	int				pidcount;
 	pid_t			*pidarray;

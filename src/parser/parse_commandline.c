@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 12:24:07 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/02/08 18:17:59 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/21 19:31:53 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_minitree	*ft_evaluate_tokensplit(t_part *tokenlist, t_global *global)
 
 	root = NULL;
 	if (is_complete_subshell(tokenlist) == FALSE
-		&& ft_tokenlist_contains(tokenlist, ft_is_tokenseparator) == TRUE)
+		&& ft_skip_tokenlist_contains(tokenlist, ft_is_tokenseparator) == TRUE)
 		root = ft_split_tokenlist(tokenlist);
 	else if (ft_valid_subshellnode(tokenlist) == TRUE)
 		root = ft_split_subshell(tokenlist, global);

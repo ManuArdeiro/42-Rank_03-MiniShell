@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   extract_arglist.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jolopez- <jolopez-@student.42madrid>       +#+  +:+       +#+        */
+/*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 15:50:08 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/02/10 15:09:57 by jolopez-         ###   ########.fr       */
+/*   Updated: 2024/02/21 19:38:21 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,11 +94,16 @@ t_list	*ft_extract_arglist(t_part *tokenlist, t_global *global)
 			node = ft_skip_redirection(node);
 		if (node != NULL
 			&& node->used == FALSE && node->token != tk_space)
+		{
 			ft_get_arg(&stringlist, &node, global);
+		}
 		global->expand_dollartoken = FALSE;
 		global->expand_startoken = FALSE;
 		if (node != NULL)
+		{
 			node = node->next;
+			node = ft_fastforward(node);
+		}
 	}
 	return (stringlist);
 }

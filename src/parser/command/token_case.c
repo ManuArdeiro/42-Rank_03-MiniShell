@@ -6,7 +6,7 @@
 /*   By: yzaytoun <yzaytoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:02:42 by yzaytoun          #+#    #+#             */
-/*   Updated: 2024/02/10 15:42:24 by yzaytoun         ###   ########.fr       */
+/*   Updated: 2024/02/23 19:49:44 by yzaytoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,16 @@
 
 static t_bool	ft_is_tokenseries(t_part *head, t_part *next)
 {
-	if (head->token != tk_space && next->token != tk_space
+	if ((head->token != tk_space
+			&& ft_is_subshellseparator(head->token) == FALSE)
+		&& (next->token != tk_space
+			&& ft_is_subshellseparator(next->token) == FALSE)
 		&& next->next != NULL && next->next->token != tk_space)
 		return (TRUE);
-	else if (head->token != tk_space && next->token != tk_space)
+	else if (head->token != tk_space
+		&& ft_is_subshellseparator(head->token) == FALSE
+		&& next->token != tk_space
+		&& ft_is_subshellseparator(next->token) == FALSE)
 		return (TRUE);
 	return (FALSE);
 }
